@@ -1,5 +1,8 @@
 package com.spring.hotelspace.client.search.vo;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class ClientRoomVO {
 	
 	private String roomId;
