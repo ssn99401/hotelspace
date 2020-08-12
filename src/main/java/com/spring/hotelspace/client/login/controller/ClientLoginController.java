@@ -27,7 +27,7 @@ public class ClientLoginController {
 	@RequestMapping(value = "/clientLogin.do", method = RequestMethod.GET)
 	public String getloginPaget(ClientLoginVO client, HttpSession httpSession, Model model) {
 		System.out.println("ge");
-		httpSession.setAttribute("kakaoURI", "https://kauth.kakao.com/oauth/authorize?client_id=7fe2ea8fb8719474f5388f06fbf3f3ca&redirect_uri=http://localhost:8088/web/kakaoLogin.do&response_type=code");
+		model.addAttribute("kakaoURI", "https://kauth.kakao.com/oauth/authorize?client_id=7fe2ea8fb8719474f5388f06fbf3f3ca&redirect_uri=http://localhost:8088/web/kakaoLogin.do&response_type=code");
 		return "login/clientLogin";
 	}
 
@@ -53,10 +53,6 @@ public class ClientLoginController {
 
 		return "redirect:" + (destination != null ? (String) destination : "index.do");
 	}
-	
-	
-	
-	
 	
 	@RequestMapping(value = "/kakaoLogin.do", method = RequestMethod.GET)
 	public String loginToClientbyKakao(@RequestParam("code") String code, HttpSession httpSession, Model model) {
@@ -84,5 +80,11 @@ public class ClientLoginController {
 		return "redirect:" + (destination != null ? (String) destination : "index.do");
 	}
 	
+	@RequestMapping(value = "/clientLogout.do", method = RequestMethod.GET)
+	public String getlogout(HttpSession httpSession, Model model) {
+		httpSession.removeAttribute("login");
+		
+		return "redirect:index.do";
+	}
 
 }
