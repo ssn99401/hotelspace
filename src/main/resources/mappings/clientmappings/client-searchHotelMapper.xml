@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring.hotelspace.client.search.dao.ClientSearchHotelDAO">
+
+	<select id="selectHotelListAll" parameterType="string" resultType="clientHotelVO">
+		SELECT HOTEL_ID, USER_ID, HOTEL_NAME, HOTEL_TEL, HOTEL_AREA, HOTEL_ADDRESS, HOTEL_CONCEPT, HOTEL_STAR, HOTEL_REG_DATE
+		FROM HOTEL
+	</select>
+	
+	<select id="selectHotelToNameAndDateList" parameterType="java.util.HashMap" resultMap="hotelResultMap">
+		<![CDATA[
+		SELECT hotel.HOTEL_ID, hotel.USER_ID, hotel.HOTEL_NAME, hotel.HOTEL_TEL, hotel.HOTEL_AREA, hotel.HOTEL_ADDRESS, hotel.HOTEL_CONCEPT, hotel.HOTEL_STAR, hotel.HOTEL_REG_DATE, 
+			(SELECT hotelimage.image_link FROM HOTEL_IMAGE hotelimage
+				WHERE hotel.HOTEL_ID = hotelimage.HOTEL_ID
+					AND hotelimage.IMAGE_TYPE = 'MAIN') as mainImage, 
+						facilities.FACILITIES_PARKING, facilities.FACILITIES_POOL, facilities.FACILITIES_BREAKFAST, facilities.FACILITIES_FITNESS, facilities.FACILITIES_WIFI, facilities.FACILITIES_PARTYROOM  
+			FROM HOTEL hotel, ROOM room, FACILITIES facilities
+				WHERE hotel.HOTEL_ID = room.HOTEL_ID AND hotel.HOTEL_ID = facilities.HOTEL_ID
+					AND ( #{people} >= room.ROOM_STANDARD_PEOPLE
+										AND #{people} <= room.ROOM_MAX_PEOPLE) 
+					AND room.ROOM_AMOUNT > 
+			]]>
+					<if test="#{checkInDate} != null and #{checkOutDate} != null">
+					(
+						<![CDATA[
+						SELECT count(reservation.RESERVATION_ID) 
+							FROM RESERVATION reservation
+								WHERE room.ROOM_ID = reservation.ROOM_ID 
+									AND room.HOTEL_ID = reservation.HOTEL_ID 
+									AND NOT (reservation.RESERVATION_IN_DATE >= #{checkInDate}
+										AND reservation.RESERVATION_OUT_DATE <= #{checkInDate}) 
+									AND NOT (reservation.RESERVATION_IN_DATE >= #{checkOutDate} 
+										AND reservation.RESERVATION_OUT_DATE <= #{checkOutDate} )
+                    )
+                     ]]>
+                    </if>
+                    <if test="#{checkInDate} == null or #{checkOutDate} == null">
+                    	0
+                    </if>
+				
+					<if test="#{searchKeyword} != null">
+					 	AND hotel.HOTEL_NAME LIKE '%'||#{searchKeyword}||'%' 
+					</if>
+		
+	</select>
+	
+	<resultMap type="hotelFacilityVO" id="hotelFacility">
+		<result property="facilityParking" column="FACILITIES_PARKING" />
+		<result property="facilityPool" column="FACILITIES_POOL" />
+		<result property="facilityBreakfast" column="FACILITIES_BREAKFAST" />
+		<result property="facilityFitness" column="FACILITIES_FITNESS" />
+		<result property="facilityWifi" column="FACILITIES_WIFI" />
+		<result property="facilityParty" column="FACILITIES_PARTYROOM " />
+	</resultMap>
+	
+	<resultMap type="clientHotelVO" id="hotelResultMap">
+		<result property="hotelId" column="HOTEL_ID" />
+		<result property="userId" column="USER_ID" />
+		<result property="hotelName" column="HOTEL_NAME" />
+		<result property="hotelTel" column="HOTEL_TEL" />
+		<result property="hotelArea" column="HOTEL_AREA" />
+		<result property="hotelAddress" column="HOTEL_ADDRESS" />
+		<result property="hotelConcept" column="HOTEL_CONCEPT" />
+		<result property="hotelStar" column="HOTEL_STAR" />
+		<result property="hotelRegDate" column="HOTEL_REG_DATE" />
+		<result property="imageLink" column="mainImage" />
+		<collection property="hotelFacility" resultMap="hotelFacility" />
+	</resultMap>
+	
+	
+	<!-- 
+	<select id="getAll" resultMap="YourResultSet">
+		SELECT * FROM tablename1
+	</select>
+
+	<insert id="insertSomething" parameterType="#modelname">
+		INSERT INTO tablename1 (columnname1, columnname2, columnname3)
+		VALUES(#{value1},#{value2},#{value3})
+	</insert>
+
+	<update id="updateSomething" parameterType="#modelname">
+		UPDATE tablename1
+		SET
+		columnname1=#{param1}
+		WHERE
+		columnname2 = #{param2}
+	</update>
+
+	<delete id="deleteSomething" parameterType="int">
+		DELETE FROM tablename1 WHERE
+		columnname1 = #{param1}
+	</delete> -->
+
+</mapper>
