@@ -9,7 +9,7 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <jsp:include page="headerCssLink.jspf" />
-
+<script type="text/javascript" src="resources/client/js/index/index.js"></script>
 </head>
 <body>
 <header>
@@ -39,13 +39,13 @@
 		<div class="container">
 			<div class="row justify-content-end">
 				<div class="col-lg-4">
-					<form action="#" class="appointment-form">
+					<form action="#" class="appointment-form" onsubmit="checkSearchDate()">
 						<h4 class="mb-3">어디로 떠나고 싶으신가요?</h4>
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
 									<input type="text" class="form-control"
-										placeholder="ex) 서울,신라호텔">
+										placeholder="ex) 서울,신라호텔" name="searchKeyword" id="searchKeyword" >
 								</div>
 							</div>
 							<div class="col-md-6">
@@ -55,7 +55,7 @@
 											<span class="ion-md-calendar"></span>
 										</div>
 										<input type="date" value="Check-in"
-											class="input-group date"
+											class="input-group date" name="checkInDate" id="checkInDate"
 											placeholder="Check-in">
 									</div>
 								</div>
@@ -67,7 +67,7 @@
 											<span class="ion-md-calendar"></span>
 										</div>
 										<input type="date"
-											class="input-group date"
+											class="input-group date" name="checkOutDate" id="checkOutDate"
 											placeholder="Check-out">
 									</div>
 								</div>
