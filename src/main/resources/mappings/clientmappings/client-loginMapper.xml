@@ -6,9 +6,16 @@
 
 	<select id="selectClient" parameterType="clientLoginVO" resultType="clientLoginVO">
 		SELECT 
-		pw 
-		FROM testtable 
-		WHERE id = #{id}
+		client_id, client_password, client_name
+		FROM client 
+		WHERE client_id = #{clientId}
+	</select>
+	
+	<select id="selectKakaoId" parameterType="String" resultType="clientLoginVO">
+		SELECT 
+		client_id, client_password, client_name
+		FROM client 
+		WHERE client_id = #{clientId}
 	</select>
 
 	<!-- <resultMap type="#modelname" id="YourResultSet">

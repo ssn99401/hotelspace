@@ -34,8 +34,6 @@ public class ClientLoginController {
 	@RequestMapping(value = "/clientLogin.do", method = RequestMethod.POST)
 	public String loginToClient(ClientLoginVO client, HttpSession httpSession, Model model) {
 
-		System.out.println(client);
-
 		ClientLoginVO resultClient = clientLoginService.getClientLoginResult(client);
 
 		Object destination = httpSession.getAttribute("destination");
@@ -43,13 +41,13 @@ public class ClientLoginController {
 		if (resultClient != null) {
 			if (resultClient.getClientPassword().equals(client.getClientPassword())) {
 				
-				httpSession.setAttribute("login", resultClient); // 로그인 성공
-			} else {
-				model.addAttribute("message", "비밀번호가 맞지 않습니다");// 비밀번호 오류 처리
+				httpSession.setAttribute("login", resultClient.getClientName()); // 로그인 성공
+			}else {
+				model.addAttribute("message", "아이디 혹은 비밀번호가 틀렸습니다.");// 아이디 오류 처리 // 비밀번호 오류 처리
 				return "login/clientLogin";
 			}
 		} else {
-			model.addAttribute("message", "아이디를 확인해 주세요");// 아이디 오류 처리
+			model.addAttribute("message", "아이디 혹은 비밀번호가 틀렸습니다.");// 아이디 오류 처리 // 비밀번호 오류 처리
 			return "login/clientLogin";
 		}
 
@@ -75,7 +73,13 @@ public class ClientLoginController {
 		
 		ClientLoginVO resultClient = clientLoginService.compareKakaoId(id);
 		
-		httpSession.setAttribute("login", resultClient);
+		if (resultClient != null) {
+			httpSession.setAttribute("login", resultClient.getClientName());
+			
+		}else {
+			model.addAttribute("message", "회원가입이 필요합니다.");
+			return "login/clientLogin"; //회원가입 창으로
+		}
 		
 		return "redirect:" + (destination != null ? (String) destination : "index.do");
 	}
