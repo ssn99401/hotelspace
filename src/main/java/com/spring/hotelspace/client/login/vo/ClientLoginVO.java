@@ -1,5 +1,7 @@
 package com.spring.hotelspace.client.login.vo;
 
+import java.util.Date;
+
 import org.springframework.stereotype.Component;
 
 public class ClientLoginVO {
@@ -11,13 +13,13 @@ public class ClientLoginVO {
    private String clientEmail;
    private String clientBirth;
    private String clientRegDate;
-   private String clientMilage;
+   private int clientMilage;
    private String clientState;
    
    public ClientLoginVO() {}
 
    public ClientLoginVO(String clientId, String clientPassword, String clientName, String clientTel,
-         String clientEmail, String clientBirth, String clientRegDate, String clientMilage, String clientState) {
+         String clientEmail, String clientBirth, String clientRegDate, int clientMilage, String clientState) {
       this.clientId = clientId;
       this.clientPassword = clientPassword;
       this.clientName = clientName;
@@ -89,11 +91,11 @@ public class ClientLoginVO {
       this.clientRegDate = clientRegDate;
    }
 
-   public String getClientMilage() {
+   public int getClientMilage() {
       return clientMilage;
    }
 
-   public void setClientMilage(String clientMilage) {
+   public void setClientMilage(int clientMilage) {
       this.clientMilage = clientMilage;
    }
    
