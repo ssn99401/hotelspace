@@ -40,8 +40,8 @@ public class ClientLoginController {
 
 		if (resultClient != null) {
 			if (resultClient.getClientPassword().equals(client.getClientPassword())) {
-				
-				httpSession.setAttribute("login", resultClient.getClientName()); // 로그인 성공
+				resultClient.setClientPassword("");
+				httpSession.setAttribute("login", resultClient); // 로그인 성공
 			}else {
 				model.addAttribute("message", "아이디 혹은 비밀번호가 틀렸습니다.");// 아이디 오류 처리 // 비밀번호 오류 처리
 				return "login/clientLogin";
@@ -70,21 +70,28 @@ public class ClientLoginController {
 		ClientLoginVO resultClient = clientLoginService.compareKakaoId(id);
 		
 		if (resultClient != null) {
-			httpSession.setAttribute("login", resultClient.getClientName());
+			resultClient.setClientPassword("");
+			httpSession.setAttribute("login", resultClient);
 			
 		}else {
 			model.addAttribute("message", "회원가입이 필요합니다.");
-			return "login/clientLogin"; //회원가입 창으로
+			return "login/clientLogin"; //회원가입 창으로 바꿀까 고민중
 		}
 		
 		return "redirect:" + (destination != null ? (String) destination : "index.do");
 	}
 	
+	//로그아웃
 	@RequestMapping(value = "/clientLogout.do", method = RequestMethod.GET)
 	public String getlogout(HttpSession httpSession, Model model) {
 		httpSession.removeAttribute("login");
 		
 		return "redirect:index.do";
+	}
+	
+	@RequestMapping(value = "/clientMypage.do", method = RequestMethod.GET)
+	public String getlogout() {
+		return "mypage/mypage";
 	}
 
 }

@@ -13,13 +13,11 @@ public class ClientLoginVO {
    private String clientRegDate;
    private String clientMilage;
    private String clientState;
-   private String clientBusinessReg;
    
    public ClientLoginVO() {}
 
    public ClientLoginVO(String clientId, String clientPassword, String clientName, String clientTel,
-         String clientEmail, String clientBirth, String clientRegDate, String clientMilage, String clientState,
-         String clientBusinessReg) {
+         String clientEmail, String clientBirth, String clientRegDate, String clientMilage, String clientState) {
       this.clientId = clientId;
       this.clientPassword = clientPassword;
       this.clientName = clientName;
@@ -29,7 +27,6 @@ public class ClientLoginVO {
       this.clientRegDate = clientRegDate;
       this.clientMilage = clientMilage;
       this.clientState = clientState;
-      this.clientBusinessReg = clientBusinessReg;
    }
    
    public String getClientId() {
@@ -108,17 +105,10 @@ public class ClientLoginVO {
       this.clientState = clientState;
    }
 
-   public String getClientBusinessReg() {
-      return clientBusinessReg;
-   }
-
-   public void setClientBusinessReg(String clientBusinessReg) {
-      this.clientBusinessReg = clientBusinessReg;
-   }
 
    @Override
    public String toString() {
-      return "ClientLoginVO [id=" + clientId + ", pw=" + clientPassword + "]";
+      return clientName;
    }
    
 }
