@@ -21,73 +21,11 @@
 		} else {
 		}
 	}
-	//     아이디와 비밀번호가 맞지 않을 경우 가입버튼 비활성화를 위한 변수설정
-	var idCheck = 0;
-	var pwdCheck = 0;
-
-	//아이디 체크하여 가입버튼 비활성화, 중복확인.
-	function checkId() {
-		var inputed = $('.form-control').val();
-		console.log(inputed);
-		$.ajax({
-			data : {
-				id : inputed
-			},
-			url : "checkId.do",
-			success : function(data) {
-				if (inputed == "" && data == '0') {
-					$(".signupbtn").prop("disabled", true);
-					$(".signupbtn").css("background-color", "#aaaaaa");
-					$("#clientId").css("background-color", "#FFCECE");
-					idCheck = 0;
-				} else if (data == '0') {
-					$("#clientId").css("background-color", "#B0F6AC");
-					idCheck = 1;
-
-					if (idCheck == 1 && pwdCheck == 1) {
-						$(".signupbtn").prop("disabled", false);
-						$(".signupbtn").css("background-color", "#4CAF50");
-						signupCheck();
-					}
-				} else if (data == '1') {
-					$(".signupbtn").prop("disabled", true);
-					$(".signupbtn").css("background-color", "#aaaaaa");
-					$("#clientId").css("background-color", "#FFCECE");
-					idCheck = 0;
-				}
-				console.log(data);
-			}
-		});
-	}
-	//재입력 비밀번호 체크하여 가입버튼 비활성화 또는 맞지않음을 알림.
-	function checkPwd() {
-		var inputed = $('#clientPassword').val();
-
-		var reinputed = $('#chackPassword').val();
-		if (reinputed == "" && (inputed != reinputed || inputed == reinputed)) {
-			$(".signupbtn").prop("disabled", true);
-			$(".signupbtn").css("background-color", "#aaaaaa");
-			$("#chackPassword").css("background-color", "#FFCECE");
-		} else if (inputed == reinputed) {
-			$("#chackPassword").css("background-color", "#B0F6AC");
-			pwdCheck = 1;
-			if (idCheck == 1 && pwdCheck == 1) {
-				$(".signupbtn").prop("disabled", false);
-				$(".signupbtn").css("background-color", "#4CAF50");
-				signupCheck();
-			}
-		} else if (inputed != reinputed) {
-			pwdCheck = 0;
-			$(".signupbtn").prop("disabled", true);
-			$(".signupbtn").css("background-color", "#aaaaaa");
-			$("#chackPassword").css("background-color", "#FFCECE");
-
-		}
-	}
 
 	$(document).ready(function() {
 		$(document).on('keyup', '#info input', infoChange)
 	})
+
 	function infoChange() {
 		console.log("..................")
 
@@ -95,26 +33,23 @@
 		var tel = $("#clientTel").val();
 		var birth = $("#clientBirth").val();
 		var name = $("#clientName").val();
-		
-		
-		
 
-		if (email == "" || tel == "" || birth == "" || name == "" || idCheck == 0 && pwdCheck == 0 ) {
+		if (email == "" || tel == "" || birth == "" || name == "") {
 			$(".signupbtn").prop("disabled", true);
 			$(".signupbtn").css("background-color", "#aaaaaa");
-		}
-		else{
+		} else {
 			$(".signupbtn").prop("disabled", false);
 			$(".signupbtn").css("background-color", "#4CAF50");
 			signupCheck();
-			
-			
+
 		}
 	}
 
 	//캔슬버튼 눌렀을 눌렀을시 인풋박스 클리어
-	function index() {
-		location.href = "index.do";
+	function index() {	
+		location.href = "clientLogout.do";
+		
+		//카카오 로그인 연결 끊기 넣기///////
 	}
 </script>
 
@@ -144,27 +79,11 @@
 <body>
 
 	<form action="RegisterInsert.do" method="Post" id="info">
-		<h2>회원가입</h2>
-
+		<h2>카카오 회원가입</h2>
 		<table class="table table-boardered">
-			<tr>
-				<th>아이디</th>
-				<td><input type="text" class="form-control" name="clientId"
-					placeholder="id를 넣으세요" oninput="checkId()" id="clientId"></td>
-			</tr>
-			<tr>
-				<th>패스워드</th>
-				<td><input type="password" class="form-control"
-					name="clientPassword" placeholder="pw를 넣어주세요" required class="pass"
-					id="clientPassword" oninput="checkPwd()"></td>
-			</tr>
+			<input type="hidden" id="clientId" name="clientId" value="${login.clientId}">
+			<input type="hidden" id="clientPassword" name="clientPassword" value="kakao">
 
-			<tr>
-				<th>패스워드확인</th>
-				<td><input type="password" class="form-control"
-					id="chackPassword" placeholder="pw 재입력" name="chackPassword"
-					required class="pass" oninput="checkPwd()"></td>
-			</tr>
 			<tr>
 				<th>이름</th>
 				<td><input type="text" class="form-control" id="clientName"
@@ -197,7 +116,7 @@
 
 
 		</table>
+
 	</form>
-	<a href="KakaoRegister.do">카카오로 로그인</a>
 </body>
 </html>

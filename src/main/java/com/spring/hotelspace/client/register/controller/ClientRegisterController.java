@@ -30,7 +30,7 @@ public class ClientRegisterController {
 	@RequestMapping(value = "RegisterInsert.do" , method ={ RequestMethod.GET, RequestMethod.POST})
 	public String RegisterInsert(ClientRegisterVO vo , Model model) {
 		clientRegisterService.RegisterInsert(vo);
-		return "index";
+		return "redirect:index.do";
 	}
 	
 		
@@ -47,5 +47,11 @@ public class ClientRegisterController {
 		int result = clientRegisterService.checkId(regvo1);
 		return result;
     }//
+	
+	@RequestMapping(value = "kakaoRegister.do" , method ={ RequestMethod.GET, RequestMethod.POST})
+	public String kakaoR() {
+		
+		return "redirect:kakaologin";
+	}
 
 }
