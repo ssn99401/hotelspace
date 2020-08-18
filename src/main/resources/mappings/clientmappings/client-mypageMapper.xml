@@ -4,7 +4,22 @@
 
 <mapper namespace="com.spring.hotelspace.client.mypage.dao.ClientMyPageDAO">
 
-
+<update id="updateMyInfo" parameterType="clientLoginVO">
+		UPDATE client
+		SET
+		CLIENT_TEL=#{clientTel},
+		CLIENT_EMAIL=#{clientEmail}
+		where client_id=#{clientId}
+	</update>
+	
+	<select id="selectAll" parameterType="clientLoginVO" resultType="clientLoginVO">
+		SELECT 
+		*
+		FROM client 
+		WHERE client_id = #{clientId}
+	</select>
+	
+	
 	<!-- <resultMap type="#modelname" id="YourResultSet">
 		<id property="param1" column="columnname1" />
 		<result property="param2" column="columnname2" />

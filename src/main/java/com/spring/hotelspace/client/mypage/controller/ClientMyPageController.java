@@ -26,4 +26,15 @@ public class ClientMyPageController {
 		
 	}
 	
+	@RequestMapping (value="/updateaction.do", method=RequestMethod.POST)
+	public String getpageupdate(ClientLoginVO loginVO,HttpSession session,Model model) {
+		System.out.println(loginVO);
+		int aa= clientMyPageService.updateAction(loginVO);
+		System.out.println("update data count : "+ aa);
+		session.setAttribute("login", loginVO);
+		clientMyPageService.searchAll(loginVO);
+		return "mypage/mypage";
+		
+	}
+	
 }

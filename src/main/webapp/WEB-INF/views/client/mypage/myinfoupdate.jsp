@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,53 +17,53 @@
       
       if($("#pwForm").submit(function(){
          if($("#pw").val() !== $("#pw2").val()){
-            alert("ºñ¹Ğ¹øÈ£°¡ ´Ù¸¨´Ï´Ù.");
+            alert("ë¹„ë°€ë²ˆí˜¸ê°€ ë‹¤ë¦…ë‹ˆë‹¤.");
             $("#pw").val("").focus();
             $("#pw2").val("");
             return false;
          }else if ($("#pw").val().length < 8) {
-            alert("ºñ¹Ğ¹øÈ£´Â 8ÀÚ ÀÌ»óÀ¸·Î ¼³Á¤ÇØ¾ß ÇÕ´Ï´Ù.");
+            alert("ë¹„ë°€ë²ˆí˜¸ëŠ” 8ì ì´ìƒìœ¼ë¡œ ì„¤ì •í•´ì•¼ í•©ë‹ˆë‹¤.");
             $("#pw").val("").focus();
             return false;
          }else if($.trim($("#pw").val()) !== $("#pw").val()){
-            alert("°ø¹éÀº ÀÔ·ÂÀÌ ºÒ°¡´ÉÇÕ´Ï´Ù.");
+            alert("ê³µë°±ì€ ì…ë ¥ì´ ë¶ˆê°€ëŠ¥í•©ë‹ˆë‹¤.");
             return false;
          }
       }));
    })
 </script>
-<title>¸¶ÀÌÆäÀÌÁö</title>
+<title>ë§ˆì´í˜ì´ì§€</title>
 </head>
 <body>
 	<div class="w3-content w3-container w3-margin-top">
 		<div class="w3-container w3-card-4">
 			<div class="w3-center w3-large w3-margin-top">
-				<h3>°³ÀÎÁ¤º¸ º¯°æ</h3>
+				<h3>ê°œì¸ì •ë³´ ë³€ê²½</h3>
 			</div>
 			<div>
-				<form id="myForm" action="updateaction.do">
+				<form id="myForm" action="updateaction.do" method="post">
 					<p>
 						<label>ID</label> <input class="w3-input" type="text" id="id"
-							name="id" readonly value="${ login.clientId }" >
+							name="clientId" readonly value="${ login.clientId }" >
 					</p>
 					<p>
-						<label>ÀÌ¸§</label> <input class="w3-input" type="text"
-							id="name" name="email" readonly value="${ login.clientName }" >
+						<label>ì´ë¦„</label> <input class="w3-input" type="text"
+							id="clientName" name="clientName" readonly value="${ login.clientName }" >
 					</p>
 					<p>
 						<label>Email</label> <input class="w3-input" type="text"
-							id="email" name="email"  value="${ login.clientEmail }" required>
+							id="clientEmail" name="clientEmail"  value="${ login.clientEmail }" required>
 					</p>
 					<p>
-						<label>ÀüÈ­¹øÈ£</label> <input class="w3-input" type="text"
-							id="tel" name="email" value="${ login.clientTel }" required>
+						<label>ì „í™”ë²ˆí˜¸</label> <input class="w3-input" type="text"
+							id="clientTel" name="clientTel" value="${ login.clientTel }" required>
 					</p>
 					
 					
 					<p class="w3-center">
-						<button type="submit"
-							class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round">È¸¿øÁ¤º¸
-							º¯°æ</button>
+						<input type="submit"
+							class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round" value="íšŒì›ì •ë³´ ë³€ê²½"/>
+							
 					</p>
 
 				</form>
