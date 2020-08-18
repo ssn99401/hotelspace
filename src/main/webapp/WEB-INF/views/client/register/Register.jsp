@@ -198,6 +198,6 @@
 
 		</table>
 	</form>
-	<a href="KakaoRegister.do">카카오로 로그인</a>
+	<a href="${kakaoURI }">카카오로 로그인</a>
 </body>
 </html>

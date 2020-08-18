@@ -93,6 +93,7 @@ public class ClientLoginController {
 	public String getlogout(HttpSession httpSession, Model model) {
 		
 		ClientLoginVO cl = (ClientLoginVO)httpSession.getAttribute("login");
+		System.out.println(cl);
 		if(cl.getClientPassword().equals("kakao")) {
 			kakao.logout((String)httpSession.getAttribute("access_Token"));
 			httpSession.removeAttribute("access_Token");
