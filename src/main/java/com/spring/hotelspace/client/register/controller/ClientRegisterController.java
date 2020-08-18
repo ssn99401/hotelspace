@@ -1,5 +1,9 @@
 package com.spring.hotelspace.client.register.controller;
 
+import java.util.Date;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,21 +19,33 @@ public class ClientRegisterController {
 	
 	@Autowired
 	private ClientRegisterService clientRegisterService;
-	@Autowired
-	public ClientRegisterService service;
-	
-	@RequestMapping(value = "/Register.do", method = RequestMethod.GET)
+
+	//회원가입 폼
+	@RequestMapping(value = "Register.do", method = { RequestMethod.GET, RequestMethod.POST})
 	public String RegisterForm() {
 		return "register/Register";
 	}
-	@RequestMapping(value = "/RegisterInsert.do" , method =RequestMethod.GET)
-	public String RegisterInsert(ClientRegisterVO vo) {
-		service.RegisterInsert(vo);
+	
+	//회원가입 insert
+	@RequestMapping(value = "RegisterInsert.do" , method ={ RequestMethod.GET, RequestMethod.POST})
+	public String RegisterInsert(ClientRegisterVO vo , Model model) {
+		clientRegisterService.RegisterInsert(vo);
 		return "index";
 	}
+	
+		
+	//아이디 중복체크
 	@RequestMapping(value = "checkId.do", method = { RequestMethod.GET, RequestMethod.POST})
-    public @ResponseBody int idCheck(ClientRegisterVO regvo, Model model) {
-        return service.checkId(regvo);
+    public @ResponseBody int checkId(HttpServletRequest request, Model model) {
+        //return clientRegisterService.checkId(regvo);
+		
+		
+		ClientRegisterVO regvo1 = new ClientRegisterVO();
+		
+		regvo1.setClientId(request.getParameter("id"));
+		System.out.println(regvo1.getClientId());
+		int result = clientRegisterService.checkId(regvo1);
+		return result;
     }//
 
 }
