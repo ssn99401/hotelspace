@@ -14,7 +14,8 @@
 		var email = $("#clientEmail").val();
 		var tel = $("#clientTel").val();
 		var birth = $("#clientBirth").val();
-		if (email == "" || tel == "" || birth == "") {
+		var name = $("#clientName").val();
+		if (email == "" || tel == "" || birth == "" || name == "") {
 			$(".signupbtn").prop("disabled", true);
 			$(".signupbtn").css("background-color", "#aaaaaa");
 		} else {
@@ -23,9 +24,11 @@
 	//     아이디와 비밀번호가 맞지 않을 경우 가입버튼 비활성화를 위한 변수설정
 	var idCheck = 0;
 	var pwdCheck = 0;
+
 	//아이디 체크하여 가입버튼 비활성화, 중복확인.
 	function checkId() {
-		var inputed = $('.clientId').val();
+		var inputed = $('.form-control').val();
+		console.log(inputed);
 		$.ajax({
 			data : {
 				id : inputed
@@ -35,11 +38,12 @@
 				if (inputed == "" && data == '0') {
 					$(".signupbtn").prop("disabled", true);
 					$(".signupbtn").css("background-color", "#aaaaaa");
-					$("#checkaa").css("background-color", "#FFCECE");
+					$("#clientId").css("background-color", "#FFCECE");
 					idCheck = 0;
 				} else if (data == '0') {
-					$("#checkaa").css("background-color", "#B0F6AC");
+					$("#clientId").css("background-color", "#B0F6AC");
 					idCheck = 1;
+
 					if (idCheck == 1 && pwdCheck == 1) {
 						$(".signupbtn").prop("disabled", false);
 						$(".signupbtn").css("background-color", "#4CAF50");
@@ -48,15 +52,16 @@
 				} else if (data == '1') {
 					$(".signupbtn").prop("disabled", true);
 					$(".signupbtn").css("background-color", "#aaaaaa");
-					$("#checkaa").css("background-color", "#FFCECE");
+					$("#clientId").css("background-color", "#FFCECE");
 					idCheck = 0;
 				}
+				console.log(data);
 			}
 		});
 	}
 	//재입력 비밀번호 체크하여 가입버튼 비활성화 또는 맞지않음을 알림.
 	function checkPwd() {
-		var inputed = $('.clientPassword').val();	
+		var inputed = $('#clientPassword').val();
 
 		var reinputed = $('#chackPassword').val();
 		if (reinputed == "" && (inputed != reinputed || inputed == reinputed)) {
@@ -80,13 +85,37 @@
 		}
 	}
 
+	$(document).ready(function() {
+		$(document).on('keyup', '#info input', infoChange)
+	})
+	function infoChange() {
+		console.log("..................")
+
+		var email = $("#clientEmail").val();
+		var tel = $("#clientTel").val();
+		var birth = $("#clientBirth").val();
+		var name = $("#clientName").val();
+		
+		
+		
+
+		if (email == "" || tel == "" || birth == "" || name == "" || idCheck == 0 && pwdCheck == 0 ) {
+			$(".signupbtn").prop("disabled", true);
+			$(".signupbtn").css("background-color", "#aaaaaa");
+		}
+		else{
+			$(".signupbtn").prop("disabled", false);
+			$(".signupbtn").css("background-color", "#4CAF50");
+			signupCheck();
+			
+			
+		}
+	}
+
 	//캔슬버튼 눌렀을 눌렀을시 인풋박스 클리어
-	$(".cancelbtn").click(function() {
-		$(".clientId").val(null);
-		$(".clientPassword").val('');
-		$(".signupbtn").prop("disabled", true);
-		$(".signupbtn").css("background-color", "#aaaaaa");
-	});
+	function index() {
+		location.href = "index.do";
+	}
 </script>
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -114,48 +143,56 @@
 </head>
 <body>
 
-	<form action="RegisterInsert.do">
+	<form action="RegisterInsert.do" method="Post" id="info">
 		<h2>회원가입</h2>
 
 		<table class="table table-boardered">
 			<tr>
 				<th>아이디</th>
 				<td><input type="text" class="form-control" name="clientId"
-					placeholder="id를 넣으세요" oninput="checkId()" id="checkaa"></td>
+					placeholder="id를 넣으세요" oninput="checkId()" id="clientId"></td>
 			</tr>
 			<tr>
 				<th>패스워드</th>
 				<td><input type="password" class="form-control"
 					name="clientPassword" placeholder="pw를 넣어주세요" required class="pass"
-					oninput="checkPwd()"></td>
+					id="clientPassword" oninput="checkPwd()"></td>
 			</tr>
 
 			<tr>
 				<th>패스워드확인</th>
 				<td><input type="password" class="form-control"
-					placeholder="pw 재입력" name="chackPassword" required class="pass"
-					oninput="checkPwd()"></td>
+					id="chackPassword" placeholder="pw 재입력" name="chackPassword"
+					required class="pass" oninput="checkPwd()"></td>
+			</tr>
+			<tr>
+				<th>이름</th>
+				<td><input type="text" class="form-control" id="clientName"
+					name="clientName"></td>
 			</tr>
 			<tr>
 				<th>생일</th>
-				<td><input type="Date" class="form-control" id="clientBirth"></td>
+				<td><input type="Date" class="form-control" id="clientBirth"
+					name="clientBirth"></td>
 			</tr>
 
 			<tr>
 				<th>이메일</th>
-				<td><input type="text" class="form-control" id="clientEmail"></td>
+				<td><input type="email" class="form-control" id="clientEmail"
+					name="clientEmail"></td>
 			</tr>
 
 			<tr>
 				<th>전화번호</th>
-				<td><input type="tel" class="form-control" name="clientTel"></td>
+				<td><input type="tel" class="form-control" id="clientTel"
+					name="clientTel"></td>
 			</tr>
 
 			<tr>
 				<td colspan="2">
-					<button type="button" class="cancelbtn"
-						onclick='$("#_joinsung").css("display", "none")'>Cancel</button> <input
-					type="submit" class="signupbtn" disabled="disabled" value="Sign Up">
+					<button type="button" class="cancelbtn" onclick="index()">Cancel</button>
+					<input type="submit" class="signupbtn" disabled="disabled"
+					value="Sign Up">
 			</tr>
 
 
