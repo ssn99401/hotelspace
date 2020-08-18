@@ -14,18 +14,19 @@
 <title>내 정보</title>
 
 <!-- Bootstrap core CSS -->
-<link
+<!-- <link
 	href="resources/client/vendor/scroll-nav/bootstrap/css/bootstrap.min.css"
-	rel="stylesheet">
+	rel="stylesheet">  -->
 
 <!-- Custom styles for this template -->
-<link href="resources/client/css/scrolling-nav.css" rel="stylesheet">
-
+<!-- <link href="resources/client/css/scrolling-nav.css" rel="stylesheet"> -->
+<jsp:include page="../headerCssLink.jspf" />
 </head>
-
+<body>
 <body id="page-top">
+<c:import url="/clientHeader.do" />
 
-	<!-- Navigation -->
+	<!-- Navigation
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"
 		id="mainNav">
 		<div class="container">
@@ -47,28 +48,34 @@
 				</ul>
 			</div>
 		</div>
-	</nav>
+	</nav>-->
 
 	<header class="bg-primary text-white">
 		<div class="container text-center">
 			<h1>My info</h1>
-			<p class="lead">맨위에 화면(개인정보수정)</p>
+			<p class="lead">개인정보수정</p>
 		</div>
 	</header>
-
+		
+	
 	<section id="about">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-8 mx-auto">
-					<h2>중간시작</h2>
 					<p class="lead">
-					<form action="myinfoupdate.do">
-						테스트임<br> ${login.clientId} <br> ${login.clientName} <br>
-						${login.clientTel} <br> ${login.clientEmail} <br>
-						${login.clientBirth} <br> ${login.clientRegDate} <br>
-						${login.clientMilage} <br> <input type="submit"
-							value="개인정보 수정" /><br> <input type="submit" value="비밀번호 변경" /><br>
-						<input type="reset" value="취소" />
+					<form action="myinfoupdate.do" method="get">
+					<table align="center">
+						<tr><td>아이디</td><td>${login.clientId}</td></tr>  
+						<tr><td>이름</td><td>${login.clientName}</tr>
+						<tr><td>전화번호</td><td>${login.clientTel}</tr>
+						<tr><td>이메일</td><td>${login.clientEmail}</tr>
+						<tr><td>생년월일</td><td>${login.clientBirth}</tr>
+						<tr><td>생성일자</td><td>${login.clientRegDate}</td></tr>
+						<tr><td>마일리지</td><td>${login.clientMilage}</td></tr>
+						<tr><td colspan="2"><input type="submit" value="개인정보 수정" /> </td></tr>
+						<tr><td colspan="2"><input type="submit" value="비밀번호 변경" /></td></tr>
+						<tr><td colspan="2"><input type="reset" value="취소" /></td></tr>
+					</table>
 					</form>
 
 				</div>
@@ -76,61 +83,12 @@
 		</div>
 	</section>
 
-	<section id="services" class="bg-light">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-8 mx-auto">
-					<h2>Services we offer</h2>
-					<p class="lead">Lorem ipsum dolor sit amet, consectetur
-						adipisicing elit. Aut optio velit inventore, expedita quo
-						laboriosam possimus ea consequatur vitae, doloribus consequuntur
-						ex. Nemo assumenda laborum vel, labore ut velit dignissimos.</p>
-				</div>
-			</div>
-		</div>
-	</section>
 
-	<section id="contact">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-8 mx-auto">
-					<h2>Contact us</h2>
-					<p class="lead">Lorem ipsum dolor sit amet, consectetur
-						adipisicing elit. Vero odio fugiat voluptatem dolor, provident
-						officiis, id iusto! Obcaecati incidunt, qui nihil beatae magnam et
-						repudiandae ipsa exercitationem, in, quo totam.</p>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<!-- Footer -->
-	<footer class="py-5 bg-dark">
-		<div class="container">
-			<p class="m-0 text-center text-white">Copyright &copy; Your
-				Website 2020</p>
-		</div>
-		<!-- /.container -->
+	<footer>
+		<c:import url="/clientFooter.do" />
 	</footer>
-
-
-
-
-
-
-	<!-- Bootstrap core JavaScript -->
-	<script src="resources/client/vendor/scroll-nav/jquery/jquery.min.js"></script>
-	<script
-		src="resources/client/vendor/scroll-nav/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-	<!-- Plugin JavaScript -->
-	<script
-		src="resources/client/vendor/scroll-nav/jquery-easing/jquery.easing.min.js"></script>
-
-	<!-- Custom JavaScript for this theme -->
-	<script src="resources/client/js/scrolling-nav.js"></script>
-
-</body>
+	
+	<jsp:include page="../headerScriptLink.jspf" />
 
 </html>
 
