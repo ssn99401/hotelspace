@@ -21,7 +21,7 @@ public class ClientSearchHotelController {
 	@RequestMapping(value = "testsearchhotel.do", method = RequestMethod.GET)
 	public String test(HttpServletRequest request ,Model model) {
 		
-		HashMap<Object, Object> map = new HashMap<>();
+		HashMap<Object, Object> map = new HashMap<Object, Object>();
 		
 		map.put("searchKeyword", request.getParameter("searchKeyword"));
 		map.put("checkIdDate", request.getParameter("checkInDate"));

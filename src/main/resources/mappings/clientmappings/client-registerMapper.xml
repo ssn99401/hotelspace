@@ -2,16 +2,25 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.spring.hotelspace.client.register.dao.ClientRegisterDAO">
+<mapper
+	namespace="com.spring.hotelspace.client.register.dao.ClientRegisterDAO">
+	<!-- a-jax 아이디체크 -->
+	<select id="checkId" parameterType="clientRegisterVO"
+		resultType="java.lang.Integer">
+		SELECT NVL(COUNT(*),0)
+		FROM CLIENT WHERE
+		client_Id=#{clientId}
+	</select>
+	<!-- 회원가입 -->
+	<insert id="RegisterInsert" parameterType="clientRegisterVO">
+		INSERT INTO CLIENT
+		(CLIENT_ID, CLIENT_PASSWORD, CLIENT_NAME, CLIENT_TEL, CLIENT_EMAIL,
+		CLIENT_BIRTH) VALUES
+		(#{clientId},#{clientPassword},#{clientName},#{clientTel},#{clientEmail},
+		to_date(#{clientBirth},'YYYY-MM-DD'))
 
-	<select id="checkId" parameterType="clientRegisterVO" resultType="string">
-		 SELECT NVL(COUNT(*),0)
-		FROM CLIENT WHERE client_Id=#{clientId};
-	</select>
-	<select id= "RegisterInsert" parameterType="clientRegisterVO" resultType="string">
-		INSERT INTO VALUES(#{clientId}, #{clientPassword},"김인수" <!-- #{clientName} -->,#{clientBirth},sysdate,0,0)
-	
-	</select>
+	</insert>
+
 
 
 </mapper>

@@ -2,13 +2,16 @@ package com.spring.hotelspace.client.register.vo;
 
 import java.util.Date;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class ClientRegisterVO {
 	 private String clientId;
 	 private String clientPassword;
 	 private String clientName;
 	 private String clientTel;
 	 private String clientEmail;
-	 private Date clientBirth;
+	 private String clientBirth;
 	 private Date clientRegDate;
 	 private Integer clinetMilage;
 	 private Integer clinetState;
@@ -17,7 +20,7 @@ public class ClientRegisterVO {
 	 public ClientRegisterVO() {}
 	 
 	public ClientRegisterVO(String clientId, String clientPassword, String clientName, String clientTel, String clientEmail,
-			Date clientBirth, Date clientRegDate, Integer clinetMilage, Integer clinetState) {
+			String clientBirth, Date clientRegDate, Integer clinetMilage, Integer clinetState) {
 		super();
 		this.clientId = clientId;
 		this.clientPassword = clientPassword;
@@ -47,6 +50,8 @@ public class ClientRegisterVO {
 	public void setClientName(String clientName) {
 		this.clientName = clientName;
 	}
+	
+
 	public String getClientTel() {
 		return clientTel;
 	}
@@ -59,10 +64,10 @@ public class ClientRegisterVO {
 	public void setClientEmail(String clientEmail) {
 		this.clientEmail = clientEmail;
 	}
-	public Date getClientBirth() {
+	public String getClientBirth() {
 		return clientBirth;
 	}
-	public void setClientBirth(Date clientBirth) {
+	public void setClientBirth(String clientBirth) {
 		this.clientBirth = clientBirth;
 	}
 	public Date getClientRegDate() {
@@ -82,5 +87,12 @@ public class ClientRegisterVO {
 	}
 	public void setClinetState(Integer clinetState) {
 		this.clinetState = clinetState;
+	}
+	@Override
+	public String toString() {
+		return "ClientRegisterVO [clientId=" + clientId + ", clientPassword=" + clientPassword + ", clientName="
+				+ clientName + ", clientTel=" + clientTel + ", clientEmail=" + clientEmail + ", clientBirth="
+				+ clientBirth + ", clientRegDate=" + clientRegDate + ", clinetMilage=" + clinetMilage + ", clinetState="
+				+ clinetState + "]";
 	}
 }
