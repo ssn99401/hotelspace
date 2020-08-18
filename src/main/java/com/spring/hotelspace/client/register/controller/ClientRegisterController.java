@@ -20,9 +20,12 @@ public class ClientRegisterController {
 	@Autowired
 	private ClientRegisterService clientRegisterService;
 
+	private final String codeURI="https://kauth.kakao.com/oauth/authorize?client_id=7fe2ea8fb8719474f5388f06fbf3f3ca&redirect_uri=http://localhost:8088/web/kakaoLogin.do&response_type=code";
+
 	//회원가입 폼
 	@RequestMapping(value = "Register.do", method = { RequestMethod.GET, RequestMethod.POST})
-	public String RegisterForm() {
+	public String RegisterForm(Model model) {
+		model.addAttribute("kakaoURI", codeURI);
 		return "register/Register";
 	}
 	
@@ -30,7 +33,7 @@ public class ClientRegisterController {
 	@RequestMapping(value = "RegisterInsert.do" , method ={ RequestMethod.GET, RequestMethod.POST})
 	public String RegisterInsert(ClientRegisterVO vo , Model model) {
 		clientRegisterService.RegisterInsert(vo);
-		return "index";
+		return "redirect:index.do";
 	}
 	
 		
@@ -47,5 +50,6 @@ public class ClientRegisterController {
 		int result = clientRegisterService.checkId(regvo1);
 		return result;
     }//
+	
 
 }

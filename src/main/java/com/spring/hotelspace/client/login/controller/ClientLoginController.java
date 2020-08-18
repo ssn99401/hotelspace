@@ -23,11 +23,12 @@ public class ClientLoginController {
 	
 	@Autowired
     private KakaoAPI kakao;
+	
+	private final String codeURI="https://kauth.kakao.com/oauth/authorize?client_id=7fe2ea8fb8719474f5388f06fbf3f3ca&redirect_uri=http://localhost:8088/web/kakaoLogin.do&response_type=code";
 
 	@RequestMapping(value = "/clientLogin.do", method = RequestMethod.GET)
 	public String getloginPaget(ClientLoginVO client, HttpSession httpSession, Model model) {
-		System.out.println("ge");
-		model.addAttribute("kakaoURI", "https://kauth.kakao.com/oauth/authorize?client_id=7fe2ea8fb8719474f5388f06fbf3f3ca&redirect_uri=http://localhost:8088/web/kakaoLogin.do&response_type=code");
+		model.addAttribute("kakaoURI", codeURI);
 		return "login/clientLogin";
 	}
 
@@ -40,8 +41,8 @@ public class ClientLoginController {
 
 		if (resultClient != null) {
 			if (resultClient.getClientPassword().equals(client.getClientPassword())) {
-				
-				httpSession.setAttribute("login", resultClient.getClientName()); // 로그인 성공
+				resultClient.setClientPassword("");
+				httpSession.setAttribute("login", resultClient); // 로그인 성공
 			}else {
 				model.addAttribute("message", "아이디 혹은 비밀번호가 틀렸습니다.");// 아이디 오류 처리 // 비밀번호 오류 처리
 				return "login/clientLogin";
@@ -70,21 +71,42 @@ public class ClientLoginController {
 		ClientLoginVO resultClient = clientLoginService.compareKakaoId(id);
 		
 		if (resultClient != null) {
-			httpSession.setAttribute("login", resultClient.getClientName());
+			resultClient.setClientPassword("kakao");
+			httpSession.setAttribute("access_Token", access_Token);
+			httpSession.setAttribute("login", resultClient);
 			
 		}else {
-			model.addAttribute("message", "회원가입이 필요합니다.");
-			return "login/clientLogin"; //회원가입 창으로
+			//로그인을 요청한 회원정보를 카카오 회원가입 화면으로 전송
+			ClientLoginVO wantR = new ClientLoginVO();
+			wantR.setClientPassword("kakao");
+			wantR.setClientId(id);
+			httpSession.setAttribute("login", wantR);
+			httpSession.setAttribute("access_Token", access_Token);
+			return "register/kakaoRegister"; 
 		}
 		
 		return "redirect:" + (destination != null ? (String) destination : "index.do");
 	}
 	
+	//로그아웃 & 카카오 회원가입 중 취소를 원하는 회원
 	@RequestMapping(value = "/clientLogout.do", method = RequestMethod.GET)
 	public String getlogout(HttpSession httpSession, Model model) {
+		
+		ClientLoginVO cl = (ClientLoginVO)httpSession.getAttribute("login");
+		System.out.println(cl);
+		if(cl.getClientPassword().equals("kakao")) {
+			kakao.logout((String)httpSession.getAttribute("access_Token"));
+			httpSession.removeAttribute("access_Token");
+		}
+		
 		httpSession.removeAttribute("login");
 		
 		return "redirect:index.do";
+	}
+	
+	@RequestMapping(value = "/clientMypage.do", method = RequestMethod.GET)
+	public String getlogout() {
+		return "mypage/mypage";
 	}
 
 }
