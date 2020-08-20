@@ -1,15 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <jsp:include page="headerCssLink.jspf" />
+<script type="text/javascript" src="resources/client/js/jquery-3.3.1.js"></script>
 </head>
 
 <body>
-<!-- loader -->
+	<!-- loader -->
 	<%-- <div id="ftco-loader" class="show fullscreen">
 		<svg class="circular" width="48px" height="48px">
 			<circle class="path-bg" cx="24" cy="24" r="22" fill="none"
@@ -64,18 +65,23 @@
 					<li class="nav-item active"><a href="index.do"
 						class="nav-link">Home</a></li>
 					<li class="nav-item"><a href="#" class="nav-link">About</a></li>
-					<li class="nav-item"><a href="searchHotelAll.do" class="nav-link">Hotel</a></li>
-					<li class="nav-item"><a href="clientFAQServices.do" class="nav-link">Services</a></li>
-					
+					<li class="nav-item"><a href="searchHotelAll.do?pageNum=1"
+						class="nav-link">Hotel</a></li>
+					<li class="nav-item"><a href="clientFAQServices.do"
+						class="nav-link">Services</a></li>
+
 					<c:if test="${sessionScope.login != null }">
-						<li class="nav-item"><a href="clientMypage.do" class="nav-link">MyPage</a></li>
-						<li class="nav-item"><a href="clientLogout.do" class="nav-link">Logout</a></li>&nbsp;
-						<li class="nav-item">${sessionScope.login }님 환영합니다!</li>
-					</c:if>
-					<c:if test="${sessionScope.login == null }">
-						<li class="nav-item"><a href="clientLogin.do" class="nav-link">Login</a></li>
+						<li class="nav-item"><a href="clientMypage.do"
+							class="nav-link">MyPage</a></li>
+						<li class="nav-item"><a href="clientLogout.do"
+							class="nav-link">Logout</a></li>&nbsp;
+						<li class="nav-item">${sessionScope.login }님환영합니다!</li>
 					</c:if>
 					
+					<c:if test="${sessionScope.login == null }">
+						<li class="nav-item"><a href="clientLogin.do"
+							class="nav-link">Login</a></li>
+					</c:if>
 				</ul>
 			</div>
 		</div>

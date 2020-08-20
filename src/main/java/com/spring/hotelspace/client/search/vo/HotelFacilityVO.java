@@ -5,67 +5,79 @@ import org.springframework.stereotype.Component;
 @Component
 public class HotelFacilityVO {
 	
-	private String facilityParking;
-	private String facilityPool;
-	private String facilityBreakfast;
-	private String facilityFitness;
-	private String facilityWifi;
-	private String facilityParty;
+	private int facilityParking;
+	private int facilityPool;
+	private int facilityBreakfast;
+	private int facilityFitness;
+	private int facilityWifi;
+	private int facilityPartyRoom;
 	
 	public HotelFacilityVO() {}
-	
-	public HotelFacilityVO(String facilityParking, String facilityPool, String facilityBreakfast,
-			String facilityFitness, String facilityWifi, String facilityParty) {
+
+	public HotelFacilityVO(int facilityParking, int facilityPool, int facilityBreakfast, int facilityFitness,
+			int facilityWifi, int facilityPartyRoom) {
 		super();
 		this.facilityParking = facilityParking;
 		this.facilityPool = facilityPool;
 		this.facilityBreakfast = facilityBreakfast;
 		this.facilityFitness = facilityFitness;
 		this.facilityWifi = facilityWifi;
-		this.facilityParty = facilityParty;
+		this.facilityPartyRoom = facilityPartyRoom;
 	}
-	
-	public String getFacilityParking() {
+
+	public int getFacilityParking() {
 		return facilityParking;
 	}
-	public void setFacilityParking(String facilityParking) {
+
+	public void setFacilityParking(int facilityParking) {
 		this.facilityParking = facilityParking;
 	}
-	public String getFacilityPool() {
+
+	public int getFacilityPool() {
 		return facilityPool;
 	}
-	public void setFacilityPool(String facilityPool) {
+
+	public void setFacilityPool(int facilityPool) {
 		this.facilityPool = facilityPool;
 	}
-	public String getFacilityBreakfast() {
+
+	public int getFacilityBreakfast() {
 		return facilityBreakfast;
 	}
-	public void setFacilityBreakfast(String facilityBreakfast) {
+
+	public void setFacilityBreakfast(int facilityBreakfast) {
 		this.facilityBreakfast = facilityBreakfast;
 	}
-	public String getFacilityFitness() {
+
+	public int getFacilityFitness() {
 		return facilityFitness;
 	}
-	public void setFacilityFitness(String facilityFitness) {
+
+	public void setFacilityFitness(int facilityFitness) {
 		this.facilityFitness = facilityFitness;
 	}
-	public String getFacilityWifi() {
+
+	public int getFacilityWifi() {
 		return facilityWifi;
 	}
-	public void setFacilityWifi(String facilityWifi) {
+
+	public void setFacilityWifi(int facilityWifi) {
 		this.facilityWifi = facilityWifi;
 	}
-	public String getFacilityParty() {
-		return facilityParty;
+
+	public int getFacilityPartyRoom() {
+		return facilityPartyRoom;
 	}
-	public void setFacilityParty(String facilityParty) {
-		this.facilityParty = facilityParty;
+
+	public void setFacilityPartyRoom(int facilityPartyRoom) {
+		this.facilityPartyRoom = facilityPartyRoom;
 	}
+
 	@Override
 	public String toString() {
-		return "MemberHotelsFacilityVO [facilityParking=" + facilityParking
-				+ ", facilityPool=" + facilityPool + ", facilityBreakfast=" + facilityBreakfast + ", facilityFitness="
-				+ facilityFitness + ", facilityWifi=" + facilityWifi + ", facilityParty=" + facilityParty + "]";
-	}	
+		return "HotelFacilityVO [facilityParking=" + facilityParking + ", facilityPool=" + facilityPool
+				+ ", facilityBreakfast=" + facilityBreakfast + ", facilityFitness=" + facilityFitness
+				+ ", facilityWifi=" + facilityWifi + ", facilityPartyRoom=" + facilityPartyRoom + "]";
+	}
 	
 }
