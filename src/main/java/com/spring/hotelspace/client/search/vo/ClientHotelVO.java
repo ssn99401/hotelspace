@@ -14,6 +14,7 @@ public class ClientHotelVO {
 	private String hotelConcept;
 	private Double hotelStar;
 	private String hotelRegDate;
+	private int lowestPrice;
 	private String imageLink;
 	private String imageType;
 	private HotelFacilityVO hotelFacility;
@@ -21,8 +22,8 @@ public class ClientHotelVO {
 	public ClientHotelVO() {}
 
 	public ClientHotelVO(String hotelId, String userId, String hotelName, String hotelTel, String hotelArea,
-			String hotelAddress, String hotelConcept, Double hotelStar, String hotelRegDate, String imageLink,
-			String imageType, HotelFacilityVO hotelFacility) {
+			String hotelAddress, String hotelConcept, Double hotelStar, String hotelRegDate, int lowestPrice,
+			String imageLink, String imageType, HotelFacilityVO hotelFacility) {
 		super();
 		this.hotelId = hotelId;
 		this.userId = userId;
@@ -33,6 +34,7 @@ public class ClientHotelVO {
 		this.hotelConcept = hotelConcept;
 		this.hotelStar = hotelStar;
 		this.hotelRegDate = hotelRegDate;
+		this.lowestPrice = lowestPrice;
 		this.imageLink = imageLink;
 		this.imageType = imageType;
 		this.hotelFacility = hotelFacility;
@@ -110,6 +112,14 @@ public class ClientHotelVO {
 		this.hotelRegDate = hotelRegDate;
 	}
 
+	public int getLowestPrice() {
+		return lowestPrice;
+	}
+
+	public void setLowestPrice(int lowestPrice) {
+		this.lowestPrice = lowestPrice;
+	}
+
 	public String getImageLink() {
 		return imageLink;
 	}
@@ -132,6 +142,15 @@ public class ClientHotelVO {
 
 	public void setHotelFacility(HotelFacilityVO hotelFacility) {
 		this.hotelFacility = hotelFacility;
+	}
+
+	@Override
+	public String toString() {
+		return "ClientHotelVO [hotelId=" + hotelId + ", userId=" + userId + ", hotelName=" + hotelName + ", hotelTel="
+				+ hotelTel + ", hotelArea=" + hotelArea + ", hotelAddress=" + hotelAddress + ", hotelConcept="
+				+ hotelConcept + ", hotelStar=" + hotelStar + ", hotelRegDate=" + hotelRegDate + ", lowestPrice="
+				+ lowestPrice + ", imageLink=" + imageLink + ", imageType=" + imageType + ", hotelFacility="
+				+ hotelFacility + "]";
 	}
 
 	

@@ -7,9 +7,18 @@ import com.spring.hotelspace.client.search.vo.ClientHotelVO;
 
 public interface ClientSearchHotelDAO {
 	
-	// 전체 호텔목록 조회
-	public List<ClientHotelVO> searchHotelAll();
+	// 조회한 호텔리스트 총 갯수
+	public int getCountToHotelList(HashMap<Object, Object> map);
 	
-	// 검색바 호텔조회 - 호텔이름, 체크인, 아웃
-	public List<Object> searchHotelToNameAndDate(HashMap<Object, Object> request);
+	// 전체 호텔목록 조회
+	public List<Object> searchHotelAll(HashMap<Object, Object> map);
+	
+	// 호텔 리스트 검색(index page)
+	public List<Object> searchHotelToSearchBar(HashMap<Object, Object> map);
+	
+	// 호텔 리스트 결과 필터 적용
+	public List<Object> applyFillterToHotelList(HashMap<Object, Object> map);
+	
+	// 호텔 리스트 페이지 이동
+	public List<Object> movoPageToHotelList(HashMap<Object, Object> map);
 }

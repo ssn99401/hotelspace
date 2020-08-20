@@ -14,18 +14,46 @@ import com.spring.hotelspace.client.search.vo.ClientHotelVO;
 public class ClientSearchHotelDAOImpl implements ClientSearchHotelDAO {
 	
 	@Autowired
-	SqlSessionTemplate sqlSessionTemplate;
+	private SqlSessionTemplate sqlSessionTemplate;
 	
 	private static final String namespace = "com.spring.hotelspace.client.search.dao.ClientSearchHotelDAO";
 	
+	// 조회한 호텔리스트 총 갯수
+	public int getCountToHotelList(HashMap<Object, Object> map) {
+		return sqlSessionTemplate.selectOne(namespace + ".getHotelCount", map);
+	}
+	
 	// 전체 호텔목록 조회
-	public List<ClientHotelVO> searchHotelAll()  {
-		return sqlSessionTemplate.selectList(namespace + ".selectHotelListAll", null);
+	public List<Object> searchHotelAll(HashMap<Object, Object> map)  {
+		return sqlSessionTemplate.selectList(namespace + ".selectHotelListAll", map);
 	}
 	
 	
-	// 검색바 호텔조회 - 호텔이름, 체크인, 아웃
-	public List<Object> searchHotelToNameAndDate(HashMap<Object, Object> request) {
-		return sqlSessionTemplate.selectList(namespace + ".selectHotelToNameAndDateList", request);
+	// 호텔 리스트 검색(index page)
+	public List<Object> searchHotelToSearchBar(HashMap<Object, Object> map) {
+		
+		return sqlSessionTemplate.selectList(namespace + ".selectHotelToSearchBar", map);
 	}
+
+	
+	@Override
+	// 호텔 리스트 결과 필터 적용
+	public List<Object> applyFillterToHotelList(HashMap<Object, Object> map) {
+		
+		return sqlSessionTemplate.selectList(namespace + ".applyFillterToHotelList", map);
+	}
+
+	// 호텔 리스트 페이지 이동
+	@Override
+	public List<Object> movoPageToHotelList(HashMap<Object, Object> map) {
+		if(map.get("hotelSearchMethod").equals("hotelListAll")) {
+			return sqlSessionTemplate.selectList(namespace + ".selectHotelListAll", map);
+		} else {
+			return sqlSessionTemplate.selectList(namespace + ".selectHotelToSearchBar", map);
+		}
+	}
+	
+	
+	
+	
 }

@@ -9,12 +9,14 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <jsp:include page="headerCssLink.jspf" />
-<script type="text/javascript" src="resources/client/js/index/index.js"></script>
 </head>
 <body>
-<header>
-<c:import url="/clientHeader.do" />
-</header>
+	<header>
+		<c:import url="/clientHeader.do" />
+	</header>
+	
+	<script type="text/javascript" src="resources/client/js/index/index.js"></script>
+			
 	<div class="hero-wrap js-fullheight"
 		style="background-image: url('resources/client/vendor/images/mainview8.jpg');"
 		data-stellar-background-ratio="0.5">
@@ -39,13 +41,14 @@
 		<div class="container">
 			<div class="row justify-content-end">
 				<div class="col-lg-4">
-					<form action="#" class="appointment-form" onsubmit="checkSearchDate()">
+					<form action="searchHotelToIndex.do?pageNum=1" class="appointment-form" onsubmit="return checkInputDate()">
 						<h4 class="mb-3">어디로 떠나고 싶으신가요?</h4>
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
 									<input type="text" class="form-control"
-										placeholder="ex) 서울,신라호텔" name="searchKeyword" id="searchKeyword" >
+										placeholder="ex) 서울,신라호텔" name="searchKeyword"
+										id="searchKeyword">
 								</div>
 							</div>
 							<div class="col-md-6">
@@ -54,9 +57,8 @@
 										<div class="icon">
 											<span class="ion-md-calendar"></span>
 										</div>
-										<input type="date" value="Check-in"
-											class="input-group date" name="checkInDate" id="checkInDate"
-											placeholder="Check-in">
+										<input type="date" value="Check-in" class="input-group date"
+											name="checkInDate" id="checkInDate" placeholder="Check-in">
 									</div>
 								</div>
 							</div>
@@ -66,34 +68,57 @@
 										<div class="icon">
 											<span class="ion-md-calendar"></span>
 										</div>
-										<input type="date"
-											class="input-group date" name="checkOutDate" id="checkOutDate"
-											placeholder="Check-out">
+										<input type="date" class="input-group date"
+											name="checkOutDate" id="checkOutDate" placeholder="Check-out">
 									</div>
 								</div>
 							</div>
-								<div class="col-md-6">
-									<div class="form-group">
-			    					<div class="form-field">
-	          					<div class="select-wrap">
-	                      <div class="icon"><span class="fa fa-chevron-down"></span></div>
-	                      <select name="people" id="people" class="form-control">
-	                      	<option value="">인원</option>
-	                        <option value="">1</option>
-	                        <option value="">2</option>
-	                        <option value="">3</option>
-	                        <option value="">4</option>
-	                        <option value="">5</option>
-	                        <option value="">6</option>
-	                            <option value="">7</option>
-	                              <option value="">8</option>
-	                                <option value="">9</option>
-	                                  <option value="">9명이상</option>
-	                      </select>
-	                    </div>
-			              </div>
-			    				</div>
-								</div> 
+							<div class="col-md-6">
+								<div class="form-group">
+									<div class="form-field">
+										<div class="select-wrap">
+											<div class="icon">
+												<span class="fa fa-chevron-down"></span>
+											</div>
+											<select name="area" id="area" class="form-control">
+												<option value="서울" selected="selected">서울</option>
+												<option value="인천">인천</option>
+												<option value="경기">경기</option>
+												<option value="ha1">ha1</option>
+												<option value="ha3">ha2</option>
+												<option value="">5</option>
+												<option value="">6</option>
+												<option value="">7</option>
+												<option value="">8</option>
+												<option value="">9</option>
+											</select>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<div class="form-field">
+										<div class="select-wrap">
+											<div class="icon">
+												<span class="fa fa-chevron-down"></span>
+											</div>
+											<select name="people" id="people" class="form-control">
+												<option value="0">인원</option>
+												<option value="1">1</option>
+												<option value="2">2</option>
+												<option value="3">3</option>
+												<option value="4">4</option>
+												<option value="5">5</option>
+												<option value="6">6</option>
+												<option value="7">7</option>
+												<option value="8">8</option>
+												<option value="10">9명이상</option>
+											</select>
+										</div>
+									</div>
+								</div>
+							</div>
 							<div class="col-md-12">
 								<div class="form-group">
 									<input type="submit" value="검색하기"
@@ -571,7 +596,7 @@
 	<footer>
 		<c:import url="/clientFooter.do" />
 	</footer>
-	
+
 	<jsp:include page="headerScriptLink.jspf" />
 
 </body>
