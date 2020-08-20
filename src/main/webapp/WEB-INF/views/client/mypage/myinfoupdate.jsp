@@ -15,7 +15,7 @@
          alert('${msg}');
       };
       
-      if($("#pwForm").submit(function(){
+ /*      if($("#pwForm").submit(function(){
          if($("#pw").val() !== $("#pw2").val()){
             alert("비밀번호가 다릅니다.");
             $("#pw").val("").focus();
@@ -25,11 +25,11 @@
             alert("비밀번호는 8자 이상으로 설정해야 합니다.");
             $("#pw").val("").focus();
             return false;
-         }else if($.trim($("#pw").val()) !== $("#pw").val()){
+         }else if($.trim($("#clientEmail").val()) !== $("#pw").val()){
             alert("공백은 입력이 불가능합니다.");
             return false;
          }
-      }));
+      })); */
    })
 </script>
 <title>마이페이지</title>
@@ -41,7 +41,7 @@
 				<h3>개인정보 변경</h3>
 			</div>
 			<div>
-				<form id="myForm" action="updateaction.do" method="post">
+				<form id="myForm" action="mypageUpdate.do" method="post">
 					<p>
 						<label>ID</label> <input class="w3-input" type="text" id="id"
 							name="clientId" readonly value="${ login.clientId }" >
@@ -59,10 +59,13 @@
 							id="clientTel" name="clientTel" value="${ login.clientTel }" required>
 					</p>
 					
-					
+					 <input class="w3-input" type="hidden"
+							id="clientBirth" name="clientBirth" value="${ login.clientBirth }">
+					<input class="w3-input" type="hidden"
+							id="clientRegDate" name="clientRegDate" value="${ login.clientRegDate }">
 					<p class="w3-center">
 						<input type="submit"
-							class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round" value="회원정보 변경"/>
+							class="w3-button w3-block w3-pink w3-ripple w3-margin-top w3-round" value="회원정보 변경"/>
 							
 					</p>
 

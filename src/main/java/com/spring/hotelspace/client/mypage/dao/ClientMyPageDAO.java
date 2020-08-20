@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.spring.hotelspace.client.login.vo.ClientLoginVO;
+import com.spring.hotelspace.client.mypage.vo.ClientMyPageVO;
 
 @Repository
 public interface ClientMyPageDAO {
@@ -12,6 +13,10 @@ public interface ClientMyPageDAO {
 	public int updateAction(ClientLoginVO loginVO);
 
 	public ClientLoginVO selectAll(ClientLoginVO loginVO);
+
+	int changePW(ClientMyPageVO client);
+
+	public int checkPw(ClientMyPageVO myPagevo1);
 	
 	
 }

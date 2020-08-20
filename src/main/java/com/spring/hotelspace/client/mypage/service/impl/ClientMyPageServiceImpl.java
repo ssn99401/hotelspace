@@ -27,7 +27,17 @@ public class ClientMyPageServiceImpl implements ClientMyPageService {
 	}
 
 	
-	
+	   @Override
+	   public int changePW(ClientMyPageVO client) {
+	      // TODO Auto-generated method stub
+	      return clientMyPageDAO.changePW(client);
+	   }
+
+	   @Override
+	   public int checkPw(ClientMyPageVO myPagevo1) {
+	      // TODO Auto-generated method stub
+	      return clientMyPageDAO.checkPw(myPagevo1);
+	   }
 	
 	
 }

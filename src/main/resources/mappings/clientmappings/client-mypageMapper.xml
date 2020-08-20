@@ -19,6 +19,24 @@
 		WHERE client_id = #{clientId}
 	</select>
 	
+	   <update id="updatePW" parameterType="ClientMyPageVO">
+      UPDATE CLIENT
+      SET
+      CLIENT_PASSWORD= #{clientPassword}
+      WHERE
+      CLIENT_ID = #{clientId}
+   </update>
+   
+   
+   <!-- a-jax 비밀번호 체크 -->
+   <select id="checkPw" parameterType="ClientMypageVO"
+      resultType="java.lang.Integer">
+      SELECT NVL(COUNT(*),0)
+      FROM CLIENT WHERE
+      client_Password=#{clientPassword}
+   </select>
+   
+	
 	
 	<!-- <resultMap type="#modelname" id="YourResultSet">
 		<id property="param1" column="columnname1" />
