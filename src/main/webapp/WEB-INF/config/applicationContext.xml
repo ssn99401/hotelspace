@@ -7,22 +7,33 @@
 	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
 	xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:util="http://www.springframework.org/schema/util"
 	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.3.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
-		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
+		
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>WEB-INF/config/properties/db.properties</value>
+                <value>WEB-INF/config/properties/mail.properties</value>
+            </list>
+        </property>
+    </bean>
 
 	<!-- DataSource -->
 	<bean id="dataSource"
 		class="org.apache.commons.dbcp2.BasicDataSource"
 		destroy-method="close">
 		<property name="driverClassName"
-			value="oracle.jdbc.driver.OracleDriver"></property>
+			value="${db.driverClassName}"></property>
 		<property name="url"
-			value="jdbc:oracle:thin:@myspringdb.czyz7ohdb9s7.us-east-2.rds.amazonaws.com:1521:springDB"></property>
-		<property name="username" value="admin"></property>
-		<property name="password" value="admin123"></property>
+			value="${db.url}"></property>
+		<property name="username" value="${db.username}"></property>
+		<property name="password" value="${db.password}"></property>
 	</bean>
 
 	<!-- Transaction 관리자 설정 -->
@@ -49,6 +60,27 @@
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<property name="maxUploadSize" value="10485760"></property>
 	</bean>
+	
+	<!-- mailSender -->
+   <bean id="mailSender"
+      class="org.springframework.mail.javamail.JavaMailSenderImpl">
+      <property name="host" value="${mail.host}" />
+      <property name="port" value="${mail.port}" />
+      <property name="username" value="${mail.username}" />
+      <property name="password" value="${mail.password}" />
+      <property name="defaultEncoding" value="${mail.defaultEncoding}" />
+      <property name="javaMailProperties">
+         <props>
+            <prop key="mail.debug">true</prop>
+            <prop key="mail.smtp.starttls.enable">true</prop>
+            <prop key="mail.smtps.ssl.checkserveridentity">true</prop>
+            <prop key="mail.smtp.auth">true</prop>
+            <prop key="mail.smtps.ssl.trust">*</prop>
+            <prop key="mail.smtp.socketFactory.class">javax.net.ssl.SSLSocketFactory</prop>
+         </props>
+      </property>
+   </bean>
+	
 
 	<context:component-scan
 		base-package="com.spring.hotelspace" />

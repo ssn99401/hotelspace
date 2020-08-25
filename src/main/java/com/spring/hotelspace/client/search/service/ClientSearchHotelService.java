@@ -10,8 +10,7 @@ import com.spring.hotelspace.client.search.vo.ClientSearchHotelDTO;
 
 public interface ClientSearchHotelService {
 	
-	public HashMap<String, Object> searchHotelAll(ClientSearchHotelDTO requestDTO);
 	public HashMap<String, Object> searchHotelToSearchBar(ClientSearchHotelDTO requestDTO);
-	public HashMap<String, Object> applyFillterToHotelList(ClientHotelFilterDTO hotelFillter, Object hotelSearchMethod);
+	public HashMap<String, Object> searchHotelList(ClientHotelFilterDTO hotelFillter, Object hotelSearchMethod);
 	public HashMap<String, Object> movePageToHotelList(ClientHotelFilterDTO hotelFillter, Object hotelSearchMethod, String filter);
 }
