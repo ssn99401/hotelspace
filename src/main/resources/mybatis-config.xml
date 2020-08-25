@@ -11,6 +11,7 @@
 	
 	<typeAliases>
 		<typeAlias type="com.spring.hotelspace.client.main.vo.MainVO" alias="mainVO"/>
+		<typeAlias type="com.spring.hotelspace.client.main.vo.TopHotelVO" alias="topHotelVO"/>
 		<typeAlias type="com.spring.hotelspace.client.login.vo.ClientLoginVO" alias="clientLoginVO"/>
 		<typeAlias type="com.spring.hotelspace.client.register.vo.ClientRegisterVO" alias="clientRegisterVO"/>
 		<typeAlias type="com.spring.hotelspace.client.search.vo.ClientHotelVO" alias="clientHotelVO"/>
@@ -21,11 +22,14 @@
 		<typeAlias type="com.spring.hotelspace.client.board.vo.ClientFAQVO" alias="clientFAQVO"/>
 		<typeAlias type="com.spring.hotelspace.client.board.vo.ClientQNAVO" alias="clientQNAVO"/>
 		
+		<typeAlias type="com.spring.hotelspace.admin.main.vo.AdminMainVO" alias="adminMainVO"/>
 		<typeAlias type="com.spring.hotelspace.admin.login.vo.AdminLoginVO" alias="adminLoginVO"/>
+		<typeAlias type="com.spring.hotelspace.admin.management.page.vo.AdminPageImageVO" alias="adminPageImageVO"/>
+		<typeAlias type="com.spring.hotelspace.admin.management.user.vo.AdminManageClientVO" alias="adminManageClientVO"/>
 	</typeAliases>
 
 	<mappers>
-		<mapper resource="mappings/clientmappings/client-maimMapper.xml"/>
+		<mapper resource="mappings/clientmappings/client-mainMapper.xml"/>
 		<mapper resource="mappings/clientmappings/client-loginMapper.xml"/>
 		<mapper resource="mappings/clientmappings/client-registerMapper.xml"/>
 		<mapper resource="mappings/clientmappings/client-mypageMapper.xml"/>
@@ -36,6 +40,9 @@
 		<mapper resource="mappings/clientmappings/client-QNAMapper.xml"/>
 		
 		<mapper resource="mappings/adminmappings/admin-loginMapper.xml"/>
+		<mapper resource="mappings/adminmappings/admin-mainMapper.xml"/>
+		<mapper resource="mappings/adminmappings/admin-pageManagerMapper.xml"/>
+		<mapper resource="mappings/adminmappings/admin-clientManagerMapper.xml"/>
 	</mappers>
 
 </configuration>

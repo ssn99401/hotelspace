@@ -16,9 +16,4 @@ public interface ClientSearchHotelDAO {
 	// 호텔 리스트 검색(index page)
 	public List<Object> searchHotelToSearchBar(HashMap<Object, Object> map);
 	
-	// 호텔 리스트 결과 필터 적용
-	public List<Object> applyFillterToHotelList(HashMap<Object, Object> map);
-	
-	// 호텔 리스트 페이지 이동
-	public List<Object> movoPageToHotelList(HashMap<Object, Object> map);
 }

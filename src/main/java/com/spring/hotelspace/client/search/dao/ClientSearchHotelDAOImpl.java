@@ -35,25 +35,4 @@ public class ClientSearchHotelDAOImpl implements ClientSearchHotelDAO {
 		return sqlSessionTemplate.selectList(namespace + ".selectHotelToSearchBar", map);
 	}
 
-	
-	@Override
-	// 호텔 리스트 결과 필터 적용
-	public List<Object> applyFillterToHotelList(HashMap<Object, Object> map) {
-		
-		return sqlSessionTemplate.selectList(namespace + ".applyFillterToHotelList", map);
-	}
-
-	// 호텔 리스트 페이지 이동
-	@Override
-	public List<Object> movoPageToHotelList(HashMap<Object, Object> map) {
-		if(map.get("hotelSearchMethod").equals("hotelListAll")) {
-			return sqlSessionTemplate.selectList(namespace + ".selectHotelListAll", map);
-		} else {
-			return sqlSessionTemplate.selectList(namespace + ".selectHotelToSearchBar", map);
-		}
-	}
-	
-	
-	
-	
 }

@@ -5,8 +5,9 @@
 <mapper namespace="com.spring.hotelspace.client.search.dao.ClientSearchHotelDAO">
 
 	<select id="selectHotelListAll" parameterType="java.util.HashMap" resultMap="hotelResultMap">
+	 
 		SELECT * FROM (
-		SELECT ROWNUM as "row",hotel.HOTEL_ID, hotel.USER_ID, hotel.HOTEL_NAME, hotel.HOTEL_TEL,
+		SELECT DISTINCT RANK() OVER (ORDER BY hotel.HOTEL_STAR DESC ) as "row" , hotel.HOTEL_ID, hotel.USER_ID, hotel.HOTEL_NAME, hotel.HOTEL_TEL,
 			hotel.HOTEL_AREA, hotel.HOTEL_ADDRESS, hotel.HOTEL_CONCEPT, hotel.HOTEL_STAR, hotel.HOTEL_REG_DATE ,
 			(SELECT min(room.ROOM_PRICE) 
 				FROM room 
@@ -15,59 +16,78 @@
 		(SELECT hotelimage.image_link FROM HOTEL_IMAGE hotelimage
 				WHERE hotel.HOTEL_ID = hotelimage.HOTEL_ID
 					AND hotelimage.IMAGE_TYPE = 'MAIN') as mainImage, 
-						facilities.FACILITIES_PARKING, facilities.FACILITIES_POOL, facilities.FACILITIES_BREAKFAST, facilities.FACILITIES_FITNESS, facilities.FACILITIES_WIFI, facilities.FACILITIES_PARTYROOM  
+				facilities.FACILITIES_PARKING, facilities.FACILITIES_POOL, facilities.FACILITIES_BREAKFAST, facilities.FACILITIES_FITNESS, facilities.FACILITIES_WIFI, facilities.FACILITIES_PARTYROOM  
 				FROM HOTEL hotel, ROOM room, FACILITIES facilities 
-					WHERE hotel.HOTEL_ID = room.HOTEL_ID AND hotel.HOTEL_ID = facilities.HOTEL_ID
-		
-				ORDER BY hotel.HOTEL_STAR DESC 
-		) 
+					WHERE hotel.HOTEL_ID = room.HOTEL_ID AND hotel.HOTEL_ID = facilities.HOTEL_ID AND room.HOTEL_ID = facilities.HOTEL_ID
 				<![CDATA[
-				WHERE
-					"row" >= #{start} 
-				AND
-					"row" <=  #{end}
-				]]> 
-			<if test="filter.equals('yes')">
-					<![CDATA[
-						AND lowestPrice >= #{minPrice}
-						AND lowestPrice <= #{maxPrice} 
-						AND HOTEL_STAR >= #{minStar} 
-						AND HOTEL_STAR <= #{maxStar} 
-				 	]]>
-				 	
-				 	<if test="checkedKeyword != null and !checkedKeyword.equals('')">
-						AND HOTEL_NAME LIKE '%'||#{checkedKeyword}||'%' 
-					</if>
-					<if test="checkedConcept != null and !checkedConcept.equals('')">
-						AND HOTEL_CONCEPT = #{checkedConcept} 
-					</if>
-					<if test="parking != null and !parking.equals('')" >
-						AND FACILITIES_PARKING = 1 
-					</if>
-					<if test="pool != null and !pool.equals('')">
-						AND FACILITIES_POOL = 1 
-					</if>
-					<if test="breakfast != null and !breakfast.equals('')">
-						AND FACILITIES_BREAKFAST = 1 
-					</if>
-					<if test="fitness != null and !fitness.equals('')">
-						AND FACILITIES_FITNESS = 1 
-					</if>
-					<if test="wifi != null and !wifi.equals('')">
-						AND FACILITIES_WIFI = 1 
-					</if>
-					<if test="partyRoom != null and !partyRoom.equals('')">
-						AND FACILITIES_PARTYROOM = 1 
-					</if>
-				</if>
+					AND room.ROOM_AMOUNT > 
+						(SELECT count(reservation.RESERVATION_ID) 
+							FROM RESERVATION reservation
+								WHERE room.ROOM_ID = reservation.ROOM_ID 
+									AND room.HOTEL_ID = reservation.HOTEL_ID 
+								
+									AND NOT (reservation.RESERVATION_IN_DATE >= #{checkInDate}
+										AND reservation.RESERVATION_OUT_DATE <= #{checkInDate}) 
+									AND NOT (reservation.RESERVATION_IN_DATE >= #{checkOutDate} 
+										AND reservation.RESERVATION_OUT_DATE <= #{checkOutDate} )
+                    	)
 					
+				AND 
+					(SELECT min(room.ROOM_PRICE) 
+					FROM room 
+						WHERE room.HOTEL_ID = hotel.HOTEL_ID 
+					) >= #{minPrice}
+					
+					AND (SELECT min(room.ROOM_PRICE) 
+					FROM room 
+						WHERE room.HOTEL_ID = hotel.HOTEL_ID 
+					) <= #{maxPrice} 
+					
+					AND
+						HOTEL_STAR >= #{minStar} 
+					AND 
+						HOTEL_STAR <= #{maxStar} 
+			 	]]>
+				 	
+				 <if test="checkedKeyword != null and !checkedKeyword.equals('')">
+					AND HOTEL_NAME LIKE '%'||#{checkedKeyword}||'%' 
+				</if>
+				<if test="checkedConcept != null and !checkedConcept.equals('')">
+					AND HOTEL_CONCEPT = #{checkedConcept} 
+				</if>
+				<if test="parking != null and !parking.equals('')" >
+					AND FACILITIES_PARKING = 1 
+				</if>
+				<if test="pool != null and !pool.equals('')">
+					AND FACILITIES_POOL = 1 
+				</if>
+				<if test="breakfast != null and !breakfast.equals('')">
+					AND FACILITIES_BREAKFAST = 1 
+				</if>
+				<if test="fitness != null and !fitness.equals('')">
+					AND FACILITIES_FITNESS = 1 
+				</if>
+				<if test="wifi != null and !wifi.equals('')">
+					AND FACILITIES_WIFI = 1 
+				</if>
+				<if test="partyRoom != null and !partyRoom.equals('')">
+					AND FACILITIES_PARTYROOM = 1 
+				</if>
+				ORDER BY hotel.HOTEL_STAR DESC 
+			) 
+			<![CDATA[
+				WHERE 
+					"row" >= #{start} 
+				AND 
+					"row" <=  #{end} 
+			]]> 
 	</select>
 
 
 	<select id="selectHotelToSearchBar" parameterType="java.util.HashMap" resultMap="hotelResultMap">
 		<![CDATA[
 		SELECT * FROM (
-		SELECT ROWNUM as "row",hotel.HOTEL_ID, hotel.USER_ID, hotel.HOTEL_NAME, hotel.HOTEL_TEL, hotel.HOTEL_AREA, hotel.HOTEL_ADDRESS, hotel.HOTEL_CONCEPT, hotel.HOTEL_STAR, hotel.HOTEL_REG_DATE, 
+		SELECT DISTINCT RANK() OVER (ORDER BY hotel.HOTEL_STAR DESC ) as "row" , hotel.HOTEL_ID, hotel.USER_ID, hotel.HOTEL_NAME, hotel.HOTEL_TEL, hotel.HOTEL_AREA, hotel.HOTEL_ADDRESS, hotel.HOTEL_CONCEPT, hotel.HOTEL_STAR, hotel.HOTEL_REG_DATE, 
 			(SELECT min(room.ROOM_PRICE) 
 				FROM room 
 					WHERE room.HOTEL_ID = hotel.HOTEL_ID 
@@ -78,7 +98,7 @@
 						facilities.FACILITIES_PARKING, facilities.FACILITIES_POOL, facilities.FACILITIES_BREAKFAST, facilities.FACILITIES_FITNESS, facilities.FACILITIES_WIFI, facilities.FACILITIES_PARTYROOM  
 			FROM HOTEL hotel, ROOM room, FACILITIES facilities
 				WHERE 
-					hotel.HOTEL_ID = room.HOTEL_ID AND hotel.HOTEL_ID = facilities.HOTEL_ID
+					hotel.HOTEL_ID = room.HOTEL_ID AND hotel.HOTEL_ID = facilities.HOTEL_ID AND room.HOTEL_ID = facilities.HOTEL_ID
 					AND #{people} <= room.ROOM_MAX_PEOPLE
 					AND room.ROOM_AMOUNT > 
 			
@@ -86,34 +106,38 @@
 						FROM RESERVATION reservation
 							WHERE room.ROOM_ID = reservation.ROOM_ID 
 								AND room.HOTEL_ID = reservation.HOTEL_ID 
+								
 								AND NOT (reservation.RESERVATION_IN_DATE >= #{checkInDate}
 									AND reservation.RESERVATION_OUT_DATE <= #{checkInDate}) 
 								AND NOT (reservation.RESERVATION_IN_DATE >= #{checkOutDate} 
-										AND reservation.RESERVATION_OUT_DATE <= #{checkOutDate} )
+									AND reservation.RESERVATION_OUT_DATE <= #{checkOutDate} )
                     )
-                    ]]>
+		]]>
 					
-						AND hotel.HOTEL_NAME LIKE '%'||#{searchKeyword}||'%' 
-						AND
-							hotel.HOTEL_AREA = #{area}
+			AND hotel.HOTEL_NAME LIKE '%'||#{searchKeyword}||'%' 
+			<if test="!area.equals('전체')">
+				AND
+					hotel.HOTEL_AREA = #{area}
+			</if>
+			<if test="filter.equals('yes')">	
+				<![CDATA[
+					 AND 
+						(SELECT min(room.ROOM_PRICE) 
+						FROM room 
+							WHERE room.HOTEL_ID = hotel.HOTEL_ID 
+						) >= #{minPrice}
 						
-						ORDER BY hotel.HOTEL_STAR DESC
-				)
-					<![CDATA[
-					WHERE
-						"row" >= #{start} 
-					AND
-						"row" <=  #{end}
-					]]> 
-					 <if test="filter.equals('yes')">
-					<![CDATA[
-					
-						AND lowestPrice >= #{minPrice}
-						AND lowestPrice <= #{maxPrice} 
-						AND HOTEL_STAR >= #{minStar} 
-						AND HOTEL_STAR <= #{maxStar} 
-				 	]]>
-				 	
+						AND (SELECT min(room.ROOM_PRICE) 
+						FROM room 
+							WHERE room.HOTEL_ID = hotel.HOTEL_ID 
+						) <= #{maxPrice} 
+						
+						AND
+							HOTEL_STAR >= #{minStar} 
+						AND 
+							HOTEL_STAR <= #{maxStar} 
+				 ]]>
+				 
 				 	<if test="checkedKeyword != null and !checkedKeyword.equals('')">
 						AND HOTEL_NAME LIKE '%'||#{checkedKeyword}||'%' 
 					</if>
@@ -139,137 +163,73 @@
 						AND FACILITIES_PARTYROOM = 1 
 					</if>
 				</if>
-					
-	</select>
-	
-	<select id="applyFillterToHotelList" parameterType="java.util.HashMap" resultMap="hotelResultMap">
-		SELECT * FROM (
-		<![CDATA[
-			SELECT ROWNUM as "row",hotel.HOTEL_ID, hotel.USER_ID, hotel.HOTEL_NAME, hotel.HOTEL_TEL, hotel.HOTEL_AREA, hotel.HOTEL_ADDRESS, hotel.HOTEL_CONCEPT, hotel.HOTEL_STAR, hotel.HOTEL_REG_DATE, 
-				(SELECT min(room.ROOM_PRICE) 
-					FROM room 
-						WHERE room.HOTEL_ID = hotel.HOTEL_ID 
-				) as lowestPrice,
-				(SELECT hotelimage.image_link FROM HOTEL_IMAGE hotelimage
-					WHERE hotel.HOTEL_ID = hotelimage.HOTEL_ID
-						AND hotelimage.IMAGE_TYPE = 'MAIN') as mainImage, 
-							facilities.FACILITIES_PARKING, facilities.FACILITIES_POOL, facilities.FACILITIES_BREAKFAST, facilities.FACILITIES_FITNESS, facilities.FACILITIES_WIFI, facilities.FACILITIES_PARTYROOM  
-				FROM HOTEL hotel, ROOM room, FACILITIES facilities
-					WHERE 
-						hotel.HOTEL_ID = room.HOTEL_ID AND hotel.HOTEL_ID = facilities.HOTEL_ID
-					
-		]]>
-				<if test="!hotelSearchMethod.equals('hotelListAll')">
-				<![CDATA[
-					AND #{people} <= room.ROOM_MAX_PEOPLE
-					AND room.ROOM_AMOUNT > 
-			
-					(SELECT count(reservation.RESERVATION_ID) 
-						FROM RESERVATION reservation
-							WHERE room.ROOM_ID = reservation.ROOM_ID 
-								AND room.HOTEL_ID = reservation.HOTEL_ID 
-								AND NOT (reservation.RESERVATION_IN_DATE >= #{checkInDate}
-									AND reservation.RESERVATION_OUT_DATE <= #{checkInDate}) 
-								AND NOT (reservation.RESERVATION_IN_DATE >= #{checkOutDate} 
-										AND reservation.RESERVATION_OUT_DATE <= #{checkOutDate} )
-                    )
-                    ]]>
-					<![CDATA[
-						AND hotel.HOTEL_NAME LIKE '%'||#{searchKeyword}||'%' 
-						AND
-							hotel.HOTEL_AREA = #{area}
-					]]>
-					</if>
-					
-						ORDER BY hotel.HOTEL_STAR DESC
-					 )
-		 
-				<![CDATA[
+				ORDER BY hotel.HOTEL_STAR DESC
+		)
+			<![CDATA[
 				WHERE
 					"row" >= #{start} 
 				AND
 					"row" <=  #{end}
-					]]> 
-					<![CDATA[
-						AND lowestPrice >= #{minPrice}
-						AND lowestPrice <= #{maxPrice} 
-						AND HOTEL_STAR >= #{minStar} 
-						AND HOTEL_STAR <= #{maxStar} 
-				 	]]>
-				 	
-				 	<if test="checkedKeyword != null and !checkedKeyword.equals('')">
-						AND HOTEL_NAME LIKE '%'||#{checkedKeyword}||'%' 
-					</if>
-					<if test="checkedConcept != null and !checkedConcept.equals('')">
-						AND HOTEL_CONCEPT = #{checkedConcept} 
-					</if>
-					<if test="parking != null and !parking.equals('')" >
-						AND FACILITIES_PARKING = 1 
-					</if>
-					<if test="pool != null and !pool.equals('')">
-						AND FACILITIES_POOL = 1 
-					</if>
-					<if test="breakfast != null and !breakfast.equals('')">
-						AND FACILITIES_BREAKFAST = 1 
-					</if>
-					<if test="fitness != null and !fitness.equals('')">
-						AND FACILITIES_FITNESS = 1 
-					</if>
-					<if test="wifi != null and !wifi.equals('')">
-						AND FACILITIES_WIFI = 1 
-					</if>
-					<if test="partyRoom != null and !partyRoom.equals('')">
-						AND FACILITIES_PARTYROOM = 1 
-					</if>
+			]]> 
 	</select>
-	
+
+
 	<select id="getHotelCount" parameterType="java.util.HashMap" resultType="java.lang.Integer">
 		SELECT count(HOTEL_ID) FROM (
-		SELECT * FROM (
 		<![CDATA[
-			SELECT hotel.HOTEL_ID, hotel.USER_ID, hotel.HOTEL_NAME, hotel.HOTEL_TEL, hotel.HOTEL_AREA, hotel.HOTEL_ADDRESS, hotel.HOTEL_CONCEPT, hotel.HOTEL_STAR, hotel.HOTEL_REG_DATE, 
-				(SELECT min(room.ROOM_PRICE) 
-					FROM room 
-						WHERE room.HOTEL_ID = hotel.HOTEL_ID 
-				) as lowestPrice,
+			SELECT DISTINCT hotel.HOTEL_ID,
 				facilities.FACILITIES_PARKING, facilities.FACILITIES_POOL, facilities.FACILITIES_BREAKFAST, facilities.FACILITIES_FITNESS, facilities.FACILITIES_WIFI, facilities.FACILITIES_PARTYROOM  
-				FROM HOTEL hotel, ROOM room, FACILITIES facilities
-					WHERE 
-						hotel.HOTEL_ID = room.HOTEL_ID AND hotel.HOTEL_ID = facilities.HOTEL_ID
+					FROM HOTEL hotel, ROOM room, FACILITIES facilities
+						WHERE 
+							hotel.HOTEL_ID = room.HOTEL_ID AND hotel.HOTEL_ID = facilities.HOTEL_ID AND room.HOTEL_ID = facilities.HOTEL_ID
 					
 		]]>
-				<if test="!hotelSearchMethod.equals('hotelListAll')">
 				<![CDATA[
-					AND #{people} <= room.ROOM_MAX_PEOPLE
-					AND room.ROOM_AMOUNT > 
-			
-					(SELECT count(reservation.RESERVATION_ID) 
-						FROM RESERVATION reservation
-							WHERE room.ROOM_ID = reservation.ROOM_ID 
-								AND room.HOTEL_ID = reservation.HOTEL_ID 
-								AND NOT (reservation.RESERVATION_IN_DATE >= #{checkInDate}
-									AND reservation.RESERVATION_OUT_DATE <= #{checkInDate}) 
-								AND NOT (reservation.RESERVATION_IN_DATE >= #{checkOutDate} 
-										AND reservation.RESERVATION_OUT_DATE <= #{checkOutDate} )
-                    )
-                    ]]>
+						AND room.ROOM_AMOUNT > 
+						(SELECT count(reservation.RESERVATION_ID) 
+							FROM RESERVATION reservation
+								WHERE room.ROOM_ID = reservation.ROOM_ID 
+									AND room.HOTEL_ID = reservation.HOTEL_ID 
+									AND NOT (reservation.RESERVATION_IN_DATE >= #{checkInDate}
+										AND reservation.RESERVATION_OUT_DATE <= #{checkInDate}) 
+									AND NOT (reservation.RESERVATION_IN_DATE >= #{checkOutDate} 
+											AND reservation.RESERVATION_OUT_DATE <= #{checkOutDate} )
+                    	)
+						
+				]]>
+				<if test="!hotelSearchMethod.equals('hotelListAll')">
 					<![CDATA[
-						AND hotel.HOTEL_NAME LIKE '%'||#{searchKeyword}||'%' 
+					AND #{people} <= room.ROOM_MAX_PEOPLE
+					]]>
+					AND 
+							hotel.HOTEL_NAME LIKE '%'||#{searchKeyword}||'%'
+					
+					<if test="!area.equals('전체')">
 						AND
 							hotel.HOTEL_AREA = #{area}
-					]]>
+					
 					</if>
-			)
-							
-				<if test="filter.equals('yes')">
-					<![CDATA[
-					WHERE
-						lowestPrice >= #{minPrice}
-						AND lowestPrice <= #{maxPrice} 
-						AND HOTEL_STAR >= #{minStar} 
-						AND HOTEL_STAR <= #{maxStar}
-				 	]]>
-				 	
+				</if>
+			
+			<if test="filter.equals('yes')">	
+				<![CDATA[
+					 AND 
+						(SELECT min(room.ROOM_PRICE) 
+						FROM room 
+							WHERE room.HOTEL_ID = hotel.HOTEL_ID 
+						) >= #{minPrice}
+						
+						AND (SELECT min(room.ROOM_PRICE) 
+						FROM room 
+							WHERE room.HOTEL_ID = hotel.HOTEL_ID 
+						) <= #{maxPrice} 
+						
+						AND
+							HOTEL_STAR >= #{minStar} 
+						AND 
+							HOTEL_STAR <= #{maxStar} 
+				 ]]>
+				 
 				 	<if test="checkedKeyword != null and !checkedKeyword.equals('')">
 						AND HOTEL_NAME LIKE '%'||#{checkedKeyword}||'%' 
 					</if>
@@ -305,7 +265,7 @@
 			column="FACILITIES_BREAKFAST" />
 		<result property="facilityFitness" column="FACILITIES_FITNESS" />
 		<result property="facilityWifi" column="FACILITIES_WIFI" />
-		<result property="facilityPartyRoom" column="FACILITIES_PARTYROOM " />
+		<result property="facilityPartyRoom" column="FACILITIES_PARTYROOM" />
 	</resultMap>
 
 	<resultMap type="clientHotelVO" id="hotelResultMap">
