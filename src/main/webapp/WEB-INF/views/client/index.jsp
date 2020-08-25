@@ -16,9 +16,9 @@
 	</header>
 	
 	<script type="text/javascript" src="resources/client/js/index/index.js"></script>
-			
+	
 	<div class="hero-wrap js-fullheight"
-		style="background-image: url('resources/client/vendor/images/mainview8.jpg');"
+		style="background-image: url('${image['MAINPAGE']}');"
 		data-stellar-background-ratio="0.5">
 		<div class="overlay"></div>
 		<div class="container">
@@ -139,12 +139,12 @@
 					class="col-md-4 d-flex services align-self-stretch px-4 ftco-animate">
 					<div class="d-block services-wrap text-center">
 						<div class="img"
-							style="background-image: url(resources/client/vendor/images/seoul.jpg);"></div>
+							style="background-image: url(${image['SEOUL']});"></div>
 						<div class="media-body py-4 px-3">
 							<h3 class="heading">서울 특별시</h3>
 							<p>서울 도심 안에있는 최고 인기호텔</p>
 							<p>
-								<a href="#" class="btn btn-primary">찾아보기</a>
+								<a href="searchHotelToIndex.do?checkInDate=ALL&checkOutDate=ALL&area=SEOUL" class="btn btn-primary">찾아보기</a>
 							</p>
 						</div>
 					</div>
@@ -153,12 +153,12 @@
 					class="col-md-4 d-flex services align-self-stretch px-4 ftco-animate">
 					<div class="d-block services-wrap text-center">
 						<div class="img"
-							style="background-image: url(resources/client/vendor/images/busan1.jpg);"></div>
+							style="background-image: url(${image['BUSAN']});"></div>
 						<div class="media-body py-4 px-3">
 							<h3 class="heading">부산 광역시</h3>
 							<p>제2의 수도 부산의 특별한 매력이 담겨있는 호텔</p>
 							<p>
-								<a href="#" class="btn btn-primary">찾아보기</a>
+								<a href="searchHotelToIndex.do?checkInDate=ALL&checkOutDate=ALL&area=BUSAN" class="btn btn-primary">찾아보기</a>
 							</p>
 						</div>
 					</div>
@@ -167,12 +167,12 @@
 					class="col-md-4 d-flex services align-self-stretch px-4 ftco-animate">
 					<div class="d-block services-wrap text-center">
 						<div class="img"
-							style="background-image: url(resources/client/vendor/images/jeju.jpg);"></div>
+							style="background-image: url(${image['JEJU']});"></div>
 						<div class="media-body py-4 px-3">
 							<h3 class="heading">제주도</h3>
 							<p>우리나라의 아름다운 섬 제주도 호텔</p>
 							<p>
-								<a href="#" class="btn btn-primary">찾아보기</a>
+								<a href="searchHotelToIndex.do?checkInDate=ALL&checkOutDate=ALL&area=JEJU" class="btn btn-primary">찾아보기</a>
 							</p>
 						</div>
 					</div>
@@ -189,6 +189,52 @@
 				</div>
 			</div>
 			<div class="row no-gutters">
+			
+			<c:set var="cnt" value="0"></c:set>
+			<c:forEach var="top" items="${hotel}">
+				<div class="col-lg-6">
+					<div class="room-wrap d-md-flex">
+					<c:if test="${cnt < 2}">
+						<a href="#" class="img order-md-last"
+							style="background-image: url(${top.imageLink});"></a></c:if>
+					<c:if test="${cnt >= 2}">
+						<a href="#" class="img"
+							style="background-image: url(${top.imageLink});"></a></c:if>
+					<c:set var="cnt" value="${cnt + 1 }"></c:set>
+						<div class="half left-arrow d-flex align-items-center">
+							<div class="text p-4 p-xl-5 text-center">
+								<p class="star mb-0">
+									<span class="fa fa-star"></span><span class="fa fa-star"></span><span
+										class="fa fa-star"></span><span class="fa fa-star"></span><span
+										class="fa fa-star"></span>
+								</p>
+								<!-- <p class="mb-0"><span class="price mr-1">$120.00</span> <span class="per">per night</span></p> -->
+								<h3 class="mb-3">
+									<a href="rooms.html">${top.hotelName }</a>
+								</h3>
+								<ul class="list-accomodation">
+									<c:if test="${top.revCnt != null }">
+									<li><span>예약수 : </span> ${top.revCnt }</li>
+									</c:if>
+									<c:if test="${top.comCnt != null }">
+									<li><span>리뷰 : </span> ${top.comCnt }</li>
+									</c:if>
+									<li><span>별점 : </span> ${top.hotelStar }</li>
+								</ul>
+								<p class="pt-1">
+									<a href="room-single.html" class="btn-custom px-3 py-2">예약하기<span
+										class="icon-long-arrow-right"></span></a>
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			
+			
+			
+			</c:forEach>
+			
+			<!-- 
 				<div class="col-lg-6">
 					<div class="room-wrap d-md-flex">
 						<a href="#" class="img"
@@ -200,12 +246,11 @@
 										class="fa fa-star"></span><span class="fa fa-star"></span><span
 										class="fa fa-star"></span>
 								</p>
-								<!-- <p class="mb-0"><span class="price mr-1">$120.00</span> <span class="per">per night</span></p> -->
+								<p class="mb-0"><span class="price mr-1">$120.00</span> <span class="per">per night</span></p>
 								<h3 class="mb-3">
 									<a href="rooms.html">서울 시그니처 호텔</a>
 								</h3>
 								<ul class="list-accomodation">
-									<li><span>조회수 : </span> 342042</li>
 									<li><span>예약수 : </span> 3799</li>
 									<li><span>리뷰 : </span> 2015</li>
 									<li><span>별점 : </span> 4.9</li>
@@ -229,12 +274,11 @@
 										class="fa fa-star"></span><span class="fa fa-star"></span><span
 										class="fa fa-star"></span>
 								</p>
-								<!-- <p class="mb-0"><span class="price mr-1">$120.00</span> <span class="per">per night</span></p> -->
+								<p class="mb-0"><span class="price mr-1">$120.00</span> <span class="per">per night</span></p>
 								<h3 class="mb-3">
 									<a href="rooms.html">제주 아일랜드 호텔</a>
 								</h3>
 								<ul class="list-accomodation">
-									<li><span>조회수 : </span> 229521</li>
 									<li><span>예약수 : </span> 2910</li>
 									<li><span>리뷰 : </span> 1203</li>
 									<li><span>별점 : </span> 4.8</li>
@@ -259,12 +303,11 @@
 										class="fa fa-star"></span><span class="fa fa-star"></span><span
 										class="fa fa-star"></span>
 								</p>
-								<!-- <p class="mb-0"><span class="price mr-1">$120.00</span> <span class="per">per night</span></p> -->
+								<p class="mb-0"><span class="price mr-1">$120.00</span> <span class="per">per night</span></p>
 								<h3 class="mb-3">
 									<a href="rooms.html">부산 그랜드 호텔</a>
 								</h3>
 								<ul class="list-accomodation">
-									<li><span>조회수 : </span> 261031</li>
 									<li><span>예약수 : </span> 5921</li>
 									<li><span>리뷰 : </span> 3102</li>
 									<li><span>별점 : </span> 4.8</li>
@@ -288,12 +331,11 @@
 										class="fa fa-star"></span><span class="fa fa-star"></span><span
 										class="fa fa-star"></span>
 								</p>
-								<!-- <p class="mb-0"><span class="price mr-1">$120.00</span> <span class="per">per night</span></p> -->
+								<p class="mb-0"><span class="price mr-1">$120.00</span> <span class="per">per night</span></p>
 								<h3 class="mb-3">
 									<a href="rooms.html">강릉 백제 호텔</a>
 								</h3>
 								<ul class="list-accomodation">
-									<li><span>조회수 : </span> 132842</li>
 									<li><span>예약수 : </span> 2782</li>
 									<li><span>리뷰 : </span> 1282</li>
 									<li><span>별점 : </span> 4.9</li>
@@ -305,7 +347,8 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> -->
+				
 			</div>
 		</div>
 	</section>
@@ -412,7 +455,7 @@
 		</div>
 	</section>
 
-	<!-- <section class="ftco-section bg-light">
+	<!--  <section class="ftco-section bg-light">
 			<div class="container">
 				<div class="row no-gutters">
 					<div class="col-md-6 wrap-about">
@@ -507,7 +550,7 @@
 					</div>
 				</div>
 			</div>
-		</section> -->
+		</section>  -->
 
 	<!-- <section class="ftco-intro" style="background-image: url(resources/client/vendor/images/bg_1.jpg);" data-stellar-background-ratio="0.5">
 			<div class="overlay"></div>
@@ -526,7 +569,7 @@
 		<div class="container">
 			<div class="row justify-content-center pb-5 mb-3">
 				<div class="col-md-7 heading-section text-center ftco-animate">
-					<h2>휴양지 속 특별한 이야기</h2>
+					<h2>휴양지 속 특별한 story</h2>
 					<span class="subheading">휴양지 속 휴양지 초대합니다!</span>
 				</div>
 			</div>
@@ -534,7 +577,7 @@
 				<div class="col-md-4 d-flex ftco-animate">
 					<div class="blog-entry align-self-stretch">
 						<a href="blog-single.html" class="block-20 rounded"
-							style="background-image: url('resources/client/vendor/images/gp1.jpg');">
+							style="background-image: url('${image['글렘핑']}');">
 						</a>
 						<div class="text p-4 text-center">
 							<div>
@@ -543,10 +586,10 @@
 									class="fa fa-star"></span><span class="fa fa-star"></span></a>
 							</div>
 							<h3 class="heading">
-								<a href="#">강릉시 앤젤 글램핑</a>
+								<a href="#">글램핑</a>
 							</h3>
 							<div class="meta mb-2">
-								<p>글램핑이 처음이십니까? 앤젤 글램핑은 전국 최고 인기 1위 글램핑입니다!</p>
+								<p>글램핑이 처음이십니까? 첫 글램핑을 경험해 보십시오!</p>
 							</div>
 						</div>
 					</div>
@@ -554,7 +597,7 @@
 				<div class="col-md-4 d-flex ftco-animate">
 					<div class="blog-entry align-self-stretch">
 						<a href="blog-single.html" class="block-20 rounded"
-							style="background-image: url('resources/client/vendor/images/gh1.jpg');">
+							style="background-image: url('${image['바다 낭만']}');">
 						</a>
 						<div class="text p-4 text-center">
 							<div>
@@ -563,17 +606,17 @@
 									class="fa fa-star"></span><span class="fa fa-star"></span></a>
 							</div>
 							<h3 class="heading">
-								<a href="#">제주시 우주 게스트하우스</a>
+								<a href="#">바다 낭만</a>
 							</h3>
 							<div class="meta mb-2"></div>
-							<p>게스트 하우스의 낭만 , 호텔과 같은 편안함 둘다 느낄수있는 특별한 게스트하우스로 초대합니다</p>
+							<p>아름다운 바다 뷰를 보며 즐거움, 편안함 둘다 느낄수있는 호텔로 당신을 초대합니다</p>
 						</div>
 					</div>
 				</div>
 				<div class="col-md-4 d-flex ftco-animate">
 					<div class="blog-entry align-self-stretch">
 						<a href="blog-single.html" class="block-20 rounded"
-							style="background-image: url('resources/client/vendor/images/fs1.jpg');">
+							style="background-image: url('${image['도심 속 힐링']}');">
 						</a>
 						<div class="text p-4 text-center">
 							<div>
@@ -582,10 +625,10 @@
 									class="fa fa-star"></span><span class="fa fa-star"></span></a>
 							</div>
 							<h3 class="heading">
-								<a href="#">부산 광안리 럭스 펜션</a>
+								<a href="#">도심 힐링</a>
 							</h3>
 							<div class="meta mb-2"></div>
-							<p>최고의 팬션을 경험해 보고싶으신가요 부산 럭스 팬션을 경험해보십시오!</p>
+							<p>도심 속에서 낭만적인 야경을 만끽하십시오!</p>
 						</div>
 					</div>
 				</div>

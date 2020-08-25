@@ -4,6 +4,23 @@
 
 <mapper namespace="com.spring.hotelspace.client.main.dao.ClientMainPageDAO">
 
+	<select id="getAll" resultType="mainVO">
+		SELECT * FROM WEBPAGE_IMAGE
+	</select>
+	
+	<select id="getHotelImage" resultType="topHotelVO">
+		select h.hotel_id, hotel_star, hotel_name, image_link, rev_cnt, com_cnt
+	FROM 
+	(select DISTINCT RANK() OVER (ORDER BY hotel.HOTEL_STAR DESC) as "row",hotel_id, hotel_star, hotel_name from hotel) h,
+    (select * from hotel_image where image_type = 'MAIN') i, 
+    (select hotel_id, count(*) as rev_cnt from reservation group by hotel_id) r,
+    (select hotel_id, count(*) as com_cnt from review group by hotel_id) c
+	where i.hotel_id = h.hotel_id  and h.hotel_id = r.hotel_id(+) and h.hotel_id = c.hotel_id(+)
+		<![CDATA[
+		and "row" <= 4
+		]]> 
+	order by "row"
+	</select>
 
 	<!-- <resultMap type="#modelname" id="YourResultSet">
 		<id property="param1" column="columnname1" />
