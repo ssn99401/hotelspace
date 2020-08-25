@@ -358,7 +358,7 @@
 		<div class="container">
 			<div class="row justify-content-center pb-5 mb-3">
 				<div class="col-md-7 heading-section text-center ftco-animate">
-					<h2>HotelSpace Rivew</h2>
+					<h2>HotelSpace Review</h2>
 				</div>
 			</div>
 			<div class="row ftco-animate">
@@ -581,12 +581,12 @@
 						</a>
 						<div class="text p-4 text-center">
 							<div>
-								<a href="#"><span class="fa fa-star"></span><span
+								<a href="searchHotelToIndex.do?checkInDate=ALL&checkOutDate=ALL&concept=글렘핑"><span class="fa fa-star"></span><span
 									class="fa fa-star"></span><span class="fa fa-star"></span><span
 									class="fa fa-star"></span><span class="fa fa-star"></span></a>
 							</div>
 							<h3 class="heading">
-								<a href="#">글램핑</a>
+								<a href="searchHotelToIndex.do?checkInDate=ALL&checkOutDate=ALL&concept=글렘핑">글램핑</a>
 							</h3>
 							<div class="meta mb-2">
 								<p>글램핑이 처음이십니까? 첫 글램핑을 경험해 보십시오!</p>
@@ -601,12 +601,12 @@
 						</a>
 						<div class="text p-4 text-center">
 							<div>
-								<a href="#"><span class="fa fa-star"></span><span
+								<a href="searchHotelToIndex.do?checkInDate=ALL&checkOutDate=ALL&concept=바다 낭만"><span class="fa fa-star"></span><span
 									class="fa fa-star"></span><span class="fa fa-star"></span><span
 									class="fa fa-star"></span><span class="fa fa-star"></span></a>
 							</div>
 							<h3 class="heading">
-								<a href="#">바다 낭만</a>
+								<a href="searchHotelToIndex.do?checkInDate=ALL&checkOutDate=ALL&concept=바다 낭만">바다 낭만</a>
 							</h3>
 							<div class="meta mb-2"></div>
 							<p>아름다운 바다 뷰를 보며 즐거움, 편안함 둘다 느낄수있는 호텔로 당신을 초대합니다</p>
@@ -620,12 +620,12 @@
 						</a>
 						<div class="text p-4 text-center">
 							<div>
-								<a href="#"><span class="fa fa-star"></span><span
+								<a href="searchHotelToIndex.do?checkInDate=ALL&checkOutDate=ALL&concept=도심 속 힐링"><span class="fa fa-star"></span><span
 									class="fa fa-star"></span><span class="fa fa-star"></span><span
 									class="fa fa-star"></span><span class="fa fa-star"></span></a>
 							</div>
 							<h3 class="heading">
-								<a href="#">도심 힐링</a>
+								<a href="searchHotelToIndex.do?checkInDate=ALL&checkOutDate=ALL&concept=도심 속 힐링">도심 힐링</a>
 							</h3>
 							<div class="meta mb-2"></div>
 							<p>도심 속에서 낭만적인 야경을 만끽하십시오!</p>
