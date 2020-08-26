@@ -19,6 +19,7 @@
 		<typeAlias type="com.spring.hotelspace.client.search.vo.HotelFacilityVO" alias="hotelFacilityVO"/>
 		<typeAlias type="com.spring.hotelspace.client.search.vo.ClientRoomVO" alias="clientRoomVO"/>
 		<typeAlias type="com.spring.hotelspace.client.reservation.vo.ClientReservationVO" alias="clientReservationVO"/>
+		<typeAlias alias="clientReservationInfoVO" type="com.spring.hotelspace.client.reservation.vo.ClientReservationInfoVO"/>
 		<typeAlias type="com.spring.hotelspace.client.board.vo.ClientFAQVO" alias="clientFAQVO"/>
 		<typeAlias type="com.spring.hotelspace.client.board.vo.ClientQNAVO" alias="clientQNAVO"/>
 		

@@ -1,9 +1,6 @@
-package com.spring.hotelspace.client.search.vo;
+package com.spring.hotelspace.client.reservation.vo;
 
-import java.sql.Date;
-
-public class ClientRoomVO {
-
+public class ClientReservationInfoVO {
 	private String roomId;
 	private String hotelId;
 	private String roomName;
@@ -16,16 +13,14 @@ public class ClientRoomVO {
 	private int roomStandardPeople;
 	private int roomMaxPeople;
 	private String imageLink;
-	private Date reservationInDate;
-	private Date reservationOutDate;
 //
 
-	public ClientRoomVO() {
+	public ClientReservationInfoVO() {
 	}
 
-	public ClientRoomVO(String roomId, String hotelId, String roomName, String hotelName, int roomPrice, int roomAmount,
+	public ClientReservationInfoVO(String roomId, String hotelId, String roomName, String hotelName, int roomPrice, int roomAmount,
 			String roomServices, String roomInfo, int roomUsage, int roomStandardPeople, int roomMaxPeople,
-			String imageLink, Date reservationInDate, Date reservationOutDate) {
+			String imageLink) {
 		super();
 		this.roomId = roomId;
 		this.hotelId = hotelId;
@@ -39,8 +34,6 @@ public class ClientRoomVO {
 		this.roomStandardPeople = roomStandardPeople;
 		this.roomMaxPeople = roomMaxPeople;
 		this.imageLink = imageLink;
-		this.reservationInDate = reservationInDate;
-		this.reservationOutDate = reservationOutDate;
 	}
 
 	public String getHotelName() {
@@ -139,29 +132,16 @@ public class ClientRoomVO {
 		this.roomUsage = roomUsage;
 	}
 
-	public Date getReservationInDate() {
-		return reservationInDate;
-	}
-
-	public void setReservationInDate(Date reservationInDate) {
-		this.reservationInDate = reservationInDate;
-	}
-
-	public Date getReservationOutDate() {
-		return reservationOutDate;
-	}
-
-	public void setReservationOutDate(Date reservationOutDate) {
-		this.reservationOutDate = reservationOutDate;
-	}
-
 	@Override
 	public String toString() {
-		return "ClientRoomVO [roomId=" + roomId + ", hotelId=" + hotelId + ", roomName=" + roomName + ", hotelName="
-				+ hotelName + ", roomPrice=" + roomPrice + ", roomAmount=" + roomAmount + ", roomServices="
-				+ roomServices + ", roomInfo=" + roomInfo + ", roomUsage=" + roomUsage + ", roomStandardPeople="
-				+ roomStandardPeople + ", roomMaxPeople=" + roomMaxPeople + ", imageLink=" + imageLink
-				+ ", reservationInDate=" + reservationInDate + ", reservationOutDate=" + reservationOutDate + "]";
+		return "ClientReservationInfoVO [roomId=" + roomId + ", hotelId=" + hotelId + ", roomName=" + roomName
+				+ ", hotelName=" + hotelName + ", roomPrice=" + roomPrice + ", roomAmount=" + roomAmount
+				+ ", roomServices=" + roomServices + ", roomInfo=" + roomInfo + ", roomUsage=" + roomUsage
+				+ ", roomStandardPeople=" + roomStandardPeople + ", roomMaxPeople=" + roomMaxPeople + ", imageLink="
+				+ imageLink + "]";
 	}
+
+	
+
 
 }
