@@ -32,17 +32,25 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+<script>
+    //after window is loaded completely 
+    window.onload = function(){
+        //hide the preloader
+        document.querySelector(".preloader").style.display = "none";
+    }
+</script>
 </head>
 
 <body class="fix-header">
     <!-- ============================================================== -->
     <!-- Preloader -->
     <!-- ============================================================== -->
-    <!-- <div class="preloader">
+     <div class="preloader">
         <svg class="circular" viewBox="25 25 50 50">
             <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />
         </svg>
-    </div> -->
+    </div> 
     <!-- ============================================================== -->
     <!-- Wrapper -->
     <!-- ============================================================== -->
