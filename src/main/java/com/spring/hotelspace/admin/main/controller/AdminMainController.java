@@ -10,7 +10,7 @@ public class AdminMainController {
 	@RequestMapping(value = "/index.mdo", method =  RequestMethod.GET)
 	public String showIndexPage() {
 
-		return "index";
+		return "adminIndex";
 	}
 	
 }
