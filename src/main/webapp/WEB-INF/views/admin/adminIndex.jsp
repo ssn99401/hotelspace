@@ -7,25 +7,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" type="image/png" sizes="16x16" href="resources/admin/plugins/images/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="resources/admin/vender/plugins/images/favicon.png">
     <title>hotelspace</title>
     <!-- Bootstrap Core CSS -->
-    <link href="resources/admin/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="resources/admin/vender/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Menu CSS -->
-    <link href="resource/admin/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css" rel="stylesheet">
+    <link href="resource/admin/vender/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css" rel="stylesheet">
     <!-- toast CSS -->
-    <link href="resources/admin/plugins/bower_components/toast-master/css/jquery.toast.css" rel="stylesheet">
+    <link href="resources/admin/vender/plugins/bower_components/toast-master/css/jquery.toast.css" rel="stylesheet">
     <!-- morris CSS -->
-    <link href="resources/admin/plugins/bower_components/morrisjs/morris.css" rel="stylesheet">
+    <link href="resources/admin/vender/plugins/bower_components/morrisjs/morris.css" rel="stylesheet">
     <!-- chartist CSS -->
-    <link href="resources/admin/plugins/bower_components/chartist-js/dist/chartist.min.css" rel="stylesheet">
-    <link href="resource/admin/plugins/bower_components/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.css" rel="stylesheet">
+    <link href="resources/admin/vender/plugins/bower_components/chartist-js/dist/chartist.min.css" rel="stylesheet">
+    <link href="resource/admin/vender/plugins/bower_components/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.css" rel="stylesheet">
     <!-- animation CSS -->
-    <link href="resources/admin/css/animate.css" rel="stylesheet">
+    <link href="resources/admin/vender/css/animate.css" rel="stylesheet">
     <!-- Custom CSS -->
-    <link href="resources/admin/css/style.css" rel="stylesheet">
+    <link href="resources/admin/vender/css/style.css" rel="stylesheet">
     <!-- color CSS -->
-    <link href="resources/admin/css/colors/default.css" id="theme" rel="stylesheet">
+    <link href="resources/admin/vender/css/colors/default.css" id="theme" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -66,16 +66,16 @@
                         <!-- Logo icon image, you can use font-icon also -->
                         <b>
                             <!--This is dark logo icon-->
-                            <img src="resources/admin/plugins/images/admin-logo.png" alt="home" class="dark-logo" />
+                            <img src="resources/admin/vender/plugins/images/admin-logo.png" alt="home" class="dark-logo" />
                             <!--This is light logo icon-->
-                            <img src="resources/admin/plugins/images/admin-logo-dark.png" alt="home" class="light-logo" />
+                            <img src="resources/admin/vender/plugins/images/admin-logo-dark.png" alt="home" class="light-logo" />
                         </b>
                         <!-- Logo text image you can use text also -->
                         <span class="hidden-xs">
                             <!--This is dark logo text-->
-                            <img src="resources/admin/plugins/images/admin-text.png" alt="home" class="dark-logo" />
+                            <img src="resources/admin/vender/plugins/images/admin-text.png" alt="home" class="dark-logo" />
                             <!--This is light logo text-->
-                            <img src="resources/admin/plugins/images/admin-text-dark.png" alt="home" class="light-logo" />
+                            <img src="resources/admin/vender/plugins/images/admin-text-dark.png" alt="home" class="light-logo" />
                         </span> 
                     </a>
                 </div>
@@ -93,7 +93,7 @@
                         </form>
                     </li>
                     <li>
-                        <a class="profile-pic" href="#"> <img src="resources/admin/plugins/images/users/varun.jpg" alt="user-img" width="36" class="img-circle"><b class="hidden-xs">Steave</b></a>
+                        <a class="profile-pic" href="#"> <img src="resources/admin/vender/plugins/images/users/varun.jpg" alt="user-img" width="36" class="img-circle"><b class="hidden-xs">Steave</b></a>
                     </li>
                 </ul>
             </div>
@@ -309,7 +309,7 @@
                             <h3 class="box-title">Recent Comments</h3>
                             <div class="comment-center p-t-10">
                                 <div class="comment-body">
-                                    <div class="user-img"> <img src="resources/admin/plugins/images/users/pawandeep.jpg" alt="user" class="img-circle">
+                                    <div class="user-img"> <img src="resources/admin/vender/plugins/images/users/pawandeep.jpg" alt="user" class="img-circle">
                                     </div>
                                     <div class="mail-contnet">
                                         <h5>Pavan kumar</h5><span class="time">10:20 AM   20  may 2016</span>
@@ -317,7 +317,7 @@
                                     </div>
                                 </div>
                                 <div class="comment-body">
-                                    <div class="user-img"> <img src="resources/admin/plugins/images/users/sonu.jpg" alt="user" class="img-circle">
+                                    <div class="user-img"> <img src="resources/admin/vender/plugins/images/users/sonu.jpg" alt="user" class="img-circle">
                                     </div>
                                     <div class="mail-contnet">
                                         <h5>Sonu Nigam</h5><span class="time">10:20 AM   20  may 2016</span>
@@ -325,7 +325,7 @@
                                     </div>
                                 </div>
                                 <div class="comment-body b-none">
-                                    <div class="user-img"> <img src="resources/admin/plugins/images/users/arijit.jpg" alt="user" class="img-circle">
+                                    <div class="user-img"> <img src="resources/admin/vender/plugins/images/users/arijit.jpg" alt="user" class="img-circle">
                                     </div>
                                     <div class="mail-contnet">
                                         <h5>Arijit singh</h5><span class="time">10:20 AM   20  may 2016</span>
@@ -349,49 +349,49 @@
                                                     <button class="btn btn-success btn-circle btn-lg" type="button"><i class="fa fa-phone"></i></button>
                                                     <button class="btn btn-info btn-circle btn-lg" type="button"><i class="fa fa-comments-o"></i></button>
                                                 </div>
-                                                <a href="javascript:void(0)"><img src="resources/admin/plugins/images/users/varun.jpg" alt="user-img" class="img-circle"> <span>Varun Dhavan <small class="text-success">online</small></span></a>
+                                                <a href="javascript:void(0)"><img src="resources/admin/vender/plugins/images/users/varun.jpg" alt="user-img" class="img-circle"> <span>Varun Dhavan <small class="text-success">online</small></span></a>
                                             </li>
                                             <li>
                                                 <div class="call-chat">
                                                     <button class="btn btn-success btn-circle btn-lg" type="button"><i class="fa fa-phone"></i></button>
                                                     <button class="btn btn-info btn-circle btn-lg" type="button"><i class="fa fa-comments-o"></i></button>
                                                 </div>
-                                                <a href="javascript:void(0)"><img src="resources/admin/plugins/images/users/genu.jpg" alt="user-img" class="img-circle"> <span>Genelia Deshmukh <small class="text-warning">Away</small></span></a>
+                                                <a href="javascript:void(0)"><img src="resources/admin/vender/plugins/images/users/genu.jpg" alt="user-img" class="img-circle"> <span>Genelia Deshmukh <small class="text-warning">Away</small></span></a>
                                             </li>
                                             <li>
                                                 <div class="call-chat">
                                                     <button class="btn btn-success btn-circle btn-lg" type="button"><i class="fa fa-phone"></i></button>
                                                     <button class="btn btn-info btn-circle btn-lg" type="button"><i class="fa fa-comments-o"></i></button>
                                                 </div>
-                                                <a href="javascript:void(0)"><img src="resources/admin/plugins/images/users/ritesh.jpg" alt="user-img" class="img-circle"> <span>Ritesh Deshmukh <small class="text-danger">Busy</small></span></a>
+                                                <a href="javascript:void(0)"><img src="resources/admin/vender/plugins/images/users/ritesh.jpg" alt="user-img" class="img-circle"> <span>Ritesh Deshmukh <small class="text-danger">Busy</small></span></a>
                                             </li>
                                             <li>
                                                 <div class="call-chat">
                                                     <button class="btn btn-success btn-circle btn-lg" type="button"><i class="fa fa-phone"></i></button>
                                                     <button class="btn btn-info btn-circle btn-lg" type="button"><i class="fa fa-comments-o"></i></button>
                                                 </div>
-                                                <a href="javascript:void(0)"><img src="resources/admin/plugins/images/users/arijit.jpg" alt="user-img" class="img-circle"> <span>Arijit Sinh <small class="text-muted">Offline</small></span></a>
+                                                <a href="javascript:void(0)"><img src="resources/admin/vender/plugins/images/users/arijit.jpg" alt="user-img" class="img-circle"> <span>Arijit Sinh <small class="text-muted">Offline</small></span></a>
                                             </li>
                                             <li>
                                                 <div class="call-chat">
                                                     <button class="btn btn-success btn-circle btn-lg" type="button"><i class="fa fa-phone"></i></button>
                                                     <button class="btn btn-info btn-circle btn-lg" type="button"><i class="fa fa-comments-o"></i></button>
                                                 </div>
-                                                <a href="javascript:void(0)"><img src="resources/admin/plugins/images/users/govinda.jpg" alt="user-img" class="img-circle"> <span>Govinda Star <small class="text-success">online</small></span></a>
+                                                <a href="javascript:void(0)"><img src="resources/admin/vender/plugins/images/users/govinda.jpg" alt="user-img" class="img-circle"> <span>Govinda Star <small class="text-success">online</small></span></a>
                                             </li>
                                             <li>
                                                 <div class="call-chat">
                                                     <button class="btn btn-success btn-circle btn-lg" type="button"><i class="fa fa-phone"></i></button>
                                                     <button class="btn btn-info btn-circle btn-lg" type="button"><i class="fa fa-comments-o"></i></button>
                                                 </div>
-                                                <a href="javascript:void(0)"><img src="resources/admin/plugins/images/users/hritik.jpg" alt="user-img" class="img-circle"> <span>John Abraham<small class="text-success">online</small></span></a>
+                                                <a href="javascript:void(0)"><img src="resources/admin/vender/plugins/images/users/hritik.jpg" alt="user-img" class="img-circle"> <span>John Abraham<small class="text-success">online</small></span></a>
                                             </li>
                                             <li>
                                                 <div class="call-chat">
                                                     <button class="btn btn-success btn-circle btn-lg" type="button"><i class="fa fa-phone"></i></button>
                                                     <button class="btn btn-info btn-circle btn-lg" type="button"><i class="fa fa-comments-o"></i></button>
                                                 </div>
-                                                <a href="javascript:void(0)"><img src="resources/admin/plugins/images/users/varun.jpg" alt="user-img" class="img-circle"> <span>Varun Dhavan <small class="text-success">online</small></span></a>
+                                                <a href="javascript:void(0)"><img src="resources/admin/vender/plugins/images/users/varun.jpg" alt="user-img" class="img-circle"> <span>Varun Dhavan <small class="text-success">online</small></span></a>
                                             </li>
                                         </ul>
                                     </div>
@@ -415,27 +415,27 @@
     <!-- ============================================================== -->
     <!-- All Jquery -->
     <!-- ============================================================== -->
-    <script src="resources/admin/plugins/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="resources/admin/vender/plugins/bower_components/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap Core JavaScript -->
-    <script src="bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="resources/admin/vender/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- Menu Plugin JavaScript -->
-    <script src="resources/admin/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
+    <script src="resources/admin/vender/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
     <!--slimscroll JavaScript -->
-    <script src="resources/admin/js/jquery.slimscroll.js"></script>
+    <script src="resources/admin/vender/js/jquery.slimscroll.js"></script>
     <!--Wave Effects -->
-    <script src="resources/admin/js/waves.js"></script>
+    <script src="resources/admin/vender/js/waves.js"></script>
     <!--Counter js -->
-    <script src="resources/admin/plugins/bower_components/waypoints/lib/jquery.waypoints.js"></script>
-    <script src="resources/admin/plugins/bower_components/counterup/jquery.counterup.min.js"></script>
+    <script src="resources/admin/vender/plugins/bower_components/waypoints/lib/jquery.waypoints.js"></script>
+    <script src="resources/admin/vender/plugins/bower_components/counterup/jquery.counterup.min.js"></script>
     <!-- chartist chart -->
-    <script src="resources/admin/plugins/bower_components/chartist-js/dist/chartist.min.js"></script>
-    <script src="resources/admin/plugins/bower_components/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.min.js"></script>
+    <script src="resources/admin/vender/plugins/bower_components/chartist-js/dist/chartist.min.js"></script>
+    <script src="resources/admin/vender/plugins/bower_components/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.min.js"></script>
     <!-- Sparkline chart JavaScript -->
     <script src="resource/admin/plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js"></script>
     <!-- Custom Theme JavaScript -->
-    <script src="resources/admin/js/custom.min.js"></script>
-    <script src="resources/admin/js/dashboard1.js"></script>
-    <script src="resources/admin/plugins/bower_components/toast-master/js/jquery.toast.js"></script>
+    <script src="resources/admin/vender/js/custom.min.js"></script>
+    <script src="resources/admin/vender/js/dashboard1.js"></script>
+    <script src="resources/admin/vender/plugins/bower_components/toast-master/js/jquery.toast.js"></script>
 </body>
 
 </html>
