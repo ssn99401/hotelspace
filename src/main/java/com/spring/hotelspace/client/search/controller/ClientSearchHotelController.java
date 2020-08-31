@@ -26,12 +26,15 @@ public class ClientSearchHotelController {
 
 	// 메인 화면 호텔 리스트 조회
 	@RequestMapping(value = "searchHotelToIndex.do", method = RequestMethod.GET)
-	public String searchHotelToIndex(ClientSearchHotelDTO requestDTO, HttpSession httpSession, Model model) {
+	public String searchHotelToIndex(ClientSearchHotelDTO requestDTO, HttpSession httpSession, HttpServletRequest request, Model model) {
 
 		// 쿼리 내용 저장
 		httpSession.setAttribute("hotelSearchMethod", requestDTO);
-
-
+		
+		if(request.getParameter("concept") != null) {
+			model.addAttribute("concept", request.getParameter("concept"));
+		}
+		
 		return "hotel/clientHotel";
 	}
 
@@ -74,9 +77,10 @@ public class ClientSearchHotelController {
 	// 호텔 리스트 조회
 	@RequestMapping(value = "searchHotelList.do", method = RequestMethod.POST)
 	public @ResponseBody HashMap<String, Object> fillteringToHotelList(@RequestBody ClientHotelFilterDTO hotelFillter,  HttpSession httpSession) {
-
+		
 		// 필터 적용
 		httpSession.setAttribute("filter", "yes");
+		
 		HashMap<String, Object> map = clientSearchHotelService.searchHotelList(hotelFillter, httpSession.getAttribute("hotelSearchMethod"));
 		return map;
 
