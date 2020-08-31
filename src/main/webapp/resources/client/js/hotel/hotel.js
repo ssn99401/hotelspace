@@ -2,6 +2,17 @@ window.onload = function () {
 	loadingHotelList();
 }
 
+function setConceptFilter(concept) {
+	if(concept == "도심 속 힐링") {
+		document.getElementById("f-accid-999999").checked = true;
+	}
+	else if(concept == "바다 낭만") {
+		document.getElementById("f-accid-30").checked = true;
+	}
+	else if(concept == "글램핑") {
+		document.getElementById("f-accid-7").checked = true;
+	}
+}
 
 function checkSearchDate() {
 
@@ -26,7 +37,6 @@ function checkSearchDate() {
 	} else {
 		return true;
 	}
-
 }
 
 function loadingHotelList() {
@@ -69,7 +79,6 @@ function loadingHotelList() {
 		success : function(data) {
 			switchScreen()
 			setHotelList(data);
-			clearFilter();
 		},
 		error: function(jqXHR, textStatus, errorThrown) {
 			alert("error : " + jqXHR.responseText);
@@ -270,6 +279,7 @@ function setHotelList(data) {
 		divContentP2.append(data[varKey].hotelAddress);
 
 		var btn_mapModal = document.createElement("button");
+		btn_mapModal.setAttribute("id","btn-modal");
 		btn_mapModal.setAttribute("onclick","showMapModal('" + data[geoCodeKey] + "');");
 		btn_mapModal.append("약도 보기");
 
@@ -343,9 +353,8 @@ function setHotelList(data) {
 		divContent2P2.append("가격 : " + data[varKey].lowestPrice);
 		var divContent2Button = document.createElement("button");
 		divContent2Button.setAttribute("align","center");
-		divContent2Button.setAttribute("onClick","showHotelRoom('"+ data[varKey].hotelId +"')");
 		divContent2Button.setAttribute("style","background: #fd7792; color: #fff; min-width: 100%;");
-		divContent2Button.setAttribute("onclick","searchRoom('" +  data[varKey].hotelId + "','" + data['reservationInDate'] + "','" + data['reservationOutDate']  + "');");
+		divContent2Button.setAttribute("onclick","showHotelRoom('" +  data[varKey].hotelId + "','" + data['reservationInDate'] + "','" + data['reservationOutDate']  + "');");
 		divContent2Button.append("선택");
 		divContent2.appendChild(divContent2P1);
 		divContent2.appendChild(divContent2P2);
@@ -425,10 +434,8 @@ function clearFilter() {
 	}
 }
 
-function showHotelRoom(hotelId) {
-	alert(hotelId);
-}
 
+//로딩중 이미지 스위치
 function switchScreen() {
 	if(document.getElementById("divLoading").style.display =="none")
 		document.getElementById("divLoading").style.display = 'block';
@@ -436,42 +443,29 @@ function switchScreen() {
 		document.getElementById("divLoading").style.display = 'none';
 }
 
-
-function filterDisplaySwitch() {
-	if(document.getElementById("div-filter").style.display =="none") {
-		document.getElementById("div-filter").style.display = 'block';
-		document.getElementById("btn-resetFilter").style.display = 'block';
-		document.getElementById("btn-filterHide").innerHTML = "필터 숨기기";
-	}
-	else {
-		document.getElementById("div-filter").style.display = 'none';
-		document.getElementById("btn-resetFilter").style.display = 'none';
-		document.getElementById("btn-filterHide").innerHTML = "필터 보이기";
-	}
+function showHotelRoom(hotelId,reservationInDate,reservationOutDate) {
+	window.location.href= "searchRoom.do?hotelId=" + hotelId + "&reservationInDate=" + reservationInDate + "&reservationOutDate=" + reservationOutDate;
 }
 
-function searchRoom(hotelId,reservationInDate,reservationOutDate) {
-	location.href("searchRoom.do?hotelId=" + hotelId + "&reservationInDate=" + reservationInDate + "&reservationOutDate=" + reservationOutDate);
-}
-
+//오시는길 modal 출력
 function showMapModal(jsonString) {
+	$("#modal-body").empty();
+
 	var jsonString = JSON.parse(jsonString);
-	alert(jsonString);
 	var address=jsonString.documents[0].address.address_name;
 	var road_address=jsonString.documents[0].road_address.address_name;
 	var addX=jsonString.documents[0].address.x;
 	var addY=jsonString.documents[0].address.y;
-	
-	$("#modal").modal();
-	
-	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+
+
+	var mapContainer = document.getElementById('modal-body'), // 지도를 표시할 div 
 	mapOption = {
-		center : new kakao.maps.LatLng(addX, addY), // 지도의 중심좌표
+		center : new kakao.maps.LatLng(addY, addX), // 지도의 중심좌표
 		level : 3
 		// 지도의 확대 레벨
 	};
 
-	// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+//	지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
 	var map = new kakao.maps.Map(mapContainer, mapOption);
 
 	var marker = new kakao.maps.Marker({
@@ -484,12 +478,76 @@ function showMapModal(jsonString) {
 	map.relayout();
 
 	// 지도의 너비가 변경될 때 지도중심을 입력받은 위치(position)로 설정합니다
-	map.setCenter(position);
+	map.setCenter(marker.getPosition());
 
-
-	document.getElementById("modal_close_btn").onclick = function() {
-		document.getElementById("modal").style.display = "none";
-	}
 }
 
+//찾아오는길 모달 열기
+$(document).on("click","#btn-modal",function(event){
+	$("#mapModal").modal();
+	return false;
+})
+
+
+//--------------------------------------------------------- 필터 보이기,숨기기 --------------------------------------------------------- 
+//필터(시설)
+$(function() {
+	$("#filter1-switch").click(function() {
+		if(document.getElementById("filter-popular-contents").style.display =="none") {
+			document.getElementById("filter-popular-contents").style.display = 'block';
+			document.getElementById("img-filter1").setAttribute("src","resources/client/images/arrow-under.png");
+		}
+		else {
+			document.getElementById("filter-popular-contents").style.display = 'none';
+			document.getElementById("img-filter1").setAttribute("src","resources/client/images/arrow-upper.png");
+		}
+
+	})
+})
+
+//1박 비용
+$(function() {
+	$("#filter2-switch").click(function() {
+		if(document.getElementById("filter-price-contents").style.display =="none") {
+			document.getElementById("filter-price-contents").style.display = 'block';
+			document.getElementById("img-filter2").setAttribute("src","resources/client/images/arrow-under.png");
+		}
+		else {
+			document.getElementById("filter-price-contents").style.display = 'none';
+			document.getElementById("img-filter2").setAttribute("src","resources/client/images/arrow-upper.png");
+		}
+
+	})
+})
+
+//별점
+$(function() {
+	$("#filter3-switch").click(function() {
+		if(document.getElementById("filter-star-contents").style.display =="none") {
+			document.getElementById("filter-star-contents").style.display = 'block';
+			document.getElementById("img-filter3").setAttribute("src","resources/client/images/arrow-under.png");
+		}
+		else {
+			document.getElementById("filter-star-contents").style.display = 'none';
+			document.getElementById("img-filter3").setAttribute("src","resources/client/images/arrow-upper.png");
+		}
+
+	})
+})
+
+//테마
+$(function() {
+	$("#filter4-switch").click(function() {
+		if(document.getElementById("filter-accommodation-type-contents").style.display =="none") {
+			document.getElementById("filter-accommodation-type-contents").style.display = 'block';
+			document.getElementById("img-filter4").setAttribute("src","resources/client/images/arrow-under.png");
+		}
+		else {
+			document.getElementById("filter-accommodation-type-contents").style.display = 'none';
+			document.getElementById("img-filter4").setAttribute("src","resources/client/images/arrow-upper.png");
+		}
+
+	})
+})
+//---------------------------------------------------------------------------------------------------------------------------------
 

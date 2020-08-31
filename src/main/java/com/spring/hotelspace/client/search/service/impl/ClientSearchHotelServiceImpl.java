@@ -120,10 +120,10 @@ public class ClientSearchHotelServiceImpl implements ClientSearchHotelService {
 			map.put("checkOutDate", searchQuery.getCheckOutDate());
 			map.put("people", searchQuery.getPeople());
 			map.put("area", searchQuery.getArea());
-			
+			System.out.println(map);
 			hotelList = clientSearchHotelDAO.searchHotelToSearchBar(map);
 		}
-	
+		System.out.println(hotelList);
 		HashMap<String, Object> hotelMap = new HashMap<String, Object>();
 
 		for(int i = 1; i < hotelList.size() + 1; i++) {
@@ -148,6 +148,7 @@ public class ClientSearchHotelServiceImpl implements ClientSearchHotelService {
 		hotelMap.put("pageNum", 1);
 		hotelMap.put("pageSize", hoteListPageSize);
 		hotelMap.put("pageBlock", pageBlock);
+		System.out.println(hotelMap);
 		return hotelMap;
 	}
 
@@ -211,7 +212,7 @@ public class ClientSearchHotelServiceImpl implements ClientSearchHotelService {
 			}
 			hotelMap.put("hotel" + i, hotelList.get(i-1));
 		}
-		
+		System.out.println("map : " + map);
 		
 		if(hotelSearchMethod.equals("hotelListAll")) {
 			hotelMap.put("reservationInDate", checkIdDate);
@@ -224,6 +225,8 @@ public class ClientSearchHotelServiceImpl implements ClientSearchHotelService {
 		hotelMap.put("pageNum", hotelFillter.getPageNum());
 		hotelMap.put("pageSize", hoteListPageSize);
 		hotelMap.put("pageBlock", pageBlock);
+		
+		System.out.println("hotelMap : " + hotelMap);
 		return hotelMap;
 	}
 

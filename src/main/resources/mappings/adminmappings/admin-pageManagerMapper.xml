@@ -5,8 +5,8 @@
 <mapper namespace="com.spring.hotelspace.admin.management.page.dao.AdminPageManagerDAO">
 
 	<select id="getImageLinksList" resultType="adminPageImageVO">
-		SELECT IMAGE_ID, IMAGE_TYPE, IMAGE_LINK
-			FROM MAINPAGE_IMAGE
+		SELECT IMAGE_ID, IMAGE_TYPE, IMAGE_LINK 
+			FROM WEBPAGE_IMAGE
 	</select>
 	
 </mapper>

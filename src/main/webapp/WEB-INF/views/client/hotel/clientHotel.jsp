@@ -11,15 +11,13 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>hotelspace</title>
 <link rel="stylesheet" type="text/css"
+	href="resources/client/css/hotel/hotel.css">
+<link rel="stylesheet" type="text/css"
 	href="resources/client/css/HotelBody.css">
 <link rel="stylesheet"
 	href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 <link rel="stylesheet" href="resources/client/css/jquery-ui.css">
-<link rel="stylesheet" type="text/css"
-	href="resources/client/css/hotel/hotel.css">
 <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
-<script type="text/javascript" src="resources/client/js/hotel/hotel.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 </head>
 <body>
 	<header>
@@ -118,6 +116,7 @@
 						<div class="filters-overlay-close">
 							<div class="narrow-results-header-container">
 								<h2 class="narrow-results-header">검색 결과 필터링:</h2>
+
 							</div>
 						</div>
 						<div class="filters-scroll-container" id="div-filter">
@@ -136,7 +135,11 @@
 								<fieldset class="checkbox-filters" data-filter-name="popular"
 									id="filter-popular">
 									<legend class="filter-legend">
-										<h3 aria-expanded="true" role="button" tabindex="0">필터</h3>
+										<h3 id="filter1-switch" aria-expanded="true" role="button"
+											tabindex="0">
+											필터 <img id="img-filter1"
+												src="resources/client/images/arrow-under.png" />
+										</h3>
 									</legend>
 									<div id="filter-popular-contents" class="filter-contents">
 										<ul>
@@ -169,37 +172,43 @@
 									data-os-int="filterInteraction" data-filter-name="price"
 									id="filter-price">
 									<legend class="filter-legend">
-										<h3 aria-expanded="true" role="button" tabindex="0">1박 요금</h3>
+										<h3 id="filter2-switch" aria-expanded="true" role="button"
+											tabindex="0">
+											1박 요금 <img id="img-filter2"
+												src="resources/client/images/arrow-under.png" />
+										</h3>
 									</legend>
-									<div id="filter-price-contents" class="filter-contents">
-										<input name="f-price-currency-code"
-											data-os-int="filterInteraction" type="hidden" value="KRW"><input
-											name="f-price-multiplier" type="hidden"
-											data-os-int="filterInteraction" value="1">
-										<div class="input-wrapper">
-											<label class="hotellabel" for="f-price-min"
-												id="f-price-min-label">최저 (₩)</label><input type="text"
-												aria-labelledby="f-price-min-label"
-												data-os-int="filterInteraction" value="" name="f-price-min"
-												id="f-price-min" placeholder="0" data-range-value="0"
-												data-os-filter-min="" tabindex="-1">
-										</div>
-										<div class="input-wrapper">
-											<label class="hotellabel" for="f-price-max"
-												id="f-price-max-label">최고 (₩)</label><input type="text"
-												aria-labelledby="f-price-max-label" value=""
-												name="f-price-max" id="f-price-max" placeholder="1000000+"
-												data-range-value="1000000" tabindex="-1">
-										</div>
-									</div>
-									<div class="filter-contents">
-										<div class="widget-slider">
-											<div class="widget-slider-current-values">
-												<label for="amount">Price range:</label> <input type="text"
-													id="amount" readonly>
+									<div id="filter-price-contents">
+										<div class="filter-contents">
+											<input name="f-price-currency-code"
+												data-os-int="filterInteraction" type="hidden" value="KRW"><input
+												name="f-price-multiplier" type="hidden"
+												data-os-int="filterInteraction" value="1">
+											<div class="input-wrapper">
+												<label class="hotellabel" for="f-price-min"
+													id="f-price-min-label">최저 (₩)</label><input type="text"
+													aria-labelledby="f-price-min-label"
+													data-os-int="filterInteraction" value="" name="f-price-min"
+													id="f-price-min" placeholder="0" data-range-value="0"
+													data-os-filter-min="" tabindex="-1">
 											</div>
-											<div class="slider-padding">
-												<div id="slider-range" class="widget-slider-cont"></div>
+											<div class="input-wrapper">
+												<label class="hotellabel" for="f-price-max"
+													id="f-price-max-label">최고 (₩)</label><input type="text"
+													aria-labelledby="f-price-max-label" value=""
+													name="f-price-max" id="f-price-max" placeholder="1000000+"
+													data-range-value="1000000" tabindex="-1">
+											</div>
+										</div>
+										<div class="filter-contents">
+											<div class="widget-slider">
+												<div class="widget-slider-current-values">
+													<label for="amount">Price range:</label> <input type="text"
+														id="amount" readonly>
+												</div>
+												<div class="slider-padding">
+													<div id="slider-range" class="widget-slider-cont"></div>
+												</div>
 											</div>
 										</div>
 									</div>
@@ -207,9 +216,12 @@
 								<fieldset class="widget-slider-enabled"
 									data-filter-name="guest-rating" id="filter-guest-rating"
 									data-os-int="filterInteraction">
-									<h3 aria-expanded="true" role="button" tabindex="0"
-										aria-controls="filter-guest-rating-contents">고객 평점</h3>
-									<div class="filter-contents">
+									<h3 id="filter3-switch" aria-expanded="true" role="button"
+										tabindex="0" aria-controls="filter-guest-rating-contents">
+										고객 평점 <img id="img-filter3"
+											src="resources/client/images/arrow-under.png" />
+									</h3>
+									<div id="filter-star-contents" class="filter-contents">
 										<div class="widget-slider">
 											<div class="widget-slider-current-values">
 												<label for="amount2">guest rating range:</label> <input
@@ -224,10 +236,14 @@
 								<fieldset class="checkbox-filters filter-collapsed"
 									data-filter-name="accommodation-type"
 									id="filter-accommodation-type">
+									<h3 id="filter4-switch" aria-expanded="true" role="button"
+										tabindex="0" aria-controls="filter-guest-rating-contents">
+										여행 테마 <img id="img-filter4"
+											src="resources/client/images/arrow-under.png" />
+									</h3>
 									<div id="filter-accommodation-type-contents"
 										class="filter-contents">
-										<h3 aria-expanded="true" role="button" tabindex="0"
-											aria-controls="filter-guest-rating-contents">여행 테마</h3>
+
 										<ul>
 											<li class=""><input type="checkbox" name="f-accid"
 												id="f-accid-999999" aria-labelledby="f-label-accid-999999"
@@ -248,11 +264,10 @@
 											<li class=""><input type="checkbox" name="f-accid"
 												id="f-accid-7" aria-labelledby="f-label-accid-7"
 												data-os-int="filterInteraction" data-os-filter-id="7"
-												data-os-filter-val="자연 휴양" data-os-filter-index="2"
-												value="자연 휴양"
+												data-os-filter-val="글램핑" data-os-filter-index="2"
+												value="글램핑"
 												onchange="oneCheckbox(this); fillteringToSearch();"><label
-												class="hotellabel" for="f-accid-7" id="f-label-accid-7">자연
-													휴양</label></li>
+												class="hotellabel" for="f-accid-7" id="f-label-accid-7">글램핑</label></li>
 										</ul>
 									</div>
 								</fieldset>
@@ -262,8 +277,6 @@
 							<fieldset>
 								<button onclick="clearFilter(); fillteringToSearch();"
 									id="btn-resetFilter">필터 초기화</button>
-								<button onclick="filterDisplaySwitch();" id="btn-filterHide">필터
-									숨기기</button>
 							</fieldset>
 						</div>
 					</div>
@@ -311,43 +324,36 @@
 					</c:if>
 				</div>
 			</div>
-
-
 		</div>
 	</div>
 
-	<!-- 지도 Modal -->
-	<div>
-		<br>
-
-		<div class="modal fade" id="modal">
-			<div class="modal_content" style="width: 550px; height: 450px;">
-
-				<h2>모달 창 샘플</h2>
-				<br>
-				<div id="map" class="map" style="width: 100%; height: 80%;"></div>
-				<br>
-
-				<script type="text/javascript"
-					src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1612a47582f976311be9a8dd6ec0b816"></script>
-				<button type="button" id="modal_close_btn">모달 창 닫기</button>
-				<br>
+	<div class="modal" id="mapModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog" style="min-height: 500px; min-width: 80%;">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myModalLabel">찾아오시는 길</h4>
+				</div>
+				<div class="modal-body" id="modal-body" align="center"></div>
+				<div class="modal-footer">footer</div>
 			</div>
-			<div class="modal_layer"></div>
 		</div>
-		
-		<h2>
-         <b><a
-            href="https://map.kakao.com/link/to/hotelspace,37.484659,
-                           127.036700">오는 경로 찾기(다음 길찾기)</a></b>
-      	</h2>
 	</div>
 
 	<footer>
 		<c:import url="/clientFooter.do" />
 	</footer>
 
+
+	<script type="text/javascript" src="resources/client/js/hotel/hotel.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script type="text/javascript"
+		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1612a47582f976311be9a8dd6ec0b816"></script>
+	<c:if test="${!empty concept}">
+		<script>setConceptFilter('${concept}');</script>
+	</c:if>
 	<!-- <script src="resources/client/js/slider.js"></script> -->
 
 	<script>

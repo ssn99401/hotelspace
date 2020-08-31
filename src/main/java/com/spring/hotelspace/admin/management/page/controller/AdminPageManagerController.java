@@ -28,6 +28,30 @@ public class AdminPageManagerController {
 //		return "adminChart";
 	}
 	
+	@RequestMapping(value = "/main.mdo", method =  RequestMethod.GET)
+	public String getMainPage(Model model) {
+		
+		return "main";
+	}
+	
+	@RequestMapping(value = "/navbar.mdo", method =  RequestMethod.GET)
+	public String getNavBar(Model model) {
+		
+		return "adminNavBar";
+	}
+	
+	@RequestMapping(value = "/sidebar.mdo", method =  RequestMethod.GET)
+	public String getsideBar(Model model) {
+		
+		return "adminSideBar";
+	}
+	
+	@RequestMapping(value = "/footer.mdo", method =  RequestMethod.GET)
+	public String getFooter(Model model) {
+		
+		return "adminFooter";
+	}
+	
 	@RequestMapping(value = "/pageImageList.mdo", method =  RequestMethod.POST)
 	public @ResponseBody List<AdminPageImageVO> getImageListToWebPage() {
 		List<AdminPageImageVO> list = adminPageManagerService.getImageLinkList();
@@ -35,5 +59,7 @@ public class AdminPageManagerController {
 		return list;
 //		return "adminChart";
 	}
+	
+	
 	
 }
