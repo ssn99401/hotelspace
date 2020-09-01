@@ -2,7 +2,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.spring.hotelspace.admin.main.dao.AdminLoginDAO">
+<mapper namespace="com.spring.hotelspace.admin.main.dao.AdminMainDAO">
+
+
+
+	<select id="getClientTable" resultType="AdminMainVO">
+		SELECT CLIENT_ID,CLIENT_NAME,CLIENT_REG_DATE,CLIENT_MILAGE,CLIENT_STATE 
+		FROM client
+	</select>
+	
+	<select id="getClientTableSearchID" parameterType="String" resultType="AdminMainVO">
+		SELECT CLIENT_ID,CLIENT_NAME,CLIENT_REG_DATE,CLIENT_MILAGE,CLIENT_STATE
+		FROM client
+		WHERE client_ID=#{clientId}
+	</select>
+
+
+
 
 	<!-- <resultMap type="#modelname" id="YourResultSet">
 		<id property="param1" column="columnname1" />
