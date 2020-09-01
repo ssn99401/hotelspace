@@ -11,7 +11,7 @@
 <meta name="author" content="">
 <title>hotelspace</title>
 <jsp:include page="/WEB-INF/views/admin/headerCssLink.jspf" />
-
+<jsp:include page="/WEB-INF/views/admin/headerScriptLink.jspf" />
 <script>
     //after window is loaded completely 
     window.onload = function(){
@@ -42,6 +42,6 @@
 		<!-- /.container-fluid -->
 
 	</div>
-	<jsp:include page="/WEB-INF/views/admin/headerScriptLink.jspf" />
+	
 </body>
 </html>

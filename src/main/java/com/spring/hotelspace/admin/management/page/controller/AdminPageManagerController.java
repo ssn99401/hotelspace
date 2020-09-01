@@ -24,32 +24,8 @@ public class AdminPageManagerController {
 		
 		model.addAttribute("imageList",adminPageManagerService.getImageLinkList());
 		
-		return "menagement/webViews/managementWebView";
+		return "management/webViews/managementWebView";
 //		return "adminChart";
-	}
-	
-	@RequestMapping(value = "/main.mdo", method =  RequestMethod.GET)
-	public String getMainPage(Model model) {
-		
-		return "main";
-	}
-	
-	@RequestMapping(value = "/navbar.mdo", method =  RequestMethod.GET)
-	public String getNavBar(Model model) {
-		
-		return "adminNavBar";
-	}
-	
-	@RequestMapping(value = "/sidebar.mdo", method =  RequestMethod.GET)
-	public String getsideBar(Model model) {
-		
-		return "adminSideBar";
-	}
-	
-	@RequestMapping(value = "/footer.mdo", method =  RequestMethod.GET)
-	public String getFooter(Model model) {
-		
-		return "adminFooter";
 	}
 	
 	@RequestMapping(value = "/pageImageList.mdo", method =  RequestMethod.POST)

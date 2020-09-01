@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.spring.hotelspace.admin.login.dao.AdminLoginDAO">
+<mapper namespace="com.spring.hotelspace.admin.main.dao.AdminLoginDAO">
 
 	<!-- <resultMap type="#modelname" id="YourResultSet">
 		<id property="param1" column="columnname1" />

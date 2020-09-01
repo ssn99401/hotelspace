@@ -26,7 +26,7 @@
 				</form>
 			</li>
 			<li><a class="profile-pic" href="#"> <img
-					src="resources/admin/vender/plugins/images/users/varun.jpg"
+					src="resources/admin/vendor/plugins/images/users/varun.jpg"
 					alt="user-img" width="36" class="img-circle"><b
 					class="hidden-xs">Steave</b></a></li>
 		</ul>

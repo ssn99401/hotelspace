@@ -12,19 +12,17 @@
 <title>hotelspace</title>
 <jsp:include page="/WEB-INF/views/admin/headerCssLink.jspf" />
 <link rel="stylesheet"
-	href="resources/admin/css/menagement/webViews/webViews.css" />
-<script type="text/javascript"
-	src="resources/admin/js/menagement/webViews/webViews.js"></script>
-<script>
-    //after window is loaded completely 
-    window.onload = function(){
-        //hide the preloader
-        document.querySelector(".preloader").style.display = "none";
-    }
-</script>
+	href="resources/admin/css/management/webViews/webViews.css" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+
+<jsp:include page="/WEB-INF/views/admin/headerScriptLink.jspf" />
+<script type="text/javascript" src="resources/admin/js/jquery-3.3.1.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="resources/admin/js/management/webViews/webViews.js"></script>
+
 </head>
 <body class="fix-header">
-
 	<div class="preloader">
 		<svg class="circular" viewBox="25 25 50 50">
             <circle class="path" cx="50" cy="50" r="20" fill="none"
@@ -38,7 +36,7 @@
 
 		<!-- page Content -->
 		<section class="page-section portfolio" id="portfolio">
-		<div class="container">
+		<div class="container" style="margin-top: 10%; margin-left: 20%;">
 			<!-- Portfolio Section Heading-->
 			<h2
 				class="page-section-heading text-center text-uppercase text-secondary mb-0">페이지
@@ -149,16 +147,13 @@
 				</div>
 			</div>
 		</div>
-
-
 	</section>
 		<!-- ============================================================== -->
-
 
 		<c:import url="/footer.mdo" />
 		<!-- /.container-fluid -->
 
 	</div>
-	<jsp:include page="/WEB-INF/views/admin/headerScriptLink.jspf" />
+	
 </body>
 </html>

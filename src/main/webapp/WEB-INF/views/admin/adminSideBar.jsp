@@ -17,13 +17,13 @@
 			<li><a href="profile.html" class="waves-effect"><i
 					class="fa fa-user fa-fw" aria-hidden="true"></i>Profile</a></li>
 			<li><a href="basic-table.html" class="waves-effect"><i
-					class="fa fa-table fa-fw" aria-hidden="true"></i>Basic Table</a></li>
+					class="fa fa-table fa-fw" aria-hidden="true"></i>회원 관리</a></li>
 			<li><a href="pageManagement.mdo" class="waves-effect"><i
 					class="fa fa-font fa-fw" aria-hidden="true"></i>페이지 관리</a></li>
 			<li><a href="map-google.html" class="waves-effect"><i
 					class="fa fa-globe fa-fw" aria-hidden="true"></i>Google Map</a></li>
 			<li><a href="blank.html" class="waves-effect"><i
-					class="fa fa-columns fa-fw" aria-hidden="true"></i>Blank Page</a></li>
+					class="fa fa-columns fa-fw" aria-hidden="true"></i>업체(호텔) 관리</a></li>
 			<li><a href="404.html" class="waves-effect"><i
 					class="fa fa-info-circle fa-fw" aria-hidden="true"></i>Error 404</a></li>
 

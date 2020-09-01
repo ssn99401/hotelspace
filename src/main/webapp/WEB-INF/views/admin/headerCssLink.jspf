@@ -1,32 +1,32 @@
 <link rel="icon" type="image/png" sizes="16x16"
-	href="resources/admin/vender/plugins/images/favicon.png">
+	href="resources/admin/vendor/plugins/images/favicon.png">
 <!-- Bootstrap Core CSS -->
-<link href="resources/admin/vender/bootstrap/dist/css/bootstrap.min.css"
+<link href="resources/admin/vendor/bootstrap/dist/css/bootstrap.min.css"
 	rel="stylesheet">
 <!-- Menu CSS -->
 <link
-	href="resource/admin/vender/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css"
+	href="resources/admin/vendor/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css"
 	rel="stylesheet">
 <!-- toast CSS -->
 <link
-	href="resources/admin/vender/plugins/bower_components/toast-master/css/jquery.toast.css"
+	href="resources/admin/vendor/plugins/bower_components/toast-master/css/jquery.toast.css"
 	rel="stylesheet">
 <!-- morris CSS -->
 <link
-	href="resources/admin/vender/plugins/bower_components/morrisjs/morris.css"
+	href="resources/admin/vendor/plugins/bower_components/morrisjs/morris.css"
 	rel="stylesheet">
 <!-- chartist CSS -->
 <link
-	href="resources/admin/vender/plugins/bower_components/chartist-js/dist/chartist.min.css"
+	href="resources/admin/vendor/plugins/bower_components/chartist-js/dist/chartist.min.css"
 	rel="stylesheet">
 <link
-	href="resource/admin/vender/plugins/bower_components/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.css"
+	href="resources/admin/vendor/plugins/bower_components/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.css"
 	rel="stylesheet">
 <!-- animation CSS -->
-<link href="resources/admin/vender/css/animate.css" rel="stylesheet">
+<link href="resources/admin/vendor/css/animate.css" rel="stylesheet">
 <!-- Custom CSS -->
-<link href="resources/admin/vender/css/style.css" rel="stylesheet">
+<link href="resources/admin/vendor/css/style.css" rel="stylesheet">
 <!-- color CSS -->
-<link href="resources/admin/vender/css/colors/default.css" id="theme"
+<link href="resources/admin/vendor/css/colors/default.css" id="theme"
 	rel="stylesheet">
 

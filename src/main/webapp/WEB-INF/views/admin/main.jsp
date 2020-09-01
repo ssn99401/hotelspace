@@ -174,7 +174,7 @@
 						<div class="comment-body">
 							<div class="user-img">
 								<img
-									src="resources/admin/vender/plugins/images/users/pawandeep.jpg"
+									src="resources/admin/vendor/plugins/images/users/pawandeep.jpg"
 									alt="user" class="img-circle">
 							</div>
 							<div class="mail-contnet">
@@ -194,7 +194,7 @@
 						</div>
 						<div class="comment-body">
 							<div class="user-img">
-								<img src="resources/admin/vender/plugins/images/users/sonu.jpg"
+								<img src="resources/admin/vendor/plugins/images/users/sonu.jpg"
 									alt="user" class="img-circle">
 							</div>
 							<div class="mail-contnet">
@@ -209,7 +209,7 @@
 						<div class="comment-body b-none">
 							<div class="user-img">
 								<img
-									src="resources/admin/vender/plugins/images/users/arijit.jpg"
+									src="resources/admin/vendor/plugins/images/users/arijit.jpg"
 									alt="user" class="img-circle">
 							</div>
 							<div class="mail-contnet">
@@ -241,7 +241,7 @@
 												<i class="fa fa-comments-o"></i>
 											</button>
 										</div> <a href="javascript:void(0)"><img
-											src="resources/admin/vender/plugins/images/users/varun.jpg"
+											src="resources/admin/vendor/plugins/images/users/varun.jpg"
 											alt="user-img" class="img-circle"> <span>Varun
 												Dhavan <small class="text-success">online</small>
 										</span></a>
@@ -256,7 +256,7 @@
 												<i class="fa fa-comments-o"></i>
 											</button>
 										</div> <a href="javascript:void(0)"><img
-											src="resources/admin/vender/plugins/images/users/genu.jpg"
+											src="resources/admin/vendor/plugins/images/users/genu.jpg"
 											alt="user-img" class="img-circle"> <span>Genelia
 												Deshmukh <small class="text-warning">Away</small>
 										</span></a>
@@ -271,7 +271,7 @@
 												<i class="fa fa-comments-o"></i>
 											</button>
 										</div> <a href="javascript:void(0)"><img
-											src="resources/admin/vender/plugins/images/users/ritesh.jpg"
+											src="resources/admin/vendor/plugins/images/users/ritesh.jpg"
 											alt="user-img" class="img-circle"> <span>Ritesh
 												Deshmukh <small class="text-danger">Busy</small>
 										</span></a>
@@ -286,7 +286,7 @@
 												<i class="fa fa-comments-o"></i>
 											</button>
 										</div> <a href="javascript:void(0)"><img
-											src="resources/admin/vender/plugins/images/users/arijit.jpg"
+											src="resources/admin/vendor/plugins/images/users/arijit.jpg"
 											alt="user-img" class="img-circle"> <span>Arijit
 												Sinh <small class="text-muted">Offline</small>
 										</span></a>
@@ -301,7 +301,7 @@
 												<i class="fa fa-comments-o"></i>
 											</button>
 										</div> <a href="javascript:void(0)"><img
-											src="resources/admin/vender/plugins/images/users/govinda.jpg"
+											src="resources/admin/vendor/plugins/images/users/govinda.jpg"
 											alt="user-img" class="img-circle"> <span>Govinda
 												Star <small class="text-success">online</small>
 										</span></a>
@@ -316,7 +316,7 @@
 												<i class="fa fa-comments-o"></i>
 											</button>
 										</div> <a href="javascript:void(0)"><img
-											src="resources/admin/vender/plugins/images/users/hritik.jpg"
+											src="resources/admin/vendor/plugins/images/users/hritik.jpg"
 											alt="user-img" class="img-circle"> <span>John
 												Abraham<small class="text-success">online</small>
 										</span></a>
@@ -331,7 +331,7 @@
 												<i class="fa fa-comments-o"></i>
 											</button>
 										</div> <a href="javascript:void(0)"><img
-											src="resources/admin/vender/plugins/images/users/varun.jpg"
+											src="resources/admin/vendor/plugins/images/users/varun.jpg"
 											alt="user-img" class="img-circle"> <span>Varun
 												Dhavan <small class="text-success">online</small>
 										</span></a>
