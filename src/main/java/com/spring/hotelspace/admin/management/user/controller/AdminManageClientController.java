@@ -29,7 +29,7 @@ public class AdminManageClientController {
 		model.addAttribute("clientList", clientList);
 		System.out.println("list적재완료" + "list size : "+clientList.size());
 		
-		return "adminTable";
+		return "management/clientManagementPage/adminTable";
 		
 	}
 	
