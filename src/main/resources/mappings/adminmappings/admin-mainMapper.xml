@@ -6,17 +6,7 @@
 
 
 
-	<select id="getClientTable" resultType="AdminMainVO">
-		SELECT CLIENT_ID,CLIENT_NAME,CLIENT_REG_DATE,CLIENT_MILAGE,CLIENT_STATE 
-		FROM client
-	</select>
 	
-	<select id="getClientTableSearchID" parameterType="String" resultType="AdminMainVO">
-		SELECT CLIENT_ID,CLIENT_NAME,CLIENT_REG_DATE,CLIENT_MILAGE,CLIENT_STATE
-		FROM client
-		WHERE client_ID=#{clientId}
-	</select>
-
 
 
 

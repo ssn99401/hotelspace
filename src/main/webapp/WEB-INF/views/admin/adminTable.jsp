@@ -1,3 +1,4 @@
+<%@page import="com.spring.hotelspace.admin.management.user.vo.AdminManageClientVO"%>
 <%@page import="com.spring.hotelspace.admin.main.vo.AdminMainVO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
@@ -8,7 +9,91 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script>
+	
+	 $('#checkbox').click(function(){
+	        $.ajax({
+	            url:'./adminTable.jsp',
+	            dataType:'json',
+	            success:function(data){
+	            	var check = $("input[type='checkbox']");
+	            	check.click(function(){
+	            		$("p").toggle();
+	            	});
+	        }
+	    });
+	
+</script>
+<style>/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+  vertical-align:middle;
+}
+
+/* Hide default HTML checkbox */
+.switch input {display:none;}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+p {
+	margin:0px;
+	display:inline-block;
+	font-size:15px;
+	font-weight:bold;
+}</style>
 <meta charset="utf-8">
+<script type="text/javascript"
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
@@ -16,13 +101,7 @@
 <title>회원 관리</title>
 <jsp:include page="/WEB-INF/views/admin/headerCssLink.jspf" />
 
-<script>
-	//after window is loaded completely 
-	window.onload = function() {
-		//hide the preloader
-		document.querySelector(".preloader").style.display = "none";
-	}
-</script>
+
 </head>
 <body class="fix-header">
 
@@ -65,7 +144,7 @@
 							<div class="table-responsive">
 								<table class="table">
 									<thead>
-										<tr>
+										<tr style="font-size:20px;">
 											<th>id</th>
 											<th>name</th>
 											<th>reg_date</th>
@@ -75,16 +154,15 @@
 									</thead>
 									<tbody>
 										<%
-											List<AdminMainVO> clientList = (List<AdminMainVO>) request.getAttribute("clientList");
+											List<AdminManageClientVO> clientList = (List<AdminManageClientVO>) request.getAttribute("clientList");
 											System.out.println(clientList.get(0).getClientID());
-											String status=null;
+											String status = null;
 											for (int i = 0; i < clientList.size(); i++) {
 												if (clientList.get(i).getClientState() == 0) {
 													status = "active";
 												} else {
 													status = "banned";
 												}
-
 										%>
 										<tr>
 											<td><a
@@ -94,7 +172,13 @@
 											<td><%=clientList.get(i).getClientMilage()%></td>
 
 
-											<td><%=status%></td>
+											<td>
+											<label class="switch"> 
+											<input type="checkbox" id="checkbox"> 
+											<span class="slider round"></span>
+											</label>
+												<p id="ban">Banned</p>
+												<p id="act" style="display: none;">active</p></td>
 										</tr>
 										<%
 											}

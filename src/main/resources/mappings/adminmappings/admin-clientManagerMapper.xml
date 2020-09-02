@@ -4,6 +4,16 @@
 
 <mapper namespace="com.spring.hotelspace.admin.management.user.dao.AdminManageClientDAO">
 
+	<select id="getClientTable" resultType="AdminManageClientVO">
+		SELECT CLIENT_ID,CLIENT_NAME,CLIENT_REG_DATE,CLIENT_MILAGE,CLIENT_STATE 
+		FROM client
+	</select>
+	
+	<select id="getClientTableSearchID" parameterType="String" resultType="AdminManageClientVO">
+		SELECT CLIENT_ID,CLIENT_NAME,CLIENT_REG_DATE,CLIENT_MILAGE,CLIENT_STATE
+		FROM client
+		WHERE client_ID=#{clientId}
+	</select>
 	
 
 </mapper>

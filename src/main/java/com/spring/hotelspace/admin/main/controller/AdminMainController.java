@@ -13,9 +13,6 @@ import com.spring.hotelspace.admin.main.vo.AdminMainVO;
 
 @Controller
 public class AdminMainController {
-
-	@Autowired
-	AdminMainService adminmainservice;
 	
 	@RequestMapping(value = "/index.mdo", method =  RequestMethod.GET)
 	public String showIndexPage() {
@@ -47,18 +44,5 @@ public class AdminMainController {
 		return "adminFooter";
 	}
 	
-	
-	
-	@RequestMapping(value = "/clientManagement.mdo" , method = RequestMethod.GET)
-	public String clientTable(AdminMainVO vo,Model model) {
-		
-		List<AdminMainVO>clientList= adminmainservice.getClientList(vo);
-		
-		model.addAttribute("clientList", clientList);
-		System.out.println("list적재완료" + "list size : "+clientList.size());
-		
-		return "adminTable";
-		
-	}
 	
 }

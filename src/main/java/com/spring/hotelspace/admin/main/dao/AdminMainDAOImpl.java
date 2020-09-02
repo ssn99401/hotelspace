@@ -17,19 +17,4 @@ public class AdminMainDAOImpl implements AdminMainDAO {
 	
 	private static final String namespace = "com.spring.hotelspace.admin.main.dao.AdminMainDAO";
 	
-	public List<AdminMainVO> getClientTable(AdminMainVO vo) {
-		
-		System.out.println("dao 넘어왔음");
-		//전체 테이블 조회 리스트
-		List<AdminMainVO> array=sqlSessionTemplate.selectList(namespace+".getClientTable",vo);
-		
-		System.out.println("dao에서 sql동작완료"+ vo + " \n array size :"+array.size() );
-
-		
-		return array;
-		
-		
-		
-		
-	}
 }
