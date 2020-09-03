@@ -2,18 +2,46 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.spring.hotelspace.admin.management.user.dao.AdminManageClientDAO">
+<mapper
+	namespace="com.spring.hotelspace.admin.management.user.dao.AdminManageClientDAO">
 
 	<select id="getClientTable" resultType="AdminManageClientVO">
-		SELECT CLIENT_ID,CLIENT_NAME,CLIENT_REG_DATE,CLIENT_MILAGE,CLIENT_STATE 
+		SELECT
+		CLIENT_ID,CLIENT_NAME,CLIENT_REG_DATE,CLIENT_MILAGE,CLIENT_STATE
 		FROM client
 	</select>
-	
-	<select id="getClientTableSearchID" parameterType="String" resultType="AdminManageClientVO">
-		SELECT CLIENT_ID,CLIENT_NAME,CLIENT_REG_DATE,CLIENT_MILAGE,CLIENT_STATE
-		FROM client
+
+	<select id="getClientTableSearchID" parameterType="String"
+		resultType="AdminManageClientVO">
+		SELECT
+		CLIENT_ID,CLIENT_NAME,CLIENT_REG_DATE,CLIENT_MILAGE,CLIENT_STATE
+		FROM
+		client
 		WHERE client_ID=#{clientId}
 	</select>
-	
+
+	<update id="activeClientState"
+		parameterType="hashmap">
+		UPDATE CLIENT
+		SET
+		Client_State=0
+		WHERE Client_ID IN
+		<foreach collection="alist" index="index" item="item"  open="(" close=")" separator=",">
+		#{item.clientID,jdbcType=VARCHAR}
+
+        </foreach>
+		
+	</update>
+
+	<update id="banClientState" parameterType="hashmap">
+		UPDATE CLIENT
+		SET
+		Client_State=1
+		WHERE Client_ID IN
+		<foreach collection="blist" index="index" item="item"  open="(" close=")" separator=",">
+		#{item.clientID,jdbcType=VARCHAR}
+        </foreach>
+		
+	</update>
 
 </mapper>

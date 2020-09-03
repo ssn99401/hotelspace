@@ -1,4 +1,5 @@
-<%@page import="com.spring.hotelspace.admin.management.user.vo.AdminManageClientVO"%>
+<%@page
+	import="com.spring.hotelspace.admin.management.user.vo.AdminManageClientVO"%>
 <%@page import="com.spring.hotelspace.admin.main.vo.AdminMainVO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
@@ -10,90 +11,158 @@
 <html lang="en">
 <head>
 <script>
+	/* var chkNum = $('input:checkbox[id="checkbox"]').is(':checked'); */
 	
-	 $('#checkbox').click(function(){
+	/* 
+	$(document).ready(function() {
+		$('#checkbox').click(function() {
+			// checkbox
+
+			// var check = $('#rd2').is(":checked");
+			// alert(check);
+
+			// var check = $('input[id="rd2"]').is(':checked');
+			// alert(check);
+			var check = $('input:checkbox[id="checkbox"]').is(':checked');
+
+		});
+	}); */
+
+	function change() {
+		
+		var chkarr = [];
+		var Nchkarr= [];
+
+		for (var i = 1; i < $('table tr').size(); i++) {
+
+			// table 중 tr이 i번째 있는 자식중에 체크박스가 체크중이면
+
+			var chk = $('table tr').eq(i).children().find(
+					'input[type="checkbox"]').is(':checked');
+
+			if (chk == true) {
+				//var fabric_seq = $('table tr').eq(i).find('input[type="text"]').val();
+				
+				// 그 i 번째 행을 배열 chkarr에 푸시
+				chkarr.push(i);
+			}else{
+				Nchkarr.push(i);
+			}
+
+		}
+		/* var ischecked = $('input:checkbox[id="checkbox"]').is(':checked');
+
+		if (ischecked) {
+			$('#act').hide();
+			$('#ban').show();
+		} else {
+			$('#act').show();
+			$('#ban').hide();
+		}
+		 */
+		
 	        $.ajax({
-	            url:'./adminTable.jsp',
-	            dataType:'json',
-	            success:function(data){
-	            	var check = $("input[type='checkbox']");
-	            	check.click(function(){
-	            		$("p").toggle();
-	            	});
-	        }
+	        	type : "GET",
+	            url:'togglebutton.mdo',
+	            dataType:'text',
+	            data : {
+	            	'state' : chkarr,
+	            	'Nstate' : Nchkarr
+	            },
+	            success     : function(data) {
+	            	
+	            },
+	            error : function(request, status, error) {
+	                alert(error);
+	            }
+
 	    });
-	
+	}
 </script>
+
+
+<!-- 
+페이지 로딩 시, state가 0이면 active(checked)
+1이면 banned 표시
+
+ajax 사용하여 checkbox가 바뀔 때 마다
+client_state가 바뀌어야 함
+
+
+ -->
 <style>/* The switch - the box around the slider */
 .switch {
-  position: relative;
-  display: inline-block;
-  width: 50px;
-  height: 24px;
-  vertical-align:middle;
+	position: relative;
+	display: inline-block;
+	width: 50px;
+	height: 24px;
+	vertical-align: middle;
 }
 
 /* Hide default HTML checkbox */
-.switch input {display:none;}
+.switch input {
+	display: none;
+}
 
 /* The slider */
 .slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
+	position: absolute;
+	cursor: pointer;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: #ccc;
+	-webkit-transition: .4s;
+	transition: .4s;
 }
 
 .slider:before {
-  position: absolute;
-  content: "";
-  height: 16px;
-  width: 16px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
+	position: absolute;
+	content: "";
+	height: 16px;
+	width: 16px;
+	left: 4px;
+	bottom: 4px;
+	background-color: white;
+	-webkit-transition: .4s;
+	transition: .4s;
 }
 
-input:checked + .slider {
-  background-color: #2196F3;
+input:checked+.slider {
+	background-color: #2196F3;
 }
 
-input:focus + .slider {
-  box-shadow: 0 0 1px #2196F3;
+input:focus+.slider {
+	box-shadow: 0 0 1px #2196F3;
 }
 
-input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
+input:checked+.slider:before {
+	-webkit-transform: translateX(26px);
+	-ms-transform: translateX(26px);
+	transform: translateX(26px);
 }
 
 /* Rounded sliders */
 .slider.round {
-  border-radius: 34px;
+	border-radius: 34px;
 }
 
 .slider.round:before {
-  border-radius: 50%;
+	border-radius: 50%;
 }
 
 p {
-	margin:0px;
-	display:inline-block;
-	font-size:15px;
-	font-weight:bold;
-}</style>
+	margin: 0px;
+	display: inline-block;
+	font-size: 15px;
+	font-weight: bold;
+}
+</style>
 <meta charset="utf-8">
 <script type="text/javascript"
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
-	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
@@ -141,10 +210,10 @@ p {
 						<div class="white-box">
 							<h3 class="box-title">Client Management</h3>
 							<p class="text-muted">회원 관리</p>
-							<div class="table-responsive">
+							<div class="table-responsive" id="table-responsive">
 								<table class="table">
 									<thead>
-										<tr style="font-size:20px;">
+										<tr style="font-size: 20px;">
 											<th>id</th>
 											<th>name</th>
 											<th>reg_date</th>
@@ -158,28 +227,46 @@ p {
 											System.out.println(clientList.get(0).getClientID());
 											String status = null;
 											for (int i = 0; i < clientList.size(); i++) {
-												if (clientList.get(i).getClientState() == 0) {
-													status = "active";
-												} else {
-													status = "banned";
-												}
 										%>
 										<tr>
 											<td><a
-												href="profile.do?id=<%=clientList.get(i).getClientID()%>"><%=clientList.get(i).getClientID()%></a></td>
+												href="profile.mdo?id=<%=clientList.get(i).getClientID()%>"><%=clientList.get(i).getClientID()%></a></td>
 											<td><%=clientList.get(i).getClientName()%></td>
 											<td><%=clientList.get(i).getClientRegDate()%></td>
 											<td><%=clientList.get(i).getClientMilage()%></td>
 
 
 											<td>
-											<label class="switch"> 
-											<input type="checkbox" id="checkbox"> 
-											<span class="slider round"></span>
+												<%
+													if (clientList.get(i).getClientState() == 0) {//active상태 일 때는 체크되어서 로딩
+												%> <label class="switch"> <!--체크박스  --> <input
+													type="checkbox" id="checkbox" name="checkbox"
+													checked="checked" onchange="change()"> <span
+													class="slider round"></span>
 											</label>
-												<p id="ban">Banned</p>
-												<p id="act" style="display: none;">active</p></td>
+											<td>
+												<!-- 0이면 체크박스 체크(active),0이아니면 체크박스 해제(banned)  -->
+												<p id="act" style="color: green;">Active</p>
+												<p id="ban" style="color: red; display: none;">Banned</p>
+											</td>
+											<%
+												} else {
+											%>
+											<label class="switch"> <!--체크박스  --> <input
+												type="checkbox" id="checkbox" name="checkbox"
+												onchange="change()"> <span class="slider round"></span>
+											</label>
+											<td>
+												<p id="act" style="color: green; display: none;">Active</p>
+												<p id="ban" style="color: red;">Banned</p>
+											</td>
+											<%
+												}
+											%>
+
 										</tr>
+
+									
 										<%
 											}
 										%>
