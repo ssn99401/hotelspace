@@ -11,25 +11,22 @@
 <html lang="en">
 <head>
 <script>
-	/* var chkNum = $('input:checkbox[id="checkbox"]').is(':checked'); */
+	//after window is loaded completely 
+	window.onload = function() {
+		//hide the preloader
+		document.querySelector(".preloader").style.display = "none";
+	}
 
-	/* 
-	$(document).ready(function() {
-		$('#checkbox').click(function() {
-			// checkbox
+	
 
-			// var check = $('#rd2').is(":checked");
-			// alert(check);
-
-			// var check = $('input[id="rd2"]').is(':checked');
-			// alert(check);
-			var check = $('input:checkbox[id="checkbox"]').is(':checked');
-
-		});
-	}); */
-
+	
+	
+	
 	function change() {
-
+		
+			//hide the preloader
+			document.querySelector(".preloader").style.display = "block";
+		
 		var chkarr = [];
 		var Nchkarr = [];
 
@@ -59,7 +56,7 @@
 				'Nstate' : Nchkarr
 			},
 			success : function(data) {
-				
+
 				for (var i = 1; i <= chkarr.length + Nchkarr.length; i++) {
 
 					var getId = "checkbox" + i;
@@ -73,6 +70,7 @@
 						$('#ban' + i).show();
 					}
 				}
+				document.querySelector(".preloader").style.display = "none";
 
 			},
 			error : function(request, status, error) {
@@ -162,7 +160,13 @@ p {
 <meta name="author" content="">
 <title>회원 관리</title>
 <jsp:include page="/WEB-INF/views/admin/headerCssLink.jspf" />
-
+<script>
+	//after window is loaded completely 
+	window.onload = function() {
+		//hide the preloader
+		document.querySelector(".preloader").style.display = "none";
+	}
+</script>
 
 </head>
 <body class="fix-header">
@@ -207,11 +211,11 @@ p {
 								<table class="table">
 									<thead>
 										<tr style="font-size: 20px;">
-											<th>id</th>
-											<th>name</th>
-											<th>reg_date</th>
-											<th>milage</th>
-											<th>state</th>
+											<th>ID</th>
+											<th>Name</th>
+											<th>Reg Date</th>
+											<th>Milage</th>
+											<th>State</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -227,8 +231,6 @@ p {
 											<td><%=clientList.get(i).getClientName()%></td>
 											<td><%=clientList.get(i).getClientRegDate()%></td>
 											<td><%=clientList.get(i).getClientMilage()%></td>
-
-
 											<td>
 												<%
 													if (clientList.get(i).getClientState() == 0) {//active상태 일 때는 체크되어서 로딩
@@ -256,28 +258,7 @@ p {
 											<%
 												}
 											%>
-
-											<!-- 
-											<label class="switch"> 체크박스  <input
-													type="checkbox" id="checkbox" name="checkbox"
-													checked="checked" onchange="change()"> <span
-													class="slider round"></span>
-											</label>
-											<td>
-												0이면 체크박스 체크(active),0이아니면 체크박스 해제(banned) 
-												<p id="act" style="color: green;">Active</p>
-												<p id="ban" style="color: red; display: none;">Banned</p>
-											</td> -->
-
-
-
 										</tr>
-										<!-- for(var i=1;i<8;i++) {
-								        eval("p"+i+"=document.getElementById(\"past"+i+"\")"); //지난주 DIV
-								        eval("n"+i+"=document.getElementById(\"now"+i+"\")"); //이번주 DIV
-								} -->
-
-
 										<%
 											} //for문--end
 										%>
