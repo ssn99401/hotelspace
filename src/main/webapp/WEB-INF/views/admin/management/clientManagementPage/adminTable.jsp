@@ -12,7 +12,7 @@
 <head>
 <script>
 	/* var chkNum = $('input:checkbox[id="checkbox"]').is(':checked'); */
-	
+
 	/* 
 	$(document).ready(function() {
 		$('#checkbox').click(function() {
@@ -29,9 +29,9 @@
 	}); */
 
 	function change() {
-		
+
 		var chkarr = [];
-		var Nchkarr= [];
+		var Nchkarr = [];
 
 		for (var i = 1; i < $('table tr').size(); i++) {
 
@@ -41,55 +41,48 @@
 					'input[type="checkbox"]').is(':checked');
 
 			if (chk == true) {
-				//var fabric_seq = $('table tr').eq(i).find('input[type="text"]').val();
-				
 				// 그 i 번째 행을 배열 chkarr에 푸시
 				chkarr.push(i);
-			}else{
+			} else {
+				//비활성화 된 것은 Nchkarr에 푸시
 				Nchkarr.push(i);
 			}
 
 		}
-		/* var ischecked = $('input:checkbox[id="checkbox"]').is(':checked');
 
-		if (ischecked) {
-			$('#act').hide();
-			$('#ban').show();
-		} else {
-			$('#act').show();
-			$('#ban').hide();
-		}
-		 */
-		
-	        $.ajax({
-	        	type : "GET",
-	            url:'togglebutton.mdo',
-	            dataType:'text',
-	            data : {
-	            	'state' : chkarr,
-	            	'Nstate' : Nchkarr
-	            },
-	            success     : function(data) {
-	            	
-	            },
-	            error : function(request, status, error) {
-	                alert(error);
-	            }
+		$.ajax({
+			type : "GET",
+			url : 'togglebutton.mdo',
+			dataType : 'text',
+			data : {
+				'state' : chkarr,
+				'Nstate' : Nchkarr
+			},
+			success : function(data) {
+				
+				for (var i = 1; i <= chkarr.length + Nchkarr.length; i++) {
 
-	    });
+					var getId = "checkbox" + i;
+					var ischecked = $('input:checkbox[id="' + getId + '"]').is(
+							':checked');//i번째 체크박스가 active냐?
+					if (ischecked) {//맞으면
+						$('#act' + i).show();//active출력
+						$('#ban' + i).hide();
+					} else {
+						$('#act' + i).hide();//틀리면 banned출력
+						$('#ban' + i).show();
+					}
+				}
+
+			},
+			error : function(request, status, error) {
+				alert(error);
+			}
+
+		});
 	}
 </script>
 
-
-<!-- 
-페이지 로딩 시, state가 0이면 active(checked)
-1이면 banned 표시
-
-ajax 사용하여 checkbox가 바뀔 때 마다
-client_state가 바뀌어야 함
-
-
- -->
 <style>/* The switch - the box around the slider */
 .switch {
 	position: relative;
@@ -240,35 +233,53 @@ p {
 												<%
 													if (clientList.get(i).getClientState() == 0) {//active상태 일 때는 체크되어서 로딩
 												%> <label class="switch"> <!--체크박스  --> <input
-													type="checkbox" id="checkbox" name="checkbox"
+													type="checkbox" id="checkbox<%=i + 1%>" name="checkbox"
 													checked="checked" onchange="change()"> <span
 													class="slider round"></span>
 											</label>
 											<td>
 												<!-- 0이면 체크박스 체크(active),0이아니면 체크박스 해제(banned)  -->
-												<p id="act" style="color: green;">Active</p>
-												<p id="ban" style="color: red; display: none;">Banned</p>
+												<p id="act<%=i + 1%>" style="color: green;">Actived</p>
+												<p id="ban<%=i + 1%>" style="color: red; display: none;">Banned</p>
 											</td>
 											<%
 												} else {
 											%>
 											<label class="switch"> <!--체크박스  --> <input
-												type="checkbox" id="checkbox" name="checkbox"
+												type="checkbox" id="checkbox<%=i + 1%>" name="checkbox"
 												onchange="change()"> <span class="slider round"></span>
 											</label>
 											<td>
-												<p id="act" style="color: green; display: none;">Active</p>
-												<p id="ban" style="color: red;">Banned</p>
+												<p id="act<%=i + 1%>" style="color: green; display: none;">Actived</p>
+												<p id="ban<%=i + 1%>" style="color: red;">Banned</p>
 											</td>
 											<%
 												}
 											%>
 
-										</tr>
+											<!-- 
+											<label class="switch"> 체크박스  <input
+													type="checkbox" id="checkbox" name="checkbox"
+													checked="checked" onchange="change()"> <span
+													class="slider round"></span>
+											</label>
+											<td>
+												0이면 체크박스 체크(active),0이아니면 체크박스 해제(banned) 
+												<p id="act" style="color: green;">Active</p>
+												<p id="ban" style="color: red; display: none;">Banned</p>
+											</td> -->
 
-									
+
+
+										</tr>
+										<!-- for(var i=1;i<8;i++) {
+								        eval("p"+i+"=document.getElementById(\"past"+i+"\")"); //지난주 DIV
+								        eval("n"+i+"=document.getElementById(\"now"+i+"\")"); //이번주 DIV
+								} -->
+
+
 										<%
-											}
+											} //for문--end
 										%>
 									</tbody>
 								</table>
