@@ -75,4 +75,18 @@ public class AdminManageClientController {
 
 	}
 
+	
+	@RequestMapping(value = "/profile.mdo" , method = RequestMethod.GET)
+	public String clientProfile(String id, Model model) {
+		
+		AdminManageClientVO client = adminManageClientService.getClientInfo(id);
+		model.addAttribute("client",client);
+		
+		model.addAttribute("review", adminManageClientService.getClientRev(id));
+		model.addAttribute("reservation", adminManageClientService.getClientRes(id));
+		
+		
+		return "management/clientManagementPage/profile";
+		
+	}
 }

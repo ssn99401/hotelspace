@@ -43,5 +43,28 @@
         </foreach>
 		
 	</update>
+	
+	<select id="getClientInfo" parameterType="String" resultType="AdminManageClientVO">
+		SELECT
+		*
+		FROM
+		client
+		WHERE client_ID=#{id}
+	</select>
+	
+	<select id="getClientRev" parameterType="String" resultType="AdminManageClientRevVO">
+		SELECT
+		*
+		FROM
+		review
+		WHERE client_ID=#{id}
+	</select>
+	
+	<select id="getClientRes" parameterType="String" resultType="AdminManageClientResVO">
+		SELECT
+		*
+		FROM
+		reservation
+	</select>
 
 </mapper>

@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.spring.hotelspace.admin.main.vo.AdminMainVO;
+import com.spring.hotelspace.admin.management.user.vo.AdminManageClientResVO;
+import com.spring.hotelspace.admin.management.user.vo.AdminManageClientRevVO;
 import com.spring.hotelspace.admin.management.user.vo.AdminManageClientVO;
 
 @Repository
@@ -53,6 +55,21 @@ public class AdminManageClientDAOImpl implements AdminManageClientDAO {
 		
 		sqlSessionTemplate.update(namespace + ".banClientState",hm);
 
+	}
+
+	@Override
+	public AdminManageClientVO getClientInfo(String id) {
+		return sqlSessionTemplate.selectOne(namespace + ".getClientInfo",id);
+	}
+
+	@Override
+	public AdminManageClientRevVO getClientRev(String id) {
+		return sqlSessionTemplate.selectOne(namespace + ".getClientRev",id);
+	}
+
+	@Override
+	public AdminManageClientResVO getClientRes(String id) {
+		return sqlSessionTemplate.selectOne(namespace + ".getClientRes",id);
 	}
 
 }

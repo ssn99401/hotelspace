@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 import com.spring.hotelspace.admin.main.vo.AdminMainVO;
 import com.spring.hotelspace.admin.management.user.dao.AdminManageClientDAO;
 import com.spring.hotelspace.admin.management.user.service.AdminManageClientService;
+import com.spring.hotelspace.admin.management.user.vo.AdminManageClientResVO;
+import com.spring.hotelspace.admin.management.user.vo.AdminManageClientRevVO;
 import com.spring.hotelspace.admin.management.user.vo.AdminManageClientVO;
 
 @Service
@@ -47,5 +49,21 @@ public class AdminManageClientServiceImpl implements AdminManageClientService {
 		adminManageClientDAO.getClientTable(vo);
 		System.out.println("새로고침");
 
+	}
+
+	@Override
+	public AdminManageClientVO getClientInfo(String id) {
+		return adminManageClientDAO.getClientInfo(id);
+		
+	}
+
+	@Override
+	public AdminManageClientRevVO getClientRev(String id) {
+		return adminManageClientDAO.getClientRev(id);
+	}
+
+	@Override
+	public AdminManageClientResVO getClientRes(String id) {
+		return adminManageClientDAO.getClientRes(id);
 	}
 }
