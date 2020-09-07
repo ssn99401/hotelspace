@@ -1,6 +1,7 @@
 <%@page
 	import="com.spring.hotelspace.admin.management.user.vo.AdminManageClientVO"%>
 <%@page import="com.spring.hotelspace.admin.main.vo.AdminMainVO"%>
+
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@page import="org.springframework.ui.Model"%>
@@ -11,22 +12,39 @@
 <html lang="en">
 <head>
 <script>
-	//after window is loaded completely 
-	window.onload = function() {
-		//hide the preloader
-		document.querySelector(".preloader").style.display = "none";
+
+	doubleSubmitFlag = false;
+
+	//값을 저장시키고 불러올수 있는 함수
+	function doubleState1(num) {
+		if (num == 1) {
+			doubleSubmitFlag = false;
+
+			return doubleSubmitFlag;
+		} else if (num == 2) {
+			doubleSubmitFlag = true;
+
+			return doubleSubmitFlag;
+		}
+
 	}
 
 	
+	function change() {//토글버튼 누를 시
 
-	
-	
-	
-	function change() {
-		
-			//hide the preloader
-			document.querySelector(".preloader").style.display = "block";
-		
+		console.log(doubleSubmitFlag);
+		console.log('버튼맨처음');
+
+		if (doubleSubmitFlag == true) {//버튼 동작 도중 클릭시
+			alert('잠시 후 시도해주세요');
+			window.location.reload();
+			return;
+		}
+		doubleSubmitFlag = doubleState1(2);//true
+
+		console.log(doubleSubmitFlag);
+		console.log('버튼동작시작');
+
 		var chkarr = [];
 		var Nchkarr = [];
 
@@ -45,7 +63,7 @@
 				Nchkarr.push(i);
 			}
 
-		}
+		}//for문 -end
 
 		$.ajax({
 			type : "GET",
@@ -70,15 +88,21 @@
 						$('#ban' + i).show();
 					}
 				}
-				document.querySelector(".preloader").style.display = "none";
+
+				doubleSubmitFlag = doubleState1(1);//false
+
+				console.log(doubleSubmitFlag);
+				console.log('버튼끝부분');
 
 			},
 			error : function(request, status, error) {
 				alert(error);
 			}
 
-		});
-	}
+		});//ajax-end
+	}//change-end
+
+
 </script>
 
 <style>/* The switch - the box around the slider */
@@ -160,23 +184,10 @@ p {
 <meta name="author" content="">
 <title>회원 관리</title>
 <jsp:include page="/WEB-INF/views/admin/headerCssLink.jspf" />
-<script>
-	//after window is loaded completely 
-	window.onload = function() {
-		//hide the preloader
-		document.querySelector(".preloader").style.display = "none";
-	}
-</script>
 
 </head>
 <body class="fix-header">
 
-	<div class="preloader" style="opacity: 0.5;">
-		<svg class="circular" viewBox="25 25 50 50">
-            <circle class="path" cx="50" cy="50" r="20" fill="none"
-				stroke-width="2" stroke-miterlimit="10" />
-        </svg>
-	</div>
 	<div id="wrapper">
 		<c:import url="/navbar.mdo" />
 		<c:import url="/sidebar.mdo" />
@@ -184,7 +195,8 @@ p {
 
 		<!-- page Content -->
 		<div id="page-wrapper">
-			<div class="container-fluid">
+			
+							<div class="container-fluid">
 				<div class="row bg-title">
 					<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
 						<h4 class="page-title">Basic Table</h4>
@@ -207,64 +219,125 @@ p {
 						<div class="white-box">
 							<h3 class="box-title">Client Management</h3>
 							<p class="text-muted">회원 관리</p>
-							<div class="table-responsive" id="table-responsive">
-								<table class="table">
-									<thead>
-										<tr style="font-size: 20px;">
-											<th>ID</th>
-											<th>Name</th>
-											<th>Reg Date</th>
-											<th>Milage</th>
-											<th>State</th>
-										</tr>
-									</thead>
-									<tbody>
-										<%
-											List<AdminManageClientVO> clientList = (List<AdminManageClientVO>) request.getAttribute("clientList");
-											System.out.println(clientList.get(0).getClientID());
-											String status = null;
-											for (int i = 0; i < clientList.size(); i++) {
-										%>
-										<tr>
-											<td><a
-												href="profile.mdo?id=<%=clientList.get(i).getClientID()%>"><%=clientList.get(i).getClientID()%></a></td>
-											<td><%=clientList.get(i).getClientName()%></td>
-											<td><%=clientList.get(i).getClientRegDate()%></td>
-											<td><%=clientList.get(i).getClientMilage()%></td>
-											<td>
+							<br> 
+							<form action="searchUserIdName.mdo">
+							<select name="type" id="type">
+								<option value="none" selected>찾기옵션</option>
+								<option value="ID">ID</option>
+								<option value="NAME">이름</option>
+								<input type="text" name="searchUser" id="searchUser" />
+								<input type="submit" value="검색" />
+								</form>
+								<form action="clientManagement.mdo">
+								<input type="submit" value="전체보기" />
+								</form>
+								
+								<script>
+								function inputText() {
+									
+									var user = $('#searchUser').val();
+									console.log(user);
+									var type = $('#type').val();
+									console.log(type);
+									
+									if(type=="ID"){
+										$( '#table > tbody:last').empty();
+
+										$.ajax({
+											type : "GET",
+											url : 'searchId.mdo',
+											dataType : 'text',
+											data : {
+												'user' : user
+											},
+											success : function(data) {
+											console.log('iD성공');
+											},
+											error : function(request, status, error) {
+												alert(error);
+											}
+
+										});//ajax-end
+									}else if(type=="NAME"){
+										
+										$( '#table > tbody:last').empty();
+										$.ajax({
+											type : "GET",
+											url : 'searchName.mdo',
+											dataType : 'text',
+											data : {
+												'user' : user
+											},
+											success : function(data) {
+												console.log('Name성공');
+											},
+											error : function(request, status, error) {
+												alert(error);
+											}
+
+										});//ajax-end
+									}//if-end
+								}//inputText()-end
+								</script>
+								<div class="table-responsive" id="table-responsive">
+									<table class="table" id="table">
+										<thead>
+											<tr style="font-size: 20px;">
+												<th>ID</th>
+												<th>Name</th>
+												<th>Reg Date</th>
+												<th>Milage</th>
+												<th>State</th>
+											</tr>
+										</thead>
+										<tbody>
+											
 												<%
-													if (clientList.get(i).getClientState() == 0) {//active상태 일 때는 체크되어서 로딩
-												%> <label class="switch"> <!--체크박스  --> <input
+												List<AdminManageClientVO> clientList = (List<AdminManageClientVO>) request.getAttribute("clientList");
+
+												String status = null;
+												for (int i = 0; i < clientList.size(); i++) {
+											%>
+											<tr>
+												<td><a
+													href="profile.mdo?id=<%=clientList.get(i).getClientID()%>"><%=clientList.get(i).getClientID()%></a></td>
+												<td><%=clientList.get(i).getClientName()%></td>
+												<td><%=clientList.get(i).getClientRegDate()%></td>
+												<td><%=clientList.get(i).getClientMilage()%></td>
+												<td>
+													<%
+														if (clientList.get(i).getClientState() == 0) {//active상태 일 때는 체크되어서 로딩
+													%> <label class="switch"> <!--체크박스  --> <input
+														type="checkbox" id="checkbox<%=i + 1%>" name="checkbox"
+														checked="checked" onchange="change()"> <span
+														class="slider round"></span>
+												</label>
+												<td>
+													<!-- 0이면 체크박스 체크(active),0이아니면 체크박스 해제(banned)  -->
+													<p id="act<%=i + 1%>" style="color: green;">Actived</p>
+													<p id="ban<%=i + 1%>" style="color: red; display: none;">Banned</p>
+												</td>
+												<%
+													} else {
+												%>
+												<label class="switch"> <!--체크박스  --> <input
 													type="checkbox" id="checkbox<%=i + 1%>" name="checkbox"
-													checked="checked" onchange="change()"> <span
-													class="slider round"></span>
-											</label>
-											<td>
-												<!-- 0이면 체크박스 체크(active),0이아니면 체크박스 해제(banned)  -->
-												<p id="act<%=i + 1%>" style="color: green;">Actived</p>
-												<p id="ban<%=i + 1%>" style="color: red; display: none;">Banned</p>
-											</td>
+													onchange="change()"> <span class="slider round"></span>
+												</label>
+												<td>
+													<p id="act<%=i + 1%>" style="color: green; display: none;">Actived</p>
+													<p id="ban<%=i + 1%>" style="color: red;">Banned</p>
+												</td>
+												<%
+													}
+												%>
+											</tr>
 											<%
-												} else {
+												} //for문--end
 											%>
-											<label class="switch"> <!--체크박스  --> <input
-												type="checkbox" id="checkbox<%=i + 1%>" name="checkbox"
-												onchange="change()"> <span class="slider round"></span>
-											</label>
-											<td>
-												<p id="act<%=i + 1%>" style="color: green; display: none;">Actived</p>
-												<p id="ban<%=i + 1%>" style="color: red;">Banned</p>
-											</td>
-											<%
-												}
-											%>
-										</tr>
-										<%
-											} //for문--end
-										%>
-									</tbody>
-								</table>
-							</div>
+										</tbody>
+									</table>
+								</div>
 						</div>
 					</div>
 				</div>
@@ -272,10 +345,10 @@ p {
 			</div>
 
 
-			<c:import url="/footer.mdo" />
-			<!-- /.container-fluid -->
+							<c:import url="/footer.mdo" />
+							<!-- /.container-fluid -->
 
-		</div>
-		<jsp:include page="/WEB-INF/views/admin/headerScriptLink.jspf" />
+							</div>
+							<jsp:include page="/WEB-INF/views/admin/headerScriptLink.jspf" />
 </body>
 </html>

@@ -27,6 +27,8 @@ public class AdminManageClientServiceImpl implements AdminManageClientService {
 		return adminManageClientDAO.getClientTable(vo);
 
 	}
+	
+	
 
 	@Override
 	public void getState(ArrayList<AdminManageClientVO> arr, ArrayList<AdminManageClientVO> Narr,
@@ -66,4 +68,18 @@ public class AdminManageClientServiceImpl implements AdminManageClientService {
 	public AdminManageClientResVO getClientRes(String id) {
 		return adminManageClientDAO.getClientRes(id);
 	}
+
+	@Override
+	public List<AdminManageClientVO> getSearchIdList(String user) {
+		// TODO Auto-generated method stub
+		return adminManageClientDAO.getSearchId(user);
+	}
+
+	@Override
+	public List<AdminManageClientVO> getSearchNameList(String user) {
+		// TODO Auto-generated method stub
+		return adminManageClientDAO.getSearchName(user);
+	}
+
+	
 }

@@ -17,8 +17,23 @@
 		CLIENT_ID,CLIENT_NAME,CLIENT_REG_DATE,CLIENT_MILAGE,CLIENT_STATE
 		FROM
 		client
-		WHERE client_ID=#{clientId}
+		WHERE client_ID=#{clientID}
 	</select>
+	
+	<select id="getSearchId" parameterType="String" resultType="AdminManageClientVO">
+		SELECT
+		CLIENT_ID,CLIENT_NAME,CLIENT_REG_DATE,CLIENT_MILAGE,CLIENT_STATE
+		FROM client
+		where client_ID Like #{user}
+	</select>
+	
+	<select id="getSearchName" parameterType="String" resultType="AdminManageClientVO">
+		SELECT
+		CLIENT_ID,CLIENT_NAME,CLIENT_REG_DATE,CLIENT_MILAGE,CLIENT_STATE
+		FROM client
+		where client_NAME Like #{user}
+	</select>
+	
 
 	<update id="activeClientState"
 		parameterType="hashmap">
@@ -43,6 +58,10 @@
         </foreach>
 		
 	</update>
+	
+	
+	
+	
 	
 	<select id="getClientInfo" parameterType="String" resultType="AdminManageClientVO">
 		SELECT

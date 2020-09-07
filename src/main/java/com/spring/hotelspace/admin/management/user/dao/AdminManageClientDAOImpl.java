@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -23,13 +25,30 @@ public class AdminManageClientDAOImpl implements AdminManageClientDAO {
 
 	public List<AdminManageClientVO> getClientTable(AdminManageClientVO vo) {
 
-		// System.out.println("dao 넘어왔음");
 		// 전체 테이블 조회 리스트
 		List<AdminManageClientVO> array = sqlSessionTemplate.selectList(namespace + ".getClientTable", vo);
 
-		/*
-		 * System.out.println("dao에서 sql동작완료"+ vo + " \n array size :"+array.size() );
-		 */
+
+
+		return array;
+
+	}
+	public List<AdminManageClientVO> getSearchId(AdminManageClientVO vo,String user) {
+
+		
+		List<AdminManageClientVO> array = sqlSessionTemplate.selectOne(namespace+".getClientTable", vo);
+		
+
+		return array;
+
+	}
+	
+	public List<AdminManageClientVO> getSearchName(AdminManageClientVO vo,String user) {
+
+
+		List<AdminManageClientVO> array = sqlSessionTemplate.selectList(namespace + ".getClientTable",vo);
+
+
 
 		return array;
 
@@ -70,6 +89,18 @@ public class AdminManageClientDAOImpl implements AdminManageClientDAO {
 	@Override
 	public AdminManageClientResVO getClientRes(String id) {
 		return sqlSessionTemplate.selectOne(namespace + ".getClientRes",id);
+	}
+	@Override
+	public List<AdminManageClientVO> getSearchId(String user) {
+		// TODO Auto-generated method stub
+		user ="%"+user+"%";
+		return sqlSessionTemplate.selectList(namespace+".getSearchId",user);
+	}
+	@Override
+	public List<AdminManageClientVO> getSearchName(String user) {
+		// TODO Auto-generated method stub
+		user ="%"+user+"%";
+		return sqlSessionTemplate.selectList(namespace+".getSearchName",user);
 	}
 
 }
