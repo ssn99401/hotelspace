@@ -12,7 +12,6 @@
 <html lang="en">
 <head>
 <script>
-
 	doubleSubmitFlag = false;
 
 	//값을 저장시키고 불러올수 있는 함수
@@ -29,7 +28,6 @@
 
 	}
 
-	
 	function change() {//토글버튼 누를 시
 
 		console.log(doubleSubmitFlag);
@@ -102,7 +100,37 @@
 		});//ajax-end
 	}//change-end
 
+	function gonext(mode) {//버튼 함수
+		var type = $("#type option:selected").val();
+		var searchUser = $('#searchUser').val();
+		console.log(type);
+		console.log(searchUser);
+		if (mode == 1) {//검색
+			if (type != "ID" && type != "NAME" || type == "none") {
+				console.log('타입 널값');
+				alert('옵션을 선택하세요');
+				return;
+				
+			} else if (searchUser == null || searchUser == "" || searchUser == "undefined" ) {
+				alert('검색어를 입력하세요');
+				return; 
+				}
+				console.log('asdsad');
+				console.log(type);
+				console.log(searchUser);
+				
+				document.form.action = 'searchUserIdName.mdo';
+				document.form.submit();
+			
+		}
+		if (mode == 2) {//전체보기
+			
+		console.log('전체보기');
+		location.href='clientManagement.mdo';
+		
+		}
 
+	}
 </script>
 
 <style>/* The switch - the box around the slider */
@@ -195,8 +223,8 @@ p {
 
 		<!-- page Content -->
 		<div id="page-wrapper">
-			
-							<div class="container-fluid">
+
+			<div class="container-fluid">
 				<div class="row bg-title">
 					<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
 						<h4 class="page-title">Basic Table</h4>
@@ -219,29 +247,32 @@ p {
 						<div class="white-box">
 							<h3 class="box-title">Client Management</h3>
 							<p class="text-muted">회원 관리</p>
-							<br> 
-							<form action="searchUserIdName.mdo">
-							<select name="type" id="type">
-								<option value="none" selected>찾기옵션</option>
-								<option value="ID">ID</option>
-								<option value="NAME">이름</option>
-								<input type="text" name="searchUser" id="searchUser" />
-								<input type="submit" value="검색" />
-								</form>
-								<form action="clientManagement.mdo">
-								<input type="submit" value="전체보기" />
-								</form>
-								
-								<script>
+							<br>
+							<form name="form" method="get">
+								<select name="type" id="type">
+									<option value="none" selected>찾기옵션</option>
+									<option value="ID">ID</option>
+									<option value="NAME">이름</option>
+								</select> <input type="text" name="searchUser" id="searchUser" /> <input
+									type="button" value="검색" onclick='gonext(1);' /> <input
+									type="button" value="전체보기" onclick='gonext(2);' />
+							</form>
+							<!-- <form method="post" name="form">action="clientManagement.mdo"
+    <input type="submit" value="update" onclick="javascript: form.action='/manage/update';"/>
+    <input type="submit" value="delete" onclick="javascript: form.action='/manage/delete';"/>
+</form>
+								 -->
+
+							<script>
 								function inputText() {
-									
+
 									var user = $('#searchUser').val();
 									console.log(user);
 									var type = $('#type').val();
 									console.log(type);
-									
-									if(type=="ID"){
-										$( '#table > tbody:last').empty();
+
+									if (type == "ID") {
+										$('#table > tbody:last').empty();
 
 										$.ajax({
 											type : "GET",
@@ -251,16 +282,17 @@ p {
 												'user' : user
 											},
 											success : function(data) {
-											console.log('iD성공');
+												console.log('iD성공');
 											},
-											error : function(request, status, error) {
+											error : function(request, status,
+													error) {
 												alert(error);
 											}
 
 										});//ajax-end
-									}else if(type=="NAME"){
-										
-										$( '#table > tbody:last').empty();
+									} else if (type == "NAME") {
+
+										$('#table > tbody:last').empty();
 										$.ajax({
 											type : "GET",
 											url : 'searchName.mdo',
@@ -271,73 +303,74 @@ p {
 											success : function(data) {
 												console.log('Name성공');
 											},
-											error : function(request, status, error) {
+											error : function(request, status,
+													error) {
 												alert(error);
 											}
 
 										});//ajax-end
 									}//if-end
 								}//inputText()-end
-								</script>
-								<div class="table-responsive" id="table-responsive">
-									<table class="table" id="table">
-										<thead>
-											<tr style="font-size: 20px;">
-												<th>ID</th>
-												<th>Name</th>
-												<th>Reg Date</th>
-												<th>Milage</th>
-												<th>State</th>
-											</tr>
-										</thead>
-										<tbody>
-											
-												<%
-												List<AdminManageClientVO> clientList = (List<AdminManageClientVO>) request.getAttribute("clientList");
+							</script>
+							<div class="table-responsive" id="table-responsive">
+								<table class="table" id="table">
+									<thead>
+										<tr style="font-size: 20px;">
+											<th>ID</th>
+											<th>Name</th>
+											<th>Reg Date</th>
+											<th>Milage</th>
+											<th>State</th>
+										</tr>
+									</thead>
+									<tbody>
 
-												String status = null;
-												for (int i = 0; i < clientList.size(); i++) {
-											%>
-											<tr>
-												<td><a
-													href="profile.mdo?id=<%=clientList.get(i).getClientID()%>"><%=clientList.get(i).getClientID()%></a></td>
-												<td><%=clientList.get(i).getClientName()%></td>
-												<td><%=clientList.get(i).getClientRegDate()%></td>
-												<td><%=clientList.get(i).getClientMilage()%></td>
-												<td>
-													<%
-														if (clientList.get(i).getClientState() == 0) {//active상태 일 때는 체크되어서 로딩
-													%> <label class="switch"> <!--체크박스  --> <input
-														type="checkbox" id="checkbox<%=i + 1%>" name="checkbox"
-														checked="checked" onchange="change()"> <span
-														class="slider round"></span>
-												</label>
-												<td>
-													<!-- 0이면 체크박스 체크(active),0이아니면 체크박스 해제(banned)  -->
-													<p id="act<%=i + 1%>" style="color: green;">Actived</p>
-													<p id="ban<%=i + 1%>" style="color: red; display: none;">Banned</p>
-												</td>
+										<%
+											List<AdminManageClientVO> clientList = (List<AdminManageClientVO>) request.getAttribute("clientList");
+
+											String status = null;
+											for (int i = 0; i < clientList.size(); i++) {
+										%>
+										<tr>
+											<td><a
+												href="profile.mdo?id=<%=clientList.get(i).getClientID()%>"><%=clientList.get(i).getClientID()%></a></td>
+											<td><%=clientList.get(i).getClientName()%></td>
+											<td><%=clientList.get(i).getClientRegDate()%></td>
+											<td><%=clientList.get(i).getClientMilage()%></td>
+											<td>
 												<%
-													} else {
-												%>
-												<label class="switch"> <!--체크박스  --> <input
+													if (clientList.get(i).getClientState() == 0) {//active상태 일 때는 체크되어서 로딩
+												%> <label class="switch"> <!--체크박스  --> <input
 													type="checkbox" id="checkbox<%=i + 1%>" name="checkbox"
-													onchange="change()"> <span class="slider round"></span>
-												</label>
-												<td>
-													<p id="act<%=i + 1%>" style="color: green; display: none;">Actived</p>
-													<p id="ban<%=i + 1%>" style="color: red;">Banned</p>
-												</td>
-												<%
-													}
-												%>
-											</tr>
+													checked="checked" onchange="change()"> <span
+													class="slider round"></span>
+											</label>
+											<td>
+												<!-- 0이면 체크박스 체크(active),0이아니면 체크박스 해제(banned)  -->
+												<p id="act<%=i + 1%>" style="color: green;">Actived</p>
+												<p id="ban<%=i + 1%>" style="color: red; display: none;">Banned</p>
+											</td>
 											<%
-												} //for문--end
+												} else {
 											%>
-										</tbody>
-									</table>
-								</div>
+											<label class="switch"> <!--체크박스  --> <input
+												type="checkbox" id="checkbox<%=i + 1%>" name="checkbox"
+												onchange="change()"> <span class="slider round"></span>
+											</label>
+											<td>
+												<p id="act<%=i + 1%>" style="color: green; display: none;">Actived</p>
+												<p id="ban<%=i + 1%>" style="color: red;">Banned</p>
+											</td>
+											<%
+												}
+											%>
+										</tr>
+										<%
+											} //for문--end
+										%>
+									</tbody>
+								</table>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -345,10 +378,10 @@ p {
 			</div>
 
 
-							<c:import url="/footer.mdo" />
-							<!-- /.container-fluid -->
+			<c:import url="/footer.mdo" />
+			<!-- /.container-fluid -->
 
-							</div>
-							<jsp:include page="/WEB-INF/views/admin/headerScriptLink.jspf" />
+		</div>
+		<jsp:include page="/WEB-INF/views/admin/headerScriptLink.jspf" />
 </body>
 </html>
