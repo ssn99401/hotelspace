@@ -60,12 +60,12 @@ public class AdminManageClientServiceImpl implements AdminManageClientService {
 	}
 
 	@Override
-	public AdminManageClientRevVO getClientRev(String id) {
+	public List<AdminManageClientRevVO> getClientRev(String id) {
 		return adminManageClientDAO.getClientRev(id);
 	}
 
 	@Override
-	public AdminManageClientResVO getClientRes(String id) {
+	public List<AdminManageClientResVO> getClientRes(String id) {
 		return adminManageClientDAO.getClientRes(id);
 	}
 

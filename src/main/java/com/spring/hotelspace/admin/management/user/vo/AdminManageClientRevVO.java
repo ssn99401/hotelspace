@@ -14,6 +14,8 @@ public class AdminManageClientRevVO {
 	private int reviewStar;
 	private String reviewParentComment;
 	private String reviewWriteDate;
+	private String hotelName;
+	private String roomName;
 	
 	public AdminManageClientRevVO() {
 		// TODO Auto-generated constructor stub

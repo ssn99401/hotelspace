@@ -17,9 +17,9 @@ public interface AdminManageClientService {
 
 	public AdminManageClientVO getClientInfo(String id);
 
-	public AdminManageClientRevVO getClientRev(String id);
+	public List<AdminManageClientRevVO> getClientRev(String id);
 	
-	public AdminManageClientResVO getClientRes(String id);
+	public List<AdminManageClientResVO> getClientRes(String id);
 	
 	public List<AdminManageClientVO> getSearchIdList(String user);
 	public List<AdminManageClientVO> getSearchNameList(String user);

@@ -186,8 +186,78 @@
 					</div>
 				</div>
 			</div>
-
-
+			<!-- 예약관리 -->
+			<div class="row">
+					<div class="col-sm-12">
+						<div class="white-box">
+							<h3 class="box-title">Reservation Management</h3>
+							<p class="text-muted">예약 관리</p>
+							<div class="table-responsive" id="table-responsive">
+								<table class="table">
+									<thead>
+										<tr style="font-size: 20px;">
+											<th>hotelID</th>
+											<th>roomID</th>
+											<th>Date</th>
+											<th>payment</th>
+											<th>people</th>
+											<th>reserveDate</th>
+										</tr>
+									</thead>
+									<tbody>
+										<c:forEach var="re" items="${reservation }">
+										<tr>
+											<td><a href="hotelsearch.mdo?hotelid=${hotelId }">${re.hotelName }</a></td>
+											<td><a href="hotelsearch.mdo?hotelid=${hotelId }&roomid=${roomId}">${re.roomName }</a></td>
+											<td>${re.reservationInDate } - ${re.reservationOutDate }</td>
+											<td>${re.reservationPayment }</td>
+											<td>${re.reservationPeople }</td>
+											<td>${re.reserveDate }</td>							
+										</tr>
+										</c:forEach>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- /.row -->
+				
+				<!-- 리뷰관리 -->
+			<div class="row">
+					<div class="col-sm-12">
+						<div class="white-box">
+							<h3 class="box-title">Review Management</h3>
+							<p class="text-muted">리뷰 관리</p>
+							<div class="table-responsive" id="table-responsive">
+								<table class="table">
+									<thead>
+										<tr style="font-size: 20px;">
+											<th>hotelID</th>
+											<th>roomID</th>
+											<th>Star</th>
+											<th>Date</th>
+										</tr>
+									</thead>
+										<c:forEach var="re" items="${review }">
+									<tbody>
+										<tr>
+											<td>${re.hotelId }</td>
+											<td>${re.roomId }</td>
+											<td>${re.reviewStar }</td>		
+											<td>${re.reviewWriteDate }</td>
+										</tr>
+										<tr>
+											<td colspan="4">${re.reviewContent }</td>
+										</tr>
+										</c:forEach>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- /.row -->
 		</div>
 
 	</div>

@@ -82,13 +82,13 @@ public class AdminManageClientDAOImpl implements AdminManageClientDAO {
 	}
 
 	@Override
-	public AdminManageClientRevVO getClientRev(String id) {
-		return sqlSessionTemplate.selectOne(namespace + ".getClientRev",id);
+	public List<AdminManageClientRevVO> getClientRev(String id) {
+		return sqlSessionTemplate.selectList(namespace + ".getClientRev",id);
 	}
 
 	@Override
-	public AdminManageClientResVO getClientRes(String id) {
-		return sqlSessionTemplate.selectOne(namespace + ".getClientRes",id);
+	public List<AdminManageClientResVO> getClientRes(String id) {
+		return sqlSessionTemplate.selectList(namespace + ".getClientRes",id);
 	}
 	@Override
 	public List<AdminManageClientVO> getSearchId(String user) {
