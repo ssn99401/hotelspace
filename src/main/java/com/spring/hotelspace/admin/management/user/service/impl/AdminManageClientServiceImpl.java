@@ -81,5 +81,13 @@ public class AdminManageClientServiceImpl implements AdminManageClientService {
 		return adminManageClientDAO.getSearchName(user);
 	}
 
+
+
+	@Override
+	public void deleteReivew(String id) {
+		adminManageClientDAO.deleteReview(id);
+		
+	}
+
 	
 }

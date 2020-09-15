@@ -80,11 +80,14 @@
 
 	<select id="getClientRev" parameterType="String"
 		resultType="AdminManageClientRevVO">
-		SELECT
-		*
+		SELECT review_id, r.hotel_id, r.room_id,
+		review_content,review_star,review_write_date,hotel_name,room_name
 		FROM
-		review
+		review r,
+		(select hotel_id, hotel_name from hotel) h,
+		(select room_id, room_name from room) o
 		WHERE client_ID=#{id}
+		and r.hotel_id = h.hotel_id and r.room_id = o.room_id
 	</select>
 
 	<select id="getClientRes" parameterType="String"
@@ -99,4 +102,7 @@
 		and r.hotel_id = h.hotel_id and r.room_id = o.room_id
 	</select>
 
+	<delete id="deleteReview" parameterType="String">
+		delete from review where review_id=#{id}
+	</delete>
 </mapper>

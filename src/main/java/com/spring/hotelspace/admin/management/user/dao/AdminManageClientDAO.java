@@ -25,5 +25,6 @@ public interface AdminManageClientDAO {
 	public List<AdminManageClientRevVO> getClientRev(String id);
 
 	public List<AdminManageClientResVO> getClientRes(String id);
+	public void deleteReview(String id);
 	
 }

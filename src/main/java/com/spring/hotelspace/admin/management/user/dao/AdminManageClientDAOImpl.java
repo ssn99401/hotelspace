@@ -102,5 +102,10 @@ public class AdminManageClientDAOImpl implements AdminManageClientDAO {
 		user ="%"+user+"%";
 		return sqlSessionTemplate.selectList(namespace+".getSearchName",user);
 	}
+	@Override
+	public void deleteReview(String id) {
+		sqlSessionTemplate.delete(namespace + ".deleteReview",id);
+		
+	}
 
 }

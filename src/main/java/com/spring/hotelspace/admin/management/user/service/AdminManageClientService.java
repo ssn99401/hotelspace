@@ -23,4 +23,6 @@ public interface AdminManageClientService {
 	
 	public List<AdminManageClientVO> getSearchIdList(String user);
 	public List<AdminManageClientVO> getSearchNameList(String user);
+
+	public void deleteReivew(String id);
 }
