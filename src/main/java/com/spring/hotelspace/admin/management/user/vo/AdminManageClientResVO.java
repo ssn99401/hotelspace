@@ -4,36 +4,111 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class AdminManageClientResVO {
+
 	private String reservationId;
 	private String hotelId;
 	private String roomId;
+	private String clientId;
 	private String reservationInDate;
 	private String reservationOutDate;
-	private int payment;
-	private int people;
-	private String reservationReserveDate;
-	private int reservationReviewCheck;
+	private int reservationPayment;
+	private int reservationPeople;
+	private String reserveDate;
+	private int ReviewCheck;
+	private String hotelName;
+	private String roomName;
 	
 	public AdminManageClientResVO() {
 		// TODO Auto-generated constructor stub
 	}
+
 	
-	public AdminManageClientResVO(String reservationId, String hotelId, String roomId, String reservationInDate,
-			String reservationOutDate, int payment, int people, String reservationReserveDate,
-			int reservationReviewCheck) {
+
+	
+	public AdminManageClientResVO(String reservationId, String hotelId, String roomId, String clientId,
+			String reservationInDate, String reservationOutDate, int reservationPayment, int reservationPeople,
+			String reserveDate, int reviewCheck, String hotelName, String roomName) {
+		super();
 		this.reservationId = reservationId;
 		this.hotelId = hotelId;
 		this.roomId = roomId;
+		this.clientId = clientId;
 		this.reservationInDate = reservationInDate;
 		this.reservationOutDate = reservationOutDate;
-		this.payment = payment;
-		this.people = people;
-		this.reservationReserveDate = reservationReserveDate;
-		this.reservationReviewCheck = reservationReviewCheck;
+		this.reservationPayment = reservationPayment;
+		this.reservationPeople = reservationPeople;
+		this.reserveDate = reserveDate;
+		ReviewCheck = reviewCheck;
+		this.hotelName = hotelName;
+		this.roomName = roomName;
 	}
 
 
 
+
+	public String getReserveDate() {
+		return reserveDate;
+	}
+
+
+
+
+	public void setReserveDate(String reserveDate) {
+		this.reserveDate = reserveDate;
+	}
+
+
+
+
+	public int getReviewCheck() {
+		return ReviewCheck;
+	}
+
+
+
+
+	public void setReviewCheck(int reviewCheck) {
+		ReviewCheck = reviewCheck;
+	}
+
+
+
+
+	public String getHotelName() {
+		return hotelName;
+	}
+
+
+
+
+	public void setHotelName(String hotelName) {
+		this.hotelName = hotelName;
+	}
+
+
+
+
+	public String getRoomName() {
+		return roomName;
+	}
+
+
+
+
+	public void setRoomName(String roomName) {
+		this.roomName = roomName;
+	}
+
+
+
+
+	public String getClientId() {
+		return clientId;
+	}
+	
+	public void setClientId(String clientId) {
+		this.clientId = clientId;
+	}
 	public String getReservationId() {
 		return reservationId;
 	}
@@ -59,7 +134,8 @@ public class AdminManageClientResVO {
 	}
 
 	public String getReservationInDate() {
-		return reservationInDate;
+		//9번째 자리 수 까지 출력
+		return reservationInDate.substring(0, 10);
 	}
 
 	public void setReservationInDate(String reservationInDate) {
@@ -67,43 +143,39 @@ public class AdminManageClientResVO {
 	}
 
 	public String getReservationOutDate() {
-		return reservationOutDate;
+		return reservationOutDate.substring(0, 10);
 	}
 
 	public void setReservationOutDate(String reservationOutDate) {
 		this.reservationOutDate = reservationOutDate;
 	}
 
-	public int getPayment() {
-		return payment;
+
+	public int getReservationPayment() {
+		return reservationPayment;
 	}
 
-	public void setPayment(int payment) {
-		this.payment = payment;
+
+	public void setReservationPayment(int reservationPayment) {
+		this.reservationPayment = reservationPayment;
 	}
 
-	public int getPeople() {
-		return people;
+	public int getReservationPeople() {
+		return reservationPeople;
 	}
 
-	public void setPeople(int people) {
-		this.people = people;
+	public void setReservationPeople(int reservationPeople) {
+		this.reservationPeople = reservationPeople;
 	}
 
 	public String getReservationReserveDate() {
-		return reservationReserveDate;
+		return reserveDate;
 	}
 
 	public void setReservationReserveDate(String reservationReserveDate) {
-		this.reservationReserveDate = reservationReserveDate;
+		this.reserveDate = reservationReserveDate;
 	}
 
-	public int getReservationReviewCheck() {
-		return reservationReviewCheck;
-	}
 
-	public void setReservationReviewCheck(int reservationReviewCheck) {
-		this.reservationReviewCheck = reservationReviewCheck;
-	}
 	
 }

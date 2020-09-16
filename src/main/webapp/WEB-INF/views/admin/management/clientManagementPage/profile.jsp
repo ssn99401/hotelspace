@@ -18,6 +18,37 @@
 		//hide the preloader
 		document.querySelector(".preloader").style.display = "none";
 	}
+
+	function openHotel(hotel) {
+		var url = "hotelInfoView.mdo?"+ hotel;
+		window.open(url, "", "width=600,height=600,left=600");
+	}
+	function openRoom() {
+		var url = "index.mdo";
+		window.open(url, "", "width=600,height=600,left=600");
+	}
+	function postComment(reno) {
+		$('#post' + reno).toggleClass("hide");
+	}
+
+	function deleteReview(reno) {
+		if (!confirm("삭제하시겠습니까?")) {
+			return;
+		}
+		$.ajax({
+			url : "deleteReview.mdo",
+			type : "post",
+			data : {
+				"id" : reno
+			},
+			success : function(data) {
+				$('#post'+reno).remove();
+				$('#' + reno).remove();
+				alert("삭제되었습니다.");
+
+			}
+		})
+	}
 </script>
 </head>
 <body class="fix-header">
@@ -62,23 +93,23 @@
 					<div class="col-md-4 col-xs-12">
 						<div class="white-box">
 							<div class="user-bg">
-						
+
 								<div class="overlay-box">
 									<div class="user-content">
-									<h1 class="text-white">${client.clientID }</h1>
+										<h1 class="text-white">${client.clientID }</h1>
 									</div>
 								</div>
-								
+
 							</div>
 							<div class="user-btm-box">
 								<div class="text-center">
-										<!-- <a href="javascript:void(0)"></a> -->
-										<c:if test="${client.clientPassword == 'kakao' }">
-											<h4>kakao로 로그인 한 회원</h4>										
-										</c:if>
-										<c:if test="${client.clientPassword != 'kakao' }">
-											<h4>본 서버로 로그인 한 회원</h4>										
-										</c:if>
+									<!-- <a href="javascript:void(0)"></a> -->
+									<c:if test="${client.clientPassword == 'kakao' }">
+										<h4>kakao로 로그인 한 회원</h4>
+									</c:if>
+									<c:if test="${client.clientPassword != 'kakao' }">
+										<h4>본 서버로 로그인 한 회원</h4>
+									</c:if>
 								</div>
 								<!-- <div class="col-md-4 col-sm-4 text-center">
 									<p class="text-blue">
@@ -95,9 +126,9 @@
 							</div>
 						</div>
 					</div>
-					
-					
-					
+
+
+
 					<div class="col-md-8 col-xs-12">
 						<div class="white-box">
 							<form class="form-horizontal form-material">
@@ -178,16 +209,99 @@
 								</div> -->
 								<div class="form-group">
 									<div class="col-sm-12">
-										<button class="btn btn-success" onclick="myFunction()">Update Profile</button>
+										<button class="btn btn-success" onclick="myFunction()">Update
+											Profile</button>
 									</div>
-								</div> 
+								</div>
 							</form>
 						</div>
 					</div>
 				</div>
 			</div>
+			<!-- 예약관리 -->
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="white-box">
+						<h3 class="box-title">Reservation Management</h3>
+						<p class="text-muted">예약 관리</p>
+						<div class="table-responsive" id="table-responsive">
+							<table class="table">
+								<thead>
+									<tr style="font-size: 20px;">
+										<th>hotelID</th>
+										<th>roomID</th>
+										<th>Date</th>
+										<th>payment</th>
+										<th>people</th>
+										<th>reserveDate</th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach var="re" items="${reservation }">
+										<tr>
+											<td><a href="javascript:void(0);" onclick="openHotel('${re.hotelId}')">${re.hotelName }</a></td>
+											<td><a href="javascript:void(0);" onclick="openHotel('${re.hotelId}')">${re.roomName }</a></td>
+											<td>${re.reservationInDate }~ ${re.reservationOutDate }</td>
+											<td>${re.reservationPayment }</td>
+											<td>${re.reservationPeople }</td>
+											<td>${re.reserveDate }</td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /.row -->
 
-
+			<!-- 리뷰관리 -->
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="white-box">
+						<h3 class="box-title">Review Management</h3>
+						<p class="text-muted">리뷰 관리</p>
+						<div class="table-responsive" id="table-responsive">
+							<table class="table">
+								<thead>
+									<tr style="font-size: 20px;">
+										<th>hotelID</th>
+										<th>roomID</th>
+										<th>Star</th>
+										<th>Date</th>
+										<th></th>
+									</tr>
+								</thead>
+								<c:set var="reno" value="0" />
+								<c:forEach var="re" items="${review }">
+									<c:set var="reno" value="${reno + 1}" />
+									<tbody>
+									
+										<tr id="${re.reviewId }">
+											<td><a href="javascript:void(0);" onclick="openHotel('${re.hotelId}')">${re.hotelName }</a></td>
+											<td><a href="javascript:void(0);" onclick="openHotel('${re.hotelId}')">${re.roomName }</a></td>
+											<td>${re.reviewStar }</td>
+											<td>${re.reviewWriteDate }</td>
+											<td><div>
+													<a href="javascript:void(0);"
+														onclick="javascript:deleteReview('${re.reviewId }');">삭제</a>
+													&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <img
+														src="resources/admin/images/plus.png"
+														onclick="javascript:postComment('${re.reviewId}');">
+												</div></td>
+										</tr>
+										<tr id="post${re.reviewId }" class="hide">
+											<td colspan="5">${re.reviewContent }</td>
+										</tr>
+							
+								</c:forEach>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /.row -->
 		</div>
 
 	</div>
