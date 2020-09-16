@@ -280,7 +280,7 @@ function setHotelList(data) {
 
 		var btn_mapModal = document.createElement("button");
 		btn_mapModal.setAttribute("id","btn-modal");
-		btn_mapModal.setAttribute("onclick","showMapModal('" + data[geoCodeKey] + "');");
+		btn_mapModal.setAttribute("onclick","showMapModal('" + data[geoCodeKey] +"','"+ data[varKey].hotelName+"');");
 		btn_mapModal.append("약도 보기");
 
 		divContent.appendChild(divContentP1);
@@ -448,45 +448,73 @@ function showHotelRoom(hotelId,reservationInDate,reservationOutDate) {
 }
 
 //오시는길 modal 출력
-function showMapModal(jsonString) {
+function showMapModal(jsonString,hotelName) {
 	$("#modal-body").empty();
-
+	$("#mapModal").modal();//모달 창 열기
+	//모달 컨텐츠(지도)
 	var jsonString = JSON.parse(jsonString);
 	var address=jsonString.documents[0].address.address_name;
 	var road_address=jsonString.documents[0].road_address.address_name;
 	var addX=jsonString.documents[0].address.x;
 	var addY=jsonString.documents[0].address.y;
+	
+	
+	
+	
+	$(document).ready(function(){
 
 
-	var mapContainer = document.getElementById('modal-body'), // 지도를 표시할 div 
-	mapOption = {
-		center : new kakao.maps.LatLng(addY, addX), // 지도의 중심좌표
-		level : 3
-		// 지도의 확대 레벨
-	};
+		
+		//모달 헤더 (호텔 이름)
+		var HotelName=hotelName;
+		$(".modal-header").empty();
+		$(".modal-header").append("찾아오시는 길");
+		$(".modal-header").append("<b>"+hotelName+"</b>");
+		
+		
+		
+	
 
-//	지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
-	var map = new kakao.maps.Map(mapContainer, mapOption);
+		var mapContainer = document.getElementById('modal-body'); // 지도를 표시할 div 
+		mapOption = {
+			center : new kakao.maps.LatLng(addY, addX), // 지도의 중심좌표
+			level : 3
+			// 지도의 확대 레벨
+		};
 
-	var marker = new kakao.maps.Marker({
-		// 지도 중심좌표에 마커를 생성합니다 
-		position : map.getCenter()
+//		지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+		var map = new kakao.maps.Map(mapContainer, mapOption);
+
+		var marker = new kakao.maps.Marker({
+			// 지도 중심좌표에 마커를 생성합니다 
+			position : map.getCenter()
+		});
+		// 지도에 마커를 표시합니다
+		marker.setMap(map);
+		
+		// 지도의 크기가 변경되었기 때문에 relayout 함수를 호출합니다
+		map.relayout();
+
+		// 지도의 너비가 변경될 때 지도중심을 입력받은 위치(position)로 설정합니다
+		map.setCenter(marker.getPosition());
+		
+		
+		
+		//모달 푸터(주소)
+		$(".modal-footer").empty();
+		$(".modal-footer").append("지번 주소 : "+ address);
+		$(".modal-footer").append("<br>"+"도로명 주소 : "+ road_address);
+		$(".modal-footer").append('<b><a href=\"https:\/\/map.kakao.com\/link\/to\/'+HotelName+','+addY+','+addX+'\"'+'>오는 경로 찾기</a></b>');
+		
+
+		
+
 	});
-	// 지도에 마커를 표시합니다
-	marker.setMap(map);
-	// 지도의 크기가 변경되었기 때문에 relayout 함수를 호출합니다
-	map.relayout();
 
-	// 지도의 너비가 변경될 때 지도중심을 입력받은 위치(position)로 설정합니다
-	map.setCenter(marker.getPosition());
 
 }
 
-//찾아오는길 모달 열기
-$(document).on("click","#btn-modal",function(event){
-	$("#mapModal").modal();
-	return false;
-})
+
 
 
 //--------------------------------------------------------- 필터 보이기,숨기기 --------------------------------------------------------- 
