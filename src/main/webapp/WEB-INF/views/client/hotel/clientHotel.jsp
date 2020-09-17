@@ -19,6 +19,7 @@
 <link rel="stylesheet" href="resources/client/css/jquery-ui.css">
 <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
 </head>
+
 <body>
 	<header>
 		<c:import url="/clientHeader.do" />
@@ -294,7 +295,7 @@
 							alt="잠시만 기다려 주세요. 로딩중입니다." />
 					</div>
 
-					<div class="col-md-8" id="div-hotelList"></div>
+					<div class="col-md-8" id="div-hotelList" ></div>
 				</div>
 				<div id="paging" align="center">
 					<c:if test="${hotelList.count > 0 }">
@@ -329,13 +330,14 @@
 
 	<div class="modal" id="mapModal" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog" style="min-height: 500px; min-width: 80%;">
+		<div class="modal-dialog" >
 			<div class="modal-content">
 				<div class="modal-header">
 					<h4 class="modal-title" id="myModalLabel">찾아오시는 길</h4>
 				</div>
 				<div class="modal-body" id="modal-body" align="center"></div>
 				<div class="modal-footer">footer</div>
+				
 			</div>
 		</div>
 	</div>
@@ -349,6 +351,7 @@
 	<script
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1612a47582f976311be9a8dd6ec0b816"></script>
 	<c:if test="${!empty concept}">

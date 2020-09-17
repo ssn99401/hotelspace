@@ -1,9 +1,15 @@
 package com.spring.hotelspace.admin.main.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.spring.hotelspace.admin.main.service.AdminMainService;
+import com.spring.hotelspace.admin.main.vo.AdminMainVO;
 
 @Controller
 public class AdminMainController {
@@ -37,4 +43,6 @@ public class AdminMainController {
 		
 		return "adminFooter";
 	}
+	
+	
 }

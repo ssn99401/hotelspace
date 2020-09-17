@@ -16,7 +16,7 @@
 					aria-hidden="true"></i>Dashboard</a></li>
 			<li><a href="profile.html" class="waves-effect"><i
 					class="fa fa-user fa-fw" aria-hidden="true"></i>Profile</a></li>
-			<li><a href="basic-table.html" class="waves-effect"><i
+			<li><a href="clientManagement.mdo?curPage=1" class="waves-effect"><i
 					class="fa fa-table fa-fw" aria-hidden="true"></i>회원 관리</a></li>
 			<li><a href="pageManagement.mdo" class="waves-effect"><i
 					class="fa fa-font fa-fw" aria-hidden="true"></i>페이지 관리</a></li>
