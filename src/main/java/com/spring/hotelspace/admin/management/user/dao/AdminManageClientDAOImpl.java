@@ -23,35 +23,11 @@ public class AdminManageClientDAOImpl implements AdminManageClientDAO {
 
 	private static final String namespace = "com.spring.hotelspace.admin.management.user.dao.AdminManageClientDAO";
 
-	public List<AdminManageClientVO> getClientTable(AdminManageClientVO vo) {
+	public List<AdminManageClientVO> getClientTable() {
 
 		// 전체 테이블 조회 리스트
-		List<AdminManageClientVO> array = sqlSessionTemplate.selectList(namespace + ".getClientTable", vo);
-
-
-
+		List<AdminManageClientVO> array = sqlSessionTemplate.selectList(namespace + ".getClientTable");
 		return array;
-
-	}
-	public List<AdminManageClientVO> getSearchId(AdminManageClientVO vo,String user) {
-
-		
-		List<AdminManageClientVO> array = sqlSessionTemplate.selectOne(namespace+".getClientTable", vo);
-		
-
-		return array;
-
-	}
-	
-	public List<AdminManageClientVO> getSearchName(AdminManageClientVO vo,String user) {
-
-
-		List<AdminManageClientVO> array = sqlSessionTemplate.selectList(namespace + ".getClientTable",vo);
-
-
-
-		return array;
-
 	}
 
 	public void getActiveState(ArrayList<AdminManageClientVO> arr) {
@@ -60,10 +36,6 @@ public class AdminManageClientDAOImpl implements AdminManageClientDAO {
 	HashMap hm= new HashMap();
 	hm.put("alist", arr);
 		sqlSessionTemplate.update(namespace + ".activeClientState", hm);
-	
-		
-		
-
 	}
 
 	public void getBanState(ArrayList<AdminManageClientVO> Narr ) {
@@ -74,6 +46,18 @@ public class AdminManageClientDAOImpl implements AdminManageClientDAO {
 		
 		sqlSessionTemplate.update(namespace + ".banClientState",hm);
 
+	}
+	@Override
+	public List<AdminManageClientVO> getSearchId(String user) {
+		// TODO Auto-generated method stub
+		user ="%"+user+"%";
+		return sqlSessionTemplate.selectList(namespace+".getSearchId",user);
+	}
+	@Override
+	public List<AdminManageClientVO> getSearchName(String user) {
+		// TODO Auto-generated method stub
+		user ="%"+user+"%";
+		return sqlSessionTemplate.selectList(namespace+".getSearchName",user);
 	}
 
 	@Override
@@ -89,18 +73,6 @@ public class AdminManageClientDAOImpl implements AdminManageClientDAO {
 	@Override
 	public List<AdminManageClientResVO> getClientRes(String id) {
 		return sqlSessionTemplate.selectList(namespace + ".getClientRes",id);
-	}
-	@Override
-	public List<AdminManageClientVO> getSearchId(String user) {
-		// TODO Auto-generated method stub
-		user ="%"+user+"%";
-		return sqlSessionTemplate.selectList(namespace+".getSearchId",user);
-	}
-	@Override
-	public List<AdminManageClientVO> getSearchName(String user) {
-		// TODO Auto-generated method stub
-		user ="%"+user+"%";
-		return sqlSessionTemplate.selectList(namespace+".getSearchName",user);
 	}
 	@Override
 	public void deleteReview(String id) {

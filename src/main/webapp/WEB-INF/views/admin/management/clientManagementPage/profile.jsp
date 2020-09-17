@@ -20,7 +20,7 @@
 	}
 
 	function openHotel(hotel) {
-		var url = "hotelInfoView.mdo?"+ hotel;
+		var url = "hotelInfoView.mdo?hotelId="+ hotel;
 		window.open(url, "", "width=600,height=600,left=600");
 	}
 	function openRoom() {

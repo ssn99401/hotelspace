@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.spring.hotelspace.admin.management.user.service.AdminManageClientService;
 import com.spring.hotelspace.admin.management.user.vo.AdminManageClientVO;
+import com.spring.hotelspace.admin.management.user.vo.Pagination;
 
 @Controller
 public class AdminManageClientController {
@@ -26,39 +27,58 @@ public class AdminManageClientController {
 	private AdminManageClientService adminManageClientService;
 
 	@RequestMapping(value = "/clientManagement.mdo", method = RequestMethod.GET)
-	public String clientTable(AdminManageClientVO vo, Model model) {
+	public String clientTable(int curPage, Model model) {
+		System.out.println(curPage);
+		List<AdminManageClientVO> clientList = adminManageClientService.getClientList();
 
-		List<AdminManageClientVO> clientList = adminManageClientService.getClientList(vo);
-
-		model.addAttribute("clientList", clientList);
+		Pagination pagination = new Pagination(clientList.size(), curPage);
+		List<AdminManageClientVO> list = new ArrayList<AdminManageClientVO>();
+		if(pagination.getEndPage() == curPage) {
+			for(int i = (curPage-1)*5; i < clientList.size(); i++) {
+				list.add(clientList.get(i));
+			}
+		}
+		else {
+			for(int i = (curPage-1)*5; i < curPage*5; i++) {
+				list.add(clientList.get(i));
+			}			
+		}
+		
+		model.addAttribute("clientList", list);
+		model.addAttribute("pagination", pagination);
 
 		return "management/clientManagementPage/adminTable";
 
 	}
+	
+	
 	@RequestMapping(value = "/searchUserIdName.mdo", method = { RequestMethod.GET, RequestMethod.POST })
-	public String searchUserIdandName(AdminManageClientVO vo, Model model,HttpServletRequest request) {
+	public String searchUserIdandName(Model model,HttpServletRequest request) {
 		
 		String user=null;
 		List<AdminManageClientVO> searchList= null;
+		List<AdminManageClientVO> list = new ArrayList<AdminManageClientVO>();
+		
+		//id로 search
 		if(request.getParameter("type").equals("ID")) {
 			 user=request.getParameter("searchUser");
 			 System.out.println(user);
 			System.out.println("id서치");
 			 searchList = adminManageClientService.getSearchIdList(user);
-
-				model.addAttribute("clientList", searchList);
+			model.addAttribute("clientList", searchList);
 				
-		}else if(request.getParameter("type").equals("NAME")) {
+		}
+		//name으로 search
+		else if(request.getParameter("type").equals("NAME")) {
 			System.out.println(user);
-			 user=request.getParameter("searchUser");
+			user=request.getParameter("searchUser");
 			System.out.println("name서치");
-			 searchList = adminManageClientService.getSearchNameList(user);
-
-				model.addAttribute("clientList", searchList);
+			searchList = adminManageClientService.getSearchNameList(user);
+			
+			model.addAttribute("clientList", searchList);
 				
 		}
 		
-
 		
 		return "management/clientManagementPage/adminTable";
 	}
@@ -120,7 +140,7 @@ public class AdminManageClientController {
 		System.out.println("컨트롤러가 받음");
 		
 
-		List<AdminManageClientVO> clientList = adminManageClientService.getClientList(vo);
+		List<AdminManageClientVO> clientList = adminManageClientService.getClientList();
 		model.addAttribute("clientList", clientList);
 
 		System.out.println(clientList.size() + "clientList.size");
@@ -145,7 +165,7 @@ public class AdminManageClientController {
 		}
 		adminManageClientService.getState(arr, Narr, vo);
 
-		clientList = adminManageClientService.getClientList(vo);
+		clientList = adminManageClientService.getClientList();
 
 		// vo에서 0인 행의 id 조회
 		// id로 update mapper연결 후 리턴

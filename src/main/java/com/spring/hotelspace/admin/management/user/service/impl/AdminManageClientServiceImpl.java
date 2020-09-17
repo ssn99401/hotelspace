@@ -22,9 +22,9 @@ public class AdminManageClientServiceImpl implements AdminManageClientService {
 	@Autowired
 	private AdminManageClientDAO adminManageClientDAO;
 
-	public List<AdminManageClientVO> getClientList(AdminManageClientVO vo) {
+	public List<AdminManageClientVO> getClientList() {
 		// System.out.println("서비스 vo받음 " +vo);
-		return adminManageClientDAO.getClientTable(vo);
+		return adminManageClientDAO.getClientTable();
 
 	}
 	
@@ -48,7 +48,7 @@ public class AdminManageClientServiceImpl implements AdminManageClientService {
 
 		System.out.println("active처리완료");
 
-		adminManageClientDAO.getClientTable(vo);
+		adminManageClientDAO.getClientTable();
 		System.out.println("새로고침");
 
 	}

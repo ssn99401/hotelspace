@@ -14,7 +14,7 @@ public interface AdminManageClientDAO {
 
 
 
-	public List<AdminManageClientVO> getClientTable(AdminManageClientVO vo);
+	public List<AdminManageClientVO> getClientTable();
 	public List<AdminManageClientVO> getSearchId(String user);
 	public List<AdminManageClientVO> getSearchName(String user);
 	public void getActiveState(ArrayList<AdminManageClientVO> arr);

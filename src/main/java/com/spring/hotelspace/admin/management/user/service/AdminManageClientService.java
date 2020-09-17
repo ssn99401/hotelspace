@@ -11,7 +11,7 @@ import com.spring.hotelspace.admin.management.user.vo.AdminManageClientVO;
 
 public interface AdminManageClientService {
 
-	public List<AdminManageClientVO> getClientList(AdminManageClientVO vo);
+	public List<AdminManageClientVO> getClientList();
 
 	public void getState(ArrayList<AdminManageClientVO> arr, ArrayList<AdminManageClientVO> Narr,AdminManageClientVO vo);
 

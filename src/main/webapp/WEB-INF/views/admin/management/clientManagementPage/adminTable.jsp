@@ -1,5 +1,4 @@
-<%@page
-	import="com.spring.hotelspace.admin.management.user.vo.AdminManageClientVO"%>
+<%@page import="com.spring.hotelspace.admin.management.user.vo.AdminManageClientVO"%>
 <%@page import="com.spring.hotelspace.admin.main.vo.AdminMainVO"%>
 
 <%@page import="java.util.ArrayList"%>
@@ -13,7 +12,9 @@
 <head>
 <script>
 	doubleSubmitFlag = false;
-
+	defaultMode = 2;
+	
+	
 	//값을 저장시키고 불러올수 있는 함수
 	function doubleState1(num) {
 		if (num == 1) {
@@ -110,26 +111,57 @@
 				console.log('타입 널값');
 				alert('옵션을 선택하세요');
 				return;
-				
-			} else if (searchUser == null || searchUser == "" || searchUser == "undefined" ) {
+
+			} else if (searchUser == null || searchUser == ""
+					|| searchUser == "undefined") {
 				alert('검색어를 입력하세요');
-				return; 
-				}
-				console.log('asdsad');
-				console.log(type);
-				console.log(searchUser);
-				
-				document.form.action = 'searchUserIdName.mdo';
-				document.form.submit();
-			
+				return;
+			}
+			console.log('asdsad');
+			console.log(type);
+			console.log(searchUser);
+			defaultMode = 1;
+			document.form.action = 'searchUserIdName.mdo';
+			document.form.submit();
+
 		}
 		if (mode == 2) {//전체보기
-			
-		console.log('전체보기');
-		location.href='clientManagement.mdo';
-		
+			defaultMode = 2;
+			console.log('전체보기');
+			location.href = 'clientManagement.mdo?curPage=1';
+
 		}
 
+	}
+
+	function fn_paging(curPage) {
+		if (defaultMode == 1) {//검색
+			if (type != "ID" && type != "NAME" || type == "none") {
+				console.log('타입 널값');
+				alert('옵션을 선택하세요');
+				return;
+
+			} else if (searchUser == null || searchUser == ""
+					|| searchUser == "undefined") {
+				alert('검색어를 입력하세요');
+				return;
+			}
+			console.log('asdsad');
+			console.log(type);
+			console.log(searchUser);
+			defaultMode = 1;
+			document.form.action = 'searchUserIdName.mdo';
+			document.form.submit();
+
+		}
+		if (defaultMode == 2) {//전체보기
+			
+			console.log(defaultMode);
+			console.log('전체보기');
+			location.href = 'clientManagement.mdo?curPage='+curPage;
+
+		}
+		
 	}
 </script>
 
@@ -253,8 +285,8 @@ p {
 									<option value="none" selected>찾기옵션</option>
 									<option value="ID">ID</option>
 									<option value="NAME">이름</option>
-								</select> <input type="text" name="searchUser" id="searchUser" /> <input
-									type="button" value="검색" onclick='gonext(1);' /> <input
+								</select> <input type="text" name="searchUser" id="searchUser" />
+								 <input type="button" value="검색" onclick='gonext(1);' /> <input
 									type="button" value="전체보기" onclick='gonext(2);' />
 							</form>
 							<!-- <form method="post" name="form">action="clientManagement.mdo"
@@ -263,7 +295,7 @@ p {
 </form>
 								 -->
 
-							<script>
+							<!-- <script>
 								function inputText() {
 
 									var user = $('#searchUser').val();
@@ -311,7 +343,7 @@ p {
 										});//ajax-end
 									}//if-end
 								}//inputText()-end
-							</script>
+							</script> -->
 							<div class="table-responsive" id="table-responsive">
 								<table class="table" id="table">
 									<thead>
@@ -368,8 +400,40 @@ p {
 										<%
 											} //for문--end
 										%>
+
+
 									</tbody>
 								</table>
+								<c:if test="${pagination != null }">
+								<div align="center">
+									<c:if test="${pagination.curRange ne 1 }">
+										<a href="#" onClick="fn_paging(1)">[처음]</a>
+									</c:if>
+									<c:if test="${pagination.curPage ne 1}">
+										<a href="#" onClick="fn_paging('${pagination.prevPage }')">[이전]</a>
+									</c:if>
+									<c:forEach var="pageNum" begin="${pagination.startPage }"
+										end="${pagination.endPage }">
+										<c:choose>
+											<c:when test="${pageNum eq  pagination.curPage}">
+												<span style="font-weight: bold;"><a href="#"
+													onClick="fn_paging('${pageNum }')">${pageNum }</a></span>
+											</c:when>
+											<c:otherwise>
+												<a href="#" onClick="fn_paging('${pageNum }')">${pageNum }</a>
+											</c:otherwise>
+										</c:choose>
+									</c:forEach>
+									<c:if
+										test="${pagination.curPage ne pagination.pageCnt && pagination.pageCnt > 0}">
+										<a href="#" onClick="fn_paging('${pagination.nextPage }')">[다음]</a>
+									</c:if>
+									<c:if
+										test="${pagination.curRange ne pagination.rangeCnt && pagination.rangeCnt > 0}">
+										<a href="#" onClick="fn_paging('${pagination.pageCnt }')">[끝]</a>
+									</c:if>
+								</div>
+								</c:if>
 							</div>
 						</div>
 					</div>
