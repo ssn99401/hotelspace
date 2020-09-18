@@ -24,6 +24,13 @@
   }
 }
 
+
+@media screen and (min-width: 768px) { 
+ 	.page-section {
+	margin-left: 200px;
+  }
+}
+
 .modal-dialog.modal-center {
   display: inline-block;
   text-align: left;
@@ -5565,7 +5572,7 @@ a.close.disabled {
 
 @media (min-width: 576px) {
   .modal-dialog {
-    max-width: 500px;
+    min-width: 500px;
     margin: 1.75rem auto;
   }
 
@@ -5593,12 +5600,12 @@ a.close.disabled {
 @media (min-width: 992px) {
   .modal-lg,
 .modal-xl {
-    max-width: 800px;
+    min-width: 800px;
   }
 }
 @media (min-width: 1200px) {
   .modal-xl {
-    max-width: 1140px;
+    min-width: 1140px;
   }
 }
 .tooltip {
@@ -10193,7 +10200,7 @@ h3 {
   left: 0;
   transition: all 0.2s ease-in-out;
   opacity: 0;
-  background-color: rgba(26, 188, 156, 0.9);
+  background-color: rgb(253, 119, 146);
 }
 .portfolio .portfolio-item .portfolio-item-caption:hover {
   opacity: 1;

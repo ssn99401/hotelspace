@@ -23,6 +23,26 @@ public class AdminPageManagerDAOImpl implements AdminPageManagerDAO {
 		return sqlSessionTemplate.selectList(namespace + ".getImageLinksList");
 	}
 	
+	// 이미지 ID 얻기
+	@Override
+	public String getImageSeq() {
+		return sqlSessionTemplate.selectOne(namespace + ".getPageSeq");
+	}
 	
+	// 업로드 된 이미지 데이터베이스에 저장
+	@Override
+	public int uploadPageImage(List<AdminPageImageVO> pageImageList) {
+		return sqlSessionTemplate.insert(namespace + ".pageImageInsert", pageImageList);
+	}
+
+	@Override
+	public int changePageImage(Map<String, String> requestMap) {
+		return sqlSessionTemplate.update(namespace + ".pageImageUpdate", requestMap);
+	}
 	
+	// 페이지 사진 삭제
+	@Override
+	public int deletePageImage(List<Map> arrJson) {
+		return sqlSessionTemplate.update(namespace + ".pageImageDelete", arrJson);
+	}
 }

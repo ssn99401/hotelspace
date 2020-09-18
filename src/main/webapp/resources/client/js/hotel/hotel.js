@@ -444,6 +444,7 @@ function switchScreen() {
 }
 
 function showHotelRoom(hotelId,reservationInDate,reservationOutDate) {
+	alert(reservationOutDate);
 	window.location.href= "searchRoom.do?hotelId=" + hotelId + "&reservationInDate=" + reservationInDate + "&reservationOutDate=" + reservationOutDate;
 }
 

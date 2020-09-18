@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring.hotelspace.admin.management.hotel.dao.AdminHotelManagerDAO">
+
+	<select id="getHotelList" parameterType="java.util.HashMap" resultType="adminHotelVO">
+		SELECT *
+			FROM (
+				SELECT 	ROWNUM as "row", subtable.*
+					FROM (
+						SELECT 
+							HOTEL_ID
+							, USER_ID
+							, HOTEL_NAME
+							, HOTEL_TEL
+							, HOTEL_AREA
+							, HOTEL_ADDRESS
+							, HOTEL_CONCEPT
+							, HOTEL_STAR
+							, TO_CHAR(HOTEL_REG_DATE, 'YYYY-MM-DD') as HOTEL_REG_DATE
+						FROM
+							HOTEL
+						WHERE
+							1=1
+						<if test="hotelName != null and !hotelName.equals('')">
+							AND 
+								HOTEL_NAME LIKE '%'||#{hotelName}||'%' 
+						</if>
+						<if test="hotelAddress != null and !hotelAddress.equals('')">
+							AND 
+								HOTEL_ADDRESS LIKE '%'||#{hotelAddress}||'%' 
+						</if>
+						<if test="hotelClientId != null and !hotelClientId.equals('')">
+							AND 
+								HOTEL_AREA LIKE '%'||#{hotelClientId}||'%' 
+						</if>
+						ORDER BY
+							HOTEL_ID 
+						<choose>
+							<when test = "orderbyOption eq 'ASC'">
+								ASC
+							</when>
+							<otherwise>
+								DESC
+							</otherwise>
+						</choose>
+						<if test="orderbyName != null and !orderbyName.equals('')">
+							, #{orderbyName} 
+								<choose>
+									<when test = "orderbyOption eq 'ASC'">
+										ASC
+									</when>
+									<otherwise>
+										DESC
+									</otherwise>
+								</choose>
+						</if>
+						<if test="orderbyArea != null and !orderbyArea.equals('')">
+							, #{orderbyId} 
+								<choose>
+									<when test = "orderbyOption eq 'ASC'">
+										ASC
+									</when>
+									<otherwise>
+										DESC
+									</otherwise>
+								</choose>
+						</if>
+						<if test="orderbyStar != null and !orderbyStar.equals('')">
+							, #{orderbyStar} 
+								<choose>
+									<when test = "orderbyOption eq 'ASC'">
+										ASC
+									</when>
+									<otherwise>
+										DESC
+									</otherwise>
+								</choose>
+						</if>
+						) subtable 
+					)
+					WHERE
+						<![CDATA[
+							"row" >= #{start} 
+						AND 
+							"row" <=  #{end} 
+						]]>
+	</select>
+	
+	<select id="getHotelListCount" parameterType="java.util.HashMap" resultType="int">
+		SELECT 
+			MAX(ROWNUM) 
+		FROM 
+			hotel
+		WHERE
+			1=1
+		<if test="hotelName != null and !hotelName.equals('')">
+			AND 
+				HOTEL_NAME LIKE '%'||#{hotelName}||'%' 
+		</if>
+		<if test="hotelAddress != null and !hotelAddress.equals('')">
+			AND 
+				HOTEL_ADDRESS LIKE '%'||#{hotelAddress}||'%' 
+		</if>
+		<if test="hotelClientId != null and !hotelClientId.equals('')">
+			AND 
+				HOTEL_AREA LIKE '%'||#{hotelClientId}||'%' 
+		</if>
+	</select>
+	
+	<select id="getHotelInfo" parameterType="string" resultType="adminHotelVO">
+		SELECT
+			HOTEL_ID
+			, USER_ID
+			, HOTEL_NAME
+			, HOTEL_TEL
+			, HOTEL_AREA
+			, HOTEL_ADDRESS
+			, HOTEL_CONCEPT
+			, HOTEL_STAR
+			, TO_CHAR(HOTEL_REG_DATE, 'YYYY-MM-DD') as HOTEL_REG_DATE
+		FROM
+			HOTEL
+		WHERE
+			HOTEL_ID = #{hotelId}	
+	</select>
+	
+	<select id="getHotelImageList" resultType="adminHotelImageVO">
+		SELECT
+			HOTEL_ID,
+			IMAGE_LINK,
+			IMAGE_TYPE
+		FROM
+			HOTEL_IMAGE
+		WHERE
+			HOTEL_ID = #{hotelId}
+	</select>
+	
+	<select id="getRoomList" parameterType="string" resultType="adminRoomVO">
+		SELECT
+			room.ROOM_ID,
+			room.HOTEL_ID,
+			room.ROOM_NAME,
+			room.ROOM_PRICE,
+			room.ROOM_AMOUNT,
+			room.ROOM_STANDARD_PEOPLE,
+			room.ROOM_MAX_PEOPLE,
+			room.ROOM_PRICE_PEOPLE,
+			room.ROOM_SERVICES,
+			room.ROOM_INFO,
+			room.ROOM_USAGE
+		FROM
+			ROOM room
+		WHERE
+			HOTEL_ID = #{hotelId}
+	</select>
+	
+	<select id="getRoomImageList" parameterType="java.util.List" resultType="adminRoomImageVO">
+		SELECT
+			ROOM_ID,
+			IMAGE_LINK,
+			IMAGE_TYPE
+		FROM
+			ROOM_IMAGE
+		WHERE
+		<foreach collection="list" item="roomVO" separator=" OR ">
+			ROOM_Id = #{roomVO.roomId}
+		</foreach>
+	</select>
+	
+	<update id="updateHotelInfo" parameterType="java.util.HashMap">
+		UPDATE 
+    		HOTEL
+		SET
+   		<if test="target != null and target.equals('호텔명')">
+			HOTEL_NAME = #{newValue}
+		</if>
+		<if test="target != null and target.equals('전화번호')">
+			HOTEL_TEL = #{newValue}
+		</if>
+		<if test="target != null and target.equals('지역')">
+			HOTEL_AREA = #{newValue}
+		</if>
+		<if test="target != null and target.equals('주소')">
+			HOTEL_ADDRESS = #{newValue}
+		</if>
+		<if test="target != null and target.equals('테마')">
+			HOTEL_CONCEPT = #{newValue}
+		</if>
+		WHERE
+    		HOTEL_ID = #{hotelId}
+	</update>
+	
+	<update id="updateRoomInfo" parameterType="java.util.HashMap">
+		UPDATE 
+    		ROOM
+		SET
+		<if test="target != null and target.equals('방 이름')">
+			ROOM_NAME = #{newValue}
+		</if>
+		<if test="target != null and target.equals('1박 요금')">
+			ROOM_PRICE = #{newValue}
+		</if>
+		<if test="target != null and target.equals('방 갯수')">
+			ROOM_AMOUNT = #{newValue}
+		</if>
+		<if test="target != null and target.equals('적정 인원')">
+			ROOM_STANDARD_PEOPLE = #{newValue}
+		</if>
+		<if test="target != null and target.equals('최대 인원')">
+			ROOM_MAX_PEOPLE = #{newValue}
+		</if>
+		<if test="target != null and target.equals('1인당 추가 금액')">
+			ROOM_PRICE_PEOPLE = #{newValue}
+		</if>
+		<if test="target != null and target.equals('부가 서비스')">
+			ROOM_SERVICES = #{newValue}
+		</if>
+		<if test="target != null and target.equals('방 정보')">
+			ROOM_INFO = #{newValue}
+		</if>
+   			
+		WHERE
+    		ROOM_ID = #{roomId}
+	</update>
+	
+</mapper>

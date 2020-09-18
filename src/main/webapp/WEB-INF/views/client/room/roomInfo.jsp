@@ -44,77 +44,59 @@
 			<div class="row mb-5">
 
 				<c:forEach items="${roomList }" var="Room">
-					<c:set var="index" items = 0>
-						<c:set var="RoomId" items="${Room[index].roomId }">
-							<div class="col-md-12 mb-5">
+					<c:set var="index" value="${0}" />
+					<c:set var="RoomId" value="${roomList[index].roomId }" />
+					<div class="col-md-12 mb-5">
 
 						<div class="block-3 d-md-flex">
-							<c:if test="${Room[index].roomId eq RoomId}">
+							<c:if test="${roomList[index].roomId eq RoomId}">
 								<div class="image" id="image"
 									style="background-image: url('${Room.imageLink}');"></div>
-							
-							<div class="text">
 
-								<h2 class="heading">${Room.roomName }</h2>
-								<div class="price">
-									<sup>￦</sup><span class="number"> <fmt:formatNumber
-											value="${Room.roomPrice }" pattern="#,###,###" /></span><sub>/1박</sub>
+								<div class="text">
+
+									<h2 class="heading">${Room.roomName }</h2>
+									<div class="price">
+										<sup>￦</sup><span class="number"> <fmt:formatNumber
+												value="${Room.roomPrice }" pattern="#,###,###" /></span><sub>/1박</sub>
+									</div>
+									<ul class="specs mb-5">
+										<li><strong>방 기준인원: </strong>${Room.roomStandardPeople}</li>
+										<li><strong>방 최대인원: </strong>${Room.roomMaxPeople }</li>
+										<li><strong>기본옵션: </strong> ${Room.roomServices }</li>
+										<li><strong>잔여 객실: </strong>${Room.roomAmount }</li>
+										<li><strong>선택하신 날짜:</strong><br>
+											${param.reservationInDate} ~ ${param.reservationOutDate}</li>
+										<li><strong>Info: </strong><br>${Room.roomInfo }<br>
+											방 기준인원에서 1인 추가시마다 +30,000￦씩 추가됩니다.</li>
+
+									</ul>
 								</div>
-								<ul class="specs mb-5">
-									<li><strong>방 기준인원: </strong>${Room.roomStandardPeople}</li>
-									<li><strong>방 최대인원: </strong>${Room.roomMaxPeople }</li>
-									<li><strong>기본옵션: </strong> ${Room.roomServices }</li>
-									<li><strong>잔여 객실: </strong>${Room.roomAmount }</li>
-									<li><strong>선택하신 날짜:</strong><br>
-										${param.reservationInDate} ~ ${param.reservationOutDate}</li>
-									<li><strong>Info: </strong><br>${Room.roomInfo }<br>
-										방 기준인원에서 1인 추가시마다 +30,000￦씩 추가됩니다.</li>
-
-								</ul>
+							</c:if>
+							<p>
+								<c:if test="${Room.roomAmount != 0 }">
+									<a
+										href="revInfo.do?roomId=${Room.roomId}&reservationInDate=${param.reservationInDate}&reservationOutDate=${param.reservationOutDate}"
+										class="btn btn-primary py-3 px-5">예약</a>
 								</c:if>
-								
-								<c:if test="${Room[index].roomId != RoomId}">
-								<c:set var="index" items = ${index + 1 }/>
+								<c:if test="${Room.roomAmount == 0 }">
+									<a href="#" onclick="return false;"
+										class="btn btn-primary py-3 px-5"
+										style="background-color: #bbb2b3;">매진</a>
 								</c:if>
-								<p>
-									<c:if test="${Room.roomAmount != 0 }">
-										<a
-											href="revInfo.do?roomId=${Room.roomId}&reservationInDate=${param.reservationInDate}&reservationOutDate=${param.reservationOutDate}"
-											class="btn btn-primary py-3 px-5">예약</a>
-									</c:if>
-									<c:if test="${Room.roomAmount == 0 }">
-										<a href="#" onclick="return false;"
-											class="btn btn-primary py-3 px-5"
-											style="background-color: #bbb2b3;">매진</a>
-									</c:if>
-								</p>
+							</p>
+							
+							<c:set var="index" value="${index + 1 }" />
 
-							</div>
+						</div>
+					</div>
+				</c:forEach>
 			</div>
-
 		</div>
-		</c:set>
-		</c:set>
-		</c:forEach>
-
 	</div>
-	</div>
-	</div>
-
 	<footer>
 		<c:import url="/clientFooter.do" />
 	</footer>
-
-
-
-
-
-
-
-
-
-
-
 
 	<script src="resources/client/js/jquery.min.js"></script>
 	<script src="resources/client/js/room/jquery-migrate-3.0.1.min.js"></script>

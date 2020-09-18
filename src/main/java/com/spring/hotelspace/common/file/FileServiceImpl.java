@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
@@ -52,15 +53,33 @@ public class FileServiceImpl implements FileService {
 		public List<FileVO> uploadFiles(String memberId, MultipartHttpServletRequest files) throws IOException, Exception{
 			
 			List<MultipartFile> fileList = files.getFiles("files");
-			List<FileVO> fileNames = new ArrayList<FileVO>();
+			List<FileVO> fileVOList = new ArrayList<FileVO>();
 			
 			for (MultipartFile file : fileList) {
 				FileVO test = this.uploadFile(memberId, file);
 				if (test != null) {
-					fileNames.add(test);					
+					fileVOList.add(test);					
 				}
 			}
-			return fileNames;
+			return fileVOList;
+		}
+		
+		
+		// 여러파일 서버에 업로드 - iterator 사용
+		public List<FileVO> uploadFilesToIterator(String memberId, MultipartHttpServletRequest files) throws IOException, Exception {
+			Iterator<String> filesIterator = files.getFileNames(); 
+			List<FileVO> fileVOList = new ArrayList<FileVO>();
+		    MultipartFile mfile = null; 
+		    String fieldName = "";
+		    while (filesIterator.hasNext()) { 
+		        fieldName = (String) filesIterator.next(); //파일이름, 위에서 file1과 file2로 보냈으니 file1, file2로 나온다.
+		        mfile = files.getFile(fieldName);  //저장된 파일 객체
+		        FileVO file = this.uploadFile(memberId, mfile);
+		        if (file != null) {
+		        	fileVOList.add(file);					
+				}
+		    }
+		    return fileVOList;
 		}
 		
 		// 파일 저장 위치 리턴

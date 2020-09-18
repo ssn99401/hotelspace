@@ -4,9 +4,49 @@
 
 <mapper namespace="com.spring.hotelspace.admin.management.page.dao.AdminPageManagerDAO">
 
+	<select id="getPageSeq" resultType="String">
+		SELECT MAINPAGE_IMAGE_SEQ.NEXTVAL
+			FROM DUAL
+	</select>
+
 	<select id="getImageLinksList" resultType="adminPageImageVO">
 		SELECT IMAGE_ID, IMAGE_TYPE, IMAGE_LINK 
 			FROM WEBPAGE_IMAGE
 	</select>
 	
+	<insert id="pageImageInsert" parameterType="java.util.List">
+		INSERT ALL
+			
+			<foreach collection="list" item="pageImage">
+				INTO webpage_image(image_id, image_type, image_link) 
+					VALUES
+				(	get_image_seq(), 
+					#{pageImage.imageType}, 
+					#{pageImage.imageLink}
+				)
+			</foreach>	
+		SELECT * FROM DUAL
+	</insert>
+	
+	<update id="pageImageUpdate" parameterType="java.util.HashMap">
+		UPDATE webpage_image 
+			SET image_type =
+				CASE 
+					WHEN image_type = #{oldImageType}
+						THEN 'NORMAL'
+					WHEN image_id = #{newImageId}
+						THEN #{oldImageType}
+					ELSE
+						image_type
+				END
+	</update>
+	
+	<update id="pageImageDelete" parameterType="java.util.List">
+		DELETE 
+			FROM webpage_image
+			WHERE
+			<foreach collection="list" item="pageImage" separator=" OR ">
+				image_Id = #{pageImage.imageId}
+			</foreach>
+	</update>
 </mapper>
