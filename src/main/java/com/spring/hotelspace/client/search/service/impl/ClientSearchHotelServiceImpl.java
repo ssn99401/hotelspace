@@ -40,7 +40,7 @@ public class ClientSearchHotelServiceImpl implements ClientSearchHotelService {
 	public HashMap<String, Object> searchHotelToSearchBar(ClientSearchHotelDTO requestDTO) {
 
 		
-		HashMap<Object, Object> map = new HashMap<>();
+		HashMap<Object, Object> map = new HashMap<Object, Object>();
 		
 		map.put("hotelSearchMethod", "hotelListToSearch");
 		map.put("searchKeyword", requestDTO.getSearchKeyword());
@@ -79,7 +79,7 @@ public class ClientSearchHotelServiceImpl implements ClientSearchHotelService {
 	@Override
 	public HashMap<String, Object> searchHotelList(ClientHotelFilterDTO hotelFillter, Object hotelSearchMethod) {
 
-		HashMap<Object, Object> map = new HashMap<>();
+		HashMap<Object, Object> map = new HashMap<Object, Object>();
 		List<Object> hotelList = null;
 		map.put("checkedKeyword", hotelFillter.getCheckedKeyword());
 		map.put("parking", hotelFillter.getParking());
@@ -157,7 +157,7 @@ public class ClientSearchHotelServiceImpl implements ClientSearchHotelService {
 	public HashMap<String, Object> movePageToHotelList(ClientHotelFilterDTO hotelFillter, Object hotelSearchMethod, String filter) {
 		
 		
-		HashMap<Object, Object> map = new HashMap<>();
+		HashMap<Object, Object> map = new HashMap<Object, Object>();
 		
 		// filter
 		map.put("checkedKeyword", hotelFillter.getCheckedKeyword());
