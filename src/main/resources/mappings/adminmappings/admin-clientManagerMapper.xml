@@ -2,8 +2,107 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.spring.hotelspace.admin.management.user.dao.AdminManageClientDAO">
+<mapper
+	namespace="com.spring.hotelspace.admin.management.user.dao.AdminManageClientDAO">
 
-	
+	<select id="getClientTable" resultType="AdminManageClientVO">
+		SELECT
+		CLIENT_ID,CLIENT_NAME,CLIENT_REG_DATE,CLIENT_MILAGE,CLIENT_STATE
+		FROM
+		client
+	</select>
 
+	<select id="getClientTableSearchID" parameterType="String"
+		resultType="AdminManageClientVO">
+		SELECT
+		CLIENT_ID,CLIENT_NAME,CLIENT_REG_DATE,CLIENT_MILAGE,CLIENT_STATE
+		FROM
+		client
+		WHERE client_ID=#{clientID}
+	</select>
+
+	<select id="getSearchId" parameterType="String"
+		resultType="AdminManageClientVO">
+		SELECT
+		CLIENT_ID,CLIENT_NAME,CLIENT_REG_DATE,CLIENT_MILAGE,CLIENT_STATE
+		FROM
+		client
+		where client_ID Like #{user}
+	</select>
+
+	<select id="getSearchName" parameterType="String"
+		resultType="AdminManageClientVO">
+		SELECT
+		CLIENT_ID,CLIENT_NAME,CLIENT_REG_DATE,CLIENT_MILAGE,CLIENT_STATE
+		FROM
+		client
+		where client_NAME Like #{user}
+	</select>
+
+
+	<update id="activeClientState" parameterType="hashmap">
+		UPDATE CLIENT
+		SET
+		Client_State=0
+		WHERE Client_ID IN
+		<foreach collection="alist" index="index" item="item" open="("
+			close=")" separator=",">
+			#{item.clientID,jdbcType=VARCHAR}
+
+		</foreach>
+
+	</update>
+
+	<update id="banClientState" parameterType="hashmap">
+		UPDATE CLIENT
+		SET
+		Client_State=1
+		WHERE Client_ID IN
+		<foreach collection="blist" index="index" item="item" open="("
+			close=")" separator=",">
+			#{item.clientID,jdbcType=VARCHAR}
+		</foreach>
+
+	</update>
+
+
+
+
+
+	<select id="getClientInfo" parameterType="String"
+		resultType="AdminManageClientVO">
+		SELECT
+		*
+		FROM
+		client
+		WHERE client_ID=#{id}
+	</select>
+
+	<select id="getClientRev" parameterType="String"
+		resultType="AdminManageClientRevVO">
+		SELECT review_id, r.hotel_id, r.room_id,
+		review_content,review_star,review_write_date,hotel_name,room_name
+		FROM
+		review r,
+		(select hotel_id, hotel_name from hotel) h,
+		(select room_id, room_name from room) o
+		WHERE client_ID=#{id}
+		and r.hotel_id = h.hotel_id and r.room_id = o.room_id
+	</select>
+
+	<select id="getClientRes" parameterType="String"
+		resultType="AdminManageClientResVO">
+		select reservation_id, r.hotel_id, r.room_id,
+		reservation_in_date, reservation_out_date,
+		reservation_payment, reservation_people, reserve_date, review_check, hotel_name, room_name
+		from reservation r,
+		(select hotel_id, hotel_name from hotel) h,
+		(select room_id, room_name from room) o
+		where client_id=#{id}
+		and r.hotel_id = h.hotel_id and r.room_id = o.room_id
+	</select>
+
+	<delete id="deleteReview" parameterType="String">
+		delete from review where review_id=#{id}
+	</delete>
 </mapper>
