@@ -7,16 +7,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class ClientReservationVO {
 
-	private String clientId;
 	private String hotelId;
 	private String roomId;
 	private String reservationInDate;
 	private String reservationOutDate;
 	private int reservationPayment;
+	private String clientId;
 	private int reservationPeople;
-	private String reserveDate;
-	private int reviewCheck;
-
+	
 	public ClientReservationVO() {}
 	public ClientReservationVO(String hotelId, String roomId, String reservationInDate, String reservationOutDate,
 			int reservationPayment, String clientId, int reservationPeople) {
@@ -71,18 +69,13 @@ public class ClientReservationVO {
 	public void setReservationPeople(int reservationPeople) {
 		this.reservationPeople = reservationPeople;
 	}
-	
-	public String getReserveDate() {
-		return reserveDate;
+	@Override
+	public String toString() {
+		return "ClientReservationVO [hotelId=" + hotelId + ", roomId=" + roomId + ", reservationInDate="
+				+ reservationInDate + ", reservationOutDate=" + reservationOutDate + ", reservationPayment="
+				+ reservationPayment + ", clientId=" + clientId + ", reservationPeople=" + reservationPeople + "]";
 	}
-	public void setReserveDate(String reserveDate) {
-		this.reserveDate = reserveDate;
-	}
-	public int getReviewCheck() {
-		return reviewCheck;
-	}
-	public void setReviewCheck(int reviewCheck) {
-		this.reviewCheck = reviewCheck;
-	}
+
+
 
 }

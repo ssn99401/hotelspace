@@ -1,9 +1,6 @@
-package com.spring.hotelspace.client.search.vo;
+package com.spring.hotelspace.client.reservation.vo;
 
-import java.sql.Date;
-
-public class ClientRoomVO {
-
+public class ClientReservationInfoVO {
 	private String roomId;
 	private String hotelId;
 	private String roomName;
@@ -18,14 +15,13 @@ public class ClientRoomVO {
 	private String imageLink;
 	private String reservationInDate;
 	private String reservationOutDate;
-//
 
-	public ClientRoomVO() {
+	public ClientReservationInfoVO() {
 	}
 
-	public ClientRoomVO(String roomId, String hotelId, String roomName, String hotelName, int roomPrice, int roomAmount,
-			String roomServices, String roomInfo, int roomUsage, int roomStandardPeople, int roomMaxPeople,
-			String imageLink, String reservationInDate, String reservationOutDate) {
+	public ClientReservationInfoVO(String roomId, String hotelId, String roomName, String hotelName, int roomPrice,
+			int roomAmount, String roomServices, String roomInfo, int roomUsage, int roomStandardPeople,
+			int roomMaxPeople, String imageLink, String reservationInDate, String reservationOutDate) {
 		super();
 		this.roomId = roomId;
 		this.hotelId = hotelId;
@@ -157,11 +153,12 @@ public class ClientRoomVO {
 
 	@Override
 	public String toString() {
-		return "ClientRoomVO [roomId=" + roomId + ", hotelId=" + hotelId + ", roomName=" + roomName + ", hotelName="
-				+ hotelName + ", roomPrice=" + roomPrice + ", roomAmount=" + roomAmount + ", roomServices="
-				+ roomServices + ", roomInfo=" + roomInfo + ", roomUsage=" + roomUsage + ", roomStandardPeople="
-				+ roomStandardPeople + ", roomMaxPeople=" + roomMaxPeople + ", imageLink=" + imageLink
-				+ ", reservationInDate=" + reservationInDate + ", reservationOutDate=" + reservationOutDate + "]";
+		return "ClientReservationInfoVO [roomId=" + roomId + ", hotelId=" + hotelId + ", roomName=" + roomName
+				+ ", hotelName=" + hotelName + ", roomPrice=" + roomPrice + ", roomAmount=" + roomAmount
+				+ ", roomServices=" + roomServices + ", roomInfo=" + roomInfo + ", roomUsage=" + roomUsage
+				+ ", roomStandardPeople=" + roomStandardPeople + ", roomMaxPeople=" + roomMaxPeople + ", imageLink="
+				+ imageLink + ", reservationInDate=" + reservationInDate + ", reservationOutDate=" + reservationOutDate
+				+ "]";
 	}
 
 }
