@@ -14,6 +14,13 @@ div {
     width: 245px;
 }
 
+.resp-col {
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
 
 .hotelbody {
     color: #4e4e4e;
@@ -21,6 +28,18 @@ div {
     line-height: 135%;
     font-family: arial,helvetica,sans-serif;
     background: #fff;
+}
+
+.resp-row {
+    min-width: 320px;
+    max-width: 1160px;
+    width: auto;
+}
+
+.resp-row {
+    margin: 0px auto !important;
+    width: 956px;
+    padding-left: 0;
 }
 
 .search-header-link {
