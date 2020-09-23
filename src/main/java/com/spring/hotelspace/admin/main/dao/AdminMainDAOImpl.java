@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.spring.hotelspace.admin.main.vo.AdminMainVO;
+import com.spring.hotelspace.admin.main.vo.AdminRecentResVO;
+import com.spring.hotelspace.admin.main.vo.AdminRecentRevVO;
 import com.spring.hotelspace.admin.main.vo.ReservationDataVO;
 
 @Repository
@@ -72,5 +74,19 @@ public class AdminMainDAOImpl implements AdminMainDAO {
 		System.out.println(getData);
 		// TODO Auto-generated method stub
 		return (ArrayList<ReservationDataVO>) getData;
+	}
+
+	@Override
+	public ArrayList<AdminRecentResVO> getRecentRes() {
+		List<AdminRecentResVO> res =sqlSessionTemplate.selectList(namespace + ".getRecentReservation");
+		// TODO Auto-generated method stub
+		return (ArrayList<AdminRecentResVO>) res;
+	}
+
+	@Override
+	public ArrayList<AdminRecentRevVO> getRecentRev() {
+		List<AdminRecentRevVO> rev =sqlSessionTemplate.selectList(namespace + ".getRecentRev");
+		// TODO Auto-generated method stub
+		return (ArrayList<AdminRecentRevVO>) rev;
 	}
 }

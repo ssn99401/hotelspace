@@ -4,6 +4,8 @@ package com.spring.hotelspace.admin.main.service;
 import java.util.ArrayList;
 
 import com.spring.hotelspace.admin.main.vo.AdminMainVO;
+import com.spring.hotelspace.admin.main.vo.AdminRecentResVO;
+import com.spring.hotelspace.admin.main.vo.AdminRecentRevVO;
 import com.spring.hotelspace.admin.main.vo.ReservationDataVO;
 
 public interface AdminMainService {
@@ -17,6 +19,8 @@ public interface AdminMainService {
 	public String getSales2019(String month);
 	
 	public ArrayList<ReservationDataVO> getData();
+	public ArrayList<AdminRecentResVO> getRecentRes();
+	public ArrayList<AdminRecentRevVO> getRecentRev();
     
 
     

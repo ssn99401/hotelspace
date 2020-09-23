@@ -55,7 +55,34 @@
 		group by (year, month)
 	</select>
 
-
+	<select id="getRecentReservation" resultType="adminRecentResVO">
+	select reservation_id, r.hotel_id, r.room_id,
+		reservation_in_date, reservation_out_date,client_id,
+		reservation_payment, reservation_people, reserve_date, review_check, hotel_name, room_name
+		from 
+		(select * from reservation order by reserve_date) r,
+		(select hotel_id, hotel_name from hotel) h,
+		(select room_id, room_name from room) o
+		where r.hotel_id = h.hotel_id and r.room_id = o.room_id 
+		<![CDATA[ 
+		and rownum < 6		
+		]]> 
+		
+	</select>
+	
+	<select id="getRecentRev" resultType="adminRecentRevVO">
+	SELECT review_id, r.hotel_id, r.room_id,client_id,
+		review_content,review_star,review_write_date,hotel_name,room_name
+		FROM
+		(select * from review order by review_write_date desc) r,
+		(select hotel_id, hotel_name from hotel) h,
+		(select room_id, room_name from room) o
+        where r.hotel_id = h.hotel_id and r.room_id = o.room_id 
+        <![CDATA[ 
+		and rownum < 6		
+		]]> 
+       	</select>
+	
 
 
 

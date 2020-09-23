@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 import com.spring.hotelspace.admin.main.dao.AdminMainDAO;
 import com.spring.hotelspace.admin.main.service.AdminMainService;
 import com.spring.hotelspace.admin.main.vo.AdminMainVO;
+import com.spring.hotelspace.admin.main.vo.AdminRecentResVO;
+import com.spring.hotelspace.admin.main.vo.AdminRecentRevVO;
 import com.spring.hotelspace.admin.main.vo.ReservationDataVO;
 
 @Service
@@ -66,6 +68,18 @@ public class AdminMainServiceImpl implements AdminMainService {
 	public ArrayList<ReservationDataVO> getData() {
 		// TODO Auto-generated method stub
 		return adminMainDAO.getData();
+	}
+
+	@Override
+	public ArrayList<AdminRecentResVO> getRecentRes() {
+		// TODO Auto-generated method stub
+		return adminMainDAO.getRecentRes();
+	}
+
+	@Override
+	public ArrayList<AdminRecentRevVO> getRecentRev() {
+		// TODO Auto-generated method stub
+		return adminMainDAO.getRecentRev();
 	}
 
 

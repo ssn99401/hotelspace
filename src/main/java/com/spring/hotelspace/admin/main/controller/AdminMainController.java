@@ -92,6 +92,10 @@ public class AdminMainController {
 		}
 		model.addAttribute("getData",array);
 		
+		//최근 예약 최근 리뷰 불러오기
+		model.addAttribute("reservation", adminMainService.getRecentRes());
+		model.addAttribute("review", adminMainService.getRecentRev());
+		
 		
 		return "main";
 	}
