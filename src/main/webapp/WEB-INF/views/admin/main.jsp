@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+
+
+
 <div id="page-wrapper">
 	<div class="container-fluid">
 		<div class="row bg-title">
@@ -16,67 +20,126 @@
 					<li><a href="#">Dashboard</a></li>
 				</ol>
 			</div>
-			/.col-lg-12
+
 		</div>
-		/.row ==============================================================
-		Different data widgets
-		============================================================== .row
+
+		<!--
+		by지홍 main.jsp 컨덴츠 목록
+		
+		총 호텔 수
+		총 예약건 수
+		총 회원 수
+		--
+		월별 예약건수(년도 드롭다운 검색)
+		월별 매출(년도 드롭다운 검색)(추가 템플릿 삽입)
+		--
+		최근 예약 (거래)
+		최근 리뷰(코멘트) 
+		
+		숙소 타입(컨셉) 별 예약률
+		 -->
+
 		<div class="row">
 			<div class="col-lg-4 col-sm-6 col-xs-12">
 				<div class="white-box analytics-info">
-					<h3 class="box-title">Total Visit</h3>
+					<h3 class="box-title">Total Hotel</h3>
 					<ul class="list-inline two-part">
 						<li>
 							<div id="sparklinedash"></div>
 						</li>
 						<li class="text-right"><i class="ti-arrow-up text-success"></i>
-							<span class="counter text-success">659</span></li>
+							<span class="counter text-success">${hotelCount}</span></li>
+						<!--총 호텔 수 넘겨받기  -->
 					</ul>
 				</div>
 			</div>
 			<div class="col-lg-4 col-sm-6 col-xs-12">
 				<div class="white-box analytics-info">
-					<h3 class="box-title">Total Page Views</h3>
+					<h3 class="box-title">Total Reservation</h3>
 					<ul class="list-inline two-part">
 						<li>
 							<div id="sparklinedash2"></div>
 						</li>
 						<li class="text-right"><i class="ti-arrow-up text-purple"></i>
-							<span class="counter text-purple">869</span></li>
+							<span class="counter text-purple">${resCount}</span></li>
+						<!--총 예약완료 수 넘겨받기  -->
 					</ul>
 				</div>
 			</div>
 			<div class="col-lg-4 col-sm-6 col-xs-12">
 				<div class="white-box analytics-info">
-					<h3 class="box-title">Unique Visitor</h3>
+					<h3 class="box-title">Total User</h3>
 					<ul class="list-inline two-part">
 						<li>
 							<div id="sparklinedash3"></div>
 						</li>
 						<li class="text-right"><i class="ti-arrow-up text-info"></i>
-							<span class="counter text-info">911</span></li>
+							<span class="counter texㅁt-info">${userCount}</span></li>
+						<!-- 총 회원 수 넘겨받기  -->
 					</ul>
 				</div>
 			</div>
 		</div>
-		/.row row /.row
+
+		<!--//----------------------------월별 예약건수,매출(매출 콤보박스, 2020년,2019년은 선으로 표시)  -->
+
 		<div class="row">
+
 			<div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
 				<div class="white-box">
-					<h3 class="box-title">Products Yearly Sales</h3>
-					<ul class="list-inline text-right">
-						<li>
-							<h5>
-								<i class="fa fa-circle m-r-5 text-info"></i>Mac
-							</h5>
-						</li>
-						<li>
-							<h5>
-								<i class="fa fa-circle m-r-5 text-inverse"></i>Windows
-							</h5>
-						</li>
-					</ul>
-					<div id="ct-visits" style="height: 405px;"></div>
+					<div class="preloader">
+						<svg class="circular" viewBox="25 25 50 50">
+				            <circle class="path" cx="50" cy="50" r="20" fill="none"
+								stroke-width="2" stroke-miterlimit="10" />
+				        </svg>
+					</div>
+					<h3 class="box-title">Monthly Reservation</h3>
+
+					<!--차트 콤보박스  -->
+					<h4>
+						<select name="option" id="option" onchange="change()">
+							<option value="Reservation" selected>Reservation Sales</option>
+							<option value="Expense">Expense</option>
+						</select>
+					</h4>
+
+					<!----------------------차트 데이터 ------------------------------------------- -->
+					<!--2020년 데이터  -->
+					<c:set var="cset" value="0"/>
+					<c:forEach var="var1" items="${getData}" begin="0" end="0">
+						<c:forEach var="var2" items="${var1}" begin="0" end="11"> 
+							<input type="hidden" id="val${cset}" value="${var2}" />
+							<%-- <c:out value="${var2}"></c:out> --%>
+							<c:set var="cset" value="${cset + 1 }"/>
+						</c:forEach>
+						</c:forEach>
+					<br>
+					<!--2019년 데이터  -->
+					<c:forEach var="var1" items="${getData}" begin="1" end="1">
+						<c:forEach var="var2" items="${var1}" begin="0" end="11"> 
+							<input type="hidden" id="cval${cset}" value="${var2}" />
+							<%-- <c:out value="${var2}"></c:out> --%>
+							<c:set var="cset" value="${cset + 1 }"/>
+						</c:forEach>
+						</c:forEach>
+
+						<!-- ---------------------------------------------------------------------- -->
+
+						<ul class="list-inline text-right">
+							<li>
+								<h5>
+									<i class="fa fa-circle m-r-5 text-info"></i>2020
+								</h5>
+							</li>
+							<li>
+								<h5>
+									<i class="fa fa-circle m-r-5 text-inverse"></i>2019
+								</h5>
+							</li>
+						</ul>
+						<div id="ct-box">
+							<div id="ct-visits" style="height: 405px;"></div>
+						</div>
 				</div>
 			</div>
 		</div>
