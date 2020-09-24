@@ -119,6 +119,65 @@ $(document)
 						sparkResize = setTimeout(sparklineLogin, 500);
 					});
 					sparklineLogin();
+					var arraysize= document.getElementById('arraysize').value;
+					var concept = document.getElementById('hc0').value;
+					var rescount = document.getElementById('rhc0').value;
+					var getarray="";
+					
+					for (var i = 0; i < arraysize.length-1; i++) {
+						var name = "hc"+i;
+						var name2 = "rhc"+i;
+						console.log(name);
+	
+						getarray+= document.getElementById(name).value;
+						getarray+= ",";
+						getarray+= document.getElementById(name2).value;
+						
+						 name="hc"+(i+1);
+						if(document.getElementById(name)==null){
+							break;
+						}
+						getarray+="~";
+						console.log(getarray);
+						
+					}
+					var chartarray = getarray.split("~");
+	
+					for (var i = 0; i < chartarray.length; i++) {
+						chartarray[i] = chartarray[i].split(",");
+						chartarray[i][1]*=1;
+						
+						
+					}
+					
+					console.log(chartarray);
+					
+					// 구글 파이차트
+					google.charts.load('current', {
+						'packages' : [ 'corechart' ]
+					});
+					google.charts.setOnLoadCallback(drawChart);
+					function drawChart() {
+						var data = new google.visualization.DataTable();
+						data.addColumn('string', 'concept');
+						data.addColumn('number', '비중');
+
+						data.addRows(
+								chartarray
+
+						);
+						var opt = {
+							'title' : '컨셉 별 예약 비율',
+							'width' : 500,
+							'height' : 500,
+							pieSliceText : 'label',
+							legend : 'none'
+						};
+						var chart = new google.visualization.PieChart(document
+								.getElementById('piChart'));
+						chart.draw(data, opt);
+					}
+
 				});
 
 function change() {// 차트 옵션 콤보박스가 바뀔 때 실행

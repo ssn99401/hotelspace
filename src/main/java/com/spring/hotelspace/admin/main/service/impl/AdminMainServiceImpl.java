@@ -13,6 +13,7 @@ import com.spring.hotelspace.admin.main.service.AdminMainService;
 import com.spring.hotelspace.admin.main.vo.AdminMainVO;
 import com.spring.hotelspace.admin.main.vo.AdminRecentResVO;
 import com.spring.hotelspace.admin.main.vo.AdminRecentRevVO;
+import com.spring.hotelspace.admin.main.vo.PiChartVO;
 import com.spring.hotelspace.admin.main.vo.ReservationDataVO;
 
 @Service
@@ -80,6 +81,18 @@ public class AdminMainServiceImpl implements AdminMainService {
 	public ArrayList<AdminRecentRevVO> getRecentRev() {
 		// TODO Auto-generated method stub
 		return adminMainDAO.getRecentRev();
+	}
+
+	@Override
+	public ArrayList<PiChartVO> getpichart() {
+		// TODO Auto-generated method stub
+		return adminMainDAO.getpichart();
+	}
+
+	@Override
+	public ArrayList<String> getpichart2() {
+		// TODO Auto-generated method stub
+		return adminMainDAO.getpichart2();
 	}
 
 

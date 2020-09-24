@@ -105,41 +105,41 @@
 
 					<!----------------------차트 데이터 ------------------------------------------- -->
 					<!--2020년 데이터  -->
-					<c:set var="cset" value="0"/>
+					<c:set var="cset" value="0" />
 					<c:forEach var="var1" items="${getData}" begin="0" end="0">
-						<c:forEach var="var2" items="${var1}" begin="0" end="11"> 
+						<c:forEach var="var2" items="${var1}" begin="0" end="11">
 							<input type="hidden" id="val${cset}" value="${var2}" />
 							<%-- <c:out value="${var2}"></c:out> --%>
-							<c:set var="cset" value="${cset + 1 }"/>
+							<c:set var="cset" value="${cset + 1 }" />
 						</c:forEach>
-						</c:forEach>
+					</c:forEach>
 					<br>
 					<!--2019년 데이터  -->
 					<c:forEach var="var1" items="${getData}" begin="1" end="1">
-						<c:forEach var="var2" items="${var1}" begin="0" end="11"> 
+						<c:forEach var="var2" items="${var1}" begin="0" end="11">
 							<input type="hidden" id="cval${cset}" value="${var2}" />
 							<%-- <c:out value="${var2}"></c:out> --%>
-							<c:set var="cset" value="${cset + 1 }"/>
+							<c:set var="cset" value="${cset + 1 }" />
 						</c:forEach>
-						</c:forEach>
+					</c:forEach>
 
-						<!-- ---------------------------------------------------------------------- -->
+					<!-- ---------------------------------------------------------------------- -->
 
-						<ul class="list-inline text-right">
-							<li>
-								<h5>
-									<i class="fa fa-circle m-r-5 text-info"></i>2020
-								</h5>
-							</li>
-							<li>
-								<h5>
-									<i class="fa fa-circle m-r-5 text-inverse"></i>2019
-								</h5>
-							</li>
-						</ul>
-						<div id="ct-box">
-							<div id="ct-visits" style="height: 405px;"></div>
-						</div>
+					<ul class="list-inline text-right">
+						<li>
+							<h5>
+								<i class="fa fa-circle m-r-5 text-info"></i>2020
+							</h5>
+						</li>
+						<li>
+							<h5>
+								<i class="fa fa-circle m-r-5 text-inverse"></i>2019
+							</h5>
+						</li>
+					</ul>
+					<div id="ct-box">
+						<div id="ct-visits" style="height: 405px;"></div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -148,11 +148,11 @@
 		<div class="row">
 			<div class="col-md-12 col-lg-12 col-sm-12">
 				<div class="white-box">
-					
+
 					<h3 class="box-title">Recent reservations</h3>
 					<div class="table-responsive">
 						<table class="table">
-						<thead>
+							<thead>
 								<tr>
 									<th>#</th>
 									<th>ID</th>
@@ -163,21 +163,22 @@
 								</tr>
 							</thead>
 							<tbody>
-								<c:set var="no" value="1"/>
+								<c:set var="no" value="1" />
 								<c:forEach var="re" items="${reservation}">
-								<tr>
-									<td>${no }</td>
-									<td class="txt-oflo"><a href="#">${re.clientId}</a></td>
-									<td>${re.hotelName }</td>
-									<td>${re.roomName }</td>
-									<td class="txt-oflo">${re.reservationInDate} ~ ${re.reservationOutDate}</td>
-									<td><span class="text-info">${re.reservationPayment}</span></td>
-								</tr>
-								
-								<c:set var="no" value="${no + 1 }"/>
-								</c:forEach> 
-							
-								
+									<tr>
+										<td>${no }</td>
+										<td class="txt-oflo"><a href="#">${re.clientId}</a></td>
+										<td>${re.hotelName }</td>
+										<td>${re.roomName }</td>
+										<td class="txt-oflo">${re.reservationInDate}~
+											${re.reservationOutDate}</td>
+										<td><span class="text-info">${re.reservationPayment}</span></td>
+									</tr>
+
+									<c:set var="no" value="${no + 1 }" />
+								</c:forEach>
+
+
 								<!-- <tr>
 									<td>6</td>
 									<td class="txt-oflo">Digital Agency PSD</td>
@@ -202,7 +203,6 @@
 		chat-listing & recent comments
 		==============================================================
 		<div class="row">
-			.col
 			<div class="col-md-12 col-lg-8 col-sm-12">
 				<div class="white-box">
 					<h3 class="box-title">Recent Comments</h3>
@@ -227,15 +227,15 @@
 									class="btn-rounded btn btn-default btn-outline"><i
 									class="ti-close text-danger m-r-5"></i> Reject</a>
 							</div>
-						</div>-->	
-						<c:forEach var="re" items="${review}">					
-						<div class="comment-body">
-							<div class="mail-contnet">
-								<h5>${re.clientId }</h5>
-								<span class="time"> ${re.reviewWriteDate} </span> <br /> <span
-									class="mail-desc">${re.reviewContent }</span>
+						</div>-->
+						<c:forEach var="re" items="${review}">
+							<div class="comment-body">
+								<div class="mail-contnet">
+									<h5>${re.clientId }</h5>
+									<span class="time"> ${re.reviewWriteDate} </span> <br /> <span
+										class="mail-desc">${re.reviewContent }</span>
+								</div>
 							</div>
-						</div>
 						</c:forEach>
 					</div>
 				</div>
@@ -244,120 +244,31 @@
 				<div class="panel">
 					<div class="sk-chat-widgets">
 						<div class="panel panel-default">
+
 							<div class="panel-heading">CHAT LISTING</div>
 							<div class="panel-body">
-								<ul class="chatonline">
-									<li>
-										<div class="call-chat">
-											<button class="btn btn-success btn-circle btn-lg"
-												type="button">
-												<i class="fa fa-phone"></i>
-											</button>
-											<button class="btn btn-info btn-circle btn-lg" type="button">
-												<i class="fa fa-comments-o"></i>
-											</button>
-										</div> <a href="javascript:void(0)"><img
-											src="resources/admin/vendor/plugins/images/users/varun.jpg"
-											alt="user-img" class="img-circle"> <span>Varun
-												Dhavan <small class="text-success">online</small>
-										</span></a>
-									</li>
-									<li>
-										<div class="call-chat">
-											<button class="btn btn-success btn-circle btn-lg"
-												type="button">
-												<i class="fa fa-phone"></i>
-											</button>
-											<button class="btn btn-info btn-circle btn-lg" type="button">
-												<i class="fa fa-comments-o"></i>
-											</button>
-										</div> <a href="javascript:void(0)"><img
-											src="resources/admin/vendor/plugins/images/users/genu.jpg"
-											alt="user-img" class="img-circle"> <span>Genelia
-												Deshmukh <small class="text-warning">Away</small>
-										</span></a>
-									</li>
-									<li>
-										<div class="call-chat">
-											<button class="btn btn-success btn-circle btn-lg"
-												type="button">
-												<i class="fa fa-phone"></i>
-											</button>
-											<button class="btn btn-info btn-circle btn-lg" type="button">
-												<i class="fa fa-comments-o"></i>
-											</button>
-										</div> <a href="javascript:void(0)"><img
-											src="resources/admin/vendor/plugins/images/users/ritesh.jpg"
-											alt="user-img" class="img-circle"> <span>Ritesh
-												Deshmukh <small class="text-danger">Busy</small>
-										</span></a>
-									</li>
-									<li>
-										<div class="call-chat">
-											<button class="btn btn-success btn-circle btn-lg"
-												type="button">
-												<i class="fa fa-phone"></i>
-											</button>
-											<button class="btn btn-info btn-circle btn-lg" type="button">
-												<i class="fa fa-comments-o"></i>
-											</button>
-										</div> <a href="javascript:void(0)"><img
-											src="resources/admin/vendor/plugins/images/users/arijit.jpg"
-											alt="user-img" class="img-circle"> <span>Arijit
-												Sinh <small class="text-muted">Offline</small>
-										</span></a>
-									</li>
-									<li>
-										<div class="call-chat">
-											<button class="btn btn-success btn-circle btn-lg"
-												type="button">
-												<i class="fa fa-phone"></i>
-											</button>
-											<button class="btn btn-info btn-circle btn-lg" type="button">
-												<i class="fa fa-comments-o"></i>
-											</button>
-										</div> <a href="javascript:void(0)"><img
-											src="resources/admin/vendor/plugins/images/users/govinda.jpg"
-											alt="user-img" class="img-circle"> <span>Govinda
-												Star <small class="text-success">online</small>
-										</span></a>
-									</li>
-									<li>
-										<div class="call-chat">
-											<button class="btn btn-success btn-circle btn-lg"
-												type="button">
-												<i class="fa fa-phone"></i>
-											</button>
-											<button class="btn btn-info btn-circle btn-lg" type="button">
-												<i class="fa fa-comments-o"></i>
-											</button>
-										</div> <a href="javascript:void(0)"><img
-											src="resources/admin/vendor/plugins/images/users/hritik.jpg"
-											alt="user-img" class="img-circle"> <span>John
-												Abraham<small class="text-success">online</small>
-										</span></a>
-									</li>
-									<li>
-										<div class="call-chat">
-											<button class="btn btn-success btn-circle btn-lg"
-												type="button">
-												<i class="fa fa-phone"></i>
-											</button>
-											<button class="btn btn-info btn-circle btn-lg" type="button">
-												<i class="fa fa-comments-o"></i>
-											</button>
-										</div> <a href="javascript:void(0)"><img
-											src="resources/admin/vendor/plugins/images/users/varun.jpg"
-											alt="user-img" class="img-circle"> <span>Varun
-												Dhavan <small class="text-success">online</small>
-										</span></a>
-									</li>
-								</ul>
+							
+							<!--파이차트 데이터 ---------------------------------------------------->
+							
+								<c:set var="cset" value="0"></c:set>
+								<c:forEach var="var" items="${conceptarray}">
+								<input type="hidden" id="hc${cset}" value="${var.hotelConcept}" />
+								<input type="hidden" id="rhc${cset }" value="${var.reshotelcount}" />
+								<c:set var="cset" value="${cset + 1 }" />
+								</c:forEach>
+							<!----------------------------------------------------------------->	
+								<script type="text/javascript"
+									src="https://www.gstatic.com/charts/loader.js"></script>
+								<script>
+									//구글차트
+								</script>
+								<body>
+									<div id="piChart"></div>
+								</body>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			/.col
 		</div>
 	</div>
