@@ -14,7 +14,7 @@ $(document)
 								stack : 6
 							})*/
 
-					var option = document.getElementById("option").value; // 차트
+					var option = document.getElementById("option"); // 차트
 					// 옵션 값
 					console.log(option);
 					var getarray = "";
@@ -181,7 +181,7 @@ $(document)
 
 				});
 
-function change() {// 차트 옵션 콤보박스가 바뀔 때 실행
+function changechart() {// 차트 옵션 콤보박스가 바뀔 때 실행
 
 	$('.preloader').show();
 

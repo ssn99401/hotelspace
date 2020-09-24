@@ -25,7 +25,7 @@ public class AdminMainServiceImpl implements AdminMainService {
 	@Override
 	public int gethotelCount() {//호텔 수
 		int result=adminMainDAO.gethotelCount();
-		System.out.println(result);
+
 		return adminMainDAO.gethotelCount();
 	}
 

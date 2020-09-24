@@ -27,7 +27,6 @@ public class AdminMainDAOImpl implements AdminMainDAO {
 		
 		int result = sqlSessionTemplate.selectOne(namespace + ".getHotelCount");
 		
-		System.out.println(result);
 		return sqlSessionTemplate.selectOne(namespace + ".getHotelCount");
 	}
 

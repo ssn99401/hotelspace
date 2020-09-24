@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<script src="resources/admin/vendor/js/dashboard1.js"></script>
 
 
 
@@ -93,7 +93,7 @@
 
 					<!--차트 콤보박스  -->
 					<h4>
-						<select name="option" id="option" onchange="change()">
+						<select name="option" id="option" onchange="changechart()">
 							<option value="Reservation" selected>Reservation Sales</option>
 							<option value="Expense">Expense</option>
 						</select>
