@@ -406,7 +406,7 @@ $(function() {
 		for(var i = 0; i < filesInputTags.length; i++) {
 			var files = filesInputTags[i].files;
 			if(files == null) {
-				alert("파을을 선택해 주세요.");
+				alert("파일을 선택해 주세요.");
 				return;
 			}
 			for(var j = 0; j < files.length; j++) {

@@ -353,9 +353,12 @@ function setHotelList(data) {
 		divContent2P2.append("가격 : " + data[varKey].lowestPrice);
 		var divContent2Button = document.createElement("button");
 		divContent2Button.setAttribute("align","center");
+
+		// 호텔 사용 가능여부 표시
 		divContent2Button.setAttribute("style","background: #fd7792; color: #fff; min-width: 100%;");
 		divContent2Button.setAttribute("onclick","showHotelRoom('" +  data[varKey].hotelId + "','" + data['reservationInDate'] + "','" + data['reservationOutDate']  + "');");
 		divContent2Button.append("선택");
+
 		divContent2.appendChild(divContent2P1);
 		divContent2.appendChild(divContent2P2);
 		divContent2.appendChild(divContent2Button);
@@ -402,22 +405,17 @@ function setHotelList(data) {
 
 }
 
-
+function showSoldOutalert() {
+	alert("조회하신 날짜에 해당 호텔에 방이 없습니다.");
+}
 
 function oneCheckbox(a){
-
 	var concepts = document.getElementsByName("f-accid");
-
 	for(var i=0; i<concepts.length; i++){
-
 		if(concepts[i] != a){
-
 			concepts[i].checked = false;
-
 		}
-
 	}
-
 }
 
 function clearFilter() {
@@ -444,7 +442,6 @@ function switchScreen() {
 }
 
 function showHotelRoom(hotelId,reservationInDate,reservationOutDate) {
-	alert(reservationOutDate);
 	window.location.href= "searchRoom.do?hotelId=" + hotelId + "&reservationInDate=" + reservationInDate + "&reservationOutDate=" + reservationOutDate;
 }
 
@@ -458,29 +455,29 @@ function showMapModal(jsonString,hotelName) {
 	var road_address=jsonString.documents[0].road_address.address_name;
 	var addX=jsonString.documents[0].address.x;
 	var addY=jsonString.documents[0].address.y;
-	
-	
-	
-	
+
+
+
+
 	$(document).ready(function(){
 
 
-		
+
 		//모달 헤더 (호텔 이름)
 		var HotelName=hotelName;
 		$(".modal-header").empty();
 		$(".modal-header").append("찾아오시는 길");
 		$(".modal-header").append("<b>"+hotelName+"</b>");
-		
-		
-		
-	
+
+
+
+
 
 		var mapContainer = document.getElementById('modal-body'); // 지도를 표시할 div 
 		mapOption = {
-			center : new kakao.maps.LatLng(addY, addX), // 지도의 중심좌표
-			level : 3
-			// 지도의 확대 레벨
+				center : new kakao.maps.LatLng(addY, addX), // 지도의 중심좌표
+				level : 3
+				// 지도의 확대 레벨
 		};
 
 //		지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
@@ -492,23 +489,22 @@ function showMapModal(jsonString,hotelName) {
 		});
 		// 지도에 마커를 표시합니다
 		marker.setMap(map);
-		
+
 		// 지도의 크기가 변경되었기 때문에 relayout 함수를 호출합니다
 		map.relayout();
 
 		// 지도의 너비가 변경될 때 지도중심을 입력받은 위치(position)로 설정합니다
 		map.setCenter(marker.getPosition());
-		
-		
-		
+
+
+
 		//모달 푸터(주소)
 		$(".modal-footer").empty();
-		$(".modal-footer").append("지번 주소 : "+ address);
-		$(".modal-footer").append("<br>"+"도로명 주소 : "+ road_address);
-		$(".modal-footer").append('<b><a href=\"https:\/\/map.kakao.com\/link\/to\/'+HotelName+','+addY+','+addX+'\"'+'>오는 경로 찾기</a></b>');
-		
+		$(".modal-footer").append("<div style='margin-right : 100px;'>지번 주소 : "+ address + "<br>"+"도로명 주소 : "+ road_address + "</div>");
+		$(".modal-footer").append('<div><button><b><a href=\"https:\/\/map.kakao.com\/link\/to\/'+HotelName+','+addY+','+addX+'\"'+'>경로 찾기</a></b></button></div>');
 
-		
+
+
 
 	});
 
@@ -579,4 +575,3 @@ $(function() {
 	})
 })
 //---------------------------------------------------------------------------------------------------------------------------------
-

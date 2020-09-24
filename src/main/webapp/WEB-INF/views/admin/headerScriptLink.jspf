@@ -23,8 +23,5 @@
 <script
 	src="resources/admin/vendor/plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js"></script>
 
-<!-- Custom Theme JavaScript -->
-<script src="resources/admin/vendor/js/custom.min.js"></script>
-<script src="resources/admin/vendor/js/dashboard1.js"></script>
 <script
 	src="resources/admin/vendor/plugins/bower_components/toast-master/js/jquery.toast.js"></script>

@@ -3,8 +3,6 @@ package com.spring.hotelspace.admin.management.hotel.dao;
 import java.util.List;
 import java.util.Map;
 
-import org.json.simple.parser.ParseException;
-
 import com.spring.hotelspace.admin.management.hotel.vo.AdminHotelImageVO;
 import com.spring.hotelspace.admin.management.hotel.vo.AdminHotelVO;
 import com.spring.hotelspace.admin.management.hotel.vo.AdminRoomVO;
@@ -29,4 +27,23 @@ public interface AdminHotelManagerDAO {
 
 	// 방 정보 업데이트 요청
 	public int updateRoomInfo(Map<String, String> requestMap);
+
+	// 업로드 된 호텔 이미지 데이터베이스에 저장
+	public int uploadHotelImage(List<AdminHotelImageVO> pageImageList);
+
+	// 서버에 호텔 등록
+	public int uploadHotel(Map<String, String> requestMap);
+
+	// 업로드 된 방 이미지 데이터베이스에 저장
+	public int uploadRoomImage(List<AdminHotelImageVO> pageImageList);
+
+	// 서버에 방 등록
+	public int uploadRoom(Map<String, String> requestMap);
+
+	// 호텔 삭제
+	public int deleteHotel(String hotelId);
+
+	// 방 삭제
+	public int deleteRoom(String roomId);
+
 }

@@ -11,6 +11,7 @@ import java.util.Map;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.spring.hotelspace.client.search.dao.ClientSearchHotelDAOImpl;
 import com.spring.hotelspace.client.search.service.ClientSearchHotelService;
@@ -29,22 +30,22 @@ public class ClientSearchHotelServiceImpl implements ClientSearchHotelService {
 	private GeoCodeService geoCodeService;
 	
 	private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yy-MM-dd");
-	Calendar cal = new GregorianCalendar();
-    
+	
 	private final static int hoteListPageSize = 3;
 	private final static int pageBlock = 2;
 	// 전체 호텔 리스트 조회
 	
 	// 호텔 리스트 검색(hotelList page)
 	@Override
+	@Transactional
 	public HashMap<String, Object> searchHotelToSearchBar(ClientSearchHotelDTO requestDTO) {
 
 		
-		HashMap<Object, Object> map = new HashMap<Object, Object>();
+		HashMap<Object, Object> map = new HashMap<>();
 		
 		map.put("hotelSearchMethod", "hotelListToSearch");
 		map.put("searchKeyword", requestDTO.getSearchKeyword());
-		map.put("checkIdDate", requestDTO.getCheckInDate());
+		map.put("checkInDate", requestDTO.getCheckInDate());
 		map.put("checkOutDate", requestDTO.getCheckOutDate());
 		map.put("people", requestDTO.getPeople());
 		map.put("area", requestDTO.getArea());
@@ -72,14 +73,16 @@ public class ClientSearchHotelServiceImpl implements ClientSearchHotelService {
 		hotelMap.put("pageNum", 1);
 		hotelMap.put("pageSize", hoteListPageSize);
 		hotelMap.put("pageBlock", pageBlock);
+		System.out.println("hotelMap : " + hotelMap);
 		return hotelMap;
 	}
 
 	// 호텔 리스트 결과 필터 적용
 	@Override
+	@Transactional
 	public HashMap<String, Object> searchHotelList(ClientHotelFilterDTO hotelFillter, Object hotelSearchMethod) {
-
-		HashMap<Object, Object> map = new HashMap<Object, Object>();
+		Calendar cal = new GregorianCalendar();
+		HashMap<Object, Object> map = new HashMap<>();
 		List<Object> hotelList = null;
 		map.put("checkedKeyword", hotelFillter.getCheckedKeyword());
 		map.put("parking", hotelFillter.getParking());
@@ -98,14 +101,14 @@ public class ClientSearchHotelServiceImpl implements ClientSearchHotelService {
 		map.put("end", hoteListPageSize);
 		
 		
-		String checkIdDate = null;
+		String checkInDate = null;
 		String checkOutDate = null;
 		
 		if(hotelSearchMethod.equals("hotelListAll")) {
 			cal.add(Calendar.DATE, 1);
-			checkIdDate = simpleDateFormat.format(new Date());
+			checkInDate = simpleDateFormat.format(new Date());
 			checkOutDate = simpleDateFormat.format(cal.getTime());
-			map.put("checkIdDate", checkIdDate);
+			map.put("checkInDate", checkInDate);
 			map.put("checkOutDate", checkOutDate);
 
 			map.put("hotelSearchMethod", "hotelListAll");
@@ -116,7 +119,7 @@ public class ClientSearchHotelServiceImpl implements ClientSearchHotelService {
 			ClientSearchHotelDTO searchQuery = (ClientSearchHotelDTO) hotelSearchMethod;
 			map.put("hotelSearchMethod", "hotelListToSearch");
 			map.put("searchKeyword", searchQuery.getSearchKeyword());
-			map.put("checkIdDate", searchQuery.getCheckInDate());
+			map.put("checkInDate", searchQuery.getCheckInDate());
 			map.put("checkOutDate", searchQuery.getCheckOutDate());
 			map.put("people", searchQuery.getPeople());
 			map.put("area", searchQuery.getArea());
@@ -137,7 +140,7 @@ public class ClientSearchHotelServiceImpl implements ClientSearchHotelService {
 		}
 		
 		if(hotelSearchMethod.equals("hotelListAll")) {
-			hotelMap.put("reservationInDate", checkIdDate);
+			hotelMap.put("reservationInDate", checkInDate);
 			hotelMap.put("reservationOutDate", checkOutDate);
 		} else {
 			hotelMap.put("reservationInDate", ((ClientSearchHotelDTO) hotelSearchMethod).getCheckInDate());
@@ -148,16 +151,17 @@ public class ClientSearchHotelServiceImpl implements ClientSearchHotelService {
 		hotelMap.put("pageNum", 1);
 		hotelMap.put("pageSize", hoteListPageSize);
 		hotelMap.put("pageBlock", pageBlock);
-		System.out.println(hotelMap);
+		System.out.println("hotelMap : " + hotelMap);
 		return hotelMap;
 	}
 
 	// 호텔리스트 페이지 이동
 	@Override
+	@Transactional
 	public HashMap<String, Object> movePageToHotelList(ClientHotelFilterDTO hotelFillter, Object hotelSearchMethod, String filter) {
+		Calendar cal = new GregorianCalendar();
 		
-		
-		HashMap<Object, Object> map = new HashMap<Object, Object>();
+		HashMap<Object, Object> map = new HashMap<>();
 		
 		// filter
 		map.put("checkedKeyword", hotelFillter.getCheckedKeyword());
@@ -178,15 +182,15 @@ public class ClientSearchHotelServiceImpl implements ClientSearchHotelService {
 		map.put("end", (hotelFillter.getPageNum() * hoteListPageSize));
 		
 		List<Object> hotelList = null;
-		String checkIdDate = null;
+		String checkInDate = null;
 		String checkOutDate = null;
 		
 		if(hotelSearchMethod.equals("hotelListAll")) {
 			map.put("hotelSearchMethod", "hotelListAll");
 			cal.add(Calendar.DATE, 1);
-			checkIdDate = simpleDateFormat.format(new Date());
+			checkInDate = simpleDateFormat.format(new Date());
 			checkOutDate = simpleDateFormat.format(cal.getTime());
-			map.put("checkIdDate", checkIdDate);
+			map.put("checkInDate", checkInDate);
 			map.put("checkOutDate", checkOutDate);
 			
 			hotelList =  clientSearchHotelDAO.searchHotelAll(map);
@@ -194,7 +198,7 @@ public class ClientSearchHotelServiceImpl implements ClientSearchHotelService {
 			ClientSearchHotelDTO searchQuery = (ClientSearchHotelDTO) hotelSearchMethod;
 			map.put("hotelSearchMethod", "hotelListToSearch");
 			map.put("searchKeyword",  searchQuery.getSearchKeyword());
-			map.put("checkIdDate", searchQuery.getCheckInDate());
+			map.put("checkInDate", searchQuery.getCheckInDate());
 			map.put("checkOutDate", searchQuery.getCheckOutDate());
 			map.put("people", searchQuery.getPeople());
 			map.put("area", searchQuery.getArea());
@@ -215,10 +219,10 @@ public class ClientSearchHotelServiceImpl implements ClientSearchHotelService {
 		System.out.println("map : " + map);
 		
 		if(hotelSearchMethod.equals("hotelListAll")) {
-			hotelMap.put("reservationInDate", checkIdDate);
+			hotelMap.put("reservationInDate", checkInDate);
 			hotelMap.put("reservationOutDate", checkOutDate);
 		} else {
-			hotelMap.put("reservationInDate", checkIdDate);
+			hotelMap.put("reservationInDate", checkInDate);
 			hotelMap.put("reservationOutDate", checkOutDate);
 		}
 		hotelMap.put("count", clientSearchHotelDAO.getCountToHotelList(map));

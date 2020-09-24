@@ -58,17 +58,11 @@
 				<br />
 				<div class="row mb-5" id="div-roomInfo"></div>
 			</div>
-
-
-			<div class="row mb-5 pt-5 justify-content-center">
-				<div class="col-md-7 text-center section-heading">
-					<h2 class="heading">More Rooms</h2>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-						Reprehenderit, iusto, omnis! Quidem, sint, impedit? Dicta eaque
-						delectus tempora hic, corporis velit doloremque quod quam laborum,
-						nobis iusto autem culpa quaerat!</p>
-				</div>
+			
+			<div align="right" style="width: 100%;">
+				<button onclick="windowClose();">닫기</button>
 			</div>
+			
 		</div>
 
 

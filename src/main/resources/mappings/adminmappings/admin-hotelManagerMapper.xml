@@ -7,7 +7,7 @@
 	<select id="getHotelList" parameterType="java.util.HashMap" resultType="adminHotelVO">
 		SELECT *
 			FROM (
-				SELECT 	ROWNUM as "row", subtable.*
+				SELECT ROWNUM as "row", subtable.*
 					FROM (
 						SELECT 
 							HOTEL_ID
@@ -36,47 +36,19 @@
 								HOTEL_AREA LIKE '%'||#{hotelClientId}||'%' 
 						</if>
 						ORDER BY
-							HOTEL_ID 
-						<choose>
-							<when test = "orderbyOption eq 'ASC'">
-								ASC
-							</when>
-							<otherwise>
-								DESC
-							</otherwise>
-						</choose>
-						<if test="orderbyName != null and !orderbyName.equals('')">
-							, #{orderbyName} 
-								<choose>
-									<when test = "orderbyOption eq 'ASC'">
-										ASC
-									</when>
-									<otherwise>
-										DESC
-									</otherwise>
-								</choose>
+							<!-- #{checkedOrderValue}  -->
+						<if test="checkedOrderValue != null and checkedOrderValue.equals('HOTEL_ID')">
+							HOTEL_ID
 						</if>
-						<if test="orderbyArea != null and !orderbyArea.equals('')">
-							, #{orderbyId} 
-								<choose>
-									<when test = "orderbyOption eq 'ASC'">
-										ASC
-									</when>
-									<otherwise>
-										DESC
-									</otherwise>
-								</choose>
+						<if test="orderbyOption != null and checkedOrderValue.equals('HOTEL_AREA')">
+							HOTEL_AREA
 						</if>
-						<if test="orderbyStar != null and !orderbyStar.equals('')">
-							, #{orderbyStar} 
-								<choose>
-									<when test = "orderbyOption eq 'ASC'">
-										ASC
-									</when>
-									<otherwise>
-										DESC
-									</otherwise>
-								</choose>
+						<if test="orderbyOption != null and checkedOrderValue.equals('HOTEL_STAR')">
+							HOTEL_STAR
+						</if>	
+							
+						<if test="orderbyOption != null and orderbyOption eq 'DESC'">
+							DESC
 						</if>
 						) subtable 
 					)
@@ -225,4 +197,131 @@
     		ROOM_ID = #{roomId}
 	</update>
 	
+	<insert id="hotelImageInsert" parameterType="java.util.List">
+		INSERT ALL
+			<foreach collection="list" item="hotelImage">
+				INTO HOTEL_IMAGE(HOTEL_ID, IMAGE_TYPE, IMAGE_LINK) 
+					VALUES
+				(	#{hotelImage.hotelId}, 
+					#{hotelImage.imageType}, 
+					#{hotelImage.imageLink}
+				)
+			</foreach>	
+		SELECT 
+			* 
+		FROM 
+			DUAL
+	</insert>
+	
+	<insert id="hotelInsert" parameterType="java.util.HashMap">
+		INSERT ALL
+			INTO
+				HOTEL (
+					HOTEL_ID,
+					USER_ID,
+					HOTEL_NAME,
+					HOTEL_TEL,
+					HOTEL_AREA,
+					HOTEL_ADDRESS,
+					HOTEL_CONCEPT,
+					HOTEL_STAR,
+					HOTEL_REG_DATE
+				)
+			VALUES(
+				#{hotelId},
+				#{hotelClientId},
+				#{hotelName},
+				#{hotelTel},
+				#{hotelArea},
+				#{hotelAddress},
+				#{hotelConcept},
+				0,
+				SYSDATE
+			)
+			INTO
+				FACILITIES (
+					HOTEL_ID,
+					FACILITIES_PARKING,
+					FACILITIES_POOL,
+					FACILITIES_BREAKFAST,
+					FACILITIES_FITNESS,
+					FACILITIES_WIFI,
+					FACILITIES_PARTYROOM
+				)
+			VALUES(
+				#{hotelId},
+				#{facility_parking},
+				#{facility_pool},
+				#{facility_breakfast},
+				#{facility_fitness},
+				#{facility_wifi},
+				#{facility_partyRoom}
+			)
+			
+			SELECT
+				*
+			FROM
+				DUAL
+	</insert>
+	
+	<insert id="roomImageInsert" parameterType="java.util.List">
+		INSERT ALL
+			<foreach collection="list" item="hotelImage">
+				INTO ROOM_IMAGE(ROOM_ID, IMAGE_TYPE, IMAGE_LINK) 
+					VALUES
+				(	#{hotelImage.hotelId}, 
+					#{hotelImage.imageType}, 
+					#{hotelImage.imageLink}
+				)
+			</foreach>	
+		SELECT 
+			* 
+		FROM 
+			DUAL
+	</insert>
+	
+	<insert id="roomInsert" parameterType="java.util.HashMap">
+		INSERT 
+			INTO
+				ROOM (
+					ROOM_ID,
+					HOTEL_ID,
+					ROOM_NAME,
+					ROOM_PRICE,
+					ROOM_AMOUNT,
+					ROOM_STANDARD_PEOPLE,
+					ROOM_MAX_PEOPLE,
+					ROOM_PRICE_PEOPLE,
+					ROOM_SERVICES,
+					ROOM_INFO,
+					ROOM_USAGE
+				)
+			VALUES(
+				#{roomId},
+				#{hotelId},
+				#{roomName},
+				#{roomPrice},
+				#{roomAmount},
+				#{roomStandardPeople},
+				#{roomMaxPeople},
+				#{roomPricePeople},
+				#{roomService},
+				#{roomInfo},
+				0
+			)
+	</insert>
+	
+	<delete id="roomDelete" parameterType="String">
+		DELETE
+			ROOM
+		WHERE
+			ROOM_ID = #{roomId}
+	</delete>
+	
+	<delete id="hotelDelete" parameterType="String">
+		DELETE
+			HOTEL
+		WHERE
+			HOTEL_ID = #{hotelId}
+	</delete>
 </mapper>
