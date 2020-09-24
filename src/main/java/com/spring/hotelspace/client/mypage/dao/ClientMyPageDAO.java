@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.spring.hotelspace.client.login.vo.ClientLoginVO;
 import com.spring.hotelspace.client.mypage.vo.ClientMyPageVO;
+import com.spring.hotelspace.client.mypage.vo.ClientReviewVO;
 import com.spring.hotelspace.client.reservation.vo.ClientReservationVO;
 
 @Repository
@@ -24,5 +25,9 @@ public interface ClientMyPageDAO {
 	public ClientMyPageVO withdrawal(ClientLoginVO client);
 
 	public List<ClientReservationVO> myReservation(String client);
+
+	public String mypageReview(ClientReviewVO client);
+
+	public String avgReview(String review);
 	
 }

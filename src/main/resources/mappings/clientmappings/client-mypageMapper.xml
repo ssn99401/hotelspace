@@ -2,80 +2,79 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.spring.hotelspace.client.mypage.dao.ClientMyPageDAO">
-
-<update id="updateMyInfo" parameterType="clientLoginVO">
+<mapper
+	namespace="com.spring.hotelspace.client.mypage.dao.ClientMyPageDAO">
+	
+	<update id="avgReview" parameterType="String">
+	UPDATE HOTEL
+	SET hotel_star = (select avg(review_star) from review where hotel_id = #{hotelId}) 
+	WHERE hotel_id = #{hotelId}
+	
+	</update>
+	
+	<update id="mypageReview" parameterType="clientReviewVO">
+	INSERT INTO review (REVIEW_ID, CLIENT_ID, HOTEL_ID, ROOM_ID, REVIEW_CONTENT, REVIEW_STAR, REVIEW_PARENT_COMMENT) 
+	VALUES ( #{reviewId}, #{clientId}, #{hotelId}, #{roomId}, #{reviewContent},#{reviewStar},#{roomId})	
+	
+	</update>
+	
+	<update id="updateMyInfo" parameterType="clientLoginVO">
 		UPDATE client
 		SET
 		CLIENT_TEL=#{clientTel},
 		CLIENT_EMAIL=#{clientEmail}
-		where client_id=#{clientId}
+		where
+		client_id=#{clientId}
 	</update>
-	
-	<select id="selectAll" parameterType="clientLoginVO" resultType="clientLoginVO">
-		SELECT 
+
+	<select id="selectAll" parameterType="clientLoginVO"
+		resultType="clientLoginVO">
+		SELECT
 		*
-		FROM client 
+		FROM client
 		WHERE client_id = #{clientId}
 	</select>
-	
-	<select id="myReservation" parameterType="String" resultType="clientReservationVO">
-		SELECT 
+
+	<select id="myReservation" parameterType="String"
+		resultType="clientReservationVO">
+		SELECT
 		*
-		FROM reservation 
+		FROM reservation
 		WHERE client_id = #{client}
 	</select>
-	
-	   <update id="updatePW" parameterType="ClientMyPageVO">
-      UPDATE CLIENT
-      SET
-      CLIENT_PASSWORD= #{clientPassword}
-      WHERE
-      CLIENT_ID = #{clientId}
-   </update>
-   
-   
-   <!-- a-jax 비밀번호 체크 -->
-   <select id="checkPw" parameterType="ClientMypageVO"
-      resultType="java.lang.Integer">
-      SELECT NVL(COUNT(*),0)
-      FROM CLIENT WHERE
-      client_Password=#{clientPassword}
-   </select>
-   
-   <!-- 회원탈퇴 -->
-   <delete id="withdrawal" parameterType="ClientLoginVO">
+
+	<update id="updatePW" parameterType="ClientMyPageVO">
+		UPDATE CLIENT
+		SET
+		CLIENT_PASSWORD= #{clientPassword}
+		WHERE
+		CLIENT_ID = #{clientId}
+	</update>
+
+
+	<!-- a-jax 비밀번호 체크 -->
+	<select id="checkPw" parameterType="ClientMypageVO"
+		resultType="java.lang.Integer">
+		SELECT NVL(COUNT(*),0)
+		FROM CLIENT WHERE
+		client_Password=#{clientPassword}
+	</select>
+
+	<!-- 회원탈퇴 -->
+	<delete id="withdrawal" parameterType="ClientLoginVO">
 		DELETE FROM ClIENT WHERE
 		client_Id = #{clientId}
 	</delete>
-	
-	
-	<!-- <resultMap type="#modelname" id="YourResultSet">
-		<id property="param1" column="columnname1" />
-		<result property="param2" column="columnname2" />
-		<result property="param3" column="columnname3" />
-	</resultMap>
 
-	<select id="getAll" resultMap="YourResultSet">
-		SELECT * FROM tablename1
-	</select>
 
-	<insert id="insertSomething" parameterType="#modelname">
-		INSERT INTO tablename1 (columnname1, columnname2, columnname3)
-		VALUES(#{value1},#{value2},#{value3})
-	</insert>
-
-	<update id="updateSomething" parameterType="#modelname">
-		UPDATE tablename1
-		SET
-		columnname1=#{param1}
-		WHERE
-		columnname2 = #{param2}
-	</update>
-
-	<delete id="deleteSomething" parameterType="int">
-		DELETE FROM tablename1 WHERE
-		columnname1 = #{param1}
-	</delete> -->
+	<!-- <resultMap type="#modelname" id="YourResultSet"> <id property="param1" 
+		column="columnname1" /> <result property="param2" column="columnname2" /> 
+		<result property="param3" column="columnname3" /> </resultMap> <select id="getAll" 
+		resultMap="YourResultSet"> SELECT * FROM tablename1 </select> <insert id="insertSomething" 
+		parameterType="#modelname"> INSERT INTO tablename1 (columnname1, columnname2, 
+		columnname3) VALUES(#{value1},#{value2},#{value3}) </insert> <update id="updateSomething" 
+		parameterType="#modelname"> UPDATE tablename1 SET columnname1=#{param1} WHERE 
+		columnname2 = #{param2} </update> <delete id="deleteSomething" parameterType="int"> 
+		DELETE FROM tablename1 WHERE columnname1 = #{param1} </delete> -->
 
 </mapper>
