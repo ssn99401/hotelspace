@@ -12,12 +12,8 @@
 				<h4 class="page-title">Dashboard</h4>
 			</div>
 			<div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
-				<a href="https://wrappixel.com/templates/ampleadmin/"
-					target="_blank"
-					class="btn btn-danger pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light">Upgrade
-					to Pro</a>
 				<ol class="breadcrumb">
-					<li><a href="#">Dashboard</a></li>
+					
 				</ol>
 			</div>
 
@@ -143,8 +139,8 @@
 				</div>
 			</div>
 		</div>
-		============================================================== table
-		==============================================================
+		
+		<!-- 최근 예약 -->
 		<div class="row">
 			<div class="col-md-12 col-lg-12 col-sm-12">
 				<div class="white-box">
@@ -167,7 +163,7 @@
 								<c:forEach var="re" items="${reservation}">
 									<tr>
 										<td>${no }</td>
-										<td class="txt-oflo"><a href="#">${re.clientId}</a></td>
+										<td class="txt-oflo"><a href="profile.mdo?id=${re.clientId }">${re.clientId}</a></td>
 										<td>${re.hotelName }</td>
 										<td>${re.roomName }</td>
 										<td class="txt-oflo">${re.reservationInDate}~
@@ -199,9 +195,7 @@
 				</div>
 			</div>
 		</div>
-		==============================================================
-		chat-listing & recent comments
-		==============================================================
+		<!-- 최근 리뷰 -->
 		<div class="row">
 			<div class="col-md-12 col-lg-8 col-sm-12">
 				<div class="white-box">
@@ -230,8 +224,13 @@
 						</div>-->
 						<c:forEach var="re" items="${review}">
 							<div class="comment-body">
+								<div class="user-img">
+								<img
+									src="${re.imageLink }"
+									alt="user" class="img-circle">
+								</div>
 								<div class="mail-contnet">
-									<h5>${re.clientId }</h5>
+									<h5><a href="profile.mdo?id=${re.clientId }">${re.clientId}</a></h5>
 									<span class="time"> ${re.reviewWriteDate} </span> <br /> <span
 										class="mail-desc">${re.reviewContent }</span>
 								</div>
@@ -245,7 +244,7 @@
 					<div class="sk-chat-widgets">
 						<div class="panel panel-default">
 
-							<div class="panel-heading">CHAT LISTING</div>
+							<div class="panel-heading">Hotel Reservation Rate</div>
 							<div class="panel-body">
 							
 							<!--파이차트 데이터 ---------------------------------------------------->

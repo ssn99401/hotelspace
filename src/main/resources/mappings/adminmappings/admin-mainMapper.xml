@@ -62,41 +62,37 @@
 		group by (year, month)
 	</select>
 
-	<select id="getRecentReservation" resultType="adminRecentResVO">
-		select reservation_id, r.hotel_id, r.room_id,
-		reservation_in_date,
-		reservation_out_date,client_id,
-		reservation_payment,
-		reservation_people, reserve_date, review_check, hotel_name, room_name
-		from
-		(select * from reservation order by reserve_date) r,
-		(select
-		hotel_id,
-		hotel_name from hotel) h,
-		(select room_id, room_name from
-		room) o
-		where
-		r.hotel_id = h.hotel_id and r.room_id = o.room_id 
+		<select id="getRecentReservation" resultType="adminRecentResVO">
+	select * from
+		(select reservation_id, r.hotel_id as hotel_id, r.room_id as room_id,
+		reservation_in_date, reservation_out_date,client_id,
+		reservation_payment, reserve_date, hotel_name, room_name
+		from 
+		reservation r,
+		(select hotel_id, hotel_name from hotel) h,
+		(select room_id, room_name from room) o
+		where r.hotel_id = h.hotel_id and r.room_id = o.room_id order by reserve_date desc)
 		<![CDATA[ 
-		and rownum < 6		
-		]]>
-
+		where rownum < 6		
+		]]> 
 	</select>
-
+	
 	<select id="getRecentRev" resultType="adminRecentRevVO">
-		SELECT review_id, r.hotel_id, r.room_id,client_id,
+	select * from 
+		(SELECT review_id, r.hotel_id as hotel_id, r.room_id as room_id,client_id, image_link,
 		review_content,review_star,review_write_date,hotel_name,room_name
 		FROM
-		(select * from review order by review_write_date desc) r,
-		(select
-		hotel_id, hotel_name from hotel) h,
-		(select room_id, room_name from
-		room) o
-		where r.hotel_id = h.hotel_id and r.room_id = o.room_id 
-        <![CDATA[ 
-		and rownum < 6		
+		review r,
+		(select h.hotel_id,image_link, hotel_name from hotel h, hotel_image i where i.image_type = 'MAIN' and h.hotel_id (+)= i.hotel_id) h,
+		(select room_id, room_name from room) o
+        where r.hotel_id = h.hotel_id and r.room_id = o.room_id
+        order by review_write_date desc)
+        <![CDATA[
+		where rownum < 6
 		]]>
-	</select>
+       	</select>
+	
+
 
 	<select id="getpiChart" resultType="piChartVO">
 	select hotel_concept,count(*) as reshotel_count 
@@ -104,21 +100,6 @@
     where h.hotel_id = r.hotel_id GROUP by hotel_concept
 	</select>
 	
-	<select id="getResid" resultType="String">
-	select hotel_id 
-	from reservation
-	</select>
-	
-	<select id="gethid2" parameterType="String" resultType="String">
-		select hotel_id 
-		from hotel
-		where hotel_concept = #{city}
-	</select>
-	
-	<select id="getrid2" resultType="String">
-	select hotel_id 
-	from reservation
-	</select>
 
 
 	<!-- <resultMap type="#modelname" id="YourResultSet"> <id property="param1" 

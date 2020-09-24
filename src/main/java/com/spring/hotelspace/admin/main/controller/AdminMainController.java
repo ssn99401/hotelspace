@@ -51,10 +51,9 @@ public class AdminMainController {
 	
 		
 		for (ReservationDataVO e : getData) {//값이 있는곳에 반복문으로 넣어주기
-	
 			if(e.getYear().equals("2020") || e.getYear().equals("20")) {//2020년 데이터 //데이터가 중복되면 20으로 추출됨
 				int m = Integer.parseInt(e.getMonth());
-				array[0][m-1] = e.getCount();//예약 건수
+				array[0][m-1] += e.getCount();//예약 건수
 			
 				
 			}else {//2019년 데이터

@@ -16,15 +16,15 @@ public class AdminRecentRevVO {
 	private String reviewWriteDate;
 	private String hotelName;
 	private String roomName;
+	private String imageLink;
 	
 	public AdminRecentRevVO() {
 		// TODO Auto-generated constructor stub
 	}
 
-	
-
 	public AdminRecentRevVO(String reviewId, String clientId, String hotelId, String roomId, String reviewContent,
-			int reviewStar, String reviewParentComment, String reviewWriteDate, String hotelName, String roomName) {
+			int reviewStar, String reviewParentComment, String reviewWriteDate, String hotelName, String roomName,
+			String imageLink) {
 		super();
 		this.reviewId = reviewId;
 		this.clientId = clientId;
@@ -36,6 +36,20 @@ public class AdminRecentRevVO {
 		this.reviewWriteDate = reviewWriteDate;
 		this.hotelName = hotelName;
 		this.roomName = roomName;
+		this.imageLink = imageLink;
+	}
+
+
+	public String getImageLink() {
+		return imageLink;
+	}
+	
+	
+	
+	
+	
+	public void setImageLink(String imageLink) {
+		this.imageLink = imageLink;
 	}
 
 

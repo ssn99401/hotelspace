@@ -3,7 +3,7 @@ $(document)
 				function() {
 					"use strict";
 					// toat popup js
-					$
+					/*$
 							.toast({
 								heading : 'Welcome to Ample admin',
 								text : 'Use the predefined ones, or specify a custom position object.',
@@ -12,7 +12,7 @@ $(document)
 								icon : 'warning',
 								hideAfter : 3500,
 								stack : 6
-							})
+							})*/
 
 					var option = document.getElementById("option").value; // 차트
 					// 옵션 값
@@ -119,12 +119,12 @@ $(document)
 						sparkResize = setTimeout(sparklineLogin, 500);
 					});
 					sparklineLogin();
-					var arraysize= document.getElementById('arraysize').value;
+				
 					var concept = document.getElementById('hc0').value;
 					var rescount = document.getElementById('rhc0').value;
 					var getarray="";
 					
-					for (var i = 0; i < arraysize.length-1; i++) {
+					for (var i = 0; i < 100; i++) {
 						var name = "hc"+i;
 						var name2 = "rhc"+i;
 						console.log(name);
@@ -168,14 +168,15 @@ $(document)
 						);
 						var opt = {
 							'title' : '컨셉 별 예약 비율',
-							'width' : 500,
-							'height' : 500,
+							'width' : 350,
+							'height' : 350,
 							pieSliceText : 'label',
 							legend : 'none'
 						};
 						var chart = new google.visualization.PieChart(document
 								.getElementById('piChart'));
 						chart.draw(data, opt);
+						window.addEventListener('resize',drawChart,false);
 					}
 
 				});
