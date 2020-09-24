@@ -5,5 +5,5 @@ import com.spring.hotelspace.client.search.vo.ClientRoomVO;
 
 public interface ClientSearchRoomDAO {
 	public List<ClientRoomVO> searchRoom(ClientRoomVO vo);
-	
+	public List<ClientRoomVO> searchRoomImage(List<ClientRoomVO> voList);
 }

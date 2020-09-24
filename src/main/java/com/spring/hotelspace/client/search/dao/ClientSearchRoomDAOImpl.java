@@ -22,7 +22,12 @@ public class ClientSearchRoomDAOImpl implements ClientSearchRoomDAO {
 		// TODO Auto-generated method stub
 		return sqlSessionTemplate.selectList(namespace + ".searchRoom", vo);
 	}
-
+	
+	@Override
+	public List<ClientRoomVO> searchRoomImage(List<ClientRoomVO> voList) {
+		// TODO Auto-generated method stub
+		return sqlSessionTemplate.selectList(namespace + ".getRoomImageList", voList);
+	}
 	
 
 }

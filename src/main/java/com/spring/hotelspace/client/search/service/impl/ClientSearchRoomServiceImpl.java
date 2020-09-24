@@ -23,6 +23,12 @@ public class ClientSearchRoomServiceImpl implements ClientSearchRoomService {
 		return o;
 	}
 
+	@Override
+	public List<ClientRoomVO> searchRoomImage(List<ClientRoomVO> voList) {
+		// TODO Auto-generated method stub
+		return clientSearchRoomDAO.searchRoomImage(voList);
+	}
+
 
 
 }
