@@ -9,6 +9,7 @@ import com.spring.hotelspace.client.login.vo.ClientLoginVO;
 import com.spring.hotelspace.client.mypage.dao.ClientMyPageDAO;
 import com.spring.hotelspace.client.mypage.service.ClientMyPageService;
 import com.spring.hotelspace.client.mypage.vo.ClientMyPageVO;
+import com.spring.hotelspace.client.mypage.vo.ClientReviewVO;
 import com.spring.hotelspace.client.reservation.vo.ClientReservationVO;
 
 @Service
@@ -52,6 +53,18 @@ public class ClientMyPageServiceImpl implements ClientMyPageService {
 	public List<ClientReservationVO> myReservation(String client) {
 		// TODO Auto-generat ed method stub
 		return clientMyPageDAO.myReservation(client);
+	}
+
+	@Override
+	public String mypageReview(ClientReviewVO client) {
+		// TODO Auto-generated method stub
+		return clientMyPageDAO.mypageReview(client);
+	}
+
+	@Override
+	public  String avgReview(String review) {
+		// TODO Auto-generated method stub
+		return clientMyPageDAO.avgReview(review);
 	}
 	
 	
