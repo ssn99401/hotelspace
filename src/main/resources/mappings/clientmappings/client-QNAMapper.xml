@@ -2,35 +2,111 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.spring.hotelspace.client.board.dao.ClientQNADAO">
+<mapper
+	namespace="com.spring.hotelspace.client.board.dao.ClientQNADAO">
 
+<select id="AllQNA" parameterType="ClientQNAVO"
+      resultType="ClientQNAVO">
+      <![CDATA[               
+         SELECT *
+         FROM(SELECT substr(C.CLIENT_NAME,1,1)||lpad('*', length(C.CLIENT_NAME)-2, '*')||substr(C.CLIENT_NAME,length(C.CLIENT_NAME),1) "CLIENT_NAME", Q.CLAIM_CATEGORY,
+         Q.CLAIM_TITLE,
+         Q.CLAIM_SECRET,
+         Q.CLAIM_QDATE,
+         Q.CLAIM_NUM,
+         C.CLIENT_ID
+         FROM CLIENT C, QNA Q
+         WHERE C.CLIENT_ID=Q.CLIENT_ID
+         ORDER BY Q.CLAIM_QDATE DESC)
+         WHERE ROWNUM <= #{listNum}
+      ]]>
+   </select>
 
-	<!-- <resultMap type="#modelname" id="YourResultSet">
-		<id property="param1" column="columnname1" />
-		<result property="param2" column="columnname2" />
-		<result property="param3" column="columnname3" />
-	</resultMap>
+   <select id="MyQNA" parameterType="ClientQNAVO"
+      resultType="ClientQNAVO">
+      <![CDATA[
+         SELECT * FROM
+         (SELECT C.CLIENT_NAME, Q.CLAIM_CATEGORY, Q.CLAIM_NUM,
+         Q.CLAIM_TITLE, Q.CLAIM_QDATE, Q.CLAIM_ADATE
+         FROM CLIENT C, QNA Q
+         WHERE C.CLIENT_ID=Q.CLIENT_ID and C.CLIENT_ID = #{clientId}
+         ORDER BY CLAIM_QDATE desc)
+         WHERE ROWNUM <= #{listNum2}
+      ]]>
+   </select>
+   
+   <select id="SearchQNA" parameterType="ClientQNAVO"
+      resultType="ClientQNAVO">
+      <![CDATA[
+         Select * 
+         FROM (SELECT substr(C.CLIENT_NAME,1,1)||lpad('*', length(C.CLIENT_NAME)-2, '*')||substr(C.CLIENT_NAME,length(C.CLIENT_NAME),1) "CLIENT_NAME",
+            Q.CLAIM_CATEGORY, Q.CLAIM_CONTENT, Q.CLAIM_SECRET, Q.CLAIM_NUM,
+         Q.CLAIM_TITLE, Q.CLAIM_QDATE, Q.CLAIM_ADATE ]]>
+         FROM CLIENT C, QNA Q 
+         WHERE C.CLIENT_ID=Q.CLIENT_ID <if test= 'searchfor == "3"'> and C.CLIENT_NAME LIKE #{searchItem} 
+         ORDER BY Q.CLAIM_QDATE <![CDATA[desc)WHERE ROWNUM <]]>= #{listNum3} </if>
+         <if test= 'searchfor == "0"'>
+               <![CDATA[ORDER BY CLAIM_QDATE desc)]]>WHERE CLAIM_TITLE LIKE #{searchItem} and ROWNUM  <![CDATA[<]]>= #{listNum3}
+            </if>
+            <if test= 'searchfor == "1"'>
+               <![CDATA[ORDER BY CLAIM_QDATE desc)]]>WHERE CLAIM_CONTENT LIKE #{searchItem} and ROWNUM  <![CDATA[<]]>= #{listNum3}
+            </if>
+            <if test= 'searchfor == "2"'>
+               <![CDATA[ORDER BY CLAIM_QDATE desc)]]>WHERE CLAIM_TITLE LIKE #{searchItem} and CLAIM_CONTENT LIKE #{searchItem} and ROWNUM  <![CDATA[<]]>= #{listNum3}
+            </if>
+   </select>
+	<insert id="QNAInsert" parameterType="ClientQNAVO">
+		INSERT INTO QNA VALUES ( 
+		#{clientId},
+		QNA_SEQ.NEXTVAL,
+		#{claimCategory},
+		#{claimTitle},
+		#{claimContent},
+		#{claimPhoto},
+		SYSDATE,
+		#{claimSecret},
+		SYSDATE
+		)
 
-	<select id="getAll" resultMap="YourResultSet">
-		SELECT * FROM tablename1
-	</select>
-
-	<insert id="insertSomething" parameterType="#modelname">
-		INSERT INTO tablename1 (columnname1, columnname2, columnname3)
-		VALUES(#{value1},#{value2},#{value3})
 	</insert>
-
-	<update id="updateSomething" parameterType="#modelname">
-		UPDATE tablename1
-		SET
-		columnname1=#{param1}
-		WHERE
-		columnname2 = #{param2}
+	<select id="QNAread" parameterType="int"
+		resultType="ClientQNAVO">
+		SELECT CLAIM_NUM
+		, CLIENT_ID
+		, CLAIM_TITLE
+		, CLAIM_CATEGORY
+		, CLAIM_CONTENT
+		, CLAIM_PHOTO
+		, CLAIM_QDATE
+		, CLAIM_SECRET
+		, CLAIM_ADATE
+		FROM QNA
+		WHERE CLAIM_NUM = #{claimNum}
+	</select>
+	<update id="QNAupdate" parameterType="ClientQNAVO">
+	UPDATE QNA SET
+		CLAIM_TITLE = #{claimTitle},
+		CLAIM_CONTENT = #{claimContent},
+		CLAIM_ADATE = SYSDATE
+	WHERE CLAIM_NUM = #{claimNum}
+	
 	</update>
-
-	<delete id="deleteSomething" parameterType="int">
-		DELETE FROM tablename1 WHERE
-		columnname1 = #{param1}
-	</delete> -->
+	
+	<delete id="QNAdelete" parameterType="int">
+	DELETE FROM QNA
+	WHERE CLAIM_NUM = #{claimNum}
+	
+	</delete>
+	
+  
+	<!-- <resultMap type="#modelname" id="YourResultSet"> <id property="param1" 
+		column="columnname1" /> <result property="param2" column="columnname2" /> 
+		<result property="param3" column="columnname3" /> </resultMap> <select id="getAll" 
+		resultMap="YourResultSet"> SELECT * FROM tablename1 </select> <insert id="insertSomething" 
+		parameterType="#modelname"> INSERT INTO tablename1 (columnname1, columnname2, 
+		columnname3) VALUES(#{value1},#{value2},#{value3}) </insert> <update id="updateSomething" 
+		parameterType="#modelname"> UPDATE tablename1 SET columnname1=#{param1} WHERE 
+		columnname2 = #{param2} </update> <delete id="deleteSomething" parameterType="int"> 
+		DELETE FROM tablename1 WHERE columnname1 = #{param1} </delete> -->
 
 </mapper>

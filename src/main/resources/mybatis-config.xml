@@ -3,59 +3,55 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-	<settings>
-		<setting name="mapUnderscoreToCamelCase" value="true"/>		
-		<setting name="cacheEnabled" value="false"/>		
-		<setting name="jdbcTypeForNull" value="NULL"/>		
-	</settings>
-	
-	
-	<typeAliases>
-		<typeAlias type="com.spring.hotelspace.client.main.vo.MainVO" alias="mainVO"/>
-		<typeAlias type="com.spring.hotelspace.client.main.vo.TopHotelVO" alias="topHotelVO"/>
-		<typeAlias type="com.spring.hotelspace.client.login.vo.ClientLoginVO" alias="clientLoginVO"/>
-		<typeAlias type="com.spring.hotelspace.client.register.vo.ClientRegisterVO" alias="clientRegisterVO"/>
-		<typeAlias type="com.spring.hotelspace.client.search.vo.ClientHotelVO" alias="clientHotelVO"/>
-		<typeAlias type="com.spring.hotelspace.client.mypage.vo.ClientMyPageVO" alias="clientMyPageVO"/>
-		<typeAlias type="com.spring.hotelspace.client.search.vo.HotelFacilityVO" alias="hotelFacilityVO"/>
-		<typeAlias type="com.spring.hotelspace.client.search.vo.ClientRoomVO" alias="clientRoomVO"/>
-		<typeAlias type="com.spring.hotelspace.client.reservation.vo.ClientReservationVO" alias="clientReservationVO"/>
-		<typeAlias alias="clientReservationInfoVO" type="com.spring.hotelspace.client.reservation.vo.ClientReservationInfoVO"/>
-		<typeAlias type="com.spring.hotelspace.client.board.vo.ClientFAQVO" alias="clientFAQVO"/>
-		<typeAlias type="com.spring.hotelspace.client.board.vo.ClientQNAVO" alias="clientQNAVO"/>
-			
-		<typeAlias type="com.spring.hotelspace.admin.main.vo.AdminMainVO" alias="adminMainVO"/>
-		<typeAlias type="com.spring.hotelspace.admin.login.vo.AdminLoginVO" alias="adminLoginVO"/>
-		<typeAlias type="com.spring.hotelspace.admin.management.user.vo.AdminManageClientRevVO" alias="adminManageClientRevVO"/>
-      	<typeAlias type="com.spring.hotelspace.admin.management.user.vo.AdminManageClientResVO" alias="adminManageClientResVO"/>
-		<typeAlias type="com.spring.hotelspace.admin.management.user.vo.AdminManageClientVO" alias="adminManageClientVO"/>
-      	<typeAlias type="com.spring.hotelspace.admin.management.user.vo.AdminManageClientRevVO" alias="adminManageClientRevVO"/>
-		<typeAlias type="com.spring.hotelspace.admin.management.page.vo.AdminPageImageVO" alias="adminPageImageVO"/>
-		<typeAlias type="com.spring.hotelspace.admin.management.hotel.vo.AdminHotelVO" alias="adminHotelVO"/>
-		<typeAlias type="com.spring.hotelspace.admin.management.hotel.vo.AdminRoomVO" alias="adminRoomVO"/>
-		<typeAlias type="com.spring.hotelspace.admin.management.hotel.vo.AdminHotelImageVO" alias="adminHotelImageVO"/>
-		<typeAlias type="com.spring.hotelspace.admin.management.hotel.vo.AdminRoomImageVO" alias="adminRoomImageVO"/>
-		<typeAlias type="com.spring.hotelspace.admin.management.user.vo.AdminManageClientVO" alias="adminManageClientVO"/>
-	</typeAliases>
-	
-	
-	<mappers>
-		<mapper resource="mappings/clientmappings/client-mainMapper.xml"/>
-		<mapper resource="mappings/clientmappings/client-loginMapper.xml"/>
-		<mapper resource="mappings/clientmappings/client-registerMapper.xml"/>
-		<mapper resource="mappings/clientmappings/client-mypageMapper.xml"/>
-		<mapper resource="mappings/clientmappings/client-searchHotelMapper.xml"/>
-		<mapper resource="mappings/clientmappings/client-searchRoomMapper.xml"/>
-		<mapper resource="mappings/clientmappings/client-reservationMapper.xml"/>
-		<mapper resource="mappings/clientmappings/client-FAQMapper.xml"/>
-		<mapper resource="mappings/clientmappings/client-QNAMapper.xml"/>
-	
-		<mapper resource="mappings/adminmappings/admin-loginMapper.xml"/>
-		<mapper resource="mappings/adminmappings/admin-mainMapper.xml"/>
-		<mapper resource="mappings/adminmappings/admin-clientManagerMapper.xml"/>
-		<mapper resource="mappings/adminmappings/admin-pageManagerMapper.xml"/>
-		<mapper resource="mappings/adminmappings/admin-hotelManagerMapper.xml"/>
-		<mapper resource="mappings/adminmappings/admin-clientManagerMapper.xml"/>
-	</mappers>
-	
+   <settings>
+      <setting name="mapUnderscoreToCamelCase" value="true"/>      
+      <setting name="cacheEnabled" value="false"/>      
+      <setting name="jdbcTypeForNull" value="NULL"/>      
+   </settings>
+   
+   <typeAliases>
+      <typeAlias type="com.spring.hotelspace.client.main.vo.MainVO" alias="mainVO"/>
+      <typeAlias type="com.spring.hotelspace.client.main.vo.TopHotelVO" alias="topHotelVO"/>
+      <typeAlias type="com.spring.hotelspace.client.login.vo.ClientLoginVO" alias="clientLoginVO"/>
+      <typeAlias type="com.spring.hotelspace.client.register.vo.ClientRegisterVO" alias="clientRegisterVO"/>
+      <typeAlias type="com.spring.hotelspace.client.search.vo.ClientHotelVO" alias="clientHotelVO"/>
+      <typeAlias type="com.spring.hotelspace.client.mypage.vo.ClientMyPageVO" alias="clientMyPageVO"/>
+      <typeAlias type="com.spring.hotelspace.client.search.vo.HotelFacilityVO" alias="hotelFacilityVO"/>
+      <typeAlias type="com.spring.hotelspace.client.search.vo.ClientRoomVO" alias="clientRoomVO"/>
+      <typeAlias type="com.spring.hotelspace.client.reservation.vo.ClientReservationVO" alias="clientReservationVO"/>
+      <typeAlias type="com.spring.hotelspace.client.board.vo.ClientFAQVO" alias="clientFAQVO"/>
+      <typeAlias type="com.spring.hotelspace.client.board.vo.ClientQNAVO" alias="clientQNAVO"/>
+      <typeAlias type="com.spring.hotelspace.client.board.vo.ClientReplyVO" alias="clientReplyVO"/>
+      <typeAlias type="com.spring.hotelspace.client.mypage.vo.ClientReviewVO" alias="clientReviewVO"/>
+      
+      <typeAlias type="com.spring.hotelspace.admin.main.vo.AdminMainVO" alias="adminMainVO"/>
+      <typeAlias type="com.spring.hotelspace.admin.main.vo.ReservationDataVO" alias="reservationDataVO"/>
+      <typeAlias type="com.spring.hotelspace.admin.main.vo.PiChartVO" alias="piChartVO"/>
+      <typeAlias type="com.spring.hotelspace.admin.login.vo.AdminLoginVO" alias="adminLoginVO"/>
+      <typeAlias type="com.spring.hotelspace.admin.management.page.vo.AdminPageImageVO" alias="adminPageImageVO"/>
+      <typeAlias type="com.spring.hotelspace.admin.management.user.vo.AdminManageClientVO" alias="adminManageClientVO"/>
+      <typeAlias type="com.spring.hotelspace.admin.management.user.vo.AdminManageClientRevVO" alias="adminManageClientRevVO"/>
+      <typeAlias type="com.spring.hotelspace.admin.management.user.vo.AdminManageClientResVO" alias="adminManageClientResVO"/>
+      <typeAlias type="com.spring.hotelspace.admin.main.vo.AdminRecentResVO" alias="adminRecentResVO"/>
+      <typeAlias type="com.spring.hotelspace.admin.main.vo.AdminRecentRevVO" alias="adminRecentRevVO"/>
+   </typeAliases>
+
+   <mappers>
+      <mapper resource="mappings/clientmappings/client-mainMapper.xml"/>
+      <mapper resource="mappings/clientmappings/client-loginMapper.xml"/>
+      <mapper resource="mappings/clientmappings/client-registerMapper.xml"/>
+      <mapper resource="mappings/clientmappings/client-mypageMapper.xml"/>
+      <mapper resource="mappings/clientmappings/client-searchHotelMapper.xml"/>
+      <mapper resource="mappings/clientmappings/client-searchRoomMapper.xml"/>
+      <mapper resource="mappings/clientmappings/client-reservationMapper.xml"/>
+      <mapper resource="mappings/clientmappings/client-FAQMapper.xml"/>
+      <mapper resource="mappings/clientmappings/client-QNAMapper.xml"/>
+      <mapper resource="mappings/clientmappings/client-ReplyMapper.xml"/>
+      
+      <mapper resource="mappings/adminmappings/admin-loginMapper.xml"/>
+      <mapper resource="mappings/adminmappings/admin-mainMapper.xml"/>
+      <mapper resource="mappings/adminmappings/admin-pageManagerMapper.xml"/>
+      <mapper resource="mappings/adminmappings/admin-clientManagerMapper.xml"/>
+   </mappers>
+
 </configuration>

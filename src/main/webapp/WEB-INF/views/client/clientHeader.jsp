@@ -68,7 +68,9 @@
 					<li class="nav-item"><a href="searchHotelAll.do?pageNum=1"
 						class="nav-link">Hotel</a></li>
 					<li class="nav-item"><a href="clientFAQServices.do"
-						class="nav-link">Services</a></li>
+						class="nav-link">FAQ</a></li>
+                    <li class="nav-item"><a href="clientQNAServices.do"
+						class="nav-link">QNA</a></li>
 
 					<c:if test="${sessionScope.login != null }">
 						<li class="nav-item"><a href="clientMypage.do"
