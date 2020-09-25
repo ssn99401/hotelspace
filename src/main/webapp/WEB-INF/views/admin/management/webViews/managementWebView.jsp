@@ -223,8 +223,8 @@
 								<input type="file" id="select_file" name="select_file"
 									class="upload-hidden" accept=".png, .jpg, .gif"
 									style="display: inline;" multiple="multiple"
-									onclick="saveElement(this)"> <span
-									style="margin-left: 59.75%;">
+									onclick="saveElement(this)">  <span
+								style="float: right;">
 									<button id="btn-plus" style="margin-right: 2%;">
 										<img src="resources/admin/images/plus.png">
 									</button>

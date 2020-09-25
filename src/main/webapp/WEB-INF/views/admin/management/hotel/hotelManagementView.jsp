@@ -35,13 +35,13 @@
 		<div class="container" style="margin-top: 200px;" align="center">
 			<div class="row">
 				<div class="col-md-12" style="width: 100%; margin-bottom: 50px;" align="right">
-					<button>호텔 등록</button>
+					<button onclick="openRegisterHotel();">호텔 등록</button>
 				</div>
 				<div class="col-md-12" style="width: 100%;">
 					<div id="hotel-filter">
 						<span style="display: inline-block; float: left;"> <input
 							type="text" id="hotelName" placeholder="호텔명"> <input
-							type="text" id="hotelAddress" placeholder="주소"><input
+							type="text" id="hotelAddress"  placeholder="주소"><input
 							type="text" id="hotel_clientId" placeholder="등록인 ID">
 							<button id="btn-search">필터링</button>
 							<button id="btn-resetFilter">초기화</button>
@@ -51,11 +51,11 @@
 								<option selected="selected">정렬</option>
 								<option>오름차순</option>
 								<option>내림차순</option>
-						</select> <input type="checkbox" name="orderby-name" id="orderby-name"
-							value="HOTEL_NAME"> <label>ID</label>&nbsp; <input
-							type="checkbox" name="orderby-area" id="orderby-area"
+						</select> <input type="radio" name="orderby" id="orderby-id"
+							value="HOTEL_ID" checked="checked"> <label>ID</label>&nbsp; <input
+							type="radio" name="orderby" id="orderby-area"
 							value="HOTEL_AREA"> <label>지역</label>&nbsp; <input
-							type="checkbox" name="orderby-average" id="orderby-average"
+							type="radio" name="orderby" id="orderby-average"
 							value="HOTEL_STAR"> <label>평점</label> &nbsp; 
 						</span>
 					</div>

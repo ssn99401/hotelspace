@@ -246,7 +246,7 @@
 	</section>
 
 
-	<section class="ftco-section testimony-section bg-light">
+	<!-- <section class="ftco-section testimony-section bg-light">
 		<div class="container">
 			<div class="row justify-content-center pb-5 mb-3">
 				<div class="col-md-7 heading-section text-center ftco-animate">
@@ -345,7 +345,7 @@
 				</div>
 			</div>
 		</div>
-	</section>
+	</section> -->
 
 	<!--  <section class="ftco-section bg-light">
 			<div class="container">

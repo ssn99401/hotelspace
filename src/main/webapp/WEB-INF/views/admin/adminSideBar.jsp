@@ -11,17 +11,16 @@
 			</h3>
 		</div>
 		<ul class="nav" id="side-menu">
-			<li style="padding: 70px 0 0;"><a href="dashboard.html"
+			<li style="padding: 70px 0 0;"><a href="index.mdo"
 				class="waves-effect"><i class="fa fa-clock-o fa-fw"
+
 					aria-hidden="true"></i>통계 정보</a></li>
 			<li><a href="clientManagement.mdo?curPage=1" class="waves-effect"><i
 					class="fa fa-table fa-fw" aria-hidden="true"></i>회원 관리</a></li>
 			<li><a href="pageManagement.mdo" class="waves-effect"><i
 					class="fa fa-font fa-fw" aria-hidden="true"></i>페이지 관리</a></li>
-			<li><a href="blank.html" class="waves-effect"><i
+			<li><a href="hotelManagementList.mdo" class="waves-effect"><i
 					class="fa fa-columns fa-fw" aria-hidden="true"></i>업체(호텔) 관리</a></li>
-
-
 		</ul>
 	</div>
 </div>

@@ -7,7 +7,7 @@
 	<select id="selectHotelListAll" parameterType="java.util.HashMap" resultMap="hotelResultMap">
 	 	SELECT * FROM (
 		SELECT ROWNUM as "row", subtable.* FROM (
-		SELECT DISTINCT hotel.HOTEL_ID, hotel.USER_ID, hotel.HOTEL_NAME, hotel.HOTEL_TEL,
+			SELECT DISTINCT hotel.HOTEL_ID, hotel.USER_ID, hotel.HOTEL_NAME, hotel.HOTEL_TEL,
 			hotel.HOTEL_AREA, hotel.HOTEL_ADDRESS, hotel.HOTEL_CONCEPT, hotel.HOTEL_STAR, hotel.HOTEL_REG_DATE ,
 			(SELECT min(room.ROOM_PRICE) 
 				FROM room 
@@ -16,30 +16,23 @@
 		(SELECT hotelimage.image_link FROM HOTEL_IMAGE hotelimage
 				WHERE hotel.HOTEL_ID = hotelimage.HOTEL_ID
 					AND hotelimage.IMAGE_TYPE = 'MAIN') as mainImage, 
-				facilities.FACILITIES_PARKING, facilities.FACILITIES_POOL, facilities.FACILITIES_BREAKFAST, facilities.FACILITIES_FITNESS, facilities.FACILITIES_WIFI, facilities.FACILITIES_PARTYROOM  
-				FROM HOTEL hotel, ROOM room, FACILITIES facilities 
-					WHERE hotel.HOTEL_ID = room.HOTEL_ID AND hotel.HOTEL_ID = facilities.HOTEL_ID AND room.HOTEL_ID = facilities.HOTEL_ID
+				facilities.FACILITIES_PARKING, 
+				facilities.FACILITIES_POOL, 
+				facilities.FACILITIES_BREAKFAST, 
+				facilities.FACILITIES_FITNESS, 
+				facilities.FACILITIES_WIFI, 
+				facilities.FACILITIES_PARTYROOM
+
+				FROM HOTEL hotel, ROOM room, FACILITIES facilities
+				WHERE hotel.HOTEL_ID = room.HOTEL_ID AND hotel.HOTEL_ID = facilities.HOTEL_ID AND room.HOTEL_ID = facilities.HOTEL_ID
+				
+				
 				<if test="people != null and !people.equals('')">	
 					<![CDATA[
 						AND #{people} <= room.ROOM_MAX_PEOPLE
 					 ]]>
 				 </if>
-			 <if test="checkInDate != null and !checkInDate.equals('')">	
-				 <![CDATA[
-					AND room.ROOM_AMOUNT > 
-						(SELECT count(reservation.RESERVATION_ID) 
-							FROM RESERVATION reservation
-								WHERE room.ROOM_ID = reservation.ROOM_ID 
-									AND room.HOTEL_ID = reservation.HOTEL_ID 
-					
-									AND NOT (reservation.RESERVATION_IN_DATE >= #{checkInDate}
-										AND reservation.RESERVATION_OUT_DATE <= #{checkInDate}) 
-									AND NOT (reservation.RESERVATION_IN_DATE >= #{checkOutDate} 
-										AND reservation.RESERVATION_OUT_DATE <= #{checkOutDate})
-				
-            	       	)
-            	]]>
-            </if>
+            <if test='filter.equals("yes")'>	
 				<![CDATA[
 				AND 
 					(SELECT min(room.ROOM_PRICE) 
@@ -82,9 +75,10 @@
 				<if test="partyRoom != null and !partyRoom.equals('')">
 					AND FACILITIES_PARTYROOM = 1 
 				</if>
-				
-			) subtable
+			</if>
 				ORDER BY HOTEL_STAR DESC 
+			) subtable
+				
 				)
 				<![CDATA[
 					WHERE 
@@ -105,8 +99,14 @@
 			) as lowestPrice,
 			(SELECT hotelimage.image_link FROM HOTEL_IMAGE hotelimage
 				WHERE hotel.HOTEL_ID = hotelimage.HOTEL_ID
-					AND hotelimage.IMAGE_TYPE = 'MAIN') as mainImage, 
-						facilities.FACILITIES_PARKING, facilities.FACILITIES_POOL, facilities.FACILITIES_BREAKFAST, facilities.FACILITIES_FITNESS, facilities.FACILITIES_WIFI, facilities.FACILITIES_PARTYROOM  
+				AND hotelimage.IMAGE_TYPE = 'MAIN') as mainImage, 
+				facilities.FACILITIES_PARKING, 
+				facilities.FACILITIES_POOL, 
+				facilities.FACILITIES_BREAKFAST, 
+				facilities.FACILITIES_FITNESS, 
+				facilities.FACILITIES_WIFI, 
+				facilities.FACILITIES_PARTYROOM
+				
 			FROM HOTEL hotel, ROOM room, FACILITIES facilities
 				WHERE 
 					hotel.HOTEL_ID = room.HOTEL_ID AND hotel.HOTEL_ID = facilities.HOTEL_ID AND room.HOTEL_ID = facilities.HOTEL_ID
@@ -115,22 +115,6 @@
 					AND #{people} <= room.ROOM_MAX_PEOPLE
 				 ]]>
 			 </if>
-			 <if test="checkInDate != null and !checkInDate.equals('')">	
-				 <![CDATA[
-					AND room.ROOM_AMOUNT > 
-						(SELECT count(reservation.RESERVATION_ID) 
-							FROM RESERVATION reservation
-								WHERE room.ROOM_ID = reservation.ROOM_ID 
-									AND room.HOTEL_ID = reservation.HOTEL_ID 
-					
-									AND NOT (reservation.RESERVATION_IN_DATE >= #{checkInDate}
-										AND reservation.RESERVATION_OUT_DATE <= #{checkInDate}) 
-									AND NOT (reservation.RESERVATION_IN_DATE >= #{checkOutDate} 
-										AND reservation.RESERVATION_OUT_DATE <= #{checkOutDate})
-				
-            	       	)
-            	]]>
-            </if>
 			<if test="searchKeyword != null and !searchKeyword.equals('')">	
 				AND hotel.HOTEL_NAME LIKE '%'||#{searchKeyword}||'%' 
 			</if>
@@ -182,9 +166,9 @@
 						AND FACILITIES_PARTYROOM = 1 
 					</if>
 				</if>
-				
+				ORDER BY HOTEL_STAR DESC
 		) subtable
-				ORDER BY HOTEL_STAR DESC 
+			 
 				)
 				<![CDATA[
 					WHERE 
@@ -210,22 +194,6 @@
 					AND #{people} <= room.ROOM_MAX_PEOPLE
 				 ]]>
 			 </if>
-			 <if test="checkInDate != null and !checkInDate.equals('')">	
-				 <![CDATA[
-					AND room.ROOM_AMOUNT > 
-						(SELECT count(reservation.RESERVATION_ID) 
-							FROM RESERVATION reservation
-								WHERE room.ROOM_ID = reservation.ROOM_ID 
-									AND room.HOTEL_ID = reservation.HOTEL_ID 
-					
-									AND NOT (reservation.RESERVATION_IN_DATE >= #{checkInDate}
-										AND reservation.RESERVATION_OUT_DATE <= #{checkInDate}) 
-									AND NOT (reservation.RESERVATION_IN_DATE >= #{checkOutDate} 
-										AND reservation.RESERVATION_OUT_DATE <= #{checkOutDate})
-				
-            	       	)
-            	]]>
-           	 </if>
 			<if test="!hotelSearchMethod.equals('hotelListAll')">
 				<if test="people != null and !people.equals('')">	
 				<![CDATA[

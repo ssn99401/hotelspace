@@ -1,6 +1,6 @@
 window.onload = function () {
 	loadingImageList();
-	uploadFileListDiv = document.getElementById('div-fileUpload').cloneNode(true);
+	uploadFileListDiv = document.getElementById('div-fileUpload-normal').cloneNode(true);
 }
 
 function loadingImageList() {
@@ -339,7 +339,7 @@ function plusFileDiv() {
 	var input_file = document.createElement('input');
 	input_file.setAttribute("type","file");
 	input_file.setAttribute("id","select_file");
-	input_file.setAttribute("name","select_file");
+	input_file.setAttribute("name","select_file-normal");
 	input_file.setAttribute("class","upload-hidden");
 	input_file.setAttribute("accept",".png, .jpg, .gif");
 	input_file.setAttribute("style","display: inline;");
@@ -355,7 +355,7 @@ function plusFileDiv() {
 	btn_plus_img.setAttribute("src","resources/admin/images/plus.png");
 	
 	var span_file2 = document.createElement('span');
-	span_file2.setAttribute("style","margin-left: 2%;");
+	span_file2.setAttribute("style","float: right;");
 	var btn_delete = document.createElement('button');
 	btn_delete.setAttribute("id","btn-delete");
 	var btn_delete_img = document.createElement('img');
@@ -371,7 +371,7 @@ function plusFileDiv() {
 	div_filebox.appendChild(span_file);
 	div_filebox.appendChild(span_file2);
 
-	document.getElementById('div-fileUpload').appendChild(div_filebox);
+	document.getElementById('div-fileUpload-normal').appendChild(div_filebox);
 }
 
 //사진 업로드 div 삭제
@@ -412,9 +412,6 @@ $(function() {
 			for(var j = 0; j < files.length; j++) {
 				form.append("file" + index++ , files[j]);
 			}
-		}
-		for (var pair of form.entries()) { 
-			console.log(pair[0]+ ', ' + pair[1].name); 
 		}
 		ImageUploadRequest(form);
 	})
