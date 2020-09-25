@@ -99,29 +99,18 @@ function setHotelInfo(data) {
 	html += '<div class="image" style="padding:0;">';
 	html += setImageSlide(0, hotelMainPicture, hotelNormalPictures);
 	html += '</div>';
-	html+='<div class="text">';
-	html+='<h2 class="heading">'+ hotelInfo.hotelName +'</h2>';
-	html+='<button onClick="showUpdateHotelInfoPrompt(' + "'" + document.getElementById('hidden-hotelId').value + "'"+  ', ' + "'호텔명'" + ' , ' + "'str'" + ');">변경</button>';
-//	html+='<ul class="specs mb-5">';
-//	html+='<li><strong>호텔아이디 : </strong>' + hotelInfo.hotelId + '</li>';
-//	html+='<li><strong>호텔주 : </strong>' + hotelInfo.userId + '</li>';
-//	html+='<li><strong>TEL : </strong>' + hotelInfo.hotelTel +'&nbsp;&nbsp;';
-//	html+='<button onClick="showUpdateHotelInfoPrompt(' + "'" + document.getElementById('hidden-hotelId').value + "'"+  ', ' + "'전화번호'" + ' , ' + "'str'" + ');">변경</button></li>';
-//	html+='<li><strong>지역 : </strong>' + hotelInfo.hotelArea +'&nbsp;&nbsp;';
-//	html+='<button onClick="showUpdateHotelInfoPrompt(' + "'" + document.getElementById('hidden-hotelId').value + "'"+  ', ' + "'지역'" + ' , ' + "'str'" + ');">변경</button></li>';
-//	html+='<li><strong>주소 : </strong>' + hotelInfo.hotelAddress +'&nbsp;&nbsp;';
-//	html+='<button onClick="showUpdateHotelInfoPrompt(' + "'" + document.getElementById('hidden-hotelId').value + "'"+  ', ' + "'주소'" + ' , ' + "'str'" + ');">변경</button></li>';
-//	html+='<li><strong>테마 : </strong>' + hotelInfo.hotelConcept +'&nbsp;&nbsp;';
-//	html+='<button onClick="showUpdateHotelInfoPrompt(' + "'" + document.getElementById('hidden-hotelId').value + "'"+  ', ' + "'테마'" + ' , ' + "'str'" + ');">변경</button></li>';
-//	html+='<li><strong>평점  : </strong>' + hotelInfo.hotelStar + '</li>';
-//	html+='<li><strong>등록일  : </strong>' + hotelInfo.hotelRegDate + '</li>';
-//	html+='</ul>';
+	html+='<div class="text" style="padding: 10px;">';
+	html+='<div align="center" style="width: 100%; margin-bottom: 40px; margin-top: 40px;">';
+	html+='<b class="heading" style="position: absolute;">'+ hotelInfo.hotelName +'</b>';
+	
+	html+='<button onClick="showUpdateHotelInfoPrompt(' + "'" + document.getElementById('hidden-hotelId').value + "'"+  ', ' + "'호텔명'" + ' , ' + "'str'" + ');" style="margin-top: 10px; margin-bottom: 30px; float: right;">이름 변경</button>';
+	html+='</div>'
 	html+='<table class="table table-bordered specs mb-5" style="text-align: center; width: 100%;">';
 	html+='<tbody id="Info-body">';
 	html+='<tr>';
-	html+='<td><strong>호텔ID</strong></td>';
-	html+='<td>' + hotelInfo.hotelId + '</td>';
-	html+='<td></td>';
+	html+='<td style="width: 150px;"><strong>호텔ID</strong></td>';
+	html+='<td style="width: 200px;">' + hotelInfo.hotelId + '</td>';
+	html+='<td style="width: 100px;"></td>';
 	html+='</tr>';
 	html+='<tr>';
 	html+='<td><strong>호텔주</strong></td>';
@@ -210,39 +199,24 @@ function setRoomInfo(roomList, roomPictures) {
 				html +='<div class="image" style="padding:0;">';
 				html += setImageSlide(i + 1, roomMainPicture, roomNormalPictures);
 				html +='</div>';
-				html+='<div class="text">';
+				html+='<div class="text" style="padding: 10px;" style="padding: 10px;">';
 			} else {
 				html +='<div class="image order-2" style="padding:0;">';
 				html += setImageSlide(i + 1, roomMainPicture, roomNormalPictures);
 				html +='</div>';
-				html+='<div class="text order-1">';
+				html+='<div class="text order-1" style="padding: 10px;">';
 			}
-			html+='<h2 class="heading">'+ roomList[i].roomName +'</h2>';
-			html+='<button onClick="showUpdateRoomInfoPrompt(' + "'" + roomList[i].roomId + "'"+  ', ' + "'방 이름'" + ' , ' + "'num'" + ');">변경</button>';
-//			html+='<ul class="specs mb-5">';
-//			html+='<li><strong>룸 아이디 : </strong>' + roomList[i].roomId + '</li>';
-//			html+='<li><strong>1박 요금 : </strong>' + roomList[i].roomPrice +'&nbsp;&nbsp;';
-//			html+='<button onClick="showUpdateRoomInfoPrompt(' + "'" + roomList[i].roomId + "'"+  ', ' + "'1박 요금'" + ' , ' + "'num'" + ');">변경</button></li>';
-//			html+='<li><strong>방 갯수 : </strong>' + roomList[i].roomAmount +'&nbsp;&nbsp;';
-//			html+='<button onClick="showUpdateRoomInfoPrompt(' + "'" + roomList[i].roomId + "'"+  ', ' + "'방 갯수'" + ' , ' + "'num'" + ');">변경</button></li>';
-//			html+='<li><strong>적정 인원 : </strong>' + roomList[i].roomStandardPeople +'&nbsp;&nbsp;';
-//			html+='<button onClick="showUpdateRoomInfoPrompt(' + "'" + roomList[i].roomId + "'"+  ', ' + "'적정 인원'" + ' , ' + "'num'" + ');">변경</button></li>';
-//			html+='<li><strong>최대 인원 : </strong>' + roomList[i].roomMaxPeople +'&nbsp;&nbsp;';
-//			html+='<button onClick="showUpdateRoomInfoPrompt(' + "'" + roomList[i].roomId + "'"+  ', ' + "'최대 인원'" + ' , ' + "'num'" + ');">변경</button></li>';
-//			html+='<li><strong>추가인원 당 금액  : </strong>' + roomList[i].roomPricePeople +'&nbsp;&nbsp;';
-//			html+='<button onClick="showUpdateRoomInfoPrompt(' + "'" + roomList[i].roomId + "'"+  ', ' + "'1인당 추가 금액'" + ' , ' + "'num'" + ');">변경</button></li>';
-//			html+='<li><strong>부가 서비스 : </strong>' + roomList[i].roomServices +'&nbsp;&nbsp;';
-//			html+='<button onClick="showUpdateRoomInfoPrompt(' + "'" + roomList[i].roomId + "'"+  ', ' + "'부가 서비스'" + ' , ' + "'str'" + ');">변경</button></li>';
-//			html+='<li><strong>총 예약 횟수 : </strong>' + roomList[i].roomUsage + '</li>';
-//			html+='<li><strong>방 정보 : </strong>' + roomList[i].roomInfo +'&nbsp;&nbsp;';
-//			html+='<button onClick="showUpdateRoomInfoPrompt(' + "'" + roomList[i].roomId + "'"+  ', ' + "'방 정보'" + ' , ' + "'str'" + ');">변경</button></li>';
-//			html+='</ul>';
+			html+='<div align="center" style="width: 100%; margin-bottom: 40px; margin-top: 40px;">';
+			html+='<b class="heading" style="position: absolute;">'+ roomList[i].roomName +'</b>';
+			html+='<button onClick="showUpdateRoomInfoPrompt(' + "'" + roomList[i].roomId + "'"+  ', ' + "'방 이름'" + ' , ' + "'num'" + ');" style="margin-top: 10px; margin-bottom: 30px; float: right;">이름 변경</button>';
+			html+='</div>'
+			
 			html+='<table class="table table-bordered specs mb-5" style="text-align: center; width: 100%;">';
 			html+='<tbody id="Info-body">';
 			html+='<tr>';
-			html+='<td><strong>아이디</strong></td>';
-			html+='<td>' + roomList[i].roomId +'</td>';
-			html+='<td></td>';
+			html+='<td style="width: 150px;"><strong>아이디</strong></td>';
+			html+='<td style="width: 200px;">' + roomList[i].roomId +'</td>';
+			html+='<td style="width: 100px;"></td>';
 			html+='</tr>';
 			html+='<tr>';
 			html+='<td><strong>1박 요금</strong></td>';

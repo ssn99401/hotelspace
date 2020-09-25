@@ -19,9 +19,3 @@
 	src="resources/admin/vendor/plugins/bower_components/chartist-js/dist/chartist.min.js"></script>
 <script
 	src="resources/admin/vendor/plugins/bower_components/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.min.js"></script>
-<!-- Sparkline chart JavaScript -->
-<script
-	src="resources/admin/vendor/plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js"></script>
-<script src="resources/admin/vendor/js/custom.min.js"></script>
-<script
-	src="resources/admin/vendor/plugins/bower_components/toast-master/js/jquery.toast.js"></script>

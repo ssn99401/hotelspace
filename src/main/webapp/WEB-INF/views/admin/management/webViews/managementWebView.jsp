@@ -224,8 +224,8 @@
 									class="upload-hidden" accept=".png, .jpg, .gif"
 									style="display: inline;" multiple="multiple"
 									onclick="saveElement(this)">  <span
-								style="float: right;">
-									<button id="btn-plus" style="margin-right: 2%;">
+								style="margin-left: 60%;">
+									<button id="btn-plus">
 										<img src="resources/admin/images/plus.png">
 									</button>
 									

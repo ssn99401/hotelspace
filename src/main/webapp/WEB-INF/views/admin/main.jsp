@@ -3,8 +3,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script src="resources/admin/vendor/js/dashboard1.js"></script>
 
-
-
+<script
+	src="resources/admin/vendor/plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js"></script>
+<script src="resources/admin/vendor/js/custom.min.js"></script>
+<script
+	src="resources/admin/vendor/plugins/bower_components/toast-master/js/jquery.toast.js"></script>
 <div id="page-wrapper">
 	<div class="container-fluid">
 		<div class="row bg-title">
