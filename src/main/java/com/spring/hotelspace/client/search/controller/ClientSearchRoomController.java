@@ -41,7 +41,8 @@ public class ClientSearchRoomController {
 		System.out.println(vo.getImageLink());
 		//model.addAttribute("roomImage",roomImage);
 		model.addAttribute("roomList", clientSearchRoomService.searchRoom(vo));
-		
+		model.addAttribute("image",clientSearchRoomService.searchRoomImage((List)model.getAttribute("roomList")));
+		System.out.println(model.getAttribute("roomList"	));
 	
 		return "room/roomInfo";
 	}
