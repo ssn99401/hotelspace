@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<script src="resources/admin/vendor/js/dashboard1.js"></script>
+
+
+
 <div id="page-wrapper">
 	<div class="container-fluid">
 		<div class="row bg-title">
@@ -8,141 +12,170 @@
 				<h4 class="page-title">Dashboard</h4>
 			</div>
 			<div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
-				<a href="https://wrappixel.com/templates/ampleadmin/"
-					target="_blank"
-					class="btn btn-danger pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light">Upgrade
-					to Pro</a>
 				<ol class="breadcrumb">
-					<li><a href="#">Dashboard</a></li>
+					
 				</ol>
 			</div>
-			/.col-lg-12
+
 		</div>
-		/.row ==============================================================
-		Different data widgets
-		============================================================== .row
+
+		<!--
+		by지홍 main.jsp 컨덴츠 목록
+		
+		총 호텔 수
+		총 예약건 수
+		총 회원 수
+		--
+		월별 예약건수(년도 드롭다운 검색)
+		월별 매출(년도 드롭다운 검색)(추가 템플릿 삽입)
+		--
+		최근 예약 (거래)
+		최근 리뷰(코멘트) 
+		
+		숙소 타입(컨셉) 별 예약률
+		 -->
+
 		<div class="row">
 			<div class="col-lg-4 col-sm-6 col-xs-12">
 				<div class="white-box analytics-info">
-					<h3 class="box-title">Total Visit</h3>
+					<h3 class="box-title">Total Hotel</h3>
 					<ul class="list-inline two-part">
 						<li>
 							<div id="sparklinedash"></div>
 						</li>
 						<li class="text-right"><i class="ti-arrow-up text-success"></i>
-							<span class="counter text-success">659</span></li>
+							<span class="counter text-success">${hotelCount}</span></li>
+						<!--총 호텔 수 넘겨받기  -->
 					</ul>
 				</div>
 			</div>
 			<div class="col-lg-4 col-sm-6 col-xs-12">
 				<div class="white-box analytics-info">
-					<h3 class="box-title">Total Page Views</h3>
+					<h3 class="box-title">Total Reservation</h3>
 					<ul class="list-inline two-part">
 						<li>
 							<div id="sparklinedash2"></div>
 						</li>
 						<li class="text-right"><i class="ti-arrow-up text-purple"></i>
-							<span class="counter text-purple">869</span></li>
+							<span class="counter text-purple">${resCount}</span></li>
+						<!--총 예약완료 수 넘겨받기  -->
 					</ul>
 				</div>
 			</div>
 			<div class="col-lg-4 col-sm-6 col-xs-12">
 				<div class="white-box analytics-info">
-					<h3 class="box-title">Unique Visitor</h3>
+					<h3 class="box-title">Total User</h3>
 					<ul class="list-inline two-part">
 						<li>
 							<div id="sparklinedash3"></div>
 						</li>
 						<li class="text-right"><i class="ti-arrow-up text-info"></i>
-							<span class="counter text-info">911</span></li>
+							<span class="counter texㅁt-info">${userCount}</span></li>
+						<!-- 총 회원 수 넘겨받기  -->
 					</ul>
 				</div>
 			</div>
 		</div>
-		/.row row /.row
+
+		<!--//----------------------------월별 예약건수,매출(매출 콤보박스, 2020년,2019년은 선으로 표시)  -->
+
 		<div class="row">
+
 			<div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
 				<div class="white-box">
-					<h3 class="box-title">Products Yearly Sales</h3>
+					<div class="preloader">
+						<svg class="circular" viewBox="25 25 50 50">
+				            <circle class="path" cx="50" cy="50" r="20" fill="none"
+								stroke-width="2" stroke-miterlimit="10" />
+				        </svg>
+					</div>
+					<h3 class="box-title">Monthly Reservation</h3>
+
+					<!--차트 콤보박스  -->
+					<h4>
+						<select name="option" id="option" onchange="changechart()">
+							<option value="Reservation" selected>Reservation Sales</option>
+							<option value="Expense">Expense</option>
+						</select>
+					</h4>
+
+					<!----------------------차트 데이터 ------------------------------------------- -->
+					<!--2020년 데이터  -->
+					<c:set var="cset" value="0" />
+					<c:forEach var="var1" items="${getData}" begin="0" end="0">
+						<c:forEach var="var2" items="${var1}" begin="0" end="11">
+							<input type="hidden" id="val${cset}" value="${var2}" />
+							<%-- <c:out value="${var2}"></c:out> --%>
+							<c:set var="cset" value="${cset + 1 }" />
+						</c:forEach>
+					</c:forEach>
+					<br>
+					<!--2019년 데이터  -->
+					<c:forEach var="var1" items="${getData}" begin="1" end="1">
+						<c:forEach var="var2" items="${var1}" begin="0" end="11">
+							<input type="hidden" id="cval${cset}" value="${var2}" />
+							<%-- <c:out value="${var2}"></c:out> --%>
+							<c:set var="cset" value="${cset + 1 }" />
+						</c:forEach>
+					</c:forEach>
+
+					<!-- ---------------------------------------------------------------------- -->
+
 					<ul class="list-inline text-right">
 						<li>
 							<h5>
-								<i class="fa fa-circle m-r-5 text-info"></i>Mac
+								<i class="fa fa-circle m-r-5 text-info"></i>2020
 							</h5>
 						</li>
 						<li>
 							<h5>
-								<i class="fa fa-circle m-r-5 text-inverse"></i>Windows
+								<i class="fa fa-circle m-r-5 text-inverse"></i>2019
 							</h5>
 						</li>
 					</ul>
-					<div id="ct-visits" style="height: 405px;"></div>
+					<div id="ct-box">
+						<div id="ct-visits" style="height: 405px;"></div>
+					</div>
 				</div>
 			</div>
 		</div>
-		============================================================== table
-		==============================================================
+		
+		<!-- 최근 예약 -->
 		<div class="row">
 			<div class="col-md-12 col-lg-12 col-sm-12">
 				<div class="white-box">
-					<div class="col-md-3 col-sm-4 col-xs-6 pull-right">
-						<select class="form-control pull-right row b-none">
-							<option>March 2017</option>
-							<option>April 2017</option>
-							<option>May 2017</option>
-							<option>June 2017</option>
-							<option>July 2017</option>
-						</select>
-					</div>
-					<h3 class="box-title">Recent sales</h3>
+
+					<h3 class="box-title">Recent reservations</h3>
 					<div class="table-responsive">
 						<table class="table">
 							<thead>
 								<tr>
 									<th>#</th>
-									<th>NAME</th>
-									<th>STATUS</th>
+									<th>ID</th>
+									<th>hotel</th>
+									<th>room</th>
 									<th>DATE</th>
 									<th>PRICE</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>1</td>
-									<td class="txt-oflo">Elite admin</td>
-									<td>SALE</td>
-									<td class="txt-oflo">April 18, 2017</td>
-									<td><span class="text-success">$24</span></td>
-								</tr>
-								<tr>
-									<td>2</td>
-									<td class="txt-oflo">Real Homes WP Theme</td>
-									<td>EXTENDED</td>
-									<td class="txt-oflo">April 19, 2017</td>
-									<td><span class="text-info">$1250</span></td>
-								</tr>
-								<tr>
-									<td>3</td>
-									<td class="txt-oflo">Ample Admin</td>
-									<td>EXTENDED</td>
-									<td class="txt-oflo">April 19, 2017</td>
-									<td><span class="text-info">$1250</span></td>
-								</tr>
-								<tr>
-									<td>4</td>
-									<td class="txt-oflo">Medical Pro WP Theme</td>
-									<td>TAX</td>
-									<td class="txt-oflo">April 20, 2017</td>
-									<td><span class="text-danger">-$24</span></td>
-								</tr>
-								<tr>
-									<td>5</td>
-									<td class="txt-oflo">Hosting press html</td>
-									<td>SALE</td>
-									<td class="txt-oflo">April 21, 2017</td>
-									<td><span class="text-success">$24</span></td>
-								</tr>
-								<tr>
+								<c:set var="no" value="1" />
+								<c:forEach var="re" items="${reservation}">
+									<tr>
+										<td>${no }</td>
+										<td class="txt-oflo"><a href="profile.mdo?id=${re.clientId }">${re.clientId}</a></td>
+										<td>${re.hotelName }</td>
+										<td>${re.roomName }</td>
+										<td class="txt-oflo">${re.reservationInDate}~
+											${re.reservationOutDate}</td>
+										<td><span class="text-info">${re.reservationPayment}</span></td>
+									</tr>
+
+									<c:set var="no" value="${no + 1 }" />
+								</c:forEach>
+
+
+								<!-- <tr>
 									<td>6</td>
 									<td class="txt-oflo">Digital Agency PSD</td>
 									<td>SALE</td>
@@ -155,23 +188,20 @@
 									<td>MEMBER</td>
 									<td class="txt-oflo">April 22, 2017</td>
 									<td><span class="text-success">$64</span></td>
-								</tr>
+								</tr> -->
 							</tbody>
 						</table>
 					</div>
 				</div>
 			</div>
 		</div>
-		==============================================================
-		chat-listing & recent comments
-		==============================================================
+		<!-- 최근 리뷰 -->
 		<div class="row">
-			.col
 			<div class="col-md-12 col-lg-8 col-sm-12">
 				<div class="white-box">
 					<h3 class="box-title">Recent Comments</h3>
 					<div class="comment-center p-t-10">
-						<div class="comment-body">
+						<!-- <div class="comment-body">
 							<div class="user-img">
 								<img
 									src="resources/admin/vendor/plugins/images/users/pawandeep.jpg"
@@ -191,36 +221,21 @@
 									class="btn-rounded btn btn-default btn-outline"><i
 									class="ti-close text-danger m-r-5"></i> Reject</a>
 							</div>
-						</div>
-						<div class="comment-body">
-							<div class="user-img">
-								<img src="resources/admin/vendor/plugins/images/users/sonu.jpg"
-									alt="user" class="img-circle">
-							</div>
-							<div class="mail-contnet">
-								<h5>Sonu Nigam</h5>
-								<span class="time">10:20 AM 20 may 2016</span> <br /> <span
-									class="mail-desc">Donec ac condimentum massa. Etiam
-									pellentesque pretium lacus. Phasellus ultricies dictum
-									suscipit. Aenean commodo dui pellentesque molestie feugiat.
-									Aenean commodo dui pellentesque molestie feugiat</span>
-							</div>
-						</div>
-						<div class="comment-body b-none">
-							<div class="user-img">
+						</div>-->
+						<c:forEach var="re" items="${review}">
+							<div class="comment-body">
+								<div class="user-img">
 								<img
-									src="resources/admin/vendor/plugins/images/users/arijit.jpg"
+									src="${re.imageLink }"
 									alt="user" class="img-circle">
+								</div>
+								<div class="mail-contnet">
+									<h5><a href="profile.mdo?id=${re.clientId }">${re.clientId}</a></h5>
+									<span class="time"> ${re.reviewWriteDate} </span> <br /> <span
+										class="mail-desc">${re.reviewContent }</span>
+								</div>
 							</div>
-							<div class="mail-contnet">
-								<h5>Arijit singh</h5>
-								<span class="time">10:20 AM 20 may 2016</span> <br /> <span
-									class="mail-desc">Donec ac condimentum massa. Etiam
-									pellentesque pretium lacus. Phasellus ultricies dictum
-									suscipit. Aenean commodo dui pellentesque molestie feugiat.
-									Aenean commodo dui pellentesque molestie feugiat</span>
-							</div>
-						</div>
+						</c:forEach>
 					</div>
 				</div>
 			</div>
@@ -228,120 +243,31 @@
 				<div class="panel">
 					<div class="sk-chat-widgets">
 						<div class="panel panel-default">
-							<div class="panel-heading">CHAT LISTING</div>
+
+							<div class="panel-heading">Hotel Reservation Rate</div>
 							<div class="panel-body">
-								<ul class="chatonline">
-									<li>
-										<div class="call-chat">
-											<button class="btn btn-success btn-circle btn-lg"
-												type="button">
-												<i class="fa fa-phone"></i>
-											</button>
-											<button class="btn btn-info btn-circle btn-lg" type="button">
-												<i class="fa fa-comments-o"></i>
-											</button>
-										</div> <a href="javascript:void(0)"><img
-											src="resources/admin/vendor/plugins/images/users/varun.jpg"
-											alt="user-img" class="img-circle"> <span>Varun
-												Dhavan <small class="text-success">online</small>
-										</span></a>
-									</li>
-									<li>
-										<div class="call-chat">
-											<button class="btn btn-success btn-circle btn-lg"
-												type="button">
-												<i class="fa fa-phone"></i>
-											</button>
-											<button class="btn btn-info btn-circle btn-lg" type="button">
-												<i class="fa fa-comments-o"></i>
-											</button>
-										</div> <a href="javascript:void(0)"><img
-											src="resources/admin/vendor/plugins/images/users/genu.jpg"
-											alt="user-img" class="img-circle"> <span>Genelia
-												Deshmukh <small class="text-warning">Away</small>
-										</span></a>
-									</li>
-									<li>
-										<div class="call-chat">
-											<button class="btn btn-success btn-circle btn-lg"
-												type="button">
-												<i class="fa fa-phone"></i>
-											</button>
-											<button class="btn btn-info btn-circle btn-lg" type="button">
-												<i class="fa fa-comments-o"></i>
-											</button>
-										</div> <a href="javascript:void(0)"><img
-											src="resources/admin/vendor/plugins/images/users/ritesh.jpg"
-											alt="user-img" class="img-circle"> <span>Ritesh
-												Deshmukh <small class="text-danger">Busy</small>
-										</span></a>
-									</li>
-									<li>
-										<div class="call-chat">
-											<button class="btn btn-success btn-circle btn-lg"
-												type="button">
-												<i class="fa fa-phone"></i>
-											</button>
-											<button class="btn btn-info btn-circle btn-lg" type="button">
-												<i class="fa fa-comments-o"></i>
-											</button>
-										</div> <a href="javascript:void(0)"><img
-											src="resources/admin/vendor/plugins/images/users/arijit.jpg"
-											alt="user-img" class="img-circle"> <span>Arijit
-												Sinh <small class="text-muted">Offline</small>
-										</span></a>
-									</li>
-									<li>
-										<div class="call-chat">
-											<button class="btn btn-success btn-circle btn-lg"
-												type="button">
-												<i class="fa fa-phone"></i>
-											</button>
-											<button class="btn btn-info btn-circle btn-lg" type="button">
-												<i class="fa fa-comments-o"></i>
-											</button>
-										</div> <a href="javascript:void(0)"><img
-											src="resources/admin/vendor/plugins/images/users/govinda.jpg"
-											alt="user-img" class="img-circle"> <span>Govinda
-												Star <small class="text-success">online</small>
-										</span></a>
-									</li>
-									<li>
-										<div class="call-chat">
-											<button class="btn btn-success btn-circle btn-lg"
-												type="button">
-												<i class="fa fa-phone"></i>
-											</button>
-											<button class="btn btn-info btn-circle btn-lg" type="button">
-												<i class="fa fa-comments-o"></i>
-											</button>
-										</div> <a href="javascript:void(0)"><img
-											src="resources/admin/vendor/plugins/images/users/hritik.jpg"
-											alt="user-img" class="img-circle"> <span>John
-												Abraham<small class="text-success">online</small>
-										</span></a>
-									</li>
-									<li>
-										<div class="call-chat">
-											<button class="btn btn-success btn-circle btn-lg"
-												type="button">
-												<i class="fa fa-phone"></i>
-											</button>
-											<button class="btn btn-info btn-circle btn-lg" type="button">
-												<i class="fa fa-comments-o"></i>
-											</button>
-										</div> <a href="javascript:void(0)"><img
-											src="resources/admin/vendor/plugins/images/users/varun.jpg"
-											alt="user-img" class="img-circle"> <span>Varun
-												Dhavan <small class="text-success">online</small>
-										</span></a>
-									</li>
-								</ul>
+							
+							<!--파이차트 데이터 ---------------------------------------------------->
+							
+								<c:set var="cset" value="0"></c:set>
+								<c:forEach var="var" items="${conceptarray}">
+								<input type="hidden" id="hc${cset}" value="${var.hotelConcept}" />
+								<input type="hidden" id="rhc${cset }" value="${var.reshotelcount}" />
+								<c:set var="cset" value="${cset + 1 }" />
+								</c:forEach>
+							<!----------------------------------------------------------------->	
+								<script type="text/javascript"
+									src="https://www.gstatic.com/charts/loader.js"></script>
+								<script>
+									//구글차트
+								</script>
+								<body>
+									<div id="piChart"></div>
+								</body>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			/.col
 		</div>
 	</div>

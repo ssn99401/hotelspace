@@ -14,9 +14,21 @@
 		from room r  JOIN ROOM_IMAGE I ON(R.ROOM_ID = I.ROOM_ID)
 		where r.hotel_id = #{hotelId}
 		order by r.room_id
-	</select>
-	
-	
+	</select>	
+		
+		<select id="getRoomImageList" parameterType="java.util.List" resultType="clientRoomVO">
+      SELECT
+         ROOM_ID,
+         IMAGE_LINK,
+         IMAGE_TYPE
+      FROM
+         ROOM_IMAGE
+      WHERE
+      <foreach collection="list" item="clientRoomVO" separator=" OR ">
+         ROOM_Id = #{clientRoomVO.roomId}
+      </foreach>
+      order by ROOM_ID
+   </select>
 	
 	
 	<!-- <resultMap type="#modelname" id="YourResultSet"> <id property="param1" 

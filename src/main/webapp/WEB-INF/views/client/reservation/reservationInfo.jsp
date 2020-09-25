@@ -4,8 +4,52 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
+
+
+
 <html>
 <head>
+
+<style type="text/css">
+.table_background {
+	display: flex;
+	background-color: white;
+	margin-left: 3vw;
+	margin-right: 3vw;
+	margin-bottom: 10vh;
+	margin-top: 5vh;
+	box-shadow: 0px 0px 10px rgba(114, 114, 113, 0.5);
+	border-radius: 15px;
+}
+
+table {
+	font-family: futura-pt, sans-serif;
+	font-weight: 400;
+	font-style: normal;
+	border-collapse: collapse;
+	width: 100%;
+	border-radius: 15px;
+	text-align: center;
+}
+
+th {
+	font-size: 18px;
+	text-align: left;
+	padding: 20px 20px 20px 20px;
+}
+
+table, td {
+	padding: 8px 8px 8px 20px;
+}
+
+tr:nth-child(even) {
+	background-color: #eff2f5;
+}
+
+tr:not (:first-child ):hover {
+	background-color: rgba(114, 114, 113, 0.2);
+}
+</style>
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript"
@@ -84,7 +128,7 @@
 		console.log(totalPrice + "totalPrice");
 		console.log(afterPrice + "afterPrice");
 	}
-	
+
 	//카카오 결제 api
 	$(document).ready(function() {
 		console.log("dhdhdhdhdhdhdh");
@@ -142,7 +186,7 @@
 					} else {
 						//[3] 아직 제대로 결제가 되지 않았습니다.
 						//[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
-					}
+					}	
 				});
 				//성공시 이동할 페이지
 				location.href = "insertReserv.do?clientId=" + clientId
@@ -187,21 +231,23 @@
 				<th colspan="3" style="text-align: center;">선택하신 예약정보입니다</th>
 			</tr>
 			<tr>
-				<td colspan="3" style="text-align: center;" id="roomName">${rev.roomName }</td>
+				<td>선택하신 방 :</td>
+				<td colspan="2" style="text-align: center;" id="roomName">${rev.roomName }</td>
 			</tr>
 			<tr>
+				<td>방 기본가격:</td>
 				<td colspan="3" style="text-align: center;"><fmt:formatNumber
 						value="${rev.roomPrice }" pattern="#,###,###" />￦</td>
 			</tr>
 
 			<tr>
-				<td>${param.reservationInDate}</td>
-				<td>~</td>
-				<td>${param.reservationOutDate }</td>
+				<td>선택하신 날짜 :</td>
+				<td>${param.reservationInDate}~ ${param.reservationOutDate }</td>
 			</tr>
 
 			<tr align="center">
-				<td colspan="3"><input type=button value="-"
+				<td>입실인원 수정 :</td>
+				<td colspan="2"><input type=button value="-"
 					onclick="javascript:peopleMinus();"> <input type="hidden"
 					id="mPeople" value=${rev.roomMaxPeople }> <input
 					type="hidden" id=sPeople value=${rev.roomStandardPeople }>
@@ -211,13 +257,14 @@
 					style="width: 30px; text-align: center;">인 <input
 					type=button value="+" onclick="javascript:peoplePlus();"></td>
 			<tr>
+			<td>최종 가격:</td>
 				<td colspan="3" style="text-align: center;" id="price"><input
 					type="hidden" id="hPrice" value="${rev.roomPrice }"> <fmt:formatNumber
 						value="${rev.roomPrice }" pattern="#,###,###" />￦</td>
 			</tr>
 			<tr>
 				<td colspan="3" style="text-align: center;"><input
-					type="button" value="결제" id=pay></td>
+					type="button" value="결제" id=pay style="width: 1400px;"></td>
 			</tr>
 		</table>
 

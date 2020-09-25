@@ -2,40 +2,114 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.spring.hotelspace.admin.main.dao.AdminMainDAO">
+<mapper
+	namespace="com.spring.hotelspace.admin.main.dao.AdminMainDAO">
 
 
 
+	<select id="getHotelCount" resultType="Integer">
+		select count(*) from hotel
+	</select>
+
+	<select id="getResCount" resultType="Integer">
+
+		select count(*) from
+		reservation
+	</select>
+
+	<select id="getUserCount" resultType="Integer">
+		select count(*) from client
+	</select>
+
+	<select id="getReservation" parameterType="String"
+		resultType="String">
+		select count(*) from reservation where reservation_in_date
+		like #{month}
+	</select>
+
+	<select id="getSales" parameterType="String" resultType="String">
+		select
+		sum(reservation_payment) from reservation where reservation_in_date
+		like #{month}
+	</select>
+
+
+	<select id="getReservation2019" parameterType="String"
+		resultType="String">
+		select count(*) from reservation where reservation_in_date
+		like #{month}
+	</select>
+
+	<select id="getSales2019" parameterType="String"
+		resultType="String">
+		select sum(reservation_payment) from reservation where
+		reservation_in_date
+		like #{month}
+	</select>
+
+	<select id="getData" resultType="reservationDataVO"><!--예약 연, 월, 매출, 건수 -->
+		select year, month,sum(reservation_payment) as
+		sum,count(reservation_payment) as count
+		from
+
+		(SELECT EXTRACT(YEAR FROM
+		reservation_in_date) as year,EXTRACT(MONTH FROM
+		reservation_in_date) as
+		month,
+		reservation_payment
+		from reservation)
+
+		group by (year, month)
+	</select>
+
+		<select id="getRecentReservation" resultType="adminRecentResVO">
+	select * from
+		(select reservation_id, r.hotel_id as hotel_id, r.room_id as room_id,
+		reservation_in_date, reservation_out_date,client_id,
+		reservation_payment, reserve_date, hotel_name, room_name
+		from 
+		reservation r,
+		(select hotel_id, hotel_name from hotel) h,
+		(select room_id, room_name from room) o
+		where r.hotel_id = h.hotel_id and r.room_id = o.room_id order by reserve_date desc)
+		<![CDATA[ 
+		where rownum < 6		
+		]]> 
+	</select>
+	
+	<select id="getRecentRev" resultType="adminRecentRevVO">
+	select * from 
+		(SELECT review_id, r.hotel_id as hotel_id, r.room_id as room_id,client_id, image_link,
+		review_content,review_star,review_write_date,hotel_name,room_name
+		FROM
+		review r,
+		(select h.hotel_id,image_link, hotel_name from hotel h, hotel_image i where i.image_type = 'MAIN' and h.hotel_id (+)= i.hotel_id) h,
+		(select room_id, room_name from room) o
+        where r.hotel_id = h.hotel_id and r.room_id = o.room_id
+        order by review_write_date desc)
+        <![CDATA[
+		where rownum < 6
+		]]>
+       	</select>
 	
 
 
-
-	<!-- <resultMap type="#modelname" id="YourResultSet">
-		<id property="param1" column="columnname1" />
-		<result property="param2" column="columnname2" />
-		<result property="param3" column="columnname3" />
-	</resultMap>
-
-	<select id="getAll" resultMap="YourResultSet">
-		SELECT * FROM tablename1
+	<select id="getpiChart" resultType="piChartVO">
+	select hotel_concept,count(*) as reshotel_count 
+	from hotel h, reservation r 
+    where h.hotel_id = r.hotel_id GROUP by hotel_concept
 	</select>
+	
 
-	<insert id="insertSomething" parameterType="#modelname">
-		INSERT INTO tablename1 (columnname1, columnname2, columnname3)
-		VALUES(#{value1},#{value2},#{value3})
-	</insert>
 
-	<update id="updateSomething" parameterType="#modelname">
-		UPDATE tablename1
-		SET
-		columnname1=#{param1}
-		WHERE
-		columnname2 = #{param2}
-	</update>
-
-	<delete id="deleteSomething" parameterType="int">
-		DELETE FROM tablename1 WHERE
-		columnname1 = #{param1}
-	</delete> -->
+	<!-- <resultMap type="#modelname" id="YourResultSet"> <id property="param1" 
+		column="columnname1" /> <result property="param2" column="columnname2" /> 
+		<result property="param3" column="columnname3" /> </resultMap> <select id="getAll" 
+		resultMap="YourResultSet"> SELECT * FROM tablename1 </select> <insert id="insertSomething" 
+		parameterType="#modelname"> INSERT INTO tablename1 (columnname1, columnname2, 
+		columnname3) VALUES(#{value1},#{value2},#{value3}) </insert> <update id="updateSomething" 
+		parameterType="#modelname"> UPDATE tablename1 SET columnname1=#{param1} WHERE 
+		columnname2 = #{param2} </update> <delete id="deleteSomething" parameterType="int"> 
+		DELETE FROM tablename1 WHERE columnname1 = #{param1} </delete> -->
 
 </mapper>

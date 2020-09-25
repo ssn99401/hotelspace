@@ -16,6 +16,7 @@ public class ClientRoomVO {
 	private int roomStandardPeople;
 	private int roomMaxPeople;
 	private String imageLink;
+	private String imageType;
 	private String reservationInDate;
 	private String reservationOutDate;
 //
@@ -25,7 +26,7 @@ public class ClientRoomVO {
 
 	public ClientRoomVO(String roomId, String hotelId, String roomName, String hotelName, int roomPrice, int roomAmount,
 			String roomServices, String roomInfo, int roomUsage, int roomStandardPeople, int roomMaxPeople,
-			String imageLink, String reservationInDate, String reservationOutDate) {
+			String imageLink, String reservationInDate, String reservationOutDate, String imageType) {
 		super();
 		this.roomId = roomId;
 		this.hotelId = hotelId;
@@ -41,6 +42,7 @@ public class ClientRoomVO {
 		this.imageLink = imageLink;
 		this.reservationInDate = reservationInDate;
 		this.reservationOutDate = reservationOutDate;
+		this.imageType = imageType;
 	}
 
 	public String getHotelName() {
@@ -154,14 +156,26 @@ public class ClientRoomVO {
 	public void setReservationOutDate(String reservationOutDate) {
 		this.reservationOutDate = reservationOutDate;
 	}
+	
+
+	public String getImageType() {
+		return imageType;
+	}
+
+	public void setImageType(String imageType) {
+		this.imageType = imageType;
+	}
 
 	@Override
 	public String toString() {
 		return "ClientRoomVO [roomId=" + roomId + ", hotelId=" + hotelId + ", roomName=" + roomName + ", hotelName="
 				+ hotelName + ", roomPrice=" + roomPrice + ", roomAmount=" + roomAmount + ", roomServices="
 				+ roomServices + ", roomInfo=" + roomInfo + ", roomUsage=" + roomUsage + ", roomStandardPeople="
-				+ roomStandardPeople + ", roomMaxPeople=" + roomMaxPeople + ", imageLink=" + imageLink
-				+ ", reservationInDate=" + reservationInDate + ", reservationOutDate=" + reservationOutDate + "]";
+				+ roomStandardPeople + ", roomMaxPeople=" + roomMaxPeople + ", imageLink=" + imageLink + ", imageType="
+				+ imageType + ", reservationInDate=" + reservationInDate + ", reservationOutDate=" + reservationOutDate
+				+ "]";
 	}
+
+	
 
 }
