@@ -187,7 +187,7 @@ function setRoomInfo(roomList, roomPictures) {
 
 			html += '<div class="col-md-12 mb-5">';
 			html+='<div align="right" style="position: absolution; width: 95%;">';
-			html+='<button onClick="deleteRoom(' + roomList[i].roomId +')">';
+			html+='<button onClick="deleteRoom(' + "'" + roomList[i].roomId + "'" +')">';
 			html+='삭제';
 			html+='</button>';
 			html+='</div>';
@@ -344,6 +344,7 @@ function deleteRoom(roomId) {
 		data: JSON.stringify(sendData),
 		success : function(data) {
 			location.reload();
+			alert('삭제되엇습니다.');
 		},
 		error: function(jqXHR, textStatus, errorThrown) {
 			alert("error : " + jqXHR.responseText);
