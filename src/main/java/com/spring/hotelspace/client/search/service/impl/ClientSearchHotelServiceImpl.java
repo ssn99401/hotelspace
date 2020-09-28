@@ -33,7 +33,7 @@ public class ClientSearchHotelServiceImpl implements ClientSearchHotelService {
 	@Autowired
 	private GeoCodeService geoCodeService;
 
-	private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yy-MM-dd");
+	private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
 	private final static int hoteListPageSize = 3;
 	private final static int pageBlock = 5;
