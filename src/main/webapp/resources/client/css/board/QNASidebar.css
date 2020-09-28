@@ -6,6 +6,10 @@
     font-family: "나눔고딕",NanumGothic,"Nanum Gothic",Dotum,Apple SD Gothic Neo,sans-serif;
 }
 
+.QNA-Sidebar-Header {
+	font-weight : 700;
+}
+
 table, td, th {
     border: 0;
     border-collapse: collapse;

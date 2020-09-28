@@ -35,12 +35,15 @@
 			<mvc:exclude-mapping path="/searchHotelToConcept.do"/>
 			<mvc:exclude-mapping path="/searhHotelToBar.do"/>
 			<mvc:exclude-mapping path="/searchHotelList.do"/>
+			<mvc:exclude-mapping path="/clientQNAServices.do"/>
+			<mvc:exclude-mapping path="/AllQNA.do"/>
 			<mvc:exclude-mapping path="/movePage.do"/>
 			<mvc:exclude-mapping path="/clientLogin.do"/>
 			<mvc:exclude-mapping path="/getHotelReviewList.do"/>
 			<bean class="com.spring.hotelspace.client.utils.interceptor.ClientInterceptor"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors>
+	
 	
 	<!-- <mvc:interceptors>
 		<mvc:interceptor>
