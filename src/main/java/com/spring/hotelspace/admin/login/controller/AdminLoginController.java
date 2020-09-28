@@ -29,12 +29,12 @@ public class AdminLoginController {
 		AdminLoginVO resultVO = adminLoginService.getAdminLoginResult(admin);
 		System.out.println("admin : "+admin);
 		System.out.println("res" + resultVO);
-		Object destination = httpSession.getAttribute("destination");
+		Object destination = httpSession.getAttribute("adminDestination");
 
 		if (resultVO != null) {
 			if (resultVO.getPassword().equals(admin.getPassword())) {
 				resultVO.setPassword("");
-				httpSession.setAttribute("login", resultVO); // 로그인 성공
+				httpSession.setAttribute("adminLogin", resultVO); // 로그인 성공
 			} else {
 				model.addAttribute("message", "아이디 혹은 비밀번호가 틀렸습니다.");// 아이디 오류 처리 // 비밀번호 오류 처리
 				return "login/adminLogin";

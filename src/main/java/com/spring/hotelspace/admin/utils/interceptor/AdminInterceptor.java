@@ -22,7 +22,7 @@ public class AdminInterceptor extends HandlerInterceptorAdapter {
 		uri = uri.substring(index + 1, uri.length());
 		if (request.getMethod().equals("GET")) {
 			
-			request.getSession().setAttribute("destination", uri + query);
+			request.getSession().setAttribute("adminDestination", uri + query);
 		}
 	}
 	
@@ -33,7 +33,7 @@ public class AdminInterceptor extends HandlerInterceptorAdapter {
 		HttpSession httpSession = request.getSession();
 		
 		// 로그인하지 않은 경우
-		if(httpSession.getAttribute("login") == null) {
+		if(httpSession.getAttribute("adminLogin") == null) {
 			
 			request.setAttribute("message", "관리자 로그인이 필요한 서비스입니다.");
 			saveDestination(request);

@@ -14,6 +14,7 @@
 <script type="text/javascript" src="resources/client/js/jquery-3.3.1.js"></script>
 <link rel="stylesheet" href="resources/client/css/reservInfo/reservInfo.css">
 <script src="resources/client/js/reservInfo/reservInfo.js"></script>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
 
 <meta charset="UTF-8">
@@ -24,7 +25,7 @@
 		<c:import url="/clientHeader.do" />
 	</header>
 
-
+<div style="height: 500px;">
 	<input type="hidden" id="clientId"
 		value="${sessionScope.login.clientId }">
 
@@ -73,15 +74,18 @@
 						value="${rev.roomPrice }" pattern="#,###,###" />￦</td>
 			</tr>
 			<tr>
-				<td colspan="3" style="text-align: center;"><input
-					type="button" value="결제" id=pay style="width: 1400px;"></td>
+			
+				<td colspan="3" style="text-align: center;">
+				<input type = "button" class="w3-button w3-block w3-pink w3-ripple w3-margin-top w3-round" value = "뒤로가기" id = "back" onclick="history.back(-1);">
+				<input
+					type="button" value="결제" id=pay class="w3-button w3-block w3-pink w3-ripple w3-margin-top w3-round" ></td>
 			</tr>
 		</table>
 
 
 	</c:forEach>
 
-
+</div>
 
 
 	<footer>

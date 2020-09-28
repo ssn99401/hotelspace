@@ -55,9 +55,7 @@ public class AdminHotelManagerServiceImpl implements AdminHotelManagerService {
 		requestMap.put("start", ""+ (pageSize * (pageNum - 1) + 1));
 		requestMap.put("end", "" + (pageSize * pageNum));
 
-		System.out.println("requestMap : " + requestMap);
 		Map<String, Object> resultMap = new HashMap<String, Object>();
-
 		int count = adminHotelManagerDAO.getAdminHotelListCount(requestMap);
 		resultMap.put("hotelList", adminHotelManagerDAO.getAdminHotelList(requestMap));
 		resultMap.put("pagination", new Pagination(count, pageNum, Integer.parseInt(requestMap.get("pageSize"))));
@@ -65,7 +63,6 @@ public class AdminHotelManagerServiceImpl implements AdminHotelManagerService {
 		resultMap.put("pageNum", pageNum);
 		resultMap.put("pageSize", pageSize);
 		resultMap.put("pageBlock", pageBlock);
-		System.out.println(resultMap);
 		return resultMap;
 	}
 
@@ -95,7 +92,6 @@ public class AdminHotelManagerServiceImpl implements AdminHotelManagerService {
 
 	// 호텔 정보 업데이트 요청처리 메서드
 	public int updateHotelInfo(String jsonParam) throws ParseException  {
-		System.out.println(jsonParam);
 		JSONParser jsonParser = new JSONParser();
 		JSONObject jsonObject = (JSONObject) jsonParser.parse(jsonParam);
 
@@ -106,7 +102,6 @@ public class AdminHotelManagerServiceImpl implements AdminHotelManagerService {
 
 	// 방 정보 업데이트 요청처리 메서드
 	public int updateRoomInfo(String jsonParam) throws ParseException  {
-		System.out.println(jsonParam);
 		JSONParser jsonParser = new JSONParser();
 		JSONObject jsonObject = (JSONObject) jsonParser.parse(jsonParam);
 
@@ -123,7 +118,6 @@ public class AdminHotelManagerServiceImpl implements AdminHotelManagerService {
 		// 이미지 파일 서버 업로드
 
 		List<FileVO> fileList = fileService.uploadFilesToIterator(hotelId, files);
-		System.out.println(fileList);
 		List<AdminHotelImageVO> pageImageList = new ArrayList<AdminHotelImageVO>();
 		AdminHotelImageVO pageImage = new AdminHotelImageVO(hotelId, fileList.get(0).getSavePath() + fileList.get(0).getFileName(), "MAIN");
 		pageImageList.add(pageImage); 
@@ -155,7 +149,6 @@ public class AdminHotelManagerServiceImpl implements AdminHotelManagerService {
 		String hotelId = (String) filesIterator.next();
 
 		List<FileVO> fileList = fileService.uploadFilesToIterator(hotelId + "/" + roomId, files);
-		System.out.println(fileList);
 		List<AdminHotelImageVO> pageImageList = new ArrayList<AdminHotelImageVO>();
 		AdminHotelImageVO pageImage = new AdminHotelImageVO(roomId, fileList.get(0).getSavePath() + fileList.get(0).getFileName(), "MAIN");
 		pageImageList.add(pageImage); 
