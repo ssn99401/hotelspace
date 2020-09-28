@@ -60,7 +60,7 @@
 				<c:set var="number" value="${0 }" />
 				<c:forEach items="${roomList }" var="Room">
 
-
+					<input type = "hidden" id = "hotelId" value = "${Room.hotelId }">
 					<input type="hidden" id="numberCount" value="${number }">
 
 
@@ -155,7 +155,8 @@
 											${roomList[index].roomServices }</li>
 										<li><strong>잔여 객실: </strong>${roomList[index].roomAmount }</li>
 										<li><strong>선택하신 날짜:</strong><br>
-											${param.reservationInDate} ~ ${param.reservationOutDate}</li>
+											<input type = "date" id = "inDate" value = "${param.reservationInDate}"> ~ 
+											<input type = "date" id = "outDate" value = "${param.reservationOutDate}"></li>
 										<li><strong>Info: </strong><br>${roomList[index].roomInfo }<br>
 											방 기준인원에서 1인 추가시마다 +30,000￦씩 추가됩니다.</li>
 
@@ -203,7 +204,7 @@
 	<footer>
 		<c:import url="/clientFooter.do" />
 	</footer>
-
+		<script src="resources/client/js/room/imageCon.js"></script>
 	<script src="resources/client/js/room/bootstrap.js"></script>
 	<script src="resources/client/js/room/bootstrap.min.js"></script>
 	<script src="resources/client/js/jquery.min.js"></script>
@@ -211,72 +212,5 @@
 	<script src="resources/client/js/room/bootstrap-datepicker.js"></script>
 	<script src="resources/client/js/room/carousel.js"></script>
 </body>
-<script type="text/javascript">
-	// 페이지 온로드 이벤트
-	window.onload = function() {
-		requestHotelReviewList('${param.hotelId}');
-	}
 
-	// 리뷰 목록 Ajax 요청
-	function requestHotelReviewList(hotelId) {
-		var sendData = {
-			hotelId : hotelId
-		};
-		$.ajax({
-			type : "POST",
-			url : "getHotelReviewList.do",
-			dataType : 'json',
-			contentType : 'application/json; charset=utf-8;',
-			data : JSON.stringify(sendData),
-			success : function(data) {
-				setReviewListTable(data);
-			},
-			error : function(jqXHR, textStatus, errorThrown) {
-				alert("error : " + jqXHR.responseText);
-			}
-		});
-	}
-
-	// 리뷰 리스트 테이블 set 
-	function setReviewListTable(data) {
-		var hotelReviewList = data['hotelReviewList'];
-		var html = "";
-		html += '<div class="col-md-12 mb-5">';
-		html += '<div align="center" style="width: 100%;">';
-		html+='<table style="text-align: center; width: 80%;">';
-		html+='<tbody id="review">';
-		if (hotelReviewList.length == 0) { // 리뷰가 없는 호텔의 경우
-			html += '<h4>호텔에 리뷰 내역이 없습니다.</h4>';
-		} else { // 리뷰 목록 표시 
-			for (var i = 0; i < hotelReviewList.length; i++) {
-				html+='<tr style="outline: auto;">';
-				html+='<td style="float: left;"><strong>&nbsp;&nbsp;' + hotelReviewList[i].clientId +'님</strong></td>';
-				html+='<td style=""></td>';
-				html+='<td style="float: right;">작성일 : ' + hotelReviewList[i].reviewWriteDate +'</td>';
-				html+='</tr>';
-				
-				html+='<tr style="outline: auto;">';
-				html+='<td colspan="3">';
-				html+='<table style="width: 100%;">';
-				html+='<tr style="float: left">';
-				html+='<td colspan="3" style="height: 30px;">&nbsp;' + hotelReviewList[i].roomName + '</td>';
-				html+='</tr>';
-				
-				html+='</tr>';
-				html+='<td colspan="3" style="height: 100px;">' + hotelReviewList[i].reviewContent + '</td>';
-				html+='</tr>';
-				html+='</table>';
-				html+='</td>';
-				html+='</tr>';
-				html += '<br>';
-			}
-
-		}
-		html+='</tbody>';
-		html+='</table>';
-		html += '</div>';
-		html += '</div>';
-		document.getElementById('div-review').innerHTML = html;
-	}
-</script>
 </html>

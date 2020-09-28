@@ -66,3 +66,16 @@ function requestHotelReviewList(hotelId) {
       }
    });
 }
+$('#inDate').change(function(){
+	var hotelId = $('#hotelId').val();
+	var inDate = $('#inDate').val();
+	var outDate = $('#outDate').val();
+	location.href = "searchRoom.do?hotelId="+hotelId+"&reservationInDate="+inDate+"&reservationOutDate="+outDate;			
+});
+
+$('#outDate').change(function(){
+	var hotelId = $('#hotelId').val();
+	var inDate = $('#inDate').val();
+	var outDate = $('#outDate').val();
+	location.href = "searchRoom.do?hotelId="+hotelId+"&reservationInDate="+inDate+"&reservationOutDate="+outDate;
+});
