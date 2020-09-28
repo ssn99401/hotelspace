@@ -175,6 +175,7 @@ function deleteHotel(hotelId) {
 		data: JSON.stringify(sendData),
 		success : function(data) {
 			requestHotelList(currentPageNum);
+			alert('삭제되었습니다.');
 		},
 		error: function(jqXHR, textStatus, errorThrown) {
 			alert("error : " + jqXHR.responseText);
