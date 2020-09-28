@@ -1,361 +1,288 @@
-
-   #QNA-all {
-      /* min-height: 1000px; */
-   }
-   #QNA-Sidebar {
-      /* min-height: 1000px; */
-      margin-left: -15rem;
-      -webkit-transition: margin .25s ease-out;
-      -moz-transition: margin .25s ease-out;
-      -o-transition: margin .25s ease-out;
-      transition: margin .25s ease-out;
-      padding-top: 90px;
-      padding-left: 32em;
-      padding-right: 300px;
-      /* padding-bottom: 500px;
-      min-height: 100%
-      padding-bottom: 100%; */
-   }
-   
-   body #QNA-Sidebar {
-      float: left;
-      padding-right: 0;
-      /* width: 20%; */
-   }
-   
-   #QNA-Sidebar .QNA-Sidebar-Header {
-      padding: 1.25rem;
-      font-size: 1.2rem;
-      padding-top: 50px;
-   }
-   .QNA-Sidebar-Header {
-      color: black;
-   }
-   
-   #QNA-Sidebar .QNA-Sidebar-List {
-      width: 15rem;
-      height: 60px;
-   }
-   .QNA-Sidebar-Style {
-      list-style-type: none;
-      font-size: 14px;
-      margin: 0 0 0 -16px;
-   }
-   
-   .QNA-Sidebar-Style li {
-      padding-top: 20px;
-   }
-   #QNA-Body {
-      padding-top: 130px;
-      /* padding-left: 685px; */
-      padding-left: 36%;
-      /* min-width: 100vw; */
-   }
-   #wrapper.toggled #QNA-Sidebar {
-      margin-left: 0;
-   }
-   #QNA-Body article {
-      padding: 40px;
-   }
-   #QNA-Body article section {
-      padding: 0px 9px;
-      /* padding: 0 9%; */
-   }
-   #QNA-Body h1 {
-      margin: 48px 0 20px;
-   }
-   .QNA-dl-Style {
-      display: block;
-      margin-block-start: 1em;
-      /* margin-block-end: 1em; */
-      margin-inline-start: 0px;
-      margin-inline-end: 0px;
-      /* border-bottom: 1px solid #e3e3e5; */
-   }
-   .QNA-dl-Style {
-      position: relative;
-      /* height: 438px; */
-      float: left;
-   }
-   #QNA-Body .QNA-dl-Style td {
-      float: left;
-      position: relative;
-      z-index: 20;
-      padding: 5px;
-      border: 1px solid #e3e3e5;
-   }
-   #QNA-Body .QNA-dl-Style td a {
-      /* display: block; */
-      width: 116px;
-      height: 44px;
-      text-indent: -999em;
-   }
-   .QNA-Selected {
-      padding: 5px;
-      border: 1px solid #e3e3e5;
-   }
-   #QNA-Body .QNA-dl-Style td.selected+#Selected1-dd {
-      z-index: 15;
-   }
-   #QNA-Body .QNA-dl-Style #Selected1-dd {
-      position: absolute;
-      top: 37px;
-      z-index: 10;
-      min-width: 886px;
-      min-height: 392px;
-      border: 1px solid #e3e3e5;
-      /* background: #fff url(../img/customer/bg_refund_step.png?v=20200722114411) no-repeat; */
-      text-indent: -999em;
-      /* display: block;
-    margin-inline-start: 40px; */
-   }
-   .boody {
-      width: 300px;
-      border: 1px solid #444444;
-   }
-   .ListBody {
-      padding-top: 53px;
-   }
-   .showlist .listheadline {
-      background: #ff80c0;
-      color: #000000;
-      text-align: center;
-   }
-   .showlist2 .listheadline {
-      background: #ff80c0;
-      color: #000000;
-      text-align: center;
-   }
-   .showlist3 .listheadline {
-      background: #ff80c0;
-      color: #000000;
-      text-align: center;
-   }
-   /* @media ( min-width : 1024px) { */
-   
-   #Selected1-dd tr .tno {
-      text-align: center;
-      width: 25px;
-   }
-   #Selected1-dd tr .tname {
-      text-align: center;
-      /* overflow: hidden;
-      white-space: nowrap;
-      display:block;
-      text-overflow:ellipsis; */
-      width: 70px;
-   }
-   #Selected1-dd tr .tcategory{
-      text-align: center;
-      /* overflow: hidden;
-      white-space: nowrap;
-      display:block;
-      text-overflow:ellipsis; */
-      width: 100px;
-   }
-   #Selected1-dd tr .ttitle {
-      text-align: center;
-      overflow: hidden;
-      white-space: nowrap;
-      display:block;
-      text-overflow:ellipsis;
-      width: 300px;
-   }
-   #Selected1-dd tr .title {
-      text-align: center;
-      overflow: hidden;
-      white-space: nowrap;
-      display:block;
-      text-overflow:ellipsis;
-      width: 300px;
-   }
-   #Selected1-dd tr .tsecret {
-      text-align: center;
-      /* overflow: hidden;
-      white-space: nowrap;
-      display:block;
-      text-overflow:ellipsis; */
-      width: 50px;
-   }
-   #Selected1-dd tr .tadate {
-      text-align: center;
-      /* overflow: hidden;
-      white-space: nowrap;
-      display:block;
-      text-overflow:ellipsis; */
-      width: 50px;
-   }
-   #Selected1-dd tr .tdate {
-      text-align: center;
-      /* overflow: hidden;
-      white-space: nowrap;
-      display:block;
-      text-overflow:ellipsis; */
-      width: 110px;
-   }
-   .showlist .listheadline {
-      background: #ff80c0;
-      color: #000000;
-      text-align: center;
-   }
-   #searchForm {
-      width: 655px;
-      text-align: center;
-   }   
-   #search-Type {
-      background: #fff !important;
-      color: #ff80c0!important;
-      font-size: 14px;
-      border-radius: 5px;
-      box-shadow: none !important;
-      padding: 0.155rem 0.5rem;
-      line-height: 1.5;
-      border: 1px solid #ced4da;
-   }
-   #search-Content {
-      padding: 0.105rem 0.5rem;
-      border-radius: 5px;
-      border: 1px solid #ced4da;
-      background: #fff !important;
-      color: #ff80c0!important;
-   }
-   #search-Btn {
-      background: #fff !important;
-      padding: 0.105rem 0.5rem;
-      border-radius: 5px;
-      border: 1px solid #ced4da;
-      color: #ff80c0 !important;
-   }
-   .morebtnT {
-      width: 655px;
-      padding: 0px;
-      border-spacing: 0px;
-   }
-   .morebtnT2 {
-      width: 655px;
-      padding: 0px;
-      border-spacing: 0px;
-   }
-   .morebtnT3 {
-      width: 655px;
-      padding: 0px;
-      border-spacing: 0px;
-   }
-   #moreList {
-      /* width: 655px; */
-      border: 0;
-      background-color: #ffffff;
-      color: #ff80c0;
-      border-spacing: 0px;
-   }
-   #moreList2 {
-      /* width: 655px; */
-      border: 0;
-      background-color: #ffffff;
-      color: #ff80c0;
-      border-spacing: 0px;
-   }
-   #moreList3 {
-      /* width: 655px; */
-      border: 0;
-      background-color: #ffffff;
-      color: #ff80c0;
-      border-spacing: 0px;
-   }
+#container {
+    background-color: #fff;
+    overflow: hidden;
+    clear: both;
+    padding-bottom: 244px;
+    font-family: "나눔고딕",NanumGothic,"Nanum Gothic",Dotum,Apple SD Gothic Neo,sans-serif;
 }
 
-@media ( min-width : 1000px) {
-   #QNA-Sidebar {
-      visibility: hidden;
-   }
-}
-@media ( min-width : 768px) {
-   .QNA-Sidebar-Style {
-      list-style-type: none;
-      font-size: 14px;
-      margin: 0 0 0 -16px;
-   }
-   #QNA-Sidebar .QNA-Sidebar-List {
-      width: 15rem;
-      height: 60px;
-   }
-   #QNA-Sidebar .QNA-Sidebar-Header {
-      padding: 1.25rem;
-      font-size: 1.2rem;
-      padding-top: 50px;
-   }
-   body #QNA-Sidebar {
-      float: left;
-      padding-right: 0;
-      /* width: 20%; */
-   }
-   /* #QNA-Sidebar {
-      min-height: 1000px;
-      margin-left: -15rem;
-      -webkit-transition: margin .25s ease-out;
-      -moz-transition: margin .25s ease-out;
-      -o-transition: margin .25s ease-out;
-      transition: margin .25s ease-out;
-      padding-top: 90px;
-      padding-left: 32em;
-      padding-right: 300px;
-      padding-bottom: 500px;
-      min-height: 100%
-      padding-bottom: 100%;
-   }    */
-   #QNA-Sidebar {
-      margin-left: 0;
-   }
-   
-   .QNA-Sidebar-Style {
-      list-style: none;
-      type: none;
-   }
-   #QNA-Body {
-      min-width: 0;
-      width: 100%;
-   }
-   #Selected1-dd {
-      min-width: 0;
-   }
-   #Selected1-dd tr {
-      min-width: 0;
-   }
-   #wrapper.toggled #QNA-Sidebar {
-      margin-left: -15rem;
-   }
-   .showlist .listheadline {
-      background: #ff80c0;
-      color: #000000;
-      text-align: center;
-   }
+table, td, th {
+    border: 0;
+    border-collapse: collapse;
+    border-spacing: 0;
+    word-break: break-all;
 }
 
-@media ( min-width : 0px) {
-   #QNA-Sidebar {
-      margin-left: 0;
-   }
-   
-   .QNA-Sidebar-Style {
-      list-style: none;
-      type: none;
-   }
-   #QNA-Body {
-      min-width: 0;
-      width: 100%;
-   }
-   #Selected1-dd {
-      min-width: 0;
-   }
-   #Selected1-dd tr {
-      min-width: 0;
-   }
-   #wrapper.toggled #QNA-Sidebar {
-      margin-left: -15rem;
-   }
-   .showlist .listheadline {
-      background: #ff80c0;
-      color: #000000;
-      text-align: center;
-   }
+#QNA-all {
+   position: relative;
+   width: 1200px;
+   margin: 0 auto;
+   padding-bottom: 60px;
+   margin-top: 60px;
+   font-size: 18px;
+}
+
+#container #QNA-all:after {
+    display: block;
+    clear: both;
+    content: '';
+}
+
+#container #QNA-all::before {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 200px;
+    width: 1px;
+}
+
+#QNA-Sidebar {
+   float: left;
+   position: relative;
+   z-index: 20;
+   width: 200px;
+}
+
+#QNA-Sidebar .QNA-Sidebar-Header {
+   padding-left: 40px;
+   padding-bottom: 30px;
+}
+
+#QNA-Art {
+   float: left;
+   /* box-sizing: border-box; */
+   width: 898px;
+   padding: 40px 30px 0;
+}
+
+.QnaSearch-area {
+   overflow: hidden;
+   border: 6px solid #e0e0e0;
+}
+
+.Qna-srch {
+   width: auto;
+    height: 144px;
+    margin: auto;
+}
+
+.QnaSearch-area .Qna-srch fieldset {
+    display: block;
+    font-size: 0;
+    text-align: center;
+}
+
+.QnaSearch-area .Qna-srch .tit {
+   margin: 30px auto 12px;
+}
+
+.QnaSearch-area .tit {
+   font-size: 16px;
+    color: #fd7792;
+}
+
+.QnaSearch-area .Qna-srch input[type=text] {
+   font-size: 12px;
+   line-height: normal;
+   width: 430px;
+    height: 35px;
+    padding: 0px;
+    padding-left: 9px;
+    border: 1px solid silver;
+    border-right: 0;
+    color: #828284;
+    vertical-align: middle;
+    outline: 0;
+}
+
+.QnaSearch-area .Qna-srch .btn_search {
+   display: inline-block;
+    width: 62px;
+    height: 35px;
+    background-color: #fd7792;
+    vertical-align: middle;
+}
+
+.QnaSearch-area .Qna-srch .btn_search button {
+   display: block;
+    width: 100%;
+    height: 100%;
+    font-size: 12px;
+    color: #fff;
+    border: 0;
+    border-radius: 0;
+    background-color: transparent;
+    outline: 0;
+    cursor: pointer;
+}
+
+#QNA-Art .QnaSearch-area+.Menu-list {
+   margin-top: 40px;
+}
+
+#QNA-Art .Menu-list {
+   overflow: hidden;
+    max-height: 38px;
+    margin-bottom: 20px;
+}
+
+#QNA-Art .Menu-list a {
+   display:block;
+   width:100%;
+   height:100%;
+   line-height:38px;
+   color:#fd7792;
+   text-align:center;
+}
+
+#QNA-Art .Menu-list li {
+   float: left;
+   box-sizing: border-box;
+    width: 48%;
+    height: 38px;
+    border: 1px solid #e2e2e2;
+    list-style: none;
+    text-align: center;
+    display: inline;
+    font-weight: 700;
+}
+
+#QNA-Art .Menu-list li:hover {
+   position:relative;
+   z-index:20;
+   /* background-color:#fff */
+}
+
+#QNA-Art .Menu-list li.selected:hover::before {
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    bottom: -1px;
+    left: -1px;
+    z-index: -1;
+    border: 2px solid #8080c0;
+    content: '';
+}
+
+#QNA-Art .Menu-list li.selected2:hover::before {
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    bottom: -1px;
+    left: -1px;
+    z-index: -1;
+    border: 2px solid #8080c0;
+    content: '';
+}
+
+#QNA-Art .Qna-table-Box {
+    border-bottom: 1px solid #b5b5ba;
+}
+
+#QNA-Art .Qna-table-Box {
+    border-top: 1px solid #222;
+    font-size: 12px;
+    text-align: center;
+}
+
+.QNA-List-All {
+   border-bottom: 1px solid #c0c0c0;
+}
+
+.morebtnT {
+   width: 845px;
+   padding: 0px;
+   border-spacing: 0px;
+   background-color: #fff;
+}
+
+.morebtnT2 {
+   width: 845px;
+   padding: 0px;
+   border-spacing: 0px;
+   background-color: #fff;
+}
+
+.morebtnT3 {
+   width: 845px;
+   padding: 0px;
+   border-spacing: 0px;
+   background-color: #fff;
+}
+
+#QNA-Art .Qna-Table thead th {
+    height: 37px;
+    border-bottom: 1px solid #b5b5ba;
+    background-color: #fcfcfc;
+    font-weight: 400;
+    line-height: 37px;
+    color: #333;
+}
+
+.listheadline {
+   background: #ff80c0;
+   color: #000000;
+   text-align: center;
+}
+
+#moreList {
+    /* width: 655px; */
+    border: 0;
+    background-color: #ffffff;
+    color: #ff80c0;
+    border-spacing: 0px;
+}
+
+.searchForm {
+   clear: both;
+    margin-top: 15px;
+    text-align: center;
+}
+
+.searchForm select {
+    padding: 5px 5px 4px;
+    border: 1px solid silver;
+    color: #828284;
+    vertical-align: middle;
+    font-size: 12px;
+    text-align: center;
+    background: #fff !important;
+   color: #ff80c0 !important;
+   font-size: 12px;
+   border-radius: 5px;
+   box-shadow: none !important;
+   /* padding: 0.155rem 0.5rem; */
+   line-height: 1.5;
+   border: 1px solid #ced4da;
+    
+}
+
+.searchForm input[type=text] {
+    width: 190px;
+    height: 27px;
+    padding-left: 8px;
+    border: 1px solid silver;
+    background-color: #fff;
+    font-size: 12px;
+    line-height: 28px;
+    color: #828284;
+    vertical-align: middle;
+    /* padding: 0.105rem 0.5rem; */
+   border-radius: 5px;
+   border: 1px solid #ced4da;
+   background: #fff !important;
+   color: #ff80c0 !important;
+}
+
+.searchForm #search-Btn {
+    width: 62px;
+    height: 29px;
+    font-size: 12px;
+    /* background: url(../img/common/sp_btn.png?v=20200916153516) no-repeat -335px 0; */
+    vertical-align: middle;
+    background: #fff !important;
+   padding: 0.105rem 0.5rem;
+   border-radius: 5px;
+   border: 1px solid #ced4da;
+   color: #ff80c0 !important;
 }
