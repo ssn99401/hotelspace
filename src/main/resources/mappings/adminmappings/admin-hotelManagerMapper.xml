@@ -76,6 +76,16 @@
 			AND 
 				HOTEL_AREA LIKE '%'||#{hotelClientId}||'%' 
 		</if>
+		
+		<if test="hotelName != null and !hotelName.equals('')">
+							AND HOTEL_NAME LIKE '%'||#{hotelName}||'%' 
+						</if>
+						<if test="hotelAddress != null and !hotelAddress.equals('')">
+							AND HOTEL_ADDRESS LIKE '%'||#{hotelAddress}||'%' 
+						</if>
+						<if test="hotelClientId != null and !hotelClientId.equals('')">
+							AND USER_ID LIKE '%'||#{hotelClientId}||'%' 
+						</if>
 	</select>
 	
 	<select id="getHotelInfo" parameterType="string" resultType="adminHotelVO">
