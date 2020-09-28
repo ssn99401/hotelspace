@@ -34,7 +34,7 @@ public class AdminLoginVO {
 
 	@Override
 	public String toString() {
-		return "AdminLoginVO [id=" + id + ", password=" + password + "]";
+		return id;
 	}
 
 	

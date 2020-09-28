@@ -349,6 +349,8 @@ function setHotelList(data) {
 
 		var divContent2P1 = document.createElement("p");
 		divContent2P1.append("평점 : " + data[varKey].hotelStar);
+		var spanStar = document.createElement("p");
+		spanStar.innerHTML = setHotelStar(data[varKey].hotelStar);
 		var divContent2P2 = document.createElement("p");
 		divContent2P2.append("가격 : " + data[varKey].lowestPrice);
 		var divContent2Button = document.createElement("button");
@@ -358,7 +360,8 @@ function setHotelList(data) {
 		divContent2Button.setAttribute("style","background: #fd7792; color: #fff; min-width: 100%;");
 		divContent2Button.setAttribute("onclick","showHotelRoom('" +  data[varKey].hotelId + "','" + data['reservationInDate'] + "','" + data['reservationOutDate']  + "');");
 		divContent2Button.append("선택");
-
+		
+		divContent2P1.appendChild(spanStar);
 		divContent2.appendChild(divContent2P1);
 		divContent2.appendChild(divContent2P2);
 		divContent2.appendChild(divContent2Button);
@@ -373,28 +376,114 @@ function setHotelList(data) {
 	// 페이징 처리
 	var divPaging = document.getElementById('paging');
 	var html = "";
-		if(data['pagination'].curRange != 1) {
-			html += '<a href="#" onClick="movePage(1)">[처음]</a>&nbsp;';
+	if(data['pagination'].curRange != 1) {
+		html += '<a href="#" onClick="movePage(1)">[처음]</a>&nbsp;';
+	}
+	if(data['pagination'].curPage != 1) {
+		html += '<a href="#" onClick="fn_paging(' + data['pagination'].prevPage + ')">[이전]</a>&nbsp;&nbsp;';
+	}
+	for(var i = data['pagination'].startPage; i <= data['pagination'].endPage; i++) {
+		if(data['pageNum'] == data['pageNum'].curPage) {
+			html += '<span style="font-weight: bold;"><a href="#" onClick="movePage(' + i + ')">'+ i +'</a>&nbsp;&nbsp;</span>';
+		} else {
+			html += '<a href="#" onClick="movePage('+ i +')">' + i + '</a>&nbsp;&nbsp;';
 		}
-		if(data['pagination'].curPage != 1) {
-			html += '<a href="#" onClick="fn_paging(' + data['pagination'].prevPage + ')">[이전]</a>&nbsp;&nbsp;';
-		}
-		for(var i = data['pagination'].startPage; i <= data['pagination'].endPage; i++) {
-			if(data['pageNum'] == data['pageNum'].curPage) {
-				html += '<span style="font-weight: bold;"><a href="#" onClick="movePage(' + i + ')">'+ i +'</a>&nbsp;&nbsp;</span>';
-			} else {
-				html += '<a href="#" onClick="movePage('+ i +')">' + i + '</a>&nbsp;&nbsp;';
-			}
-		}
-		if(data['pagination'].curPage != data['pagination'].pageCnt && data['pagination'].pageCnt > 0) {
-			html += '<a href="#" onClick="movePage('+ data['pagination'].nextPage  + ')">[다음]</a>&nbsp;';
-		}
-		if(data['pagination'].curRange != data['pagination'].rangeCnt && data['pagination'].pageCnt > 0) {
-			html += '<a href="#" onClick="movePage('+ data['pagination'].pageCnt  + ')">[끝]</a>';
-		}
+	}
+	if(data['pagination'].curPage != data['pagination'].pageCnt && data['pagination'].pageCnt > 0) {
+		html += '<a href="#" onClick="movePage('+ data['pagination'].nextPage  + ')">[다음]</a>&nbsp;';
+	}
+	if(data['pagination'].curRange != data['pagination'].rangeCnt && data['pagination'].pageCnt > 0) {
+		html += '<a href="#" onClick="movePage('+ data['pagination'].pageCnt  + ')">[끝]</a>';
+	}
 
-		divPaging.innerHTML = html;
-	
+	divPaging.innerHTML = html;
+}
+
+function setHotelStar(hotelStar) {
+	var html = "";
+	if(hotelStar <= 0.1 ) {
+		html+='<span class="fa fa-star-o"></span>';
+		html+='<span class="fa fa-star-o"></span>';
+		html+='<span class="fa fa-star-o"></span>';
+		html+='<span class="fa fa-star-o"></span>';
+		html+='<span class="fa fa-star-o"></span>';
+	}
+
+	if(hotelStar <= 0.8 && hotelStar > 0.1) {
+		html+='<span class="fa fa-star-half-o"></span>';
+		html+='<span class="fa fa-star-o"></span>';
+		html+='<span class="fa fa-star-o"></span>';
+		html+='<span class="fa fa-star-o"></span>';
+		html+='<span class="fa fa-star-o"></span>';
+	}
+	if(hotelStar > 0.8 && hotelStar <= 1.1) {
+		html+='<span class="fa fa-star"></span>';
+		html+='<span class="fa fa-star-o"></span>';
+		html+='<span class="fa fa-star-o"></span>';
+		html+='<span class="fa fa-star-o"></span>';
+		html+='<span class="fa fa-star-o"></span>';
+	}
+
+	<!-- 별점 1~2 -->
+	if(hotelStar > 1.1 && hotelStar <= 1.8) {
+		html+='<span class="fa fa-star"></span>';
+		html+='<span class="fa fa-star-half-o"></span>';
+		html+='<span class="fa fa-star-o"></span>';
+		html+='<span class="fa fa-star-o"></span>';
+		html+='<span class="fa fa-star-o"></span>';
+	}
+
+	if(hotelStar > 1.8 && hotelStar <= 2.1) {
+		html+='<span class="fa fa-star"></span>';
+		html+='<span class="fa fa-star"></span>';
+		html+='<span class="fa fa-star-o"></span>';
+		html+='<span class="fa fa-star-o"></span>';
+		html+='<span class="fa fa-star-o"></span>';
+	}
+	if(hotelStar > 2.1 && hotelStar <= 2.8) {
+		html+='<span class="fa fa-star"></span>';
+		html+='<span class="fa fa-star"></span>';
+		html+='<span class="fa fa-star-half-o"></span>';
+		html+='<span class="fa fa-star-o"></span>';
+		html+='<span class="fa fa-star-o"></span>';
+	}
+	if(hotelStar > 2.8 && hotelStar <= 3.1) {
+		html+='<span class="fa fa-star"></span>';
+		html+='<span class="fa fa-star"></span>';
+		html+='<span class="fa fa-star"></span>';
+		html+='<span class="fa fa-star-o"></span>';
+		html+='<span class="fa fa-star-o"></span>';
+	}
+	if(hotelStar > 3.1 && hotelStar <= 3.8) {
+		html+='<span class="fa fa-star"></span>';
+		html+='<span class="fa fa-star"></span>';
+		html+='<span class="fa fa-star"></span>';
+		html+='<span class="fa fa-star-half-o"></span>';
+		html+='<span class="fa fa-star-o"></span>';
+	}
+	if(hotelStar > 3.9 && hotelStar <= 4.1) {
+		html+='<span class="fa fa-star"></span>';
+		html+='<span class="fa fa-star"></span>';
+		html+='<span class="fa fa-star"></span>';                       
+		html+='<span class="fa fa-star"></span>';                       
+		html+='<span class="fa fa-star-o"></span>';
+	}
+	if(hotelStar > 4.1 && hotelStar <= 4.8) {
+		html+='<span class="fa fa-star"></span>';
+		html+='<span class="fa fa-star"></span>';
+		html+='<span class="fa fa-star"></span>';
+		html+='<span class="fa fa-star"></span>';
+		html+='<span class="fa fa-star-half-o"></span>';
+	}
+	if(hotelStar > 4.8) {
+		html+='<span class="fa fa-star"></span>';
+		html+='<span class="fa fa-star"></span>';
+		html+='<span class="fa fa-star"></span>';
+		html+='<span class="fa fa-star"></span>';
+		html+='<span class="fa fa-star"></span>';
+	}
+
+	return html;
 }
 
 function showSoldOutalert() {
