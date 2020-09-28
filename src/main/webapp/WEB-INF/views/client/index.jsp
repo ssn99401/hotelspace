@@ -230,10 +230,97 @@
 							<c:set var="cnt" value="${cnt + 1 }"></c:set>
 							<div class="half left-arrow d-flex align-items-center">
 								<div class="text p-4 p-xl-5 text-center">
-									<p class="star mb-0">
-										<span class="fa fa-star"></span><span class="fa fa-star"></span><span
-											class="fa fa-star"></span><span class="fa fa-star"></span><span
-											class="fa fa-star"></span>
+									<p class="star mb-0">									
+									<c:set var="star" value="${top.hotelStar }"/>
+									
+									<!-- 별점 0~1 -->
+									<c:if test="${star <= 0.1 }">
+										<span class="fa fa-star-o"></span>
+										<span class="fa fa-star-o"></span>
+										<span class="fa fa-star-o"></span>
+										<span class="fa fa-star-o"></span>
+										<span class="fa fa-star-o"></span>
+									</c:if>
+				
+									<c:if test="${star <= 0.8 && star > 0.1}">
+										<span class="fa fa-star-half-o"></span>
+										<span class="fa fa-star-o"></span>
+										<span class="fa fa-star-o"></span>
+										<span class="fa fa-star-o"></span>
+										<span class="fa fa-star-o"></span>
+									</c:if>
+									<c:if test="${star > 0.8 && star <= 1.1}">
+										<span class="fa fa-star"></span>
+										<span class="fa fa-star-o"></span>
+										<span class="fa fa-star-o"></span>
+										<span class="fa fa-star-o"></span>
+										<span class="fa fa-star-o"></span>
+									</c:if>
+									
+									<!-- 별점 1~2 -->
+									<c:if test="${star > 1.1 && star <= 1.8}">
+										<span class="fa fa-star"></span>
+										<span class="fa fa-star-half-o"></span>
+										<span class="fa fa-star-o"></span>
+										<span class="fa fa-star-o"></span>
+										<span class="fa fa-star-o"></span>
+									</c:if>
+				
+									<c:if test="${star > 1.8 && star <= 2.1}">
+										<span class="fa fa-star"></span>
+										<span class="fa fa-star"></span>
+										<span class="fa fa-star-o"></span>
+										<span class="fa fa-star-o"></span>
+										<span class="fa fa-star-o"></span>
+									</c:if>
+				
+									<c:if test="${star > 2.1 && star <= 2.8}">
+										<span class="fa fa-star"></span>
+										<span class="fa fa-star"></span>
+										<span class="fa fa-star-half-o"></span>
+										<span class="fa fa-star-o"></span>
+										<span class="fa fa-star-o"></span>
+									</c:if>
+									<c:if test="${star > 2.8 && star <= 3.1}">
+										<span class="fa fa-star"></span>
+										<span class="fa fa-star"></span>
+										<span class="fa fa-star"></span>
+										<span class="fa fa-star-o"></span>
+										<span class="fa fa-star-o"></span>
+									</c:if>
+						
+									<c:if test="${star > 3.1 && star <= 3.8}">
+										<span class="fa fa-star"></span>
+										<span class="fa fa-star"></span>
+										<span class="fa fa-star"></span>
+										<span class="fa fa-star-half-o"></span>
+										<span class="fa fa-star-o"></span>
+									</c:if>
+									<c:if test="${star > 3.8 && star <= 4.1}">
+										<span class="fa fa-star"></span>
+										<span class="fa fa-star"></span>
+										<span class="fa fa-star"></span>										
+										<span class="fa fa-star"></span>										
+										<span class="fa fa-star-o"></span>
+									</c:if>
+						
+									<c:if test="${star > 4.1 && star <= 4.8}">
+										<span class="fa fa-star"></span>
+										<span class="fa fa-star"></span>
+										<span class="fa fa-star"></span>
+										<span class="fa fa-star"></span>
+										<span class="fa fa-star-half-o"></span>
+									</c:if>
+									<c:if test="${star > 4.8}">
+										<span class="fa fa-star"></span>
+										<span class="fa fa-star"></span>
+										<span class="fa fa-star"></span>
+										<span class="fa fa-star"></span>
+										<span class="fa fa-star"></span>
+										
+									</c:if>
+						
+											
 									</p>
 									<!-- <p class="mb-0"><span class="price mr-1">$120.00</span> <span class="per">per night</span></p> -->
 									<h3 class="mb-3">
@@ -279,13 +366,6 @@
 						<a href="searchHotelToIndex.do?concept=글램핑" class="block-20 rounded"
 							style="background-image: url('${image['글렘핑']}');"> </a>
 						<div class="text p-4 text-center">
-							<div>
-								<a
-									href="searchHotelToIndex.do?concept=글램핑"><span
-									class="fa fa-star"></span><span class="fa fa-star"></span><span
-									class="fa fa-star"></span><span class="fa fa-star"></span><span
-									class="fa fa-star"></span></a>
-							</div>
 							<h3 class="heading">
 								<a
 									href="searchHotelToIndex.do?concept=글렘핑">글램핑</a>
@@ -301,13 +381,6 @@
 						<a href="searchHotelToIndex.do?concept=바다 낭만" class="block-20 rounded"
 							style="background-image: url('${image['바다 낭만']}');"> </a>
 						<div class="text p-4 text-center">
-							<div>
-								<a
-									href="searchHotelToIndex.do?concept=바다 낭만"><span
-									class="fa fa-star"></span><span class="fa fa-star"></span><span
-									class="fa fa-star"></span><span class="fa fa-star"></span><span
-									class="fa fa-star"></span></a>
-							</div>
 							<h3 class="heading">
 								<a
 									href="searchHotelToIndex.do?concept=바다 낭만">바다
@@ -323,13 +396,6 @@
 						<a href="searchHotelToIndex.do?concept=도심 속 힐링" class="block-20 rounded"
 							style="background-image: url('${image['도심 속 힐링']}');"> </a>
 						<div class="text p-4 text-center">
-							<div>
-								<a
-									href="searchHotelToIndex.do?concept=도심 속 힐링"><span
-									class="fa fa-star"></span><span class="fa fa-star"></span><span
-									class="fa fa-star"></span><span class="fa fa-star"></span><span
-									class="fa fa-star"></span></a>
-							</div>
 							<h3 class="heading">
 								<a
 									href="searchHotelToIndex.do?concept=도심 속 힐링">도심
