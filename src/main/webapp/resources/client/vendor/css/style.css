@@ -8705,11 +8705,11 @@ textarea.form-control {
     height: inherit !important; }
 
 .footer {
-  background: #272727;
+  background: #eef0f4;
   padding-bottom: 0; }
   .footer .border-top {
-    border-color: #1a1a1a !important;
-    background: #1a1a1a; }
+    border-color: #949191 !important;
+    background: #949191; }
   .footer .footer-heading {
     font-size: 20px;
     color: #fff;

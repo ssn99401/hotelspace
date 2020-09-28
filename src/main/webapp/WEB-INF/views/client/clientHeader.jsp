@@ -62,15 +62,14 @@
 			</button>
 			<div class="collapse navbar-collapse" id="ftco-nav">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item active"><a href="index.do"
+					<li class="nav-item"><a href="index.do"
 						class="nav-link">Home</a></li>
-					<li class="nav-item"><a href="#" class="nav-link">About</a></li>
 					<li class="nav-item"><a href="searchHotelAll.do?pageNum=1"
 						class="nav-link">Hotel</a></li>
 					<li class="nav-item"><a href="clientFAQServices.do"
 						class="nav-link">FAQ</a></li>
                     <li class="nav-item"><a href="clientQNAServices.do"
-						class="nav-link">QNA</a></li>
+						class="nav-link">Q&A</a></li>
 
 					<c:if test="${sessionScope.login != null }">
 						<li class="nav-item"><a href="clientMypage.do"

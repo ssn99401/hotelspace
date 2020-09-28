@@ -1,60 +1,96 @@
-.maintitle{
-	font-size
-	font-style: italic;
+.maintitle {
+	font-size font-style: italic;
 }
-.conta{
-border-collapse: separate;
-  border-spacing: 0 5px;
-  border: 1px solid  #a1a4a7;
+
+.conta {
+	border-collapse: separate;
+	border-spacing: 0 5px;
+	border: 1px solid #a1a4a7;
 	border-radius: 6px;
 	margin: 30px 30px 30px 30px;
 	padding-right: 30px;
 	font-style: oblique;
 }
+
 #claimTitle {
 	width: 100%;
 }
-.b1{
+
+.b1 {
 	margin-left: 10px;
 }
-.b2{
+
+.b2 {
 	margin-left: 10px;
 }
-.readForm{
-	margin: 20px 120px 20px 120px; 
+
+.readForm {
+	margin: 20px 250px 20px 250px;
 	padding: 29px 29px 0;
-    border: 1px solid  #a1a4a7;
-    border-radius: 6px;
+	border: 1px solid #a1a4a7;
+	border-radius: 6px;
 }
-.context{
-	border: 1px solid  #a1a4a7;
+
+.context {
+	border: 1px solid #a1a4a7;
 	border-radius: 6px;
 	margin: 30px 0px 0px 10px;
 	font-style: oblique;
-	
 }
-.contable{
-	margin-left: 50px; 
+
+.contable {
+	margin-left: 50px;
 	margin-top: 50px;
 }
-.replybtn{
+
+.replybtn {
 	btn btn-outline-danger;
+	
 }
-#btnReply{
+
+#btnReply {
 	margin: 0px 0px 120px 40px;
 }
-.tabtext{
+
+.tabtext {
 	
 }
-.titleTh{
-	font-size: x-large;
-	font-style: inherit;
+
+.titleTh {
+	width: 70px;
+	font-size: large;
 }
-.titleTh2{
-	
-	width: 1000px;
+
+.titleTh3 {
+	width: 850px;
+	border-spacing: 0 5px;
+	border: 1px solid #a1a4a7;
+	border-radius: 6px;
 }
-.imgs{
+
+.imgs {
 	width: 200px;
 	height: 200px;
+}
+
+.writeTitle{
+	border-spacing: 0 5px;
+	border: 1px solid #a1a4a7;
+	border-radius: 6px;
+	
+}
+.writeContent{
+	border-spacing: 0 5px;
+	border: 1px solid #a1a4a7;
+	border-radius: 6px;
+}
+.UpContent{
+	border-spacing: 0 5px;
+	border: 1px solid #a1a4a7;
+	border-radius: 6px;
+}
+.UpTitle{
+	border-spacing: 0 5px;
+	border: 1px solid #a1a4a7;
+	border-radius: 6px;
 }

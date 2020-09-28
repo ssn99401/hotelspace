@@ -185,11 +185,11 @@
 				<table>
 					<tbody>
 						<tr>
-							<th scope="row">카테고리 :</th>
-							<td>${read.claimCategory}</td>
-						<tr>
 							<th scope="row">작성자 :</th>
 							<td>${read.clientId}</td>
+						<tr>
+							<th scope="row">카테고리 :</th>
+							<td>${read.claimCategory}　</td>
 							<th scope="row">작성시간 :</th>
 							<td><fmt:formatDate value="${read.claimQdate}"
 									pattern="yyyy-MM-dd HH:mm" /></td>
@@ -211,10 +211,12 @@
 					<table>
 						<tr>
 							<th class="titleTh">제목 :</th>
-							<th class="titleTh2"><input style="width: 1100px;"
-								value="${read.claimTitle}"></th>
+							<th class="titleTh2"><input class="titleTh3"
+								readonly="readonly" value="　${read.claimTitle}"></th>
 						</tr>
+
 					</table>
+					<br> <br>
 					<c:if test="${read.claimPhoto != null}">
 						<table>
 							<tr>
@@ -225,7 +227,7 @@
 					</c:if>
 					<table class="tabtext">
 						<tr>
-							<td align="center"><textarea rows="20" cols="180"
+							<td align="center"><textarea rows="20" cols="140"
 									class="context" readonly="readonly">${read.claimContent }</textarea></td>
 						</tr>
 					</table>
@@ -265,31 +267,23 @@
 	</div> --%>
 		<div class="container">
 			<form id="ReplyForm" name="ReplyForm" method="POST">
-
 				<div>
-					<div>
-						<span><strong>댓글수</strong></span> <span id="cCnt"></span>
-					</div>
-					<div>
-						<table class="table">
-							<tr>
-								<c:if test="${sessionScope.login.clientId != null }">
-									<td><textarea style="width: 1000px" rows="5" cols="50"
-											id="replyContent" name="replyContent" placeholder="댓글을 입력하세요"></textarea>
-										<button type="button" id="btnReply"
-											class="btn btn-outline-danger">댓글쓰기</button> <br>
-										<hr></td>
-
-
-									<input type="hidden" id="clientId" name="clientId"
-										value="${sessionScope.login.clientId}" />
-
-								</c:if>
-							</tr>
-						</table>
-					</div>
+					<span><strong>댓글수</strong></span> <span id="cCnt"></span>
 				</div>
+				<table class="table">
+					<tr>
+						<c:if test="${sessionScope.login.clientId != null }">
+							<td><textarea style="width: 750px" rows="5" cols="40"
+									id="replyContent" name="replyContent" placeholder="댓글을 입력하세요"></textarea>
+								<button type="button" id="btnReply"
+									class="btn btn-outline-danger">댓글쓰기</button> <br>
+								<hr></td>
+							<input type="hidden" id="clientId" name="clientId"
+								value="${sessionScope.login.clientId}" />
 
+						</c:if>
+					</tr>
+				</table>
 				<input type="hidden" id="claimNum" name="claimNum"
 					value="${read.claimNum}" /> <input type="hidden" id="RclaimNum"
 					name="RclaimNum" value="${replyNum}" />

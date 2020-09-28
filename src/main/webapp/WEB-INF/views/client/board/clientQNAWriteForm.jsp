@@ -83,12 +83,12 @@
 
 					<tr>
 						<td align="center">제목</td>
-						<td><input type="text" name="claimTitle" id="claimTitle"
+						<td><input type="text" class="writeTitle" name="claimTitle" id="claimTitle"
 							required /></td>
 					</tr>
 					<tr>
 						<td align="center">내용</td>
-						<td colspan="1"><textarea rows="20" cols="100"
+						<td colspan="1"><textarea rows="20" cols="100" class="writeContent"
 								name="claimContent" id="claimContent" required></textarea></td>
 					</tr>
 					<tr>
