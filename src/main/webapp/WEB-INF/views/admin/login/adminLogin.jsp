@@ -29,49 +29,38 @@
 	<link rel="stylesheet" type="text/css" href="resources/client/login/css/main.css">
 <!--===============================================================================================-->
 
-<title>회원 로그인</title>
+<title>관리자 로그인</title>
 </head>
 <body>
-
 <div class="container-login100">
 <div class="wrap-login100 p-t-90 p-b-30">
-	
-	<form class="login100-form validate-form" action="clientLogin.do" method="post">
-	<span class="login100-form-title p-b-40"> Login </span>
+	<form class="login100-form validate-form" action="adminLogin.mdo" method="post">
+	<span class="login100-form-title p-b-40"> Admin Login </span>
 		 <c:if test="${message != null}">
 		 	<p align="center">${message }</p>
 		 </c:if>
 	<div class="wrap-input100 validate-input m-b-16">
-		<input class="input100"	type="text" name="clientId" placeholder="id"> 
+		<input class="input100"	type="text" name="id" placeholder="id"> 
 		 <span class="focus-input100"></span>  
 		 
 	</div>
 	
 	<div class="wrap-input100 validate-input m-b-20" data-validate = "Please enter password">
 		<span class="btn-show-pass"> <i class="fa fa fa-eye"></i></span> 
-		<input class="input100" type="password" name="clientPassword"
+		<input class="input100" type="password" name="password"
 			placeholder="Password"> 
 			 <span class="focus-input100"></span>
 	</div>
 		<input class="container-login100-form-btn" type="submit" value="login" />
 	</form>
  <br>
- 
-	<span class="login100-form-title p-b-25"> Login with SNS </span>
-	<a href="${kakaoURI }" class="login100-form-title p-b-40" ><img
-		src="resources/client/login/images/kakao_login_medium_narrow.png"></a>
-	
-	<div class="flex-col-c p-t-224">
-		<span class="txt2 p-b-10"> 회원가입이 필요하신가요? </span> <a href="Register.do?kakaoURI=${kakaoURI }"
-			class="txt3 bo1 hov1"> 회원가입 </a>
+ 	<div align="center">
+ 	<br />
+ 	<br />
+ 	<br />
+		<a href="clientLogin.do">HotelSpace</a>
 	</div>
-	
-	<br /><br /><br />
-	<br /><br /><br />
-	<div align="right">
-		<a href="adminLogin.mdo"><b>manage</b></a>
-	</div>
-</div>
+
 </div>
 </div>
 

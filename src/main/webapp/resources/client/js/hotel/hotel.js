@@ -225,7 +225,7 @@ function setHotelList(data) {
 	var divHotelList = document.getElementById('div-hotelList');
 
 	// 조회 목록이 없는 경우
-	if(data['count'] == '0' || data['count'] == 0) {
+	if(data['pagination'].listCnt == '0' || data['pagination'].listCnt == 0) {
 		var divChild = document.createElement("div");
 
 		divChild.setAttribute("class","col-md-8");
@@ -237,7 +237,7 @@ function setHotelList(data) {
 		divHotelList.appendChild(divChild);
 		return;
 	}
-	for(var i = 1; i <= data['count']; i++ ) {
+	for(var i = 1; i <= data['pagination'].listCnt; i++ ) {
 		var varKey = 'hotel' + i ;
 		var geoCodeKey = 'geoCode' + i;
 		if(data[varKey] == null) break;
@@ -372,37 +372,29 @@ function setHotelList(data) {
 
 	// 페이징 처리
 	var divPaging = document.getElementById('paging');
-
-	if(data['count'] > 0) {
-		var imsi = data['count'] % data['pageSize'] == 0 ? 0 : 1;
-		var pageCount = data['count'] / data['pageSize'] + imsi;
-		var result = (data['pageNum'] - 1) / data['pageBlock'];
-		var startPage = result * data['pageBlock'] + 1;
-		var endPage = startPage + data['pageBlock'] - 1;
-
-		if(endPage > pageCount) endPage = pageCount;
-
-		if(startPage > data['pageBlock']) {
-			var aTag = document.createElement("a");
-			aTag.setAttribute("href","javascript:movePage(" + (startPage - data['pageBlock']) + ");");
-			aTag.append("[이전]");
-			divPaging.appendChild(aTag);
+	var html = "";
+		if(data['pagination'].curRange != 1) {
+			html += '<a href="#" onClick="movePage(1)">[처음]</a>&nbsp;';
 		}
-		for(var i = startPage; i <= endPage; i++) {
-			var aTag = document.createElement("a");
-			aTag.setAttribute("href","javascript:movePage(" + i + ");");
-			aTag.append("[" + i + "]");
-			divPaging.appendChild(aTag);
+		if(data['pagination'].curPage != 1) {
+			html += '<a href="#" onClick="fn_paging(' + data['pagination'].prevPage + ')">[이전]</a>&nbsp;&nbsp;';
 		}
-		if(endPage < pageCount) {
-			var aTag = document.createElement("a");
-			aTag.setAttribute("href","javascript:movePage(" + (startPage + data['pageBlock']) + ");");
-			aTag.append("[다음]");
-			divPaging.appendChild(aTag);
+		for(var i = data['pagination'].startPage; i <= data['pagination'].endPage; i++) {
+			if(data['pageNum'] == data['pageNum'].curPage) {
+				html += '<span style="font-weight: bold;"><a href="#" onClick="movePage(' + i + ')">'+ i +'</a>&nbsp;&nbsp;</span>';
+			} else {
+				html += '<a href="#" onClick="movePage('+ i +')">' + i + '</a>&nbsp;&nbsp;';
+			}
 		}
-	}
+		if(data['pagination'].curPage != data['pagination'].pageCnt && data['pagination'].pageCnt > 0) {
+			html += '<a href="#" onClick="movePage('+ data['pagination'].nextPage  + ')">[다음]</a>&nbsp;';
+		}
+		if(data['pagination'].curRange != data['pagination'].rangeCnt && data['pagination'].pageCnt > 0) {
+			html += '<a href="#" onClick="movePage('+ data['pagination'].pageCnt  + ')">[끝]</a>';
+		}
 
-
+		divPaging.innerHTML = html;
+	
 }
 
 function showSoldOutalert() {

@@ -29,5 +29,7 @@ public interface ClientMyPageDAO {
 	public String mypageReview(ClientReviewVO client);
 
 	public String avgReview(String review);
+
+	public String reservCheck(ClientReservationVO reservVO);
 	
 }

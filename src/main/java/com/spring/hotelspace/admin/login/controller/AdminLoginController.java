@@ -1,5 +1,7 @@
 package com.spring.hotelspace.admin.login.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,15 +20,32 @@ public class AdminLoginController {
 	
 	@RequestMapping(value = "adminLogin.mdo", method = RequestMethod.GET)
 	public String getloginPaget(AdminLoginVO admin, Model model) {
-		return "adminLogin";
+		return "login/adminLogin";
 	}
 
 	@RequestMapping(value = "adminLogin.mdo", method = RequestMethod.POST)
-	public String loginToClient(AdminLoginVO admin, Model model) {
+	public String loginToClient(AdminLoginVO admin, HttpSession httpSession, Model model) {
 
-		int result = adminLoginService.getAdminLoginResult(admin);
-		model.addAttribute("result",  result);
+		AdminLoginVO resultVO = adminLoginService.getAdminLoginResult(admin);
+		System.out.println("admin : "+admin);
+		System.out.println("res" + resultVO);
+		Object destination = httpSession.getAttribute("destination");
 
-		return "adminMain";
+		if (resultVO != null) {
+			if (resultVO.getPassword().equals(admin.getPassword())) {
+				resultVO.setPassword("");
+				httpSession.setAttribute("login", resultVO); // 로그인 성공
+			} else {
+				model.addAttribute("message", "아이디 혹은 비밀번호가 틀렸습니다.");// 아이디 오류 처리 // 비밀번호 오류 처리
+				return "login/adminLogin";
+			}
+		} else {
+			model.addAttribute("message", "아이디 혹은 비밀번호가 틀렸습니다.");// 아이디 오류 처리 // 비밀번호 오류 처리
+			return "login/adminLogin";
+		}
+
+		return "redirect:" + (destination != null ? (String) destination : "index.mdo");
 	}
+	
+	
 }

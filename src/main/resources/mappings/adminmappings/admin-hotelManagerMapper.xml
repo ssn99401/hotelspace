@@ -24,16 +24,13 @@
 						WHERE
 							1=1
 						<if test="hotelName != null and !hotelName.equals('')">
-							AND 
-								HOTEL_NAME LIKE '%'||#{hotelName}||'%' 
+							AND HOTEL_NAME LIKE '%'||#{hotelName}||'%' 
 						</if>
 						<if test="hotelAddress != null and !hotelAddress.equals('')">
-							AND 
-								HOTEL_ADDRESS LIKE '%'||#{hotelAddress}||'%' 
+							AND HOTEL_ADDRESS LIKE '%'||#{hotelAddress}||'%' 
 						</if>
 						<if test="hotelClientId != null and !hotelClientId.equals('')">
-							AND 
-								HOTEL_AREA LIKE '%'||#{hotelClientId}||'%' 
+							AND USER_ID LIKE '%'||#{hotelClientId}||'%' 
 						</if>
 						ORDER BY
 							<!-- #{checkedOrderValue}  -->

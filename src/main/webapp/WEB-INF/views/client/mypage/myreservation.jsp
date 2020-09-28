@@ -18,13 +18,13 @@
 <script>
 	
 		
-        function popup(hotelId, roomId){
+        function popup(hotelId, roomId, reservationId){
 			
         	var popupX = (window.screen.width / 2) - (500 / 2);
 
         	var popupY= (window.screen.height / 2) - (300 / 2);
         	
-            var url = "reviewForm.do?hotelId="+hotelId+"&roomId="+roomId;
+            var url = "reviewForm.do?hotelId="+hotelId+"&roomId="+roomId+"&reservationId="+reservationId;
             var name = "popup test";
             var option = "width = 500, height = 300, top = "+popupY+" left = "+popupX;
 			
@@ -41,8 +41,7 @@
 	<c:import url="/clientHeader.do" />
 
 	<section>
-	<c:set var="now" value="<%=new java.util.Date()%>" />
-	<%-- <fmt:formatDate value="${now}" pattern="yyyy-MM-dd hh:mm:ss" /> --%>
+		<c:set var="now" value="<%=new java.util.Date()%>" />
 		<div class="w3-sidebar w3-bar-block" style="width: 25%; height: 28%">
 			<div class="w3-bar-item w3-pink">
 				<p>
@@ -80,9 +79,11 @@
 
 							<tbody>
 								<c:forEach var="mR" items="${myReserv }">
+								
 									<input type="hidden" value="${mR.reservationOutDate }"
 										id="reservationOutDate">
 									<tr>
+										
 										<td class="w3-center">${mR.hotelId}</td>
 										<td class="w3-center">${mR.roomId}</td>
 										<td class="w3-center"><fmt:parseDate
@@ -100,14 +101,26 @@
 										<td class="w3-center"><fmt:parseDate
 												value='${mR.reserveDate}' var='trading_day1'
 												pattern="yyyy-MM-dd HH:mm:ss" /> <fmt:formatDate
-												value="${trading_day1}" pattern="yyyy.MM.dd" /></td>
+												value="${trading_day1}" pattern="yyyy.MM.dd" />
+										<input type="hidden" value="${mR.reservationId }"
+										id="reservationId"></td>
 
 										<td class="w3-center">
-										<%-- <c:if test="${mR.reservationOutDate <= }" --%>
-										<a href="javascript:popup('${ mR.hotelId}','${ mR.roomId}')"
-											>리뷰 작성</a> <!--${mR.reviewCheck}--></td>
+											<c:if
+												test="${mR.reservationOutDate <= now && mR.reviewCheck == 0}">
+												<a href="javascript:popup('${ mR.hotelId}','${ mR.roomId}','${ mR.reservationId}')">리뷰
+													작성</a>
+												<!--${mR.reviewCheck}-->
+											</c:if>
 											
-							
+											<c:if
+												test="${mR.reviewCheck==1}">
+												<a href="#" onclick="return false;"
+												>작성완료</a>
+												<!--${mR.reviewCheck}-->
+											</c:if>
+										</td>
+
 									</tr>
 
 								</c:forEach>

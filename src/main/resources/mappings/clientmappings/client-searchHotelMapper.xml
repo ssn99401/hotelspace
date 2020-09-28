@@ -121,6 +121,9 @@
 			<if test='area != null and !area.equals("전체")'>
 				AND hotel.HOTEL_AREA = #{area}
 			</if>
+			<if test='concept != null and !concept.equals("")'>
+				AND hotel.HOTEL_CONCEPT = #{concept}
+			</if>
 			<if test='filter.equals("yes")'>	
 				<![CDATA[
 					 AND 
@@ -255,6 +258,31 @@
 			</if>
 			)
 	</select>
+	
+	
+   <select id="getHotelReviewList" parameterType="String" resultType="clientHotelReviewVO">
+   		SELECT
+   			REVIEW_ID,
+   			CLIENT_ID,
+   			HOTEL_ID,
+   			ROOM_ID,
+   			REVIEW_CONTENT,
+   			REVIEW_STAR,
+   			REVIEW_PARENT_COMMENT,
+   			TO_CHAR(REVIEW_WRITE_DATE,'YYYY-MM-DD HH:mm:ss') as reviewWriteDate,
+   			(	
+   				SELECT 
+   					room.ROOM_NAME
+   				FROM 
+   					ROOM room
+   				WHERE
+   					room.ROOM_ID = review.ROOM_ID
+   			)	as roomName
+   		FROM
+   			REVIEW review
+   		WHERE
+   			HOTEL_ID = #{hotelId}
+   </select>
 
 	<resultMap type="hotelFacilityVO" id="hotelFacility">
 		<result property="facilityParking" column="FACILITIES_PARKING" />

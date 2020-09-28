@@ -16,6 +16,26 @@
 	</header>
 
 	<script type="text/javascript" src="resources/client/js/index/index.js"></script>
+	<script>
+		function reserveBestHotel(hotelId) {
+			var reservationInDate = null;
+			var reservationOutDate = null;
+			
+			var today = new Date(); 
+			var tomorrow = new Date();
+			tomorrow.setDate(tomorrow.getDate() + 1);
+			var today_year = today.getFullYear(); // 년도
+			var today_month = today.getMonth();  // 월
+			var today_date = today.getDate();  // 날짜
+			var tomorrow_year = tomorrow.getFullYear(); // 년도
+			var tomorrow_month = tomorrow.getMonth();  // 월
+			var tomorrow_date = tomorrow.getDate();  // 날짜
+			reservationInDate = today_year.toString().substring(2, 4) + '-' + today_month.toString() + '-' + today_date.toString();
+			reservationOutDate = tomorrow_year.toString().substr(2,4) + '-' + tomorrow_month.toString() + '-' + tomorrow_date.toString();
+			
+			window.location.href= "searchRoom.do?hotelId=" + hotelId + "&reservationInDate=" + reservationInDate + "&reservationOutDate=" + reservationOutDate;
+		}
+	</script>
 
 	<div class="hero-wrap js-fullheight"
 		style="background-image: url('${image['MAINPAGE']}');"
@@ -217,7 +237,7 @@
 									</p>
 									<!-- <p class="mb-0"><span class="price mr-1">$120.00</span> <span class="per">per night</span></p> -->
 									<h3 class="mb-3">
-										<a href="rooms.html">${top.hotelName }</a>
+										<a href="javascript:reserveBestHotel('${top.hotelId }');">${top.hotelName }</a>
 									</h3>
 									<ul class="list-accomodation">
 										<c:if test="${top.revCnt != null }">
@@ -229,7 +249,7 @@
 										<li><span>별점 : </span> ${top.hotelStar }</li>
 									</ul>
 									<p class="pt-1">
-										<a href="room-single.html" class="btn-custom px-3 py-2">예약하기<span
+										<a href="javascript:reserveBestHotel('${top.hotelId }');" class="btn-custom px-3 py-2">예약하기<span
 											class="icon-long-arrow-right"></span></a>
 									</p>
 								</div>
@@ -245,218 +265,6 @@
 		</div>
 	</section>
 
-
-	<!-- <section class="ftco-section testimony-section bg-light">
-		<div class="container">
-			<div class="row justify-content-center pb-5 mb-3">
-				<div class="col-md-7 heading-section text-center ftco-animate">
-					<h2>HotelSpace Review</h2>
-				</div>
-			</div>
-			<div class="row ftco-animate">
-				<div class="col-md-12">
-					<div class="carousel-testimony owl-carousel">
-						<div class="item">
-							<div class="testimony-wrap d-flex">
-								<div class="user-img"
-									style="background-image: url(resources/client/vendor/images/person_1.jpg)">
-								</div>
-								<div class="text pl-4">
-									<span
-										class="quote d-flex align-items-center justify-content-center">
-										<i class="fa fa-quote-left"></i>
-									</span>
-									<p>Far far away, behind the word mountains, far from the
-										countries Vokalia and Consonantia, there live the blind texts.</p>
-									<p class="name">Racky Henderson</p>
-									<span class="position">Father</span>
-								</div>
-							</div>
-						</div>
-						<div class="item">
-							<div class="testimony-wrap d-flex">
-								<div class="user-img"
-									style="background-image: url(resources/client/vendor/images/person_2.jpg)">
-								</div>
-								<div class="text pl-4">
-									<span
-										class="quote d-flex align-items-center justify-content-center">
-										<i class="fa fa-quote-left"></i>
-									</span>
-									<p>Far far away, behind the word mountains, far from the
-										countries Vokalia and Consonantia, there live the blind texts.</p>
-									<p class="name">Henry Dee</p>
-									<span class="position">Businesswoman</span>
-								</div>
-							</div>
-						</div>
-						<div class="item">
-							<div class="testimony-wrap d-flex">
-								<div class="user-img"
-									style="background-image: url(resources/client/vendor/images/person_3.jpg)">
-								</div>
-								<div class="text pl-4">
-									<span
-										class="quote d-flex align-items-center justify-content-center">
-										<i class="fa fa-quote-left"></i>
-									</span>
-									<p>Far far away, behind the word mountains, far from the
-										countries Vokalia and Consonantia, there live the blind texts.</p>
-									<p class="name">Mark Huff</p>
-									<span class="position">Businesswoman</span>
-								</div>
-							</div>
-						</div>
-						<div class="item">
-							<div class="testimony-wrap d-flex">
-								<div class="user-img"
-									style="background-image: url(resources/client/vendor/images/person_4.jpg)">
-								</div>
-								<div class="text pl-4">
-									<span
-										class="quote d-flex align-items-center justify-content-center">
-										<i class="fa fa-quote-left"></i>
-									</span>
-									<p>Far far away, behind the word mountains, far from the
-										countries Vokalia and Consonantia, there live the blind texts.</p>
-									<p class="name">Rodel Golez</p>
-									<span class="position">Businesswoman</span>
-								</div>
-							</div>
-						</div>
-						<div class="item">
-							<div class="testimony-wrap d-flex">
-								<div class="user-img"
-									style="background-image: url(resources/client/vendor/images/person_1.jpg)">
-								</div>
-								<div class="text pl-4">
-									<span
-										class="quote d-flex align-items-center justify-content-center">
-										<i class="fa fa-quote-left"></i>
-									</span>
-									<p>Far far away, behind the word mountains, far from the
-										countries Vokalia and Consonantia, there live the blind texts.</p>
-									<p class="name">Ken Bosh</p>
-									<span class="position">Businesswoman</span>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section> -->
-
-	<!--  <section class="ftco-section bg-light">
-			<div class="container">
-				<div class="row no-gutters">
-					<div class="col-md-6 wrap-about">
-						<div class="img img-2 mb-4" style="background-image: url(resources/client/vendor/images/about.jpg);">
-						</div>
-						<h2>The most recommended vacation rental</h2>
-						<p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth. Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</p>
-					</div>
-					<div class="col-md-6 wrap-about ftco-animate">
-	          <div class="heading-section">
-	          	<div class="pl-md-5">
-		            <h2 class="mb-2">What we offer</h2>
-	            </div>
-	          </div>
-	          <div class="pl-md-5">
-							<p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
-							<div class="row">
-		            <div class="services-2 col-lg-6 d-flex w-100">
-		              <div class="icon d-flex justify-content-center align-items-center">
-		            		<span class="flaticon-diet"></span>
-		              </div>
-		              <div class="media-body pl-3">
-		                <h3 class="heading">Tea Coffee</h3>
-		                <p>A small river named Duden flows by their place and supplies it with the necessary</p>
-		              </div>
-		            </div> 
-		            <div class="services-2 col-lg-6 d-flex w-100">
-		              <div class="icon d-flex justify-content-center align-items-center">
-		            		<span class="flaticon-workout"></span>
-		              </div>
-		              <div class="media-body pl-3">
-		                <h3 class="heading">Hot Showers</h3>
-		                <p>A small river named Duden flows by their place and supplies it with the necessary</p>
-		              </div>
-		            </div>
-		            <div class="services-2 col-lg-6 d-flex w-100">
-		              <div class="icon d-flex justify-content-center align-items-center">
-		            		<span class="flaticon-diet-1"></span>
-		              </div>
-		              <div class="media-body pl-3">
-		                <h3 class="heading">Laundry</h3>
-		                <p>A small river named Duden flows by their place and supplies it with the necessary</p>
-		              </div>
-		            </div>      
-		            <div class="services-2 col-lg-6 d-flex w-100">
-		              <div class="icon d-flex justify-content-center align-items-center">
-		            		<span class="flaticon-first"></span>
-		              </div>
-		              <div class="media-body pl-3">
-		                <h3 class="heading">Air Conditioning</h3>
-		                <p>A small river named Duden flows by their place and supplies it with the necessary</p>
-		              </div>
-		            </div>
-		            <div class="services-2 col-lg-6 d-flex w-100">
-		              <div class="icon d-flex justify-content-center align-items-center">
-		            		<span class="flaticon-first"></span>
-		              </div>
-		              <div class="media-body pl-3">
-		                <h3 class="heading">Free Wifi</h3>
-		                <p>A small river named Duden flows by their place and supplies it with the necessary</p>
-		              </div>
-		            </div> 
-		            <div class="services-2 col-lg-6 d-flex w-100">
-		              <div class="icon d-flex justify-content-center align-items-center">
-		            		<span class="flaticon-first"></span>
-		              </div>
-		              <div class="media-body pl-3">
-		                <h3 class="heading">Kitchen</h3>
-		                <p>A small river named Duden flows by their place and supplies it with the necessary</p>
-		              </div>
-		            </div> 
-		            <div class="services-2 col-lg-6 d-flex w-100">
-		              <div class="icon d-flex justify-content-center align-items-center">
-		            		<span class="flaticon-first"></span>
-		              </div>
-		              <div class="media-body pl-3">
-		                <h3 class="heading">Ironing</h3>
-		                <p>A small river named Duden flows by their place and supplies it with the necessary</p>
-		              </div>
-		            </div> 
-		            <div class="services-2 col-lg-6 d-flex w-100">
-		              <div class="icon d-flex justify-content-center align-items-center">
-		            		<span class="flaticon-first"></span>
-		              </div>
-		              <div class="media-body pl-3">
-		                <h3 class="heading">Lovkers</h3>
-		                <p>A small river named Duden flows by their place and supplies it with the necessary</p>
-		              </div>
-		            </div>
-		          </div>  
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>  -->
-
-	<!-- <section class="ftco-intro" style="background-image: url(resources/client/vendor/images/bg_1.jpg);" data-stellar-background-ratio="0.5">
-			<div class="overlay"></div>
-			<div class="container">
-				<div class="row justify-content-center">
-					<div class="col-md-9 text-center">
-						<h2>Ready to get started</h2>
-						<p class="mb-4">It’s safe to book online with us! Get your dream stay in clicks or drop us a line with your questions.</p>
-						<p class="mb-0"><a href="#" class="btn btn-primary px-4 py-3">Book now</a> <a href="#" class="btn btn-white px-4 py-3">Contact us</a></p>
-					</div>
-				</div>
-			</div>
-		</section> -->
-
 	<section class="ftco-section bg-light">
 		<div class="container">
 			<div class="row justify-content-center pb-5 mb-3">
@@ -468,19 +276,19 @@
 			<div class="row d-flex">
 				<div class="col-md-4 d-flex ftco-animate">
 					<div class="blog-entry align-self-stretch">
-						<a href="blog-single.html" class="block-20 rounded"
+						<a href="searchHotelToIndex.do?concept=글램핑" class="block-20 rounded"
 							style="background-image: url('${image['글렘핑']}');"> </a>
 						<div class="text p-4 text-center">
 							<div>
 								<a
-									href="searchHotelToIndex.do?checkInDate=ALL&checkOutDate=ALL&concept=글램핑"><span
+									href="searchHotelToIndex.do?concept=글램핑"><span
 									class="fa fa-star"></span><span class="fa fa-star"></span><span
 									class="fa fa-star"></span><span class="fa fa-star"></span><span
 									class="fa fa-star"></span></a>
 							</div>
 							<h3 class="heading">
 								<a
-									href="searchHotelToIndex.do?checkInDate=ALL&checkOutDate=ALL&concept=글렘핑">글램핑</a>
+									href="searchHotelToIndex.do?concept=글렘핑">글램핑</a>
 							</h3>
 							<div class="meta mb-2">
 								<p>글램핑이 처음이십니까? 첫 글램핑을 경험해 보십시오!</p>
@@ -490,7 +298,7 @@
 				</div>
 				<div class="col-md-4 d-flex ftco-animate">
 					<div class="blog-entry align-self-stretch">
-						<a href="blog-single.html" class="block-20 rounded"
+						<a href="searchHotelToIndex.do?concept=바다 낭만" class="block-20 rounded"
 							style="background-image: url('${image['바다 낭만']}');"> </a>
 						<div class="text p-4 text-center">
 							<div>
@@ -512,7 +320,7 @@
 				</div>
 				<div class="col-md-4 d-flex ftco-animate">
 					<div class="blog-entry align-self-stretch">
-						<a href="blog-single.html" class="block-20 rounded"
+						<a href="searchHotelToIndex.do?concept=도심 속 힐링" class="block-20 rounded"
 							style="background-image: url('${image['도심 속 힐링']}');"> </a>
 						<div class="text p-4 text-center">
 							<div>

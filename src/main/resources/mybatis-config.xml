@@ -18,8 +18,9 @@
       <typeAlias type="com.spring.hotelspace.client.mypage.vo.ClientMyPageVO" alias="clientMyPageVO"/>
       <typeAlias type="com.spring.hotelspace.client.search.vo.HotelFacilityVO" alias="hotelFacilityVO"/>
       <typeAlias type="com.spring.hotelspace.client.search.vo.ClientRoomVO" alias="clientRoomVO"/>
+      <typeAlias type="com.spring.hotelspace.client.search.vo.ClientHotelReviewVO" alias="clientHotelReviewVO"/>
       <typeAlias type="com.spring.hotelspace.client.reservation.vo.ClientReservationVO" alias="clientReservationVO"/>
-      <typeAlias type="com.spring.hotelspace.client.reservation.vo.ClientReservationVO" alias="clientReservationInfoVO"/>
+      <typeAlias type="com.spring.hotelspace.client.reservation.vo.ClientReservationInfoVO" alias="clientReservationInfoVO"/>
       <typeAlias type="com.spring.hotelspace.client.board.vo.ClientFAQVO" alias="clientFAQVO"/>
       <typeAlias type="com.spring.hotelspace.client.board.vo.ClientQNAVO" alias="clientQNAVO"/>
       <typeAlias type="com.spring.hotelspace.client.board.vo.ClientReplyVO" alias="clientReplyVO"/>

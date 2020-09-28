@@ -185,9 +185,6 @@ function setRoomInfo(roomList, roomPictures) {
 					roomNormalPictures.push(roomNormalPictureList[j]);
 			}
 
-
-
-
 			html += '<div class="col-md-12 mb-5">';
 			html+='<div align="right" style="position: absolution; width: 95%;">';
 			html+='<button onClick="deleteRoom(' + roomList[i].roomId +')">';

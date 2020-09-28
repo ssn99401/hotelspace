@@ -1,4 +1,4 @@
-package com.spring.hotelspace.client.utils.interceptor;
+package com.spring.hotelspace.admin.utils.interceptor;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
@@ -7,7 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-public class AuthClientInterceptor extends HandlerInterceptorAdapter {
+public class AdminInterceptor extends HandlerInterceptorAdapter {
 	
 	// 요청 페이지 정보 저장
 	private void saveDestination(HttpServletRequest request) {
@@ -24,7 +24,6 @@ public class AuthClientInterceptor extends HandlerInterceptorAdapter {
 			
 			request.getSession().setAttribute("destination", uri + query);
 		}
-		System.out.println("SDfsd");
 	}
 	
 	@Override
@@ -36,9 +35,9 @@ public class AuthClientInterceptor extends HandlerInterceptorAdapter {
 		// 로그인하지 않은 경우
 		if(httpSession.getAttribute("login") == null) {
 			
-			request.setAttribute("message", "로그인이 필요한 서비스입니다.");
+			request.setAttribute("message", "관리자 로그인이 필요한 서비스입니다.");
 			saveDestination(request);
-			RequestDispatcher rd = request.getRequestDispatcher("clientLogin.do");
+			RequestDispatcher rd = request.getRequestDispatcher("adminLogin.mdo");
 			rd.forward(request, response);
 			return false;
 		}

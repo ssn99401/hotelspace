@@ -42,7 +42,6 @@ public class ClientReservationController {
 	@RequestMapping(value = "insertReserv.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String insertReserv(ClientReservationVO clientReservationVO, HttpServletRequest http,
 			HttpSession httpSession, HttpServletRequest request) {
-System.out.println("ddddddddddddddddddddddddddddd");
 		Map<String, Object> map = getParameterMap2(request);
 		String clientId = (String) map.get("clientId");
 		String roomId = (String) map.get("roomId");
