@@ -110,7 +110,21 @@ function infoChange() {
 <body>
 	<c:import url="/clientHeader.do" />
 
-	<section id="middle">
+	<section>
+		<div class="w3-sidebar2 w3-bar-block" style="position:absolute;  width: 25%; height: 40%">
+			<div class="w3-bar-item w3-pink">
+				<p>
+					<a href='clientMypage.do' class="w3-font-white">My Page</a>
+				</p>
+			</div>
+			<a href='myinfoUpdate.do' class="w3-bar-item w3-button"> 개인정보 수정
+			</a> <a href='pwChangeForm.do' class="w3-bar-item w3-button"> 비밀번호 변경
+			</a> <a href='myreservation.do' class="w3-bar-item w3-button"> 예약 상세
+				정보 </a> <a href="withdrawalForm.do" class="w3-bar-item w3-button">
+				회원탈퇴 </a>
+		</div>
+		
+		<div style="margin-left: 25%; margin-bottom:15%">
 		<div class="w3-content w3-container w3-margin-top w3-margin-bottom">
 			<div class="w3-container w3-card-4">
 				<div class="w3-center w3-large w3-margin-top">
@@ -147,6 +161,7 @@ function infoChange() {
 								value="My Page" />
 					</form>
 					<br> <br><br>
+					</div>
 				</div>
 			</div>
 		</div>

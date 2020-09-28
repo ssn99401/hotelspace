@@ -42,7 +42,7 @@
 
 	<section>
 		<c:set var="now" value="<%=new java.util.Date()%>" />
-		<div class="w3-sidebar w3-bar-block" style="width: 25%; height: 28%">
+		<div class="w3-sidebar2 w3-bar-block" style="position:absolute;  width: 25%; height: 40%">
 			<div class="w3-bar-item w3-pink">
 				<p>
 					<a href='clientMypage.do' class="w3-font-white">My Page</a>
@@ -55,15 +55,15 @@
 				회원탈퇴 </a>
 		</div>
 
-		<div style="margin-left: 25%">
+		<div style="margin-left: 25%; margin-bottom:25%">
 			<div class="w3-content w3-container w3-margin-top w3-margin-bottom">
 				<div class="w3-container w3-card-4">
 					<div class="w3-content w3-container w3-margin-top w3-margin-bottom"
 						align="left">
 						<h2>예약 내역 확인</h2>
 					</div>
-					<div class="w3-container">
-						<table class="w3-table-all w3-margin">
+					<div class="w3-container" style=" margin-bottom:25%; " >
+						<table class="w3-table-all w3-margin" >
 							<thead>
 								<tr>
 									<th class="w3-center">호텔명</th>
