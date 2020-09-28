@@ -132,7 +132,7 @@
                   <input id="search-Btn" type="submit" value="검색" />
                </fieldset>
             </div>
-         </article>>
+         </article>
       </div>
    </div>
 
