@@ -30,6 +30,7 @@ $(document).on("change","#pageSize",function(event){
 	requestHotelList('1');
 })
 $(document).on("change","#orderby-name",function(event){
+	setRarioButton(event.target);
 	requestHotelList('1');
 })
 $(document).on("change","#orderby-area",function(event){
@@ -41,7 +42,6 @@ $(document).on("change","#orderby-average",function(event){
 	requestHotelList('1');
 })
 $(document).on("click","#btn-search",function(event){
-	setRarioButton(event.target);
 	requestHotelList('1');
 
 })
@@ -128,42 +128,35 @@ function setHotelListTable(data) {
 	}
 
 	document.getElementById('hotelList-body').innerHTML = html;
-	setHotelListpage(data['count'], data['pageNum'], data['pageBlock'], data['pageSize']);
+	setHotelListpage(data);
 }
 
 // 호텔 리스트 페이징 처리
-function setHotelListpage(count ,pageNum, pageBlock, pageSize) {
+function setHotelListpage(data) {
 	$('#div-pageNum').empty();
 	var divPaging = document.getElementById('div-pageNum');
+	var html = "";
+	if(data['pagination'].curRange != 1) {
+        html += '<a href="#" onClick="requestHotelList(' + "'" + 1 + "'" + ')">[처음]</a>&nbsp;';
+     }
+     if(data['pagination'].curPage != 1) {
+        html += '<a href="#" onClick="requestHotelList('+ "'" + data['pagination'].prevPage + "'" +')">[이전]</a>&nbsp;&nbsp;';
+     }
+     for(var i = data['pagination'].startPage; i <= data['pagination'].endPage; i++) {
+        if(data['pageNum'] == data['pageNum'].curPage) {
+           html += '<span style="font-weight: bold;"><a href="#" onClick="requestHotelList(' + "'" + i + "'" + ')">'+ i +'</a>&nbsp;&nbsp;</span>';
+        } else {
+           html += '<a href="#" onClick="requestHotelList(' + "'" + i + "'" +')">' + i + '</a>&nbsp;&nbsp;';
+        }
+     }
+     if(data['pagination'].curPage != data['pagination'].pageCnt && data['pagination'].pageCnt > 0) {
+        html += '<a href="#" onClick="requestHotelList(' + "'" + data['pagination'].nextPage + "'"  + ')">[다음]</a>&nbsp;';
+     }
+     if(data['pagination'].curRange != data['pagination'].rangeCnt && data['pagination'].pageCnt > 0) {
+        html += '<a href="#" onClick="requestHotelList('+ "'" + data['pagination'].pageCnt + "'" + ')">[끝]</a>';
+     }
 
-	if(count > 0) {
-		var imsi = count % pageSize == 0 ? 0 : 1;
-		var pageCount = count / pageSize + imsi;
-		var result = (pageNum - 1) / pageBlock;
-		var startPage = result * pageBlock + 1;
-		var endPage = startPage + pageBlock - 1;
-
-		if(endPage > pageCount) endPage = pageCount;
-
-		if(startPage > pageBlock) {
-			var aTag = document.createElement("a");
-			aTag.setAttribute("href","javascript:requestHotelList('" + (startPage - pageBlock) + "');");
-			aTag.append("[이전]");
-			divPaging.appendChild(aTag);
-		}
-		for(var i = startPage; i <= endPage; i++) {
-			var aTag = document.createElement("a");
-			aTag.setAttribute("href","javascript:requestHotelList('"+ i + "');");
-			aTag.append("[" + i + "]");
-			divPaging.appendChild(aTag);
-		}
-		if(endPage < pageCount) {
-			var aTag = document.createElement("a");
-			aTag.setAttribute("href","javascript:requestHotelList('" + (startPage + pageBlock) + "');");
-			aTag.append("[다음]");
-			divPaging.appendChild(aTag);
-		}
-	}
+     divPaging.innerHTML = html;
 }
 
 //선택 호텔삭제 요청

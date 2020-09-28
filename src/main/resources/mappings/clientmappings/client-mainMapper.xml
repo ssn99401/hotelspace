@@ -11,7 +11,7 @@
 	<select id="getHotelImage" resultType="topHotelVO">
 		select h.hotel_id, hotel_star, hotel_name, image_link, rev_cnt, com_cnt
 	FROM 
-	(select DISTINCT RANK() OVER (ORDER BY hotel.HOTEL_STAR DESC) as "row",hotel_id, hotel_star, hotel_name from hotel) h,
+	(select DISTINCT ROW_NUMBER() OVER (ORDER BY hotel.HOTEL_STAR DESC) as "row",hotel_id, hotel_star, hotel_name from hotel) h,
     (select * from hotel_image where image_type = 'MAIN') i, 
     (select hotel_id, count(*) as rev_cnt from reservation group by hotel_id) r,
     (select hotel_id, count(*) as com_cnt from review group by hotel_id) c
@@ -21,33 +21,5 @@
 		]]> 
 	order by "row"
 	</select>
-
-	<!-- <resultMap type="#modelname" id="YourResultSet">
-		<id property="param1" column="columnname1" />
-		<result property="param2" column="columnname2" />
-		<result property="param3" column="columnname3" />
-	</resultMap>
-
-	<select id="getAll" resultMap="YourResultSet">
-		SELECT * FROM tablename1
-	</select>
-
-	<insert id="insertSomething" parameterType="#modelname">
-		INSERT INTO tablename1 (columnname1, columnname2, columnname3)
-		VALUES(#{value1},#{value2},#{value3})
-	</insert>
-
-	<update id="updateSomething" parameterType="#modelname">
-		UPDATE tablename1
-		SET
-		columnname1=#{param1}
-		WHERE
-		columnname2 = #{param2}
-	</update>
-
-	<delete id="deleteSomething" parameterType="int">
-		DELETE FROM tablename1 WHERE
-		columnname1 = #{param1}
-	</delete> -->
 
 </mapper>

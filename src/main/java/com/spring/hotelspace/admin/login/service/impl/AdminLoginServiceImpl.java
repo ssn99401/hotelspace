@@ -14,7 +14,7 @@ public class AdminLoginServiceImpl implements AdminLoginService {
 	private AdminLoginDAO adminLoginDAO;
 	
 	@Override
-	public int getAdminLoginResult(AdminLoginVO admin) {
+	public AdminLoginVO getAdminLoginResult(AdminLoginVO admin) {
 		return adminLoginDAO.getAdminLoginResult(admin);
 	}
 }

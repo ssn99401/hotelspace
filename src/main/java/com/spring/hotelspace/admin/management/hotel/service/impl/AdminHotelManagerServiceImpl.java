@@ -22,6 +22,7 @@ import com.spring.hotelspace.admin.management.hotel.dao.AdminHotelManagerDAO;
 import com.spring.hotelspace.admin.management.hotel.service.AdminHotelManagerService;
 import com.spring.hotelspace.admin.management.hotel.vo.AdminHotelImageVO;
 import com.spring.hotelspace.admin.management.hotel.vo.AdminRoomVO;
+import com.spring.hotelspace.admin.management.hotel.vo.Pagination;
 import com.spring.hotelspace.common.file.FileService;
 import com.spring.hotelspace.common.file.FileVO;
 import com.spring.hotelspace.common.json.JsonMapperService;
@@ -38,7 +39,7 @@ public class AdminHotelManagerServiceImpl implements AdminHotelManagerService {
 	@Autowired
 	private JsonMapperService jsonMapperService;
 
-	private final static int pageBlock = 2;
+	private final static int pageBlock = 3;
 
 	// 관리자 호텔목록 조회  메서드
 	@Transactional
@@ -57,8 +58,9 @@ public class AdminHotelManagerServiceImpl implements AdminHotelManagerService {
 		System.out.println("requestMap : " + requestMap);
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 
+		int count = adminHotelManagerDAO.getAdminHotelListCount(requestMap);
 		resultMap.put("hotelList", adminHotelManagerDAO.getAdminHotelList(requestMap));
-		resultMap.put("count", adminHotelManagerDAO.getAdminHotelListCount(requestMap));
+		resultMap.put("pagination", new Pagination(count, pageNum, Integer.parseInt(requestMap.get("pageSize"))));
 		resultMap.put("pageBlock",pageBlock);
 		resultMap.put("pageNum", pageNum);
 		resultMap.put("pageSize", pageSize);

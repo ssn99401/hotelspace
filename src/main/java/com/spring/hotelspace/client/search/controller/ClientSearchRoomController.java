@@ -10,11 +10,14 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.spring.hotelspace.client.search.service.ClientSearchRoomService;
 import com.spring.hotelspace.client.search.vo.ClientRoomVO;
+import com.spring.hotelspace.client.search.vo.ClientSearchHotelDTO;
 
 @Controller
 public class ClientSearchRoomController {
@@ -25,11 +28,11 @@ public class ClientSearchRoomController {
 	@RequestMapping(value = "searchRoom.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String searchRoom(ClientRoomVO vo, Model model , HttpServletRequest http, HttpSession httpSession) {
 		//Map<String, Object> map = new HashMap<String, Object>();
-		
+
 		System.out.println(http.getParameter("hotelId"));
 		System.out.println(http.getParameter("reservationInDate"));
 		httpSession.getAttribute("clientId");
-		
+
 		//List<ClientRoomVO> roomImage;
 		//roomImage = (List<ClientRoomVO>) map.put("roomImage", clientSearchRoomService.selectImage(vo));
 		//System.out.println(roomImage+"roomImage");
@@ -43,11 +46,7 @@ public class ClientSearchRoomController {
 		model.addAttribute("roomList", clientSearchRoomService.searchRoom(vo));
 		model.addAttribute("image",clientSearchRoomService.searchRoomImage((List)model.getAttribute("roomList")));
 		System.out.println(model.getAttribute("roomList"	));
-	
+
 		return "room/roomInfo";
 	}
-	
-	
-	
-
 }

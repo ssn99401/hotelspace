@@ -40,3 +40,29 @@ function setImageSlide(index, mainPicture, normalPictures) {
 
    return html;
 }
+
+
+//페이지 온로드 이벤트
+window.onload = function() {
+   requestHotelReviewList('${param.hotelId}');
+}
+
+// 리뷰 목록 Ajax 요청
+function requestHotelReviewList(hotelId) {
+   var sendData = {
+      hotelId : hotelId
+   };
+   $.ajax({
+      type : "POST",
+      url : "getHotelReviewList.do",
+      dataType : 'json',
+      contentType : 'application/json; charset=utf-8;',
+      data : JSON.stringify(sendData),
+      success : function(data) {
+         setReviewListTable(data);
+      },
+      error : function(jqXHR, textStatus, errorThrown) {
+         alert("error : " + jqXHR.responseText);
+      }
+   });
+}

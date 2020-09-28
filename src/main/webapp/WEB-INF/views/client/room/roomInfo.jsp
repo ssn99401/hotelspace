@@ -52,9 +52,6 @@
 		<c:import url="/clientHeader.do" />
 	</header>
 
-
-
-
 	<div class="site-section bg-light">
 		<div class="container">
 			<div class="row mb-5">
@@ -62,7 +59,7 @@
 
 				<c:set var="number" value="${0 }" />
 				<c:forEach items="${roomList }" var="Room">
-					<h3>${index }</h3>
+
 
 					<input type="hidden" id="numberCount" value="${number }">
 
@@ -164,12 +161,14 @@
 
 									</ul>
 									<p>
-										<c:if test="${roomList[index].roomAmount != 0 }">
+										<c:if
+											test="${roomList[index].roomAmount > roomList[index].roomCount }">
 											<a
 												href="revInfo.do?roomId=${roomList[index].roomId}&reservationInDate=${param.reservationInDate}&reservationOutDate=${param.reservationOutDate}"
 												class="btn btn-primary py-3 px-5">예약</a>
 										</c:if>
-										<c:if test="${roomList[index].roomAmount == 0 }">
+										<c:if
+											test="${roomList[index].roomAmount <= roomList[index].roomCount }">
 											<a href="#" onclick="return false;"
 												class="btn btn-primary py-3 px-5"
 												style="background-color: #bbb2b3;">매진</a>
@@ -182,6 +181,17 @@
 					</c:if>
 					<c:set var="number" value="${number + 1 }" />
 				</c:forEach>
+			</div>
+
+			<!-- Review List -->
+			<div class="row mb-5">
+				<div align="center"
+					style="width: 100%; border: double; margin-bottom: 200px; background-color: #f8f9fa;">
+					<br />
+					<h3 style="width: 100%;"></h3>
+					<br />
+					<div class="row mb-5" id="div-review"></div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -200,6 +210,73 @@
 	<script src="resources/client/js/jquery-3.3.1.js"></script>
 	<script src="resources/client/js/room/bootstrap-datepicker.js"></script>
 	<script src="resources/client/js/room/carousel.js"></script>
-
 </body>
+<script type="text/javascript">
+	// 페이지 온로드 이벤트
+	window.onload = function() {
+		requestHotelReviewList('${param.hotelId}');
+	}
+
+	// 리뷰 목록 Ajax 요청
+	function requestHotelReviewList(hotelId) {
+		var sendData = {
+			hotelId : hotelId
+		};
+		$.ajax({
+			type : "POST",
+			url : "getHotelReviewList.do",
+			dataType : 'json',
+			contentType : 'application/json; charset=utf-8;',
+			data : JSON.stringify(sendData),
+			success : function(data) {
+				setReviewListTable(data);
+			},
+			error : function(jqXHR, textStatus, errorThrown) {
+				alert("error : " + jqXHR.responseText);
+			}
+		});
+	}
+
+	// 리뷰 리스트 테이블 set 
+	function setReviewListTable(data) {
+		var hotelReviewList = data['hotelReviewList'];
+		var html = "";
+		html += '<div class="col-md-12 mb-5">';
+		html += '<div align="center" style="width: 100%;">';
+		html+='<table style="text-align: center; width: 80%;">';
+		html+='<tbody id="review">';
+		if (hotelReviewList.length == 0) { // 리뷰가 없는 호텔의 경우
+			html += '<h4>호텔에 리뷰 내역이 없습니다.</h4>';
+		} else { // 리뷰 목록 표시 
+			for (var i = 0; i < hotelReviewList.length; i++) {
+				html+='<tr style="outline: auto;">';
+				html+='<td style="float: left;"><strong>&nbsp;&nbsp;' + hotelReviewList[i].clientId +'님</strong></td>';
+				html+='<td style=""></td>';
+				html+='<td style="float: right;">작성일 : ' + hotelReviewList[i].reviewWriteDate +'</td>';
+				html+='</tr>';
+				
+				html+='<tr style="outline: auto;">';
+				html+='<td colspan="3">';
+				html+='<table style="width: 100%;">';
+				html+='<tr style="float: left">';
+				html+='<td colspan="3" style="height: 30px;">&nbsp;' + hotelReviewList[i].roomName + '</td>';
+				html+='</tr>';
+				
+				html+='</tr>';
+				html+='<td colspan="3" style="height: 100px;">' + hotelReviewList[i].reviewContent + '</td>';
+				html+='</tr>';
+				html+='</table>';
+				html+='</td>';
+				html+='</tr>';
+				html += '<br>';
+			}
+
+		}
+		html+='</tbody>';
+		html+='</table>';
+		html += '</div>';
+		html += '</div>';
+		document.getElementById('div-review').innerHTML = html;
+	}
+</script>
 </html>

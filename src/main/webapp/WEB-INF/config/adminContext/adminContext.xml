@@ -19,7 +19,14 @@
 
 	<mvc:resources mapping="/resources/**" location="resources/" />
 	<!-- Admin Interceptors -->
-
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/*.mdo"/>
+			<!-- interceptor 예외 대상 지정 -->
+			<mvc:exclude-mapping path="/adminLogin.mdo"/>
+			<bean class="com.spring.hotelspace.admin.utils.interceptor.AdminInterceptor"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
 	<!-- ViewResolvor -->
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">

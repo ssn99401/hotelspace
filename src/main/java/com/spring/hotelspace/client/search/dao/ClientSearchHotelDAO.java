@@ -16,4 +16,6 @@ public interface ClientSearchHotelDAO {
 	// 호텔 리스트 검색(index page)
 	public List<Object> searchHotelToSearchBar(HashMap<Object, Object> map);
 	
+	// 호텔 리뷰 목록 조회
+	public List<Object> searchHotelReviewList(String hotelId);
 }

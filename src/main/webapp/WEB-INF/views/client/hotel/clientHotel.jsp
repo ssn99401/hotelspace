@@ -108,11 +108,6 @@
 			<div class="col-lg-3">
 				<div class="sidebar">
 					<div id="filters" class="filters aside-map-show">
-						<div class="search-header-link aside-map">
-							<a href="#" id="search-map-link"
-								class="search-header-link-body link-map"><span><b>지도에서
-										보기</b></span></a>
-						</div>
 						<div class="filters-overlay-close">
 							<div class="narrow-results-header-container">
 								<h2 class="narrow-results-header">검색 결과 필터링:</h2>
@@ -297,31 +292,7 @@
 					<div class="col-md-8" id="div-hotelList"></div>
 				</div>
 				<div id="paging" align="center">
-					<c:if test="${hotelList.count > 0 }">
-						<c:set var="imsi"
-							value="${hotelList.count % hotelList.pageSize == 0 ? 0: 1}" />
-						<c:set var="pageCount"
-							value="${hotelList.count / hotelList.pageSize + imsi}" />
-						<fmt:parseNumber var="result"
-							value="${(hotelList.pageNum-1) / hotelList.pageBlock}"
-							integerOnly="true" />
-						<c:set var="startPage" value="${result * hotelList.pageBlock + 1}" />
-						<c:set var="endPage" value="${startPage + hotelList.pageBlock-1}" />
-						<c:if test="${endPage > pageCount}">
-							<c:set var="endPage" value="${pageCount}"></c:set>
-						</c:if>
-						<c:if test="${startPage > hotelList.pageBlock}">
-							<a
-								href="javascript:movePage('${startPage - hotelList.pageBlock}');">[이전]</a>
-						</c:if>
-						<c:forEach var="i" begin="${startPage}" end="${endPage}">
-							<a href="javascript:movePage('${i}');">[${i}]</a>
-						</c:forEach>
-						<c:if test="${endPage < pageCount}">
-							<a
-								href="javascript:movePage('${startPage  + hotelList.pageBlock}');">[다음]</a>
-						</c:if>
-					</c:if>
+					
 				</div>
 			</div>
 		</div>
@@ -342,14 +313,13 @@
 	<footer>
 		<c:import url="/clientFooter.do" />
 	</footer>
-
-
-	<script type="text/javascript" src="resources/client/js/hotel/hotel.js"></script>
+	
 	<script
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1612a47582f976311be9a8dd6ec0b816"></script>
+	<script type="text/javascript" src="resources/client/js/hotel/hotel.js"></script>
 	<c:if test="${!empty concept}">
 		<script>setConceptFilter('${concept}');</script>
 	</c:if>

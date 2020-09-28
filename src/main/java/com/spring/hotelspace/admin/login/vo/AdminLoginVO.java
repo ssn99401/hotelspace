@@ -6,13 +6,14 @@ import org.springframework.stereotype.Component;
 public class AdminLoginVO {
 	
 	private String id;
-	private String pw;
+	private String password;
 	
 	public AdminLoginVO() {}
 
-	public AdminLoginVO(String id, String pw) {
+	public AdminLoginVO(String id, String password) {
+		super();
 		this.id = id;
-		this.pw = pw;
+		this.password = password;
 	}
 
 	public String getId() {
@@ -23,12 +24,19 @@ public class AdminLoginVO {
 		this.id = id;
 	}
 
-	public String getPw() {
-		return pw;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setPw(String pw) {
-		this.pw = pw;
+	public void setPassword(String password) {
+		this.password = password;
 	}
+
+	@Override
+	public String toString() {
+		return "AdminLoginVO [id=" + id + ", password=" + password + "]";
+	}
+
+	
 	
 }

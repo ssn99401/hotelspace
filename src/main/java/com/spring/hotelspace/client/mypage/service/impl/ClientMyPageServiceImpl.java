@@ -51,7 +51,7 @@ public class ClientMyPageServiceImpl implements ClientMyPageService {
 
 	@Override
 	public List<ClientReservationVO> myReservation(String client) {
-		// TODO Auto-generat ed method stub
+		// TODO Auto-generated method stub
 		return clientMyPageDAO.myReservation(client);
 	}
 
@@ -65,6 +65,12 @@ public class ClientMyPageServiceImpl implements ClientMyPageService {
 	public  String avgReview(String review) {
 		// TODO Auto-generated method stub
 		return clientMyPageDAO.avgReview(review);
+	}
+
+	@Override
+	public String reservCheck(ClientReservationVO reservVO) {
+		// TODO Auto-generated method stub
+		return clientMyPageDAO.reservCheck(reservVO);
 	}
 	
 	

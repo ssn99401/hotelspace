@@ -25,4 +25,6 @@ public interface ClientMyPageService {
 
 	public String avgReview(String review);
 
+	public String reservCheck(ClientReservationVO reservVO);
+
 }

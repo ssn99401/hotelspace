@@ -16,17 +16,7 @@ public class AdminLoginDAOImpl implements AdminLoginDAO {
 	
 	// 로그인 결과 반환 메서드
 	@Override
-	public int getAdminLoginResult(AdminLoginVO admin) {
-		String pw =  (String)sqlSessionTemplate.selectOne(namespace + ".getAdminLoginResult",admin);
-		
-		if(pw != null) {
-			if(pw.equals(admin.getPw())) {
-				return 1;	// 로그인 성공
-			} else {
-				return -1;	// 비밀번호 오류
-			}
-		} else {
-			return -2;	// 아이디 오류
-		}
+	public AdminLoginVO getAdminLoginResult(AdminLoginVO admin) {
+		return (AdminLoginVO)sqlSessionTemplate.selectOne(namespace + ".getAdminLoginResult",admin);
 	}
 }

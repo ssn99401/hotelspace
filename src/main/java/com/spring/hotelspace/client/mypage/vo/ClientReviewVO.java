@@ -1,6 +1,7 @@
 package com.spring.hotelspace.client.mypage.vo;
 
 public class ClientReviewVO {
+	private String reservationId;
 	private String reviewId;
 	private String clientId;
 	private String hotelId;
@@ -10,6 +11,13 @@ public class ClientReviewVO {
 	private String reviewParentComment;
 	private String reviewWriteDate;
 	
+	
+	public String getReservationId() {
+		return reservationId;
+	}
+	public void setReservationId(String reservationId) {
+		this.reservationId = reservationId;
+	}
 	public String getReviewId() {
 		return reviewId;
 	}

@@ -78,12 +78,17 @@ public class ClientMyPageController {
 		ClientLoginVO object = (ClientLoginVO)httpSession.getAttribute("login");
 		//System.out.println(object.getClientId());
 		String id = object.getClientId();
-		
+		 
+		//리뷰 등록
 		client.setClientId(id);
 		clientMyPageService.mypageReview(client);
 		
-		// 예약내역 같은 호텔ID들의 평균
+		//리뷰 등록시 session에 vo를 불러 reservationVO의 리뷰체크를 1로 갱신
+		ClientReservationVO reservVO = new ClientReservationVO();
+		reservVO.setReservationId(client.getReservationId());
+		clientMyPageService.reservCheck(reservVO);
 		
+		// 예약내역 같은 호텔ID들의 평균으로 갱신
 		String review = client.getHotelId();
 		clientMyPageService.avgReview(review);
 		
@@ -92,7 +97,6 @@ public class ClientMyPageController {
 	
 	@RequestMapping(value = "/reviewForm.do", method= {RequestMethod.GET, RequestMethod.POST}) 
 	public String reviewForm(ClientReviewVO client, HttpSession httpSession, Model model) {
-		httpSession.getAttribute("login");
 		model.addAttribute("review", client);
 		
 		// 평점 옵션

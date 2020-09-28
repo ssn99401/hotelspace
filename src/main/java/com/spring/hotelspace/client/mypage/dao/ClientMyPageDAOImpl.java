@@ -67,4 +67,10 @@ public class ClientMyPageDAOImpl implements ClientMyPageDAO {
 		return sqlSessionTemplate.selectOne(namespace+".avgReview", review);
 	}
 
+	@Override
+	public String reservCheck(ClientReservationVO reservVO) {
+		// TODO Auto-generated method stub
+		return sqlSessionTemplate.selectOne(namespace+".reservCheck", reservVO);
+	}
+
 }

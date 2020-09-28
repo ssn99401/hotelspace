@@ -20,17 +20,37 @@
 	<mvc:resources mapping="/resources/**" location="resources/" />
 
 	<!-- Client Interceptors -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/*.do"/>
+			<!-- interceptor 예외 대상 지정 -->
+			<mvc:exclude-mapping path="/kakaoLogin.do"/>
+			<mvc:exclude-mapping path="/index.do"/>
+			<mvc:exclude-mapping path="/clientFAQServices.do"/>
+			<mvc:exclude-mapping path="/clientHeader.do"/>
+			<mvc:exclude-mapping path="/clientFooter.do"/>
+			<mvc:exclude-mapping path="/searchHotelToIndex.do"/>
+			<mvc:exclude-mapping path="/searchRoom.do"/>
+			<mvc:exclude-mapping path="/searchHotelAll.do"/>
+			<mvc:exclude-mapping path="/searchHotelToConcept.do"/>
+			<mvc:exclude-mapping path="/searhHotelToBar.do"/>
+			<mvc:exclude-mapping path="/searchHotelList.do"/>
+			<mvc:exclude-mapping path="/movePage.do"/>
+			<mvc:exclude-mapping path="/clientLogin.do"/>
+			<mvc:exclude-mapping path="/getHotelReviewList.do"/>
+			<bean class="com.spring.hotelspace.client.utils.interceptor.ClientInterceptor"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
+	
 	<!-- <mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/*.do"/>
 			interceptor 예외 대상 지정
-			<mvc:exclude-mapping path="/clientLogin.do"/>
-			<mvc:exclude-mapping path="/register.do"/>
-			<mvc:exclude-mapping path="/index.do"/>
-			<mvc:exclude-mapping path="/test.do"/>
-			<bean class="com.spring.hotelspace.client.utils.interceptor.AuthClientInterceptor"></bean>
+			<bean class="com.spring.hotelspace.client.utils.interceptor.ToAdminInterceptor"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors> -->
+	
+	
 
 	<!-- ViewResolvor -->
 	<bean id="viewResolver"

@@ -5,6 +5,13 @@
 <mapper
 	namespace="com.spring.hotelspace.client.mypage.dao.ClientMyPageDAO">
 	
+	
+	<update id="reservCheck" parameterType="String">
+	UPDATE RESERVATION
+	SET REVIEW_CHECK = 1
+	WHERE reservation_id = #{reservationId}
+	</update>
+	
 	<update id="avgReview" parameterType="String">
 	UPDATE HOTEL
 	SET hotel_star = (select avg(review_star) from review where hotel_id = #{hotelId}) 

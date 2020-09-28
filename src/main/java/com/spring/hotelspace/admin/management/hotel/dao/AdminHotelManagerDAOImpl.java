@@ -21,6 +21,7 @@ public class AdminHotelManagerDAOImpl implements AdminHotelManagerDAO {
 
 	// 관리자 호텔목록 조회  메서드
 	public List<AdminHotelVO> getAdminHotelList(Map<String, String> requestMap) {
+		System.out.println("dao + " + requestMap);
 		return sqlSessionTemplate.selectList(namespace + ".getHotelList", requestMap);
 	}
 
