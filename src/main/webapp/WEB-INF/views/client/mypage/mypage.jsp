@@ -21,7 +21,7 @@
 	<c:import url="/clientHeader.do" />
 
 	<section>
-		<div class="w3-sidebar w3-bar-block" style="width: 25%; height: 40%">
+		<div class="w3-sidebar2 w3-bar-block" style="position:absolute; width: 25%; height: 40%">
 			<div class="w3-bar-item w3-pink">
 				<p>
 					<a href='clientMypage.do' class="w3-font-white">My Page</a>
@@ -101,6 +101,8 @@
 
 
 						</table>
+						</div>
+						</div>
 					</div>
 				</div>
 	</section>
