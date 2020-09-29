@@ -60,13 +60,9 @@
 											<option value="서울">서울</option>
 											<option value="인천">인천</option>
 											<option value="경기">경기</option>
-											<option value="ha1">ha1</option>
-											<option value="ha3">ha2</option>
-											<option value="">5</option>
-											<option value="">6</option>
-											<option value="">7</option>
-											<option value="">8</option>
-											<option value="">9</option>
+											<option value="부산">부산</option>
+											<option value="대전">대전</option>
+											<option value="제주">제주</option>
 										</select>
 									</div>
 								</div>
