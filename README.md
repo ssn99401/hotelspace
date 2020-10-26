@@ -1,6 +1,6 @@
 # hotelspace
 
-**시연 영상 : **
+**시연 영상 : (client) https://youtu.be/uzUT_omUI4U (admin) **
 
 개발 기간 : 2020.09 ~ 2020.10
 
