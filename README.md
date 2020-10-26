@@ -1,6 +1,6 @@
 # hotelspace
 
-**시연 영상 : (client) https://youtu.be/uzUT_omUI4U (admin) https://youtu.be/gSjk95wzJqE 
+**시연 영상 : (client) https://youtu.be/uzUT_omUI4U (admin) https://youtu.be/gSjk95wzJqE**
 
 * 개발 기간 : 2020.09 ~ 2020.10
 * 개발 환경 : window, eclipse, spring 
