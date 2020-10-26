@@ -1,24 +1,30 @@
 # hotelspace
 
-**시연 영상 : (client) https://youtu.be/uzUT_omUI4U (admin) https://youtu.be/gSjk95wzJqE **
+**시연 영상 : (client) https://youtu.be/uzUT_omUI4U (admin) https://youtu.be/gSjk95wzJqE 
 
-개발 기간 : 2020.09 ~ 2020.10
+* 개발 기간 : 2020.09 ~ 2020.10
+* 개발 환경 : window, eclipse, spring 
+* 개발 인원 : 7명
+* 요약 : 호텔 예약 웹 페이지
 
-개발 환경 : window, eclipse, spring 
+### 기능 
+>1. Client)날짜 별 호텔 검색, 예약 및 결재
+>2. Client) FAQ , QnA
+>3. Client) Login, my page
+>4. Admin)통계정보 
+>5. Admin)회원 관리
+>5. Admin)페이지 관리
 
-개발 인원 : 7명
 
-요약 : 호텔 예약 웹 페이지
+### 개발취지 (배경)
+>Java 언어, 웹과 JDBC ,spring,mybatis 를 이용하여 Database 의 Data 를 운용 및 활용할 수 있다.
+### 개발(프로젝트의) 목적
+>JDBC 를 통해 Oracle Database 를 사용하여 시스템을 개발하고, Data 를 활용하는 방법을 학습한다. 웹 메이븐 MVC 방식을 숙지한다.
+### 프로젝트 개요
+>클라이언트가 호텔 검색을 통해 원하는 호텔의 정보들을 알 수 있고, 사이트에 등록된 호텔들을 예약할 수 있고 후기를 남길수 있으며 호텔등록을 원하는 클라이언트는 관리자를 통해 자신의 호텔을 등록 할 수 있다.
 
-기능 
-1) Client)날짜 별 호텔 검색, 예약 및 결재
-2) Client) FAQ , QnA
-3) Client) Login, my page
-4) Admin)통계정보 
-5) Admin)회원 관리
-5) Admin)페이지 관리
 
-맡은 기능 : 로그인(kakao login api), 관리자 메인 통계 페이지, 관리자 회원 관리 페이지, 
+* 맡은 기능 : 로그인(kakao login api), 관리자 메인 통계 페이지, 관리자 회원 관리 페이지, 
  클라이언트 메인 페이지, 게시판 및 목록 페이징 처리, 오류 처리
  
  ***
